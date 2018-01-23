@@ -14,10 +14,12 @@ import MJRefresh
 
 class MainViewController: UIViewController {
     
+    static var leftMenuWidth = UIScreen.width * 3 / 5
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: view.bounds)
-        scrollView.contentSize = CGSize(width: view.bounds.width + 240, height: view.bounds.height)
-        scrollView.contentOffset = CGPoint(x: 240, y: 0)
+        scrollView.contentSize = CGSize(width: view.bounds.width + MainViewController.leftMenuWidth, height: view.bounds.height)
+        scrollView.contentOffset = CGPoint(x: MainViewController.leftMenuWidth, y: 0)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
@@ -51,18 +53,18 @@ class MainViewController: UIViewController {
         view.addSubview(scrollView)
         
         let menuVC = MenuViewController()
-        menuVC.view.frame = CGRect(x: 0, y: 0, width: 240, height: view.bounds.height)
+        menuVC.view.frame = CGRect(x: 0, y: 0, width: MainViewController.leftMenuWidth, height: view.bounds.height)
         addChildViewController(menuVC)
         scrollView.addSubview(menuVC.view)
         
         let homeVC = HomeViewController()
         homeVC.menuButtonDidSelectHandler = { [weak self] (sender) in
-            let point = sender.isSelected ? CGPoint.zero : CGPoint(x: 240, y: 0)
+            let point = sender.isSelected ? CGPoint.zero : CGPoint(x: MainViewController.leftMenuWidth, y: 0)
             if let strongSelf = self {
                 strongSelf.scrollView.setContentOffset(point, animated: true)
             }
         }
-        homeVC.view.frame = CGRect(x: 240, y: 0, width: UIScreen.width, height: UIScreen.height)
+        homeVC.view.frame = CGRect(x: MainViewController.leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
         addChildViewController(homeVC)
         scrollView.addSubview(homeVC.view)
     }

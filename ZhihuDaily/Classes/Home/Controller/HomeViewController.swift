@@ -10,7 +10,16 @@ import UIKit
 import MJRefresh
 import SDCycleScrollView
 
+extension UIApplication {
+    static var statusBarHeight: CGFloat {
+        return shared.statusBarFrame.height
+    }
+}
+
 class HomeViewController: BaseViewController {
+    
+    static let customNavigationBarHeight: CGFloat = 30
+    static let tableHeaderViewHeight: CGFloat = 200
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds)
@@ -25,14 +34,14 @@ class HomeViewController: BaseViewController {
     }()
     
     lazy var navBar: UIView = {
-        let navBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: UIApplication.shared.statusBarFrame.height + 30))
+        let navBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: UIApplication.statusBarHeight + HomeViewController.customNavigationBarHeight))
         navBar.backgroundColor = UIColor.global
         navBar.alpha = 0
         return navBar
     }()
     
     lazy var navTitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.width, height: 30))
+        let label = UILabel(frame: CGRect(x: 0, y: UIApplication.statusBarHeight, width: UIScreen.width, height: HomeViewController.customNavigationBarHeight))
         label.textColor = UIColor.white
         label.text = "今日要闻"
         label.textAlignment = .center
@@ -41,19 +50,14 @@ class HomeViewController: BaseViewController {
     
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom)
-        menuBtn.frame = CGRect(x: 0, y: 20, width: 30, height: 30)
+        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 30, height: 30)
         menuBtn.setImage(UIImage(named: "menu"), for: .normal)
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
     }()
     
-    lazy var headerView: UIView = {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 200))
-        return headerView
-    }()
-    
     lazy var cycleScrollView: SDCycleScrollView = {
-        let cycleScrollView = SDCycleScrollView()
+        let cycleScrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: HomeViewController.tableHeaderViewHeight))
         return cycleScrollView
     }()
     
@@ -84,22 +88,22 @@ class HomeViewController: BaseViewController {
         view.addSubview(navTitleLabel)
         view.addSubview(menuButton)
         
-        headerView.addSubview(cycleScrollView)
-        cycleScrollView.snp.makeConstraints({ (make) in
-            make.edges.equalToSuperview()
-        })
-        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 240))
-        tableHeaderView.addSubview(headerView)
+        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: HomeViewController.tableHeaderViewHeight))
+        tableHeaderView.addSubview(cycleScrollView)
         tableView.tableHeaderView = tableHeaderView
     }
     
     private func setupTableViewRefresh() {
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.requestLatestNewsList()
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            if let strongSelf = self {
+                strongSelf.requestLatestNewsList()
+            }
         })
         
-        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            self.requestBeforeNewsList()
+        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
+            if let strongSelf = self {
+                strongSelf.requestBeforeNewsList()
+            }
         })
     }
     
@@ -199,7 +203,7 @@ extension HomeViewController: UITableViewDelegate {
         }
         let header = UIView()
         header.backgroundColor = UIColor.global
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 30))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: HomeViewController.customNavigationBarHeight))
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         label.text = sectionTitles[section - 1]
@@ -212,16 +216,14 @@ extension HomeViewController: UITableViewDelegate {
         guard section > 0 else {
             return CGFloat.leastNormalMagnitude
         }
-        return 30
+        return HomeViewController.customNavigationBarHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let model = dataSource[indexPath.section][indexPath.row]
-        guard let newsID = model.id else {
-            return
-        }
         push(NewsDetailViewController.self) {
-            $0.newsID = newsID
+            $0.newsID = model.id ?? ""
         }
     }
 }
@@ -232,31 +234,31 @@ extension HomeViewController: UIScrollViewDelegate {
         
         if scrollView == tableView {
             if tableView.contentOffset.y > 0 {
-                let alpha = tableView.contentOffset.y / 200
+                let alpha = tableView.contentOffset.y / HomeViewController.tableHeaderViewHeight
                 navBar.alpha = alpha
             }
             else {
-                if tableView.contentOffset.y > -60 {
-                    var frame = headerView.frame
+                if tableView.contentOffset.y > -40 {
+                    var frame = cycleScrollView.frame
                     frame.origin.y = tableView.contentOffset.y
-                    frame.size.height = 200 - tableView.contentOffset.y
-                    headerView.frame = frame
+                    frame.size.height = HomeViewController.tableHeaderViewHeight - tableView.contentOffset.y
+                    cycleScrollView.frame = frame
                 }
                 else {
-                    headerView.frame = CGRect(x: 0, y: -60, width: UIScreen.width, height: 260)
-                    tableView.contentOffset = CGPoint(x: 0, y: -60)
+                    cycleScrollView.frame = CGRect(x: 0, y: -40, width: UIScreen.width, height: HomeViewController.tableHeaderViewHeight + 40)
+                    tableView.contentOffset = CGPoint(x: 0, y: -40)
                 }
                 cycleScrollView.adjustWhenControllerViewWillAppera()
             }
             guard tableView.numberOfSections > 0 else { return }
-            if tableView.contentOffset.y > 220 + tableView.rect(forSection: 0).height {
-                navBar.frame.size.height = 20
+            if tableView.contentOffset.y > HomeViewController.tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
+                navBar.frame.size.height = UIApplication.statusBarHeight
                 navTitleLabel.isHidden = true
-                tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+                tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
             }
             else {
                 navTitleLabel.isHidden = false
-                navBar.frame.size.height = 50
+                navBar.frame.size.height = HomeViewController.customNavigationBarHeight + UIApplication.statusBarHeight
                 tableView.contentInset = UIEdgeInsets.zero
             }
         }

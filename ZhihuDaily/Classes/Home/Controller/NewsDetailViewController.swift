@@ -13,24 +13,8 @@ class NewsDetailViewController: BaseViewController, Routable {
 
     var newsID = ""
     
-    let configuration: WKWebViewConfiguration = {
-        var source = """
-            var meta = document.createElement('meta');
-            meta.setAttribute('name', 'viewport');
-            meta.setAttribute('content', 'width=device-width');
-            document.getElementsByTagName('head')[0].appendChild(meta);
-            """
-        let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let userContentCtrl = WKUserContentController()
-        userContentCtrl.addUserScript(userScript)
-        let configuration = WKWebViewConfiguration()
-        configuration.userContentController = userContentCtrl
-        return configuration
-    }()
-    
-    
     lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: view.bounds, configuration: self.configuration)
+        let webView = WKWebView(frame: view.bounds)
         webView.navigationDelegate = self
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.delegate = self
@@ -128,6 +112,7 @@ class NewsDetailViewController: BaseViewController, Routable {
                     <html>
                     <head>
                       <meta charset="utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                       <link rel="stylesheet" type="text/css" href="\(model?.css?.first ?? "")">
                     </head>
                     <body>

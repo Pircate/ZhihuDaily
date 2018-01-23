@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Hue
 
 class HomeNewsRowCell: UITableViewCell {
     

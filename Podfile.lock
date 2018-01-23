@@ -4,6 +4,7 @@ PODS:
     - FDFullscreenPopGesture (~> 1.1)
   - FDFullscreenPopGesture (1.1)
   - HandyJSON (4.0.0-beta.1)
+  - Hue (3.0.1)
   - Kingfisher (4.6.1)
   - MJRefresh (3.1.15.1)
   - SDCycleScrollView (1.75):
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - Alamofire
   - AYNavigationBar
   - HandyJSON (~> 4.0.0-beta.1)
+  - Hue
   - Kingfisher
   - MJRefresh
   - SDCycleScrollView
@@ -27,12 +29,13 @@ SPEC CHECKSUMS:
   AYNavigationBar: 8e2fff218012cadddf57ae74c7e49e0fe92e0e12
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
+  Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: bff8f85dd976de350a0b1a71d8d00b540e99d31b
+PODFILE CHECKSUM: 78c912b9403cf09c6e7955e7802f3d53aed3836e
 
 COCOAPODS: 1.4.0.rc.1

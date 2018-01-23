@@ -11,5 +11,6 @@ target 'ZhihuDaily' do
   pod 'AYNavigationBar'
   pod 'SDCycleScrollView'
   pod 'MJRefresh'
+  pod 'Hue'
 
 end

@@ -23,7 +23,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         var source = """
             var meta = document.createElement('meta');
             meta.setAttribute('name', 'viewport');
-            meta.setAttribute('content', 'width=device-width');
+            meta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
             document.getElementsByTagName('head')[0].appendChild(meta);
             """
         let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
