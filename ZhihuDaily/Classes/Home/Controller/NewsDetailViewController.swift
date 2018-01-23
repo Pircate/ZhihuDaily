@@ -21,13 +21,6 @@ class NewsDetailViewController: BaseViewController, Routable {
         return webView
     }()
     
-    lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 2))
-        progressView.progressTintColor = .green
-        progressView.trackTintColor = .clear
-        return progressView
-    }()
-    
     lazy var headerView: UIImageView = {
         let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 200))
         headerView.backgroundColor = UIColor.global
@@ -59,7 +52,6 @@ class NewsDetailViewController: BaseViewController, Routable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ay_navigationBar.isHidden = true
         addSubviews()
         requestNewsDetail()
     }
@@ -74,16 +66,11 @@ class NewsDetailViewController: BaseViewController, Routable {
     }
     
     // MARK: - private
-    private func addObserver() {
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-    }
-    
     private func addSubviews() {
         disableAdjustsScrollViewInsets(webView.scrollView)
         view.addSubview(webView)
         webView.scrollView.addSubview(headerView)
         headerView.addSubview(titleLabel)
-        view.addSubview(progressView)
         view.addSubview(statusBarBackView)
         
         titleLabel.snp.makeConstraints { (make) in
@@ -126,41 +113,24 @@ class NewsDetailViewController: BaseViewController, Routable {
             
         }
     }
-    
-    // MARK: - observe
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            progressView.progress = Float(webView.estimatedProgress)
-            if progressView.progress == 1 {
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.progressView.transform = .identity
-                }, completion: { (finished) in
-                    self.progressView.isHidden = true
-                })
-            }
-        }
-    }
 }
 
 // MARK: - WKNavigationDelegate
 extension NewsDetailViewController: WKNavigationDelegate {
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        progressView.isHidden = false
-        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 1.5)
-        view.bringSubview(toFront: progressView)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        progressView.isHidden = true
-    }
-    
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        progressView.isHidden = true
-    }
-    
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        let url = navigationAction.request.url?.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        if url == "about:blank" {
+            decisionHandler(.allow)
+        }
+        else {
+            push(WebViewController.self, parameters: ["url": url ?? ""], animated: true, configuration: nil)
+            decisionHandler(.cancel)
+        }
     }
 }
 

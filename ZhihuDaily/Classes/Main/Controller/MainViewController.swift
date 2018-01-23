@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationBar()
+        fd_prefersNavigationBarHidden = true
         addSubviews()
     }
     
@@ -41,10 +41,6 @@ class MainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    private func setupNavigationBar() {
-        ay_navigationBar.isHidden = true
     }
     
     private func addSubviews() {

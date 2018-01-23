@@ -11,22 +11,51 @@ import UIKit
 class MenuViewController: UIViewController {
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 240, height: view.bounds.height), style: .plain)
+        let tableView = UITableView(frame: CGRect.zero, style: .plain)
+        tableView.backgroundColor = UIColor(hex: "#444444")
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         return tableView
+    }()
+    
+    lazy var headerView: UIView = {
+        let headerView = UIView()
+        return headerView
+    }()
+    
+    lazy var dataSource: [String] = {
+        let dataSource = ["首页", "日常心理学", "用户推荐日报", "电影日报", "不许无聊", "设计日报", "大公司日报", "财经日报", "互联网安全", "开始游戏", "音乐日报", "动漫日报"]
+        return dataSource
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        disableAdjustsScrollViewInsets(tableView)
-        view.addSubview(tableView)
+        view.backgroundColor = UIColor(hex: "#444444")
+        addSubviews()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func addSubviews() {
+        disableAdjustsScrollViewInsets(tableView)
+        
+        view.addSubview(headerView)
+        view.addSubview(tableView)
+        
+        headerView.snp.makeConstraints { (make) in
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(120)
+        }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(headerView.snp.bottom)
+            make.left.bottom.right.equalToSuperview()
+        }
     }
 }
 
@@ -34,12 +63,16 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
-        cell?.textLabel?.text = "\(indexPath.row)"
+        cell?.accessoryType = .disclosureIndicator
+        cell?.backgroundColor = UIColor(hex: "#444444")
+        cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        cell?.textLabel?.textColor = UIColor(white: 1, alpha: 0.6)
+        cell?.textLabel?.text = dataSource[indexPath.row]
         return cell!
     }
 }

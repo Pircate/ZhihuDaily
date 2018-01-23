@@ -50,7 +50,7 @@ class HomeViewController: BaseViewController {
     
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom)
-        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 30, height: 30)
+        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 44, height: 32)
         menuBtn.setImage(UIImage(named: "menu"), for: .normal)
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
@@ -58,11 +58,13 @@ class HomeViewController: BaseViewController {
     
     lazy var cycleScrollView: SDCycleScrollView = {
         let cycleScrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: HomeViewController.tableHeaderViewHeight))
+        cycleScrollView.delegate = self
         return cycleScrollView
     }()
     
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
     
+    var bannerList: [HomeNewsModel] = []
     var dataSource: [[HomeNewsModel]] = []
     var date: String?
     var sectionTitles: [String] = []
@@ -112,6 +114,7 @@ class HomeViewController: BaseViewController {
             self.sectionTitles.removeAll()
             self.date = model?.date
             if let bannerList = model?.topStories {
+                self.bannerList = bannerList;
                 self.cycleScrollView.imageURLStringsGroup = bannerList.flatMap({
                     $0.image
                 })
@@ -130,6 +133,7 @@ class HomeViewController: BaseViewController {
             self.sectionTitles.removeAll()
             self.date = model?.date
             if let bannerList = model?.topStories {
+                self.bannerList = bannerList;
                 self.cycleScrollView.imageURLStringsGroup = bannerList.flatMap({
                     $0.image
                 })
@@ -222,6 +226,16 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = dataSource[indexPath.section][indexPath.row]
+        push(NewsDetailViewController.self) {
+            $0.newsID = model.id ?? ""
+        }
+    }
+}
+
+extension HomeViewController: SDCycleScrollViewDelegate {
+    
+    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
+        let model = bannerList[index]
         push(NewsDetailViewController.self) {
             $0.newsID = model.id ?? ""
         }

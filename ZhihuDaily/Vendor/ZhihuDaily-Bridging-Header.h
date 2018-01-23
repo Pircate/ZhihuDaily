@@ -3,6 +3,7 @@
 //
 
 #import <AYNavigationBar/AYNavigationBar.h>
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import <MJRefresh/MJRefresh.h>

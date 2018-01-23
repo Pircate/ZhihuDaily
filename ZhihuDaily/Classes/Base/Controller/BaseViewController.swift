@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        fd_prefersNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {

@@ -49,6 +49,26 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         return progressView
     }()
     
+    lazy var backButton: UIButton = {
+        let backBtn = UIButton(type: .system)
+        backBtn.frame = CGRect(x: 0, y: 0, width: 48, height: 44)
+        backBtn.setTitle("返回", for: .normal)
+        backBtn.setTitleColor(.white, for: .normal)
+        backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        backBtn.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
+        return backBtn
+    }()
+    
+    lazy var closeButton: UIButton = {
+        let closeBtn = UIButton(type: .system)
+        closeBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 44)
+        closeBtn.setTitle("关闭", for: .normal)
+        closeBtn.setTitleColor(.white, for: .normal)
+        closeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        closeBtn.addTarget(self, action: #selector(closeBtnAction), for: .touchUpInside)
+        return closeBtn
+    }()
+    
     // MARK: - life cycle
     init(url: String) {
         super.init(nibName: nil, bundle: nil)
@@ -68,9 +88,9 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         super.viewDidLoad()
 
         disableAdjustsScrollViewInsets(webView.scrollView)
+        updateLeftNavigationBarItem()
         addObserver()
         addSubviews()
-        updateLeftNavigationBarItem()
         
         if !url.isEmpty {
             loadURLRequest()
@@ -88,6 +108,10 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         webView.removeObserver(self, forKeyPath: "title")
         webView.removeObserver(self, forKeyPath: "canGoBack")
         webView.navigationDelegate = nil
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,35 +132,16 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         view.addSubview(self.progressView)
         
         self.registerNavigationBar()
-        self.ay_navigationBar.backgroundColor = .orange
+        self.ay_navigationBar.backgroundColor = UIColor.global
         self.ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func updateLeftNavigationBarItem() {
-        let backImg = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
-        let backBtn = UIButton(type: .system)
-        backBtn.frame = CGRect(x: 0, y: 0, width: 38, height: 44)
-        backBtn.setImage(backImg, for: .normal)
-        backBtn.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
-        
         if webView.canGoBack {
-            backBtn.frame = CGRect(x: 0, y: 0, width: 54, height: 44)
-            backBtn.setTitle("返回", for: .normal)
-            backBtn.setTitleColor(.white, for: .normal)
-            backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            backBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
-            
-            let closeBtn = UIButton(type: .system)
-            closeBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 20)
-            closeBtn.setTitle("关闭", for: .normal)
-            closeBtn.setTitleColor(.white, for: .normal)
-            closeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            closeBtn.addTarget(self, action: #selector(closeBtnAction), for: .touchUpInside)
-            
-            ay_navigationItem.leftBarItems = [backBtn, closeBtn]
+            ay_navigationItem.leftBarItems = [backButton, closeButton]
         }
         else {
-            ay_navigationItem.leftBarButton = backBtn
+            ay_navigationItem.leftBarButton = backButton
         }
     }
     
