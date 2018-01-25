@@ -56,9 +56,9 @@ class MainViewController: UIViewController {
         let homeVC = HomeViewController()
         homeVC.menuButtonDidSelectHandler = { [weak self] (sender) in
             let point = sender.isSelected ? CGPoint.zero : CGPoint(x: MainViewController.leftMenuWidth, y: 0)
-            if let strongSelf = self {
-                strongSelf.scrollView.setContentOffset(point, animated: true)
-            }
+            self.flatMap({
+                $0.scrollView.setContentOffset(point, animated: true)
+            })
         }
         homeVC.view.frame = CGRect(x: MainViewController.leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
         addChildViewController(homeVC)

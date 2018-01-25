@@ -97,15 +97,15 @@ class HomeViewController: BaseViewController {
     
     private func setupTableViewRefresh() {
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            if let strongSelf = self {
-                strongSelf.requestLatestNewsList()
-            }
+            self.flatMap({
+                $0.requestLatestNewsList()
+            })
         })
         
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
-            if let strongSelf = self {
-                strongSelf.requestBeforeNewsList()
-            }
+            self.flatMap({
+                $0.requestBeforeNewsList()
+            })
         })
     }
     
@@ -113,18 +113,18 @@ class HomeViewController: BaseViewController {
         HomeComponent().requestLatestNewsList(cache: { (model) in
             self.sectionTitles.removeAll()
             self.date = model?.date
-            if let bannerList = model?.topStories {
-                self.bannerList = bannerList;
-                self.cycleScrollView.imageURLStringsGroup = bannerList.flatMap({
+            model?.topStories.flatMap({
+                self.bannerList = $0
+                self.cycleScrollView.imageURLStringsGroup = $0.flatMap({
                     $0.image
                 })
-                self.cycleScrollView.titlesGroup = bannerList.flatMap({
+                self.cycleScrollView.titlesGroup = $0.flatMap({
                     $0.title
                 })
-            }
-            if let newsList = model?.stories {
-                self.dataSource = [newsList]
-            }
+            })
+            model?.stories.flatMap({
+                self.dataSource = [$0]
+            })
             self.tableView.reloadData()
         }, success: { (model) in
             if self.tableView.mj_header.isRefreshing {
@@ -132,18 +132,18 @@ class HomeViewController: BaseViewController {
             }
             self.sectionTitles.removeAll()
             self.date = model?.date
-            if let bannerList = model?.topStories {
-                self.bannerList = bannerList;
-                self.cycleScrollView.imageURLStringsGroup = bannerList.flatMap({
+            model?.topStories.flatMap({
+                self.bannerList = $0;
+                self.cycleScrollView.imageURLStringsGroup = $0.flatMap({
                     $0.image
                 })
-                self.cycleScrollView.titlesGroup = bannerList.flatMap({
+                self.cycleScrollView.titlesGroup = $0.flatMap({
                     $0.title
                 })
-            }
-            if let newsList = model?.stories {
-                self.dataSource = [newsList]
-            }
+            })
+            model?.stories.flatMap({
+                self.dataSource = [$0]
+            })
             self.tableView.reloadData()
         }) { (error) in
             
@@ -156,13 +156,13 @@ class HomeViewController: BaseViewController {
             if self.tableView.mj_footer.isRefreshing {
                 self.tableView.mj_footer.endRefreshing()
             }
-            if let date = model?.date {
-                self.date = date
-                self.sectionTitles.append(date)
-            }
-            if let newsList = model?.stories {
-                self.dataSource.append(newsList)
-            }
+            model?.date.flatMap({
+                self.date = $0
+                self.sectionTitles.append($0)
+            })
+            model?.stories.flatMap({
+                self.dataSource.append($0)
+            })
             self.tableView.reloadData()
         }) { (error) in
             
