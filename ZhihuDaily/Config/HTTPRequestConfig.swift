@@ -8,13 +8,9 @@
 
 import Foundation
 
-enum ZHRequestType: String, HTTPRequestType {
-    var value: String {
-        return rawValue
-    }
+enum ZHRequestType: String {
     
-    case none = ""
-    case homeBanner = "news/hot"
-    case homeLatestNews = "news/latest"
-    case homeBeforeNews = "news/before"
+    case homeLatestNews = "4/news/latest"
+    case homeBeforeNews = "4/news/before/"
+    case newsDetail = "4/news/"
 }

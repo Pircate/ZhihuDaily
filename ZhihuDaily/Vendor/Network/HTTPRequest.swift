@@ -23,25 +23,18 @@ enum NetworkEnvironment {
     }
 }
 
-protocol HTTPRequestType {
-    var value: String { get }
-}
-
 class HTTPRequest {
 
     var requestMethod: HTTPMethod = .get
     var environment: NetworkEnvironment = .develop
-    let requestName: String
-    let requestType: HTTPRequestType
+    let path: String
     let parameters: [String: Any]?
     let needsCache: Bool
     
-    init(requestName: String,
-         requestType: HTTPRequestType,
+    init(path: String,
          parameters: [String: Any]?,
          needsCache: Bool = false) {
-        self.requestName = requestName
-        self.requestType = requestType
+        self.path = path
         self.parameters = parameters
         self.needsCache = needsCache
     }
@@ -57,11 +50,11 @@ class HTTPRequest {
 
         func configureRequestUrl() -> String {
             var requestUrl = environment.baseUrl()
-            if !requestName.isEmpty {
-                requestUrl.append("/\(requestName)")
+            if requestUrl.hasSuffix("/") {
+                requestUrl.removeLast()
             }
-            if !requestType.value.isEmpty {
-                requestUrl.append("/\(requestType.value)")
+            if !path.isEmpty {
+                requestUrl.append("/\(path)")
             }
             return requestUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         }
@@ -181,7 +174,7 @@ extension HTTPRequest {
 
         func savedFileDirectory() -> String {
             let cachePath = self.cachePath()
-            let fileDirectory = "\(cachePath)/\(self.requestName)"
+            let fileDirectory = "\(cachePath)"
             self.checkDirectory(path: fileDirectory)
             return fileDirectory
         }
@@ -195,7 +188,7 @@ extension HTTPRequest {
                 }
             }
             let parameters = paramArray.joined(separator: "_")
-            let fileName = "\(self.requestType.value)_\(parameters)"
+            let fileName = "\(self.path)_\(parameters)"
             return convertToMD5(string: fileName)
         }
 

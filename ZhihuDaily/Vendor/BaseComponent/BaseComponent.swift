@@ -66,7 +66,7 @@ class BaseComponent {
     func startRequest(request: HTTPRequest,
                       success: @escaping (_ value: String?) -> (),
                       failure: @escaping (_ error: Error?) -> ()) {
-        self.startRequest(request: request, cache: nil, success: success, failure: failure)
+        startRequest(request: request, cache: nil, success: success, failure: failure)
     }
     
     func startRequest(
