@@ -37,6 +37,7 @@ class WebViewContainer: UIView {
         let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 2))
         progressView.progressTintColor = .green
         progressView.trackTintColor = .clear
+        progressView.isUserInteractionEnabled = false
         return progressView
     }()
     
@@ -67,6 +68,12 @@ class WebViewContainer: UIView {
         addSubview(progressView)
     }
     
+    private func showProgressView(visible: Bool = true, animated: Bool = true) {
+        UIView.animate(withDuration: 0.25) {
+            self.progressView.alpha = visible ? 1 : 0
+        }
+    }
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.progress = Float(webView.estimatedProgress)
@@ -74,7 +81,7 @@ class WebViewContainer: UIView {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.progressView.transform = .identity
                 }, completion: { (finished) in
-                    self.progressView.isHidden = true
+                    self.showProgressView(visible: false)
                 })
             }
         }
@@ -84,17 +91,17 @@ class WebViewContainer: UIView {
 extension WebViewContainer: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        progressView.isHidden = false
+        showProgressView()
         progressView.transform = CGAffineTransform(scaleX: 1.0, y: 1.5)
         bringSubview(toFront: progressView)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        progressView.isHidden = true
+        showProgressView(visible: false)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        progressView.isHidden = true
+        showProgressView(visible: false)
     }
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
