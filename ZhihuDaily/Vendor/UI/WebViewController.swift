@@ -42,15 +42,14 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
         closeBtn.addTarget(self, action: #selector(closeBtnAction), for: .touchUpInside)
         return closeBtn
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         updateLeftNavigationBarItem()
         addObserver()
         addSubviews()
-        
+
         if !url.isEmpty {
             loadURLRequest()
         }
@@ -63,8 +62,10 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
     }
     
     deinit {
-        container.webView.removeObserver(self, forKeyPath: "title")
-        container.webView.removeObserver(self, forKeyPath: "canGoBack")
+        if view.subviews.contains(container) {
+            container.webView.removeObserver(self, forKeyPath: "title")
+            container.webView.removeObserver(self, forKeyPath: "canGoBack")
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
