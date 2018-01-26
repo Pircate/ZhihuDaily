@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E87DC5196D1C5BBEB13B48B /* Pods_ZhihuDaily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */; };
+		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B56223851FFC729B0012CCB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56223841FFC729B0012CCB2 /* Assets.xcassets */; };
 		B56223881FFC729B0012CCB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */; };
 		B56223931FFC729C0012CCB2 /* ZhihuDailyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56223921FFC729C0012CCB2 /* ZhihuDailyTests.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		83CE6E074FEB0F0C30BFDD04 /* Pods-ZhihuDaily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.debug.xcconfig"; sourceTree = "<group>"; };
+		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B562237A1FFC729B0012CCB2 /* ZhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56223841FFC729B0012CCB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56223871FFC729B0012CCB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				B563AAEC2015AC8400F4AC66 /* WebViewController.swift */,
+				B51ACD31201B06B300469329 /* WebViewContainer.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				B5A7C9EC2015B421000C54BC /* HomeBannerListModel.swift in Sources */,
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
+				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
