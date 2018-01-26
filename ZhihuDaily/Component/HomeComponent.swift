@@ -14,7 +14,7 @@ class HomeComponent: BaseComponent {
     func requestLatestNewsList(cache: @escaping (HomeNewsListModel?) -> Void,
                                success: @escaping (HomeNewsListModel?) -> Void,
                                failure: @escaping (Error?) -> Void) {
-        let request = HTTPRequest(path: ZHRequestType.homeLatestNews.rawValue, parameters: nil, needsCache: true)
+        let request = HTTPRequest(path: ZHRequestType.homeLatestNews.rawValue, needsCache: true)
         startRequest(request: request, cache: { (json) in
             let model = JSONDeserializer<HomeNewsListModel>.deserializeFrom(json: json)
             cache(model)
@@ -30,7 +30,7 @@ class HomeComponent: BaseComponent {
                                success: @escaping (HomeNewsListModel?) -> Void,
                                failure: @escaping (Error?) -> Void) {
         let path = ZHRequestType.homeBeforeNews.rawValue + date
-        let request = HTTPRequest(path: path, parameters: nil)
+        let request = HTTPRequest(path: path)
         startRequest(request: request, success: { (json) in
             let model = JSONDeserializer<HomeNewsListModel>.deserializeFrom(json: json)
             success(model)
@@ -43,7 +43,7 @@ class HomeComponent: BaseComponent {
                            success: @escaping (NewsDetailModel?) -> Void,
                            failure: @escaping (Error?) -> Void) {
         let path = ZHRequestType.newsDetail.rawValue + newsID
-        let request = HTTPRequest(path: path, parameters: nil)
+        let request = HTTPRequest(path: path)
         startRequest(request: request, success: { (json) in
             let model = JSONDeserializer<NewsDetailModel>.deserializeFrom(json: json)
             success(model)

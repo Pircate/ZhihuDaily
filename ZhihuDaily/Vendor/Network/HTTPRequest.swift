@@ -13,12 +13,21 @@ enum NetworkEnvironment {
     case develop
     case product
     
-    func baseUrl() -> String {
+    var baseUrl: String {
         switch self {
         case .develop:
             return "https://news-at.zhihu.com/api"
         default:
             return "https://www.lanqixinxikeji.com/api/public/index.php/api/"
+        }
+    }
+    
+    var uploadUrl: String {
+        switch self {
+        case .develop:
+            return "http://wuliu.hsrich.cn/index.php/api/Upload/doUpload"
+        default:
+            return "http://wuliu.hsrich.cn/index.php/api/Upload/doUpload"
         }
     }
 }
@@ -32,7 +41,7 @@ class HTTPRequest {
     let needsCache: Bool
     
     init(path: String,
-         parameters: [String: Any]?,
+         parameters: [String: Any]? = nil,
          needsCache: Bool = false) {
         self.path = path
         self.parameters = parameters
@@ -49,7 +58,7 @@ class HTTPRequest {
         }
 
         func configureRequestUrl() -> String {
-            var requestUrl = environment.baseUrl()
+            var requestUrl = environment.baseUrl
             if requestUrl.hasSuffix("/") {
                 requestUrl.removeLast()
             }
@@ -93,7 +102,7 @@ class HTTPRequest {
         }
     }
 
-    static func upload(
+    func upload(
         images: [UIImage],
         success: @escaping (_ JSONString: String?, _ otherInfo: Any?) -> (),
         failure: @escaping (_ error: Error?) -> ()) {
@@ -108,7 +117,7 @@ class HTTPRequest {
                     }
                 })
         },
-            to: "http://wuliu.hsrich.cn/index.php/api/Upload/doUpload") { (result) in
+            to: environment.uploadUrl) { (result) in
             switch result {
             case .success(let uploadRequest, _, _):
                 uploadRequest.responseJSON(completionHandler: { (response) in
