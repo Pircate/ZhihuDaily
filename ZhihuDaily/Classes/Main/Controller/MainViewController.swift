@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
         let homeVC = HomeViewController()
         homeVC.menuButtonDidSelectHandler = { [weak self] (sender) in
             let point = sender.isSelected ? CGPoint.zero : CGPoint(x: MainViewController.leftMenuWidth, y: 0)
-            self.flatMap({
+            self.map({
                 $0.scrollView.setContentOffset(point, animated: true)
             })
         }

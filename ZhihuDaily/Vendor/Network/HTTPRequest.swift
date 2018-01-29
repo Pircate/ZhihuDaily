@@ -34,7 +34,7 @@ enum NetworkEnvironment {
 
 class HTTPRequest {
 
-    var requestMethod: HTTPMethod = .get
+    var method: HTTPMethod = .get
     var environment: NetworkEnvironment = .develop
     let path: String
     let parameters: [String: Any]?
@@ -52,7 +52,7 @@ class HTTPRequest {
                failure: @escaping (_ error: Error?, _ otherInfo: String) -> ()) {
 
         var encoding = URLEncoding.queryString
-        if requestMethod == .post {
+        if method == .post {
             encoding = .httpBody
         }
 
@@ -73,7 +73,7 @@ class HTTPRequest {
         
         Alamofire.request(
             configureRequestUrl(),
-            method: requestMethod,
+            method: method,
             parameters: configureParameters(),
             encoding: encoding,
             headers: nil).responseJSON { (response) in

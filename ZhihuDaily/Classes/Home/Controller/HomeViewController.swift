@@ -97,13 +97,13 @@ class HomeViewController: BaseViewController {
     
     private func setupTableViewRefresh() {
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            self.flatMap({
+            self.map({
                 $0.requestLatestNewsList()
             })
         })
         
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
-            self.flatMap({
+            self.map({
                 $0.requestBeforeNewsList()
             })
         })
@@ -111,43 +111,41 @@ class HomeViewController: BaseViewController {
     
     private func requestLatestNewsList() {
         HomeComponent().requestLatestNewsList(cache: { (model) in
-            self.sectionTitles.removeAll()
-            self.date = model?.date
-            model?.topStories.flatMap({
-                self.bannerList = $0
-                self.cycleScrollView.imageURLStringsGroup = $0.flatMap({
-                    $0.image
-                })
-                self.cycleScrollView.titlesGroup = $0.flatMap({
-                    $0.title
-                })
+            model.map({
+                self.handleLastestNews(model: $0)
             })
-            model?.stories.flatMap({
-                self.dataSource = [$0]
-            })
-            self.tableView.reloadData()
         }, success: { (model) in
             if self.tableView.mj_header.isRefreshing {
                 self.tableView.mj_header.endRefreshing()
             }
-            self.sectionTitles.removeAll()
-            self.date = model?.date
-            model?.topStories.flatMap({
-                self.bannerList = $0;
-                self.cycleScrollView.imageURLStringsGroup = $0.flatMap({
-                    $0.image
-                })
-                self.cycleScrollView.titlesGroup = $0.flatMap({
-                    $0.title
-                })
+            model.map({
+                self.handleLastestNews(model: $0)
             })
-            model?.stories.flatMap({
-                self.dataSource = [$0]
-            })
-            self.tableView.reloadData()
         }) { (error) in
             
         }
+    }
+    
+    private func handleLastestNews(model: HomeNewsListModel) {
+        self.sectionTitles.removeAll()
+        self.date = model.date
+        model.topStories.map({
+            self.bannerList = $0
+            var images: [String] = []
+            var titles: [String] = []
+            $0.forEach({
+                if let image = $0.image, let title = $0.title {
+                    images.append(image)
+                    titles.append(title)
+                }
+            })
+            self.cycleScrollView.imageURLStringsGroup = images
+            self.cycleScrollView.titlesGroup = titles
+        })
+        model.stories.map({
+            self.dataSource = [$0]
+        })
+        self.tableView.reloadData()
     }
     
     private func requestBeforeNewsList() {
@@ -156,11 +154,11 @@ class HomeViewController: BaseViewController {
             if self.tableView.mj_footer.isRefreshing {
                 self.tableView.mj_footer.endRefreshing()
             }
-            model?.date.flatMap({
+            model?.date.map({
                 self.date = $0
                 self.sectionTitles.append($0)
             })
-            model?.stories.flatMap({
+            model?.stories.map({
                 self.dataSource.append($0)
             })
             self.tableView.reloadData()

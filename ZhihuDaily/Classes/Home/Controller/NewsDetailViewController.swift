@@ -87,10 +87,10 @@ class NewsDetailViewController: BaseViewController, Routable {
     
     private func requestNewsDetail() {
         HomeComponent().requestNewsDetail(newsID: newsID, success: { (model) in
-            model?.image.flatMap({
+            model?.image.map({
                 self.headerView.kf.setImage(with: URL(string: $0))
             })
-            model?.title.flatMap({
+            model?.title.map({
                 self.titleLabel.text = $0
             })
             if let body = model?.body {
