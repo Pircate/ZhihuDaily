@@ -86,7 +86,7 @@ class BaseComponent {
         self.requestCount += 1
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         print("-----start request-----")
-        request.startWithCompletionBlock(success: { (JSONString, otherInfo) in
+        request.start(success: { (JSONString, otherInfo) in
             print("-----request success-----")
             self.requestCount -= 1
             if self.requestCount == 0 {

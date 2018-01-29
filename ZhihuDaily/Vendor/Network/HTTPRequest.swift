@@ -48,9 +48,8 @@ class HTTPRequest {
         self.needsCache = needsCache
     }
 
-    func startWithCompletionBlock(
-        success: @escaping (_ JSONString: String?, _ otherInfo: Any?) -> (),
-        failure: @escaping (_ error: Error?, _ otherInfo: String) -> ()) {
+    func start(success: @escaping (_ JSONString: String?, _ otherInfo: Any?) -> (),
+               failure: @escaping (_ error: Error?, _ otherInfo: String) -> ()) {
 
         var encoding = URLEncoding.queryString
         if requestMethod == .post {
