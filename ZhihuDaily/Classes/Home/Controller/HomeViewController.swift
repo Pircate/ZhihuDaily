@@ -29,7 +29,7 @@ class HomeViewController: BaseViewController {
         tableView.estimatedSectionHeaderHeight = 0
         tableView.estimatedSectionFooterHeight = 0
         tableView.separatorColor = UIColor(hex: "#eeeeee")
-        tableView.register(HomeNewsRowCell.self, forCellReuseIdentifier: "cellID")
+        tableView.register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell")
         return tableView
     }()
     
@@ -65,7 +65,7 @@ class HomeViewController: BaseViewController {
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
     
     var bannerList: [HomeNewsModel] = []
-    var dataSource: [[HomeNewsModel]] = []
+    var dataSource: [[Configurable]] = []
     var date: String?
     var sectionTitles: [String] = []
     
@@ -143,7 +143,9 @@ class HomeViewController: BaseViewController {
             self.cycleScrollView.titlesGroup = titles
         })
         model.stories.map({
-            self.dataSource = [$0]
+          self.dataSource = [$0.map({
+            Row<HomeNewsRowCell>(viewData: $0)
+          })]
         })
         self.tableView.reloadData()
     }
@@ -159,7 +161,9 @@ class HomeViewController: BaseViewController {
                 self.sectionTitles.append($0)
             })
             model?.stories.map({
-                self.dataSource.append($0)
+                self.dataSource.append($0.map({
+                    Row<HomeNewsRowCell>(viewData: $0)
+                }))
             })
             self.tableView.reloadData()
         }) { (error) in
@@ -191,9 +195,9 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! HomeNewsRowCell
-        let model = dataSource[indexPath.section][indexPath.row]
-        cell.model = model
+        let row = dataSource[indexPath.section][indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseIdentifier, for: indexPath)
+        row.update(cell: cell)
         return cell
     }
 }
@@ -223,7 +227,8 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = dataSource[indexPath.section][indexPath.row]
+        let row = dataSource[indexPath.section][indexPath.row]
+        let model: HomeNewsModel = row.cellItem()
         push(NewsDetailViewController.self) {
             $0.newsID = model.id ?? ""
         }

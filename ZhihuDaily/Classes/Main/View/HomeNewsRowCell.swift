@@ -23,15 +23,6 @@ class HomeNewsRowCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    
-    var model: HomeNewsModel? {
-        didSet {
-            titleLabel.text = model?.title
-            if let url = model?.images?.first {
-                coverImageView.kf.setImage(with: URL(string: url))
-            }
-        }
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,5 +56,16 @@ class HomeNewsRowCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension HomeNewsRowCell: Updatable {
+    typealias ViewData = HomeNewsModel
+    
+    func update(viewData: HomeNewsModel) {
+        titleLabel.text = viewData.title
+        if let url = viewData.images?.first {
+            coverImageView.kf.setImage(with: URL(string: url))
+        }
     }
 }
