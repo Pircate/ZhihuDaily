@@ -35,7 +35,7 @@ struct Router: Redirectable {
                         animated: Bool,
                         options: RouterOpenOptions = .push,
                         configuration: ((T) -> Void)?,
-                        completion: (() -> Void)?) where T: Routable, T: UIViewController {
+                        completion: (() -> Void)?) where T: Routable {
         
         func configurationHandler(target: Routable, configuration: ((T) -> Void)?) {
             guard let target = target as? T else { return }
@@ -43,7 +43,9 @@ struct Router: Redirectable {
         }
         
         redirect(route: route, parameters: parameters) { (target) in
-            guard let viewController = target as? UIViewController else { return }
+            guard let viewController = target as? UIViewController else {
+                fatalError("Target type error")
+            }
             switch options {
             case .push:
                 configurationHandler(target: target, configuration: configuration)
@@ -72,7 +74,7 @@ extension UIViewController {
     func push<T>(_ route: T.Type,
                  parameters: [String: Any]? = nil,
                  animated: Bool = true,
-                 configuration: ((T) -> Void)? = nil) where T: Routable, T: UIViewController {
+                 configuration: ((T) -> Void)? = nil) where T: Routable {
         Router.open(route, parameters: parameters, from: self, animated: animated, configuration: configuration, completion: nil)
     }
     
@@ -80,7 +82,7 @@ extension UIViewController {
                     parameters: [String: Any]? = nil,
                     animated: Bool = true,
                     configuration: ((T) -> Void)? = nil,
-                    completion: (() -> Void)? = nil) where T: Routable, T: UIViewController {
+                    completion: (() -> Void)? = nil) where T: Routable {
         Router.open(route, parameters: parameters, from: self, animated: animated, options: .present, configuration: configuration, completion: completion)
     }
     
@@ -88,7 +90,7 @@ extension UIViewController {
                        parameters: [String: Any]? = nil,
                        animated: Bool = true,
                        configuration: ((T) -> Void)? = nil,
-                       completion: (() -> Void)? = nil) where T: Routable, T: UIViewController {
+                       completion: (() -> Void)? = nil) where T: Routable {
         Router.open(route, parameters: parameters, from: self, animated: animated, options: .presentNav, configuration: configuration, completion: completion)
     }
 }
@@ -110,7 +112,7 @@ extension UIView {
     func push<T>(_ route: T.Type,
                  parameters: [String: Any]? = nil,
                  animated: Bool = true,
-                 configuration: ((T) -> Void)? = nil) where T: Routable, T: UIViewController {
+                 configuration: ((T) -> Void)? = nil) where T: Routable {
         self.currentViewController()?.push(route, parameters: parameters, animated: animated, configuration: configuration)
     }
     
@@ -118,7 +120,7 @@ extension UIView {
                     parameters: [String: Any]? = nil,
                     animated: Bool = true,
                     configuration: ((T) -> Void)? = nil,
-                    completion: (() -> Void)? = nil) where T: Routable, T: UIViewController {
+                    completion: (() -> Void)? = nil) where T: Routable {
         self.currentViewController()?.present(route, parameters: parameters, animated: animated, configuration: configuration, completion: completion)
     }
     
@@ -126,8 +128,7 @@ extension UIView {
                        parameters: [String: Any]? = nil,
                        animated: Bool = true,
                        configuration: ((T) -> Void)? = nil,
-                       completion: (() -> Void)? = nil) where T: Routable, T: UIViewController {
+                       completion: (() -> Void)? = nil) where T: Routable {
         self.currentViewController()?.presentNav(route, parameters: parameters, animated: animated, configuration: configuration, completion: completion)
     }
 }
-
