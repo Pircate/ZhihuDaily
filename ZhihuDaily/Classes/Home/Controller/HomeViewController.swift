@@ -202,6 +202,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section > 0 else {
@@ -235,6 +236,7 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - SDCycleScrollViewDelegate
 extension HomeViewController: SDCycleScrollViewDelegate {
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
@@ -245,6 +247,7 @@ extension HomeViewController: SDCycleScrollViewDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension HomeViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -48,6 +48,11 @@ class HTTPRequest {
         self.needsCache = needsCache
     }
 
+    /// 开始请求
+    ///
+    /// - Parameters:
+    ///   - success: 成功回调
+    ///   - failure: 失败回调
     func start(success: @escaping (_ JSONString: String?, _ otherInfo: Any?) -> (),
                failure: @escaping (_ error: Error?, _ otherInfo: String) -> ()) {
 
@@ -101,6 +106,12 @@ class HTTPRequest {
         }
     }
 
+    /// 上传图片
+    ///
+    /// - Parameters:
+    ///   - images: 需要上传的图片数组
+    ///   - success: 成功回调
+    ///   - failure: 失败回调
     func upload(
         images: [UIImage],
         success: @escaping (_ JSONString: String?, _ otherInfo: Any?) -> (),
@@ -161,9 +172,7 @@ extension HTTPRequest {
             if !isDir.boolValue {
                 do {
                     try FileManager.default.removeItem(atPath: path)
-                    do {
-                        try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-                    } catch  {}
+                    try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                 } catch  {}
             }
         }
@@ -214,6 +223,9 @@ extension HTTPRequest {
         return "\(savedFileDirectory())/\(savedFileName())"
     }
 
+    /// 缓存数据到磁盘
+    ///
+    /// - Parameter data: 请求数据
     public func saveDataToDisk(data: Any) {
         let filePath = savedFilePath()
         objc_sync_enter(self)
@@ -221,6 +233,9 @@ extension HTTPRequest {
         objc_sync_exit(self)
     }
 
+    /// 读取缓存数据
+    ///
+    /// - Returns: 缓存数据
     public func cacheData() -> Any? {
         let filePath = savedFilePath()
         guard FileManager.default.fileExists(atPath: filePath) else {
@@ -232,6 +247,7 @@ extension HTTPRequest {
         return data
     }
 
+    /// 清除当前请求缓存
     public func clearCache() {
         let filePath = savedFilePath()
         if FileManager.default.fileExists(atPath: filePath) {
@@ -241,7 +257,8 @@ extension HTTPRequest {
             catch {}
         }
     }
-
+    
+    /// 清除所有网络请求缓存
     public func clearAllCache() {
         let cachePath = self.cachePath()
         if FileManager.default.fileExists(atPath: cachePath) {

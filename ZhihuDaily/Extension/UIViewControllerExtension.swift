@@ -44,23 +44,24 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func dismiss(animated: Bool) {
+    func dismiss(_ animated: Bool = true, completion: (() -> Void)? = nil) {
         
         if presentingViewController != nil {
-            if let nav = navigationController {
-                if nav.viewControllers.count > 1 {
-                    nav.popViewController(animated: animated)
+            navigationController.map({
+                if $0.viewControllers.count > 1 {
+                    $0.popViewController(animated: animated)
                 }
                 else {
-                    dismiss(animated: animated, completion: nil)
+                    dismiss(animated: animated, completion: completion)
                 }
-            }
-            else {
-                dismiss(animated: animated, completion: nil)
-            }
+            })
+            dismiss(animated: animated, completion: completion)
         }
         else {
-            navigationController?.popViewController(animated: animated)
+            navigationController.map({
+                $0.popViewController(animated: animated)
+                completion.map({ $0() })
+            })
         }
     }
 }

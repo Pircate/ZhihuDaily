@@ -45,7 +45,7 @@ class NewsDetailViewController: BaseViewController, Routable {
     var statusBarStyle: UIStatusBarStyle = .lightContent
     
     
-    static func initializeRoute(parameters: [String : Any]?) -> Routable {
+    static func register(parameters: [String : Any]?) -> Routable {
         return NewsDetailViewController()
     }
 

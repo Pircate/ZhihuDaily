@@ -14,12 +14,12 @@ import MJRefresh
 
 class MainViewController: UIViewController {
     
-    static var leftMenuWidth = UIScreen.width * 3 / 5
+    private var leftMenuWidth = UIScreen.width * 3 / 5
     
     lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: view.bounds)
-        scrollView.contentSize = CGSize(width: view.bounds.width + MainViewController.leftMenuWidth, height: view.bounds.height)
-        scrollView.contentOffset = CGPoint(x: MainViewController.leftMenuWidth, y: 0)
+        let scrollView = UIScrollView(frame: CGRect.zero)
+        scrollView.contentSize = CGSize(width: view.bounds.width + leftMenuWidth, height: view.bounds.height)
+        scrollView.contentOffset = CGPoint(x: leftMenuWidth, y: 0)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
@@ -47,20 +47,23 @@ class MainViewController: UIViewController {
         
         disableAdjustsScrollViewInsets(scrollView)
         view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         
         let menuVC = MenuViewController()
-        menuVC.view.frame = CGRect(x: 0, y: 0, width: MainViewController.leftMenuWidth, height: view.bounds.height)
+        menuVC.view.frame = CGRect(x: 0, y: 0, width: leftMenuWidth, height: view.bounds.height)
         addChildViewController(menuVC)
         scrollView.addSubview(menuVC.view)
         
         let homeVC = HomeViewController()
         homeVC.menuButtonDidSelectHandler = { [weak self] (sender) in
-            let point = sender.isSelected ? CGPoint.zero : CGPoint(x: MainViewController.leftMenuWidth, y: 0)
             self.map({
+                let point = sender.isSelected ? CGPoint.zero : CGPoint(x: $0.leftMenuWidth, y: 0)
                 $0.scrollView.setContentOffset(point, animated: true)
             })
         }
-        homeVC.view.frame = CGRect(x: MainViewController.leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
+        homeVC.view.frame = CGRect(x: leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
         addChildViewController(homeVC)
         scrollView.addSubview(homeVC.view)
     }

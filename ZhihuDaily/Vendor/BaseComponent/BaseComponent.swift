@@ -9,7 +9,7 @@
 import UIKit
 import HandyJSON
 
-struct DataResponse<T: HandyJSON>: HandyJSON {
+struct BaseResponse<T: HandyJSON>: HandyJSON {
     
     private var msg = ""
     private var code = ""
@@ -54,8 +54,8 @@ struct DataResponse<T: HandyJSON>: HandyJSON {
 
 struct Convertor<T: HandyJSON> {
     
-    static func convertToResponse(json: String?) -> DataResponse<T> {
-        return JSONDeserializer<DataResponse<T>>.deserializeFrom(json: json) ?? DataResponse<T>()
+    static func convertToResponse(json: String?) -> BaseResponse<T> {
+        return JSONDeserializer<BaseResponse<T>>.deserializeFrom(json: json) ?? BaseResponse<T>()
     }
 }
 
@@ -63,6 +63,14 @@ class BaseComponent {
     
     private var requestCount = 0
     
+    
+    /// 开始请求
+    ///
+    /// - Parameters:
+    ///   - request: 请求
+    ///   - cache: 缓存回调
+    ///   - success: 请求成功回调
+    ///   - failure: 请求失败
     func startRequest<T: HandyJSON>(
         request: HTTPRequest,
         cache: ((T?) -> ())? = nil,
