@@ -128,8 +128,15 @@ extension NewsDetailViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
         else {
-            push(WebViewController.self, parameters: ["url": url ?? ""], animated: true, configuration: nil)
-            decisionHandler(.cancel)
+            if navigationAction.sourceFrame.isMainFrame {
+                push(WebViewController.self, configuration: { (web) in
+                    web.url = url ?? ""
+                })
+                decisionHandler(.cancel)
+            }
+            else {
+                decisionHandler(.allow)
+            }
         }
     }
 }
