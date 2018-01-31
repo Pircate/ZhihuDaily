@@ -29,17 +29,24 @@ extension Redirectable {
 
 struct Router: Redirectable {
     
-    static func open<T>(_ route: T.Type,
-                        parameters: [String: Any]?,
-                        from originViewController: UIViewController,
-                        animated: Bool,
-                        options: RouterOpenOptions = .push,
-                        configuration: ((T) -> Void)?,
-                        completion: (() -> Void)?) where T: Routable {
+    public static func open<Route>(_ route: Route.Type,
+                                   parameters: [String: Any]? = nil,
+                                   from originViewController: UIViewController,
+                                   animated: Bool = true,
+                                   options: RouterOpenOptions = .push,
+                                   configuration: ((Route) -> Void)? = nil,
+                                   completion: ((UIViewController, Route) -> Void)? = nil) where Route: Routable {
         
-        func configurationHandler(target: Routable, configuration: ((T) -> Void)?) {
-            guard let target = target as? T else { return }
+        func configurationHandler(target: Routable, configuration: ((Route) -> Void)?) {
+            guard let target = target as? Route else { return }
             configuration.map({ $0(target) })
+        }
+        
+        func completionHandler(origin: UIViewController, target: Routable, completion: ((UIViewController, Route) -> Void)?) {
+            guard let target = target as? Route else { return }
+            completion.map({
+                $0(origin, target)
+            })
         }
         
         redirect(route: route, parameters: parameters) { (target) in
@@ -59,11 +66,15 @@ struct Router: Redirectable {
                 }
             case .present:
                 configurationHandler(target: target, configuration: configuration)
-                originViewController.present(viewController, animated: animated, completion: completion)
+                originViewController.present(viewController, animated: animated, completion: {
+                    completionHandler(origin: originViewController, target: target, completion: completion)
+                })
             case .presentNav:
                 configurationHandler(target: target, configuration: configuration)
                 let nav = UINavigationController(rootViewController: viewController)
-                originViewController.present(nav, animated: animated, completion: completion)
+                originViewController.present(nav, animated: animated, completion: {
+                    completionHandler(origin: originViewController, target: target, completion: completion)
+                })
             }
         }
     }
@@ -82,7 +93,7 @@ extension UIViewController {
                     parameters: [String: Any]? = nil,
                     animated: Bool = true,
                     configuration: ((T) -> Void)? = nil,
-                    completion: (() -> Void)? = nil) where T: Routable {
+                    completion: ((UIViewController, T) -> Void)? = nil) where T: Routable {
         Router.open(route, parameters: parameters, from: self, animated: animated, options: .present, configuration: configuration, completion: completion)
     }
     
@@ -90,7 +101,7 @@ extension UIViewController {
                        parameters: [String: Any]? = nil,
                        animated: Bool = true,
                        configuration: ((T) -> Void)? = nil,
-                       completion: (() -> Void)? = nil) where T: Routable {
+                       completion: ((UIViewController, T) -> Void)? = nil) where T: Routable {
         Router.open(route, parameters: parameters, from: self, animated: animated, options: .presentNav, configuration: configuration, completion: completion)
     }
 }
@@ -120,7 +131,7 @@ extension UIView {
                     parameters: [String: Any]? = nil,
                     animated: Bool = true,
                     configuration: ((T) -> Void)? = nil,
-                    completion: (() -> Void)? = nil) where T: Routable {
+                    completion: ((UIViewController, T) -> Void)? = nil) where T: Routable {
         self.currentViewController()?.present(route, parameters: parameters, animated: animated, configuration: configuration, completion: completion)
     }
     
@@ -128,7 +139,7 @@ extension UIView {
                        parameters: [String: Any]? = nil,
                        animated: Bool = true,
                        configuration: ((T) -> Void)? = nil,
-                       completion: (() -> Void)? = nil) where T: Routable {
+                       completion: ((UIViewController, T) -> Void)? = nil) where T: Routable {
         self.currentViewController()?.presentNav(route, parameters: parameters, animated: animated, configuration: configuration, completion: completion)
     }
 }
