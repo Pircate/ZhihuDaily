@@ -60,6 +60,7 @@ class HomeViewController: BaseViewController {
         registerNavigationBar()
         ay_navigationBar.alpha = 0
         ay_navigationBar.backgroundColor = UIColor.global
+        ay_navigationBar.contentOffset = -14;
         ay_navigationItem.title = "今日要闻"
         ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
         
@@ -253,6 +254,7 @@ extension HomeViewController: UIScrollViewDelegate {
                 ay_navigationBar.alpha = alpha
             }
             else {
+                ay_navigationBar.alpha = 0
                 if tableView.contentOffset.y > -40 {
                     var frame = cycleScrollView.frame
                     frame.origin.y = tableView.contentOffset.y
