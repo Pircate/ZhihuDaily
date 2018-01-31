@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
-  - AYNavigationBar (1.0.9):
+  - AYNavigationBar (1.1.0):
     - FDFullscreenPopGesture (~> 1.1)
   - FDFullscreenPopGesture (1.1)
   - HandyJSON (4.0.0-beta.1)
@@ -26,7 +26,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  AYNavigationBar: 8e2fff218012cadddf57ae74c7e49e0fe92e0e12
+  AYNavigationBar: 1f23a42e469cbe977c4d557c13cb3a38e83c74b4
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
@@ -38,4 +38,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 78c912b9403cf09c6e7955e7802f3d53aed3836e
 
-COCOAPODS: 1.4.0.rc.1
+COCOAPODS: 1.4.0

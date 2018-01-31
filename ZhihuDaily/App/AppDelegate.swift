@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         let nav = UINavigationController(rootViewController: MainViewController())
+        nav.ay_navigationBarEnabled = true
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
         return true

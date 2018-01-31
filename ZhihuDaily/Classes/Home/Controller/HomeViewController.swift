@@ -33,21 +33,6 @@ class HomeViewController: BaseViewController {
         return tableView
     }()
     
-    lazy var navBar: UIView = {
-        let navBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: UIApplication.statusBarHeight + customNavigationBarHeight))
-        navBar.backgroundColor = UIColor.global
-        navBar.alpha = 0
-        return navBar
-    }()
-    
-    lazy var navTitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: UIApplication.statusBarHeight, width: UIScreen.width, height: customNavigationBarHeight))
-        label.textColor = UIColor.white
-        label.text = "今日要闻"
-        label.textAlignment = .center
-        return label
-    }()
-    
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom)
         menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 44, height: 32)
@@ -72,9 +57,21 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerNavigationBar()
+        ay_navigationBar.alpha = 0
+        ay_navigationBar.backgroundColor = UIColor.global
+        ay_navigationItem.title = "今日要闻"
+        ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
         addSubviews()
         setupTableViewRefresh()
         tableView.mj_header.beginRefreshing()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.bringSubview(toFront: menuButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,8 +83,6 @@ class HomeViewController: BaseViewController {
         
         disableAdjustsScrollViewInsets(tableView)
         view.addSubview(tableView)
-        view.addSubview(navBar)
-        view.addSubview(navTitleLabel)
         view.addSubview(menuButton)
         
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
@@ -255,7 +250,7 @@ extension HomeViewController: UIScrollViewDelegate {
         if scrollView == tableView {
             if tableView.contentOffset.y > 0 {
                 let alpha = tableView.contentOffset.y / tableHeaderViewHeight
-                navBar.alpha = alpha
+                ay_navigationBar.alpha = alpha
             }
             else {
                 if tableView.contentOffset.y > -40 {
@@ -272,13 +267,13 @@ extension HomeViewController: UIScrollViewDelegate {
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
-                navBar.frame.size.height = UIApplication.statusBarHeight
-                navTitleLabel.isHidden = true
+                ay_navigationBar.verticalOffset = -30.0
+                ay_navigationItem.alpha = 0
                 tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
             }
             else {
-                navTitleLabel.isHidden = false
-                navBar.frame.size.height = customNavigationBarHeight + UIApplication.statusBarHeight
+                ay_navigationBar.verticalOffset = 0
+                ay_navigationItem.alpha = 1
                 tableView.contentInset = UIEdgeInsets.zero
             }
         }

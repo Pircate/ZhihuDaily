@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fd_prefersNavigationBarHidden = true
+        ay_navigationBar.isHidden = true
         addSubviews()
     }
     

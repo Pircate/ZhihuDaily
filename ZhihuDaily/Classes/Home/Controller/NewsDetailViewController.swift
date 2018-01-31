@@ -16,7 +16,6 @@ class NewsDetailViewController: BaseViewController, Routable {
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: view.bounds)
         webView.navigationDelegate = self
-        webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.delegate = self
         return webView
     }()
@@ -35,13 +34,6 @@ class NewsDetailViewController: BaseViewController, Routable {
         return label
     }()
     
-    lazy var statusBarBackView: UIView = {
-        let backView = UIView()
-        backView.backgroundColor = UIColor.white
-        backView.isHidden = true
-        return backView
-    }()
-    
     var statusBarStyle: UIStatusBarStyle = .lightContent
     
     
@@ -52,6 +44,9 @@ class NewsDetailViewController: BaseViewController, Routable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ay_navigationBar.verticalOffset = -30;
+        ay_navigationItem.isHidden = true
+        ay_navigationBar.backgroundColor = UIColor.white
         addSubviews()
         requestNewsDetail()
     }
@@ -71,17 +66,11 @@ class NewsDetailViewController: BaseViewController, Routable {
         view.addSubview(webView)
         webView.scrollView.addSubview(headerView)
         headerView.addSubview(titleLabel)
-        view.addSubview(statusBarBackView)
         
         titleLabel.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
             make.width.equalTo(UIScreen.width - 30)
-        }
-        
-        statusBarBackView.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(UIApplication.shared.statusBarFrame.height)
         }
     }
     
@@ -156,7 +145,7 @@ extension NewsDetailViewController: UIScrollViewDelegate {
                 scrollView.contentOffset = CGPoint(x: 0, y: -60)
             }
         }
-        statusBarBackView.isHidden = scrollView.contentOffset.y < 180
+        ay_navigationBar.isHidden = scrollView.contentOffset.y < 180
         statusBarStyle = scrollView.contentOffset.y < 180 ? .lightContent : .default
         setNeedsStatusBarAppearanceUpdate()
     }

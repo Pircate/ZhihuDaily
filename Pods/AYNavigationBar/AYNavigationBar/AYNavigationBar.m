@@ -10,13 +10,12 @@
 
 #import <objc/runtime.h>
 
-CGFloat contentViewHeight = 44.f;
+CGFloat contentViewHeight = 30.f;
 const CGFloat AYNavigationBarLargeTitleMinHeight = 49.f;
-const CGFloat AYNavigationBarPortraitHeight = 44.f;
+const CGFloat AYNavigationBarPortraitHeight = 30.f;
 const CGFloat AYNavigationBarLandscapeHeight = 32.f;
 const CGFloat AYNavigationBarShadowViewHeight = 1.f / 3;
 const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
-const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 
 #define kAYNavigationBarIsIPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define kAYNavigationBarStatusBarHeight [UIApplication sharedApplication].statusBarFrame.size.height
@@ -202,7 +201,7 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 
 - (void)setTitle:(NSString *)title
 {
-    _title = title;
+    _title = [title copy];
     _titleLabel.hidden = NO;
     _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:title ?: @"" attributes:self.titleTextAttributes];
     
@@ -377,7 +376,7 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 {
     self = [super initWithFrame:kAYNavigationBarFrame];
     if (self) {
-        
+
         _identifier = identifier;
         
         [self ay_addObserver];
@@ -492,7 +491,7 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
     contentViewHeight = isLandscape ? AYNavigationBarLandscapeHeight : AYNavigationBarPortraitHeight;
     CGRect barFrame = kAYNavigationBarFrame;
     CGFloat statusBarHeight = isLandscape ? 0.f : (kAYNavigationBarIsIPhoneX ? 44.f : 20.f);
-    barFrame.origin.y = statusBarHeight;
+    barFrame.origin.y = statusBarHeight + self.verticalOffset;
     barFrame.size.height += largeTitleViewHeight;
     if (self.willHidden) barFrame.origin.y = -barFrame.size.height;
     self.frame = barFrame;
@@ -605,17 +604,13 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
         _largeTitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.navigationItem.title ?: @"" attributes:self.largeTitleTextAttributes];
         
         _largeTitleLabel.frame = CGRectMake(16.f, 0.f, kAYNavigationBarScreenWidth - 32.f, CGRectGetHeight(_largeTitleView.frame));
-        [UIView animateWithDuration:AYNavigationBarShowLargeTitleViewDuration animations:^{
-            _navigationItem.titleLabel.alpha = 0.f;
-            _largeTitleLabel.alpha = 1.f;
-        }];
+        _navigationItem.titleLabel.alpha = 0.f;
+        _largeTitleLabel.alpha = 1.f;
     }
     else {
         _largeTitleView.hidden = YES;
-        [UIView animateWithDuration:AYNavigationBarShowLargeTitleViewDuration animations:^{
-            _navigationItem.titleLabel.alpha = 1.f;
-            _largeTitleLabel.alpha = 0.f;
-        }];
+        _navigationItem.titleLabel.alpha = 1.f;
+        _largeTitleLabel.alpha = 0.f;
     }
 }
 
@@ -676,6 +671,13 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
     }
 }
 
+- (void)setVerticalOffset:(CGFloat)verticalOffset
+{
+    _verticalOffset = verticalOffset;
+    
+    [self ay_layoutIfNeeded];
+}
+
 @end
 
 #pragma mark - UIViewController (AYNavigationBar)
@@ -706,6 +708,8 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
         }
         
         [self registerNavigationBar];
+
+        self.fd_prefersNavigationBarHidden = !self.ay_navigationBarDisabled;
         
         if (self.navigationController.viewControllers.count > 1) {
             [self ay_setupBackBarButton];
@@ -732,9 +736,6 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 #pragma mark - public
 - (void)registerNavigationBar
 {
-    if (self.navigationItem.title) {
-        self.ay_navigationItem.title = self.navigationItem.title;
-    }
     if (self.navigationController.ay_titleTextAttributes) {
         self.ay_navigationItem.titleTextAttributes = self.navigationController.ay_titleTextAttributes;
     }
@@ -771,6 +772,17 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 }
 
 #pragma mark - getter & setter
+- (BOOL)ay_navigationBarDisabled
+{
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
+}
+
+- (void)setAy_navigationBarDisabled:(BOOL)ay_navigationBarDisabled
+{
+    objc_setAssociatedObject(self, @selector(ay_navigationBarDisabled), @(ay_navigationBarDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    self.fd_prefersNavigationBarHidden = !ay_navigationBarDisabled;
+}
+
 - (AYNavigationBar *)ay_navigationBar
 {
     AYNavigationBar *navigationBar = objc_getAssociatedObject(self, _cmd);
@@ -811,13 +823,9 @@ const CGFloat AYNavigationBarShowLargeTitleViewDuration = 0.5;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSArray *sels = @[@"setNavigationBarHidden:animated:"];
-        [sels enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            Method originalMethod = class_getInstanceMethod(self, NSSelectorFromString(obj));
-            NSString *swizzledSel = [@"ay__" stringByAppendingString:obj];
-            Method swizzledMethod = class_getInstanceMethod(self, NSSelectorFromString(swizzledSel));
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }];
+        Method originalMethod = class_getInstanceMethod(self, @selector(setNavigationBarHidden:animated:));
+        Method swizzledMethod = class_getInstanceMethod(self, @selector(ay__setNavigationBarHidden:animated:));
+        method_exchangeImplementations(originalMethod, swizzledMethod);
     });
 }
 
