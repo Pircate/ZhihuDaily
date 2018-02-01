@@ -250,7 +250,7 @@ extension HomeViewController: UIScrollViewDelegate {
         
         if scrollView == tableView {
             if tableView.contentOffset.y > 0 {
-                let alpha = tableView.contentOffset.y / tableHeaderViewHeight
+                let alpha = tableView.contentOffset.y / (tableHeaderViewHeight - UIApplication.statusBarHeight - ay_navigationBar.frame.height)
                 ay_navigationBar.alpha = alpha
             }
             else {

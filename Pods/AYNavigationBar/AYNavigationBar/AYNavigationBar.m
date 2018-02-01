@@ -394,13 +394,6 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
 }
 
 #pragma mark - over write
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-
-    [self ay_layoutSubviews];
-}
-
 - (void)setFrame:(CGRect)frame
 {
     frame.origin.x = 0.f;
@@ -476,36 +469,36 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
 
 - (void)ay_layoutIfNeeded
 {
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [self ay_layoutSubviews];
 }
 
 - (void)ay_layoutSubviews
 {
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    BOOL isLandscape = UIInterfaceOrientationIsLandscape(orientation);
-    CGFloat largeTitleViewHeight = 0.f;
-    if (_prefersLargeTitles && !isLandscape) {
-        largeTitleViewHeight = [self ay_largeTitleViewHeight];
-    }
+    BOOL isLandscape = [self ay_isLandscape];
+    CGFloat largeTitleViewHeight = (self.prefersLargeTitles && !isLandscape) ? [self ay_largeTitleViewHeight] : 0.f;
+    
     CGFloat statusBarHeight = isLandscape ? 0.f : (kAYNavigationBarIsIPhoneX ? 44.f : 20.f);
-    CGRect barFrame = kAYNavigationBarDefaultFrame;
-    barFrame.origin.y = statusBarHeight + self.verticalOffset;
-    barFrame.size.height = isLandscape ? AYNavigationBarLandscapeHeight : AYNavigationBarPortraitHeight;
-    barFrame.size.height += self.contentOffset;
-    barFrame.size.height += largeTitleViewHeight;
+    CGFloat contentHeight = isLandscape ? AYNavigationBarLandscapeHeight : AYNavigationBarPortraitHeight;
+    if (!isLandscape) contentHeight += self.contentOffset;
+    
+    CGRect barFrame = CGRectMake(0, statusBarHeight + self.verticalOffset, kAYNavigationBarScreenWidth, contentHeight + largeTitleViewHeight);
     if (self.willHidden) barFrame.origin.y = -barFrame.size.height;
     self.frame = barFrame;
     
-    _backgroundView.frame = [self barBackgroundFrame];
-    _backgroundImageView.frame = _backgroundView.bounds;
-    _shadowImageView.frame = [self barShadowViewFrame];
-    _visualEffectView.frame = _backgroundView.bounds;
+    self.backgroundView.frame = [self barBackgroundFrame];
+    self.backgroundImageView.frame = self.backgroundView.bounds;
+    self.shadowImageView.frame = [self barShadowViewFrame];
+    self.visualEffectView.frame = self.backgroundView.bounds;
     
-    _navigationItem.frame = [self barContentFrame];
+    CGRect contentFrame = CGRectMake(0, 0, kAYNavigationBarScreenWidth, contentHeight);
+    if ([self ay_needsFixedSpace]) {
+        contentFrame.origin.x = AYNavigationBarIPhoneXFixedSpaceWidth;
+        contentFrame.size.width = kAYNavigationBarScreenWidth - AYNavigationBarIPhoneXFixedSpaceWidth * 2;
+    }
+    self.navigationItem.frame = contentFrame;
     
-    _largeTitleView.frame = CGRectMake(0, CGRectGetMaxY(_navigationItem.frame), CGRectGetWidth(self.frame), largeTitleViewHeight);
-    [self ay_showLargeTitle:(!isLandscape && _prefersLargeTitles)];
+    self.largeTitleView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationItem.frame), CGRectGetWidth(self.frame), largeTitleViewHeight);
+    [self ay_showLargeTitle:(!isLandscape && self.prefersLargeTitles)];
 }
 
 - (CGRect)barBackgroundFrame
@@ -516,17 +509,6 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
 - (CGRect)barShadowViewFrame
 {
     return CGRectMake(0, CGRectGetHeight(_backgroundView.frame), CGRectGetWidth(_backgroundView.frame), AYNavigationBarShadowViewHeight);
-}
-
-- (CGRect)barContentFrame
-{
-    CGRect frame = kAYBarContentViewDefaultFrame;
-    frame.size.height += self.contentOffset;
-    if ([self ay_needsFixedSpace]) {
-        frame.origin.x = AYNavigationBarIPhoneXFixedSpaceWidth;
-        frame.size.width = kAYNavigationBarScreenWidth - AYNavigationBarIPhoneXFixedSpaceWidth * 2;
-    }
-    return frame;
 }
 
 - (void)ay_addBackgroundView
@@ -585,11 +567,15 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
     }
 }
 
+- (BOOL)ay_isLandscape
+{
+    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    return UIInterfaceOrientationIsLandscape(orientation);
+}
+
 - (BOOL)ay_needsFixedSpace
 {
-    UIDeviceOrientation currentOrientation = [[UIDevice currentDevice] orientation];
-    BOOL isLandscape = UIDeviceOrientationIsLandscape(currentOrientation);
-    return isLandscape && kAYNavigationBarIsIPhoneX;
+    return [self ay_isLandscape] && kAYNavigationBarIsIPhoneX;
 }
 
 - (CGFloat)ay_largeTitleViewHeight
@@ -656,6 +642,7 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
 {
     _prefersLargeTitles = prefersLargeTitles;
     
+    if ([self ay_isLandscape]) return;
     [self ay_layoutIfNeeded];
 }
 
@@ -677,12 +664,13 @@ const CGFloat AYNavigationBarIPhoneXFixedSpaceWidth = 56.f;
 {
     _contentOffset = contentOffset > -14.f ? contentOffset : -14.f;
     
+    if ([self ay_isLandscape]) return;
     [self ay_layoutIfNeeded];
 }
 
 - (void)setVerticalOffset:(CGFloat)verticalOffset
 {
-    _verticalOffset = verticalOffset < 0 ? verticalOffset : 0;
+    _verticalOffset = verticalOffset < 0.f ? verticalOffset : 0.f;
     
     [self ay_layoutIfNeeded];
 }
