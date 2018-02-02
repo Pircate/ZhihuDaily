@@ -45,7 +45,7 @@ class NewsDetailViewController: BaseViewController, Routable {
         super.viewDidLoad()
 
         ay_navigationBar.verticalOffset = -44;
-        ay_navigationItem.isHidden = true
+        ay_navigationItem.alpha = 0
         ay_navigationBar.backgroundColor = UIColor.white
         addSubviews()
         requestNewsDetail()
