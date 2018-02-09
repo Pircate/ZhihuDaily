@@ -20,6 +20,7 @@ class HomeViewController: BaseViewController {
     
     private let customNavigationBarHeight: CGFloat = 30
     private let tableHeaderViewHeight: CGFloat = 200
+    private let pullDownHeight: CGFloat = 60
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds)
@@ -59,10 +60,10 @@ class HomeViewController: BaseViewController {
     
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
     
-    var bannerList: [HomeNewsModel] = []
-    var dataSource: [[Configurable]] = []
-    var date: String?
-    var sectionTitles: [String] = []
+    private var bannerList: [HomeNewsModel] = []
+    private var dataSource: [[Configurable]] = []
+    private var date: String?
+    private var sectionTitles: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -273,7 +274,7 @@ extension HomeViewController: UIScrollViewDelegate {
             }
             else {
                 ay_navigationBar.alpha = 0
-                if tableView.contentOffset.y > -40 {
+                if tableView.contentOffset.y > -pullDownHeight {
                     var frame = bannerView.frame
                     frame.origin.y = tableView.contentOffset.y
                     frame.size.height = tableHeaderViewHeight - tableView.contentOffset.y
@@ -281,8 +282,8 @@ extension HomeViewController: UIScrollViewDelegate {
                     bannerView.itemSize = bannerView.bounds.size
                 }
                 else {
-                    bannerView.frame = CGRect(x: 0, y: -40, width: UIScreen.width, height: tableHeaderViewHeight + 40)
-                    tableView.contentOffset = CGPoint(x: 0, y: -40)
+                    bannerView.frame = CGRect(x: 0, y: -pullDownHeight, width: UIScreen.width, height: tableHeaderViewHeight + pullDownHeight)
+                    tableView.contentOffset = CGPoint(x: 0, y: -pullDownHeight)
                 }
             }
             guard tableView.numberOfSections > 0 else { return }
@@ -296,6 +297,12 @@ extension HomeViewController: UIScrollViewDelegate {
                 ay_navigationItem.alpha = 1
                 tableView.contentInset = UIEdgeInsets.zero
             }
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if tableView.contentOffset.y <= -pullDownHeight {
+            requestLatestNewsList()
         }
     }
 }
