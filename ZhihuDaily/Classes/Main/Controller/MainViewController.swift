@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDCycleScrollView
 import Kingfisher
 import SnapKit
 import MJRefresh

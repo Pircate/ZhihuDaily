@@ -9,8 +9,8 @@ target 'ZhihuDaily' do
   pod 'SnapKit'
   pod 'HandyJSON', '~> 4.0.0-beta.1'
   pod 'AYNavigationBar'
-  pod 'SDCycleScrollView'
   pod 'MJRefresh'
   pod 'Hue'
+  pod 'FSPagerView'
 
 end

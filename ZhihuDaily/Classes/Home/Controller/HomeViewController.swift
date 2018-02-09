@@ -8,7 +8,7 @@
 
 import UIKit
 import MJRefresh
-import SDCycleScrollView
+import FSPagerView
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {
@@ -41,10 +41,20 @@ class HomeViewController: BaseViewController {
         return menuBtn
     }()
     
-    lazy var cycleScrollView: SDCycleScrollView = {
-        let cycleScrollView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
-        cycleScrollView.delegate = self
-        return cycleScrollView
+    lazy var bannerView: FSPagerView = {
+        let bannerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
+        bannerView.dataSource = self
+        bannerView.delegate = self
+        bannerView.itemSize = bannerView.bounds.size
+        bannerView.isInfinite = true
+        bannerView.automaticSlidingInterval = 5
+        bannerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "FSPagerViewCell")
+        return bannerView
+    }()
+    
+    lazy var pageControl: FSPageControl = {
+        let pageControl = FSPageControl()
+        return pageControl
     }()
     
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
@@ -66,7 +76,7 @@ class HomeViewController: BaseViewController {
         
         addSubviews()
         setupTableViewRefresh()
-        tableView.mj_header.beginRefreshing()
+        requestLatestNewsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,17 +97,17 @@ class HomeViewController: BaseViewController {
         view.addSubview(menuButton)
         
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
-        tableHeaderView.addSubview(cycleScrollView)
+        tableHeaderView.addSubview(bannerView)
+        tableHeaderView.addSubview(pageControl)
+        pageControl.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 100, height: 30))
+        }
         tableView.tableHeaderView = tableHeaderView
     }
     
     private func setupTableViewRefresh() {
-        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            self.map({
-                $0.requestLatestNewsList()
-            })
-        })
-        
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
             self.map({
                 $0.requestBeforeNewsList()
@@ -111,9 +121,6 @@ class HomeViewController: BaseViewController {
                 self.handleLastestNews(model: $0)
             })
         }, success: { (model) in
-            if self.tableView.mj_header.isRefreshing {
-                self.tableView.mj_header.endRefreshing()
-            }
             model.map({
                 self.handleLastestNews(model: $0)
             })
@@ -127,16 +134,8 @@ class HomeViewController: BaseViewController {
         self.date = model.date
         model.topStories.map({
             self.bannerList = $0
-            var images: [String] = []
-            var titles: [String] = []
-            $0.forEach({
-                if let image = $0.image, let title = $0.title {
-                    images.append(image)
-                    titles.append(title)
-                }
-            })
-            self.cycleScrollView.imageURLStringsGroup = images
-            self.cycleScrollView.titlesGroup = titles
+            self.pageControl.numberOfPages = $0.count
+            self.bannerView.reloadData()
         })
         model.stories.map({
           self.dataSource = [$0.map({
@@ -232,14 +231,33 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - SDCycleScrollViewDelegate
-extension HomeViewController: SDCycleScrollViewDelegate {
+// MARK: - FSPagerViewDataSource
+extension HomeViewController: FSPagerViewDataSource {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return bannerList.count
+    }
     
-    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "FSPagerViewCell", at: index)
+        let item = bannerList[index]
+        cell.imageView?.kf.setImage(with: URL(string: item.image!))
+        cell.textLabel?.text = item.title
+        return cell
+    }
+}
+
+// MARK: - FSPagerViewDelegate
+extension HomeViewController: FSPagerViewDelegate {
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         let model = bannerList[index]
         push(NewsDetailViewController.self) {
             $0.newsID = model.id ?? ""
         }
+    }
+    
+    func pagerViewDidScroll(_ pagerView: FSPagerView) {
+        pageControl.currentPage = pagerView.currentIndex
     }
 }
 
@@ -256,16 +274,16 @@ extension HomeViewController: UIScrollViewDelegate {
             else {
                 ay_navigationBar.alpha = 0
                 if tableView.contentOffset.y > -40 {
-                    var frame = cycleScrollView.frame
+                    var frame = bannerView.frame
                     frame.origin.y = tableView.contentOffset.y
                     frame.size.height = tableHeaderViewHeight - tableView.contentOffset.y
-                    cycleScrollView.frame = frame
+                    bannerView.frame = frame
+                    bannerView.itemSize = bannerView.bounds.size
                 }
                 else {
-                    cycleScrollView.frame = CGRect(x: 0, y: -40, width: UIScreen.width, height: tableHeaderViewHeight + 40)
+                    bannerView.frame = CGRect(x: 0, y: -40, width: UIScreen.width, height: tableHeaderViewHeight + 40)
                     tableView.contentOffset = CGPoint(x: 0, y: -40)
                 }
-                cycleScrollView.adjustWhenControllerViewWillAppera()
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
