@@ -9,17 +9,9 @@
 import UIKit
 import FSPagerView
 
-protocol BannerViewDelegate: class {
-    func bannerView(_ bannerView: BannerView, didSelectItemAt index: Int)
-}
-
-extension BannerViewDelegate {
-    func bannerView(_ bannerView: BannerView, didSelectItemAt index: Int) {}
-}
-
 class BannerView: UIView {
-
-    public weak var delegate: BannerViewDelegate?
+    
+    public var didSelectItemHandler: ((Int) -> Void)?
     
     public var placeholder: UIImage?
     
@@ -48,9 +40,9 @@ class BannerView: UIView {
         }
     }
     
-    public var pageControlBottomOffset: CGFloat = 0 {
+    public var pageControlBottomOffset: CGFloat = 20 {
         didSet {
-            pageControl.contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: pageControlBottomOffset, right: 0)
+            pageControl.contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: pageControlBottomOffset + 20, right: 0)
         }
     }
     
@@ -116,6 +108,8 @@ extension BannerView: FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        delegate?.bannerView(self, didSelectItemAt: index)
+        didSelectItemHandler.map({
+            $0(index)
+        })
     }
 }

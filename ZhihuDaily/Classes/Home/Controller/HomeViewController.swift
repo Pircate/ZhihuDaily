@@ -44,8 +44,15 @@ class HomeViewController: BaseViewController {
     
     lazy var bannerView: BannerView = {
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
-        bannerView.delegate = self
-        bannerView.pageControlBottomOffset = 60
+        bannerView.pageControlBottomOffset = 36
+        bannerView.didSelectItemHandler = { [weak self] (index) in
+            self.map({
+                let model = $0.bannerList[index]
+                $0.push(NewsDetailViewController.self) {
+                    $0.newsID = model.id ?? ""
+                }
+            })
+        }
         return bannerView
     }()
     
@@ -215,16 +222,6 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = dataSource[indexPath.section][indexPath.row]
         let model: HomeNewsModel = row.cellItem()
-        push(NewsDetailViewController.self) {
-            $0.newsID = model.id ?? ""
-        }
-    }
-}
-
-// MARK: - BannerViewDelegate
-extension HomeViewController: BannerViewDelegate {
-    func bannerView(_ bannerView: BannerView, didSelectItemAt index: Int) {
-        let model = bannerList[index]
         push(NewsDetailViewController.self) {
             $0.newsID = model.id ?? ""
         }

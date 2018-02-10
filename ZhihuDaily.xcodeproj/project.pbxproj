@@ -10,6 +10,7 @@
 		7E87DC5196D1C5BBEB13B48B /* Pods_ZhihuDaily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */; };
 		B5171438202F33C400881F95 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5171437202F33C400881F95 /* BannerView.swift */; };
 		B517143A202F3EA200881F95 /* MarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5171439202F3EA200881F95 /* MarqueeView.swift */; };
+		B517143C202F483F00881F95 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517143B202F483F00881F95 /* HomeHeaderView.swift */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531638D201FFF4200828CA2 /* ConfigurableCell.swift */; };
 		B56223851FFC729B0012CCB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56223841FFC729B0012CCB2 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		83CE6E074FEB0F0C30BFDD04 /* Pods-ZhihuDaily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.debug.xcconfig"; sourceTree = "<group>"; };
 		B5171437202F33C400881F95 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B5171439202F3EA200881F95 /* MarqueeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeView.swift; sourceTree = "<group>"; };
+		B517143B202F483F00881F95 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B531638D201FFF4200828CA2 /* ConfigurableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
 		B562237A1FFC729B0012CCB2 /* ZhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +258,7 @@
 				B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */,
 				B5171437202F33C400881F95 /* BannerView.swift */,
 				B5171439202F3EA200881F95 /* MarqueeView.swift */,
+				B517143B202F483F00881F95 /* HomeHeaderView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 			files = (
 				B5171438202F33C400881F95 /* BannerView.swift in Sources */,
 				B5A7C9F42015C625000C54BC /* UIColorExtension.swift in Sources */,
+				B517143C202F483F00881F95 /* HomeHeaderView.swift in Sources */,
 				B5A7C9F62015D273000C54BC /* UIScreenExtension.swift in Sources */,
 				B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */,
 				B563AAF42015AC8500F4AC66 /* Router.swift in Sources */,
