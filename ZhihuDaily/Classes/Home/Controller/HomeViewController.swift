@@ -42,20 +42,11 @@ class HomeViewController: BaseViewController {
         return menuBtn
     }()
     
-    lazy var bannerView: FSPagerView = {
-        let bannerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
-        bannerView.dataSource = self
+    lazy var bannerView: BannerView = {
+        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
         bannerView.delegate = self
-        bannerView.itemSize = bannerView.bounds.size
-        bannerView.isInfinite = true
-        bannerView.automaticSlidingInterval = 5
-        bannerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "FSPagerViewCell")
+        bannerView.pageControlBottomOffset = 60
         return bannerView
-    }()
-    
-    lazy var pageControl: FSPageControl = {
-        let pageControl = FSPageControl()
-        return pageControl
     }()
     
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
@@ -99,12 +90,6 @@ class HomeViewController: BaseViewController {
         
         let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
         tableHeaderView.addSubview(bannerView)
-        tableHeaderView.addSubview(pageControl)
-        pageControl.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-20)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 100, height: 30))
-        }
         tableView.tableHeaderView = tableHeaderView
     }
     
@@ -135,8 +120,12 @@ class HomeViewController: BaseViewController {
         self.date = model.date
         model.topStories.map({
             self.bannerList = $0
-            self.pageControl.numberOfPages = $0.count
-            self.bannerView.reloadData()
+            self.bannerView.imageDataSource = $0.map({
+                $0.image ?? ""
+            })
+            self.bannerView.titleDataSource = $0.map({
+                $0.title ?? ""
+            })
         })
         model.stories.map({
           self.dataSource = [$0.map({
@@ -232,33 +221,13 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - FSPagerViewDataSource
-extension HomeViewController: FSPagerViewDataSource {
-    func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return bannerList.count
-    }
-    
-    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "FSPagerViewCell", at: index)
-        let item = bannerList[index]
-        cell.imageView?.kf.setImage(with: URL(string: item.image!))
-        cell.textLabel?.text = item.title
-        return cell
-    }
-}
-
-// MARK: - FSPagerViewDelegate
-extension HomeViewController: FSPagerViewDelegate {
-    
-    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+// MARK: - BannerViewDelegate
+extension HomeViewController: BannerViewDelegate {
+    func bannerView(_ bannerView: BannerView, didSelectItemAt index: Int) {
         let model = bannerList[index]
         push(NewsDetailViewController.self) {
             $0.newsID = model.id ?? ""
         }
-    }
-    
-    func pagerViewDidScroll(_ pagerView: FSPagerView) {
-        pageControl.currentPage = pagerView.currentIndex
     }
 }
 
@@ -279,7 +248,6 @@ extension HomeViewController: UIScrollViewDelegate {
                     frame.origin.y = tableView.contentOffset.y
                     frame.size.height = tableHeaderViewHeight - tableView.contentOffset.y
                     bannerView.frame = frame
-                    bannerView.itemSize = bannerView.bounds.size
                 }
                 else {
                     bannerView.frame = CGRect(x: 0, y: -pullDownHeight, width: UIScreen.width, height: tableHeaderViewHeight + pullDownHeight)
