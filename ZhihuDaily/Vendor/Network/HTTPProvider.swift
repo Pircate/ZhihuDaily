@@ -33,15 +33,15 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
 
     @discardableResult
     func request<T: HandyJSON>(_ target: Target,
-                    cache: ((T?) -> Void)? = nil,
-                    success: @escaping (T?) -> Void,
-                    failure: @escaping (Error?) -> ()) -> Cancellable {
+                               cache: ((T?) -> Void)? = nil,
+                               success: @escaping (T?) -> Void,
+                               failure: @escaping (Error?) -> ()) -> Cancellable {
         
-        if let cacheData = HTTPCache.cacheData(target) as? Data {
-            let json = String(data: cacheData, encoding: .utf8)
-            cache.map({
-                $0(JSONDeserializer<T>.deserializeFrom(json: json))
-            })
+        if let cache = cache {
+            if let cacheData = HTTPCache.cacheData(target) as? Data {
+                let json = String(data: cacheData, encoding: .utf8)
+                cache(JSONDeserializer<T>.deserializeFrom(json: json))
+            }
         }
         
         debugPrint("-----start request-----")
@@ -66,6 +66,8 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
                 do {
                     let json = try response.mapString()
                     success(JSONDeserializer<T>.deserializeFrom(json: json))
+                    
+                    guard cache != nil else { return }
                     if let data = json.data(using: .utf8) {
                         HTTPCache.saveDataToDisk(data, target: target)
                     }

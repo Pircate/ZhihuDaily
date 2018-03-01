@@ -8,11 +8,42 @@
 
 import Moya
 
-class HTTPCache {
+open class HTTPCache {
     
-    static let shared = HTTPCache()
+    private static let shared = HTTPCache()
     private init() {}
     
+    /// 缓存数据到磁盘
+    ///
+    /// - Parameter data: 请求数据
+    static func saveDataToDisk<Target: TargetType>(_ data: Any, target: Target) {
+        HTTPCache.shared.saveDataToDisk(data, target: target)
+    }
+    
+    /// 读取缓存数据
+    ///
+    /// - Returns: 缓存数据
+    static func cacheData<Target: TargetType>(_ target: Target) -> Any? {
+        return HTTPCache.shared.cacheData(target)
+    }
+    
+    /// 清除当前target缓存
+    static func clearTargetCache<Target: TargetType>(_ target: Target) {
+        HTTPCache.shared.clearCache(target)
+    }
+    
+    /// 清除所有网络请求缓存
+    static func clearAllCache() {
+        let cachePath = HTTPCache.shared.cachePath()
+        if FileManager.default.fileExists(atPath: cachePath) {
+            do {
+                try FileManager.default.removeItem(atPath: cachePath)
+            }
+            catch {}
+        }
+    }
+    
+    // MARK: private
     private func checkDirectory(path: String) {
         var isDir: ObjCBool = ObjCBool(false)
         if !FileManager.default.fileExists(atPath: path, isDirectory: &isDir) {
@@ -51,14 +82,14 @@ class HTTPCache {
             var params: [String] = []
             switch target.task {
             case .requestParameters(let parameters, _):
-                params = parameters.map({ (key, value) -> String in
-                    "\(key):\(value)"
+                params = parameters.map({
+                    "\($0)=\($1)"
                 })
             default:
                 break
             }
-            let parameters = params.joined(separator: "_")
-            let fileName = "\(target.path)_\(parameters)"
+            let parameters = params.joined(separator: "?")
+            let fileName = "\(target.path)/\(parameters)"
             return convertToMD5(string: fileName)
         }
         
@@ -74,20 +105,6 @@ class HTTPCache {
         }
         
         return "\(savedFileDirectory())/\(savedFileName())"
-    }
-    
-    /// 缓存数据到磁盘
-    ///
-    /// - Parameter data: 请求数据
-    static func saveDataToDisk<Target: TargetType>(_ data: Any, target: Target) {
-        HTTPCache.shared.saveDataToDisk(data, target: target)
-    }
-    
-    /// 读取缓存数据
-    ///
-    /// - Returns: 缓存数据
-    static func cacheData<Target: TargetType>(_ target: Target) -> Any? {
-        return HTTPCache.shared.cacheData(target)
     }
     
     private func saveDataToDisk<Target: TargetType>(_ data: Any, target: Target) {
@@ -108,23 +125,11 @@ class HTTPCache {
         return data
     }
     
-    /// 清除当前请求缓存
-    func clearCache<Target: TargetType>(_ target: Target) {
+    private func clearCache<Target: TargetType>(_ target: Target) {
         let filePath = savedFilePath(target)
         if FileManager.default.fileExists(atPath: filePath) {
             do {
                 try FileManager.default.removeItem(atPath: filePath)
-            }
-            catch {}
-        }
-    }
-    
-    /// 清除所有网络请求缓存
-    func clearAllCache() {
-        let cachePath = self.cachePath()
-        if FileManager.default.fileExists(atPath: cachePath) {
-            do {
-                try FileManager.default.removeItem(atPath: cachePath)
             }
             catch {}
         }
