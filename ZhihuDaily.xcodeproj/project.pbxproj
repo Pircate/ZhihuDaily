@@ -19,14 +19,12 @@
 		B56223BE1FFC734E0012CCB2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56223BD1FFC734E0012CCB2 /* MainViewController.swift */; };
 		B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56223C71FFC7E1D0012CCB2 /* MenuViewController.swift */; };
 		B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAE72015AB4B00F4AC66 /* BaseViewController.swift */; };
-		B563AAF12015AC8500F4AC66 /* BaseComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAEA2015AC8400F4AC66 /* BaseComponent.swift */; };
 		B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAEC2015AC8400F4AC66 /* WebViewController.swift */; };
 		B563AAF32015AC8500F4AC66 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAEE2015AC8400F4AC66 /* HTTPRequest.swift */; };
 		B563AAF42015AC8500F4AC66 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF02015AC8500F4AC66 /* Router.swift */; };
 		B563AAF82015AC9A00F4AC66 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF52015AC9A00F4AC66 /* StringExtension.swift */; };
 		B563AAF92015AC9A00F4AC66 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF62015AC9A00F4AC66 /* UITableViewExtension.swift */; };
 		B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */; };
-		B563AAFD2015AE2900F4AC66 /* HTTPRequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAFC2015AE2900F4AC66 /* HTTPRequestConfig.swift */; };
 		B5A7C9EA2015B336000C54BC /* HomeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9E92015B336000C54BC /* HomeComponent.swift */; };
 		B5A7C9EC2015B421000C54BC /* HomeBannerListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9EB2015B421000C54BC /* HomeBannerListModel.swift */; };
 		B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */; };
@@ -41,6 +39,9 @@
 		B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827452030810E0095BF41 /* PageMenuCell.swift */; };
 		B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827462030810E0095BF41 /* PageScrollView.swift */; };
 		B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827472030810E0095BF41 /* PageMenuView.swift */; };
+		B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E4002048240D007425F9 /* HTTPProvider.swift */; };
+		B5F6E4052048240E007425F9 /* HTTPCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E4022048240E007425F9 /* HTTPCache.swift */; };
+		B5F6E9DD204824BF007425F9 /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E9DC204824BF007425F9 /* ComponentFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,14 +81,12 @@
 		B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhihuDaily-Bridging-Header.h"; sourceTree = "<group>"; };
 		B56223C71FFC7E1D0012CCB2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B563AAE72015AB4B00F4AC66 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		B563AAEA2015AC8400F4AC66 /* BaseComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponent.swift; sourceTree = "<group>"; };
 		B563AAEC2015AC8400F4AC66 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B563AAEE2015AC8400F4AC66 /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		B563AAF02015AC8500F4AC66 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B563AAF52015AC9A00F4AC66 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B563AAF62015AC9A00F4AC66 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		B563AAFC2015AE2900F4AC66 /* HTTPRequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestConfig.swift; sourceTree = "<group>"; };
 		B5A7C9E92015B336000C54BC /* HomeComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeComponent.swift; sourceTree = "<group>"; };
 		B5A7C9EB2015B421000C54BC /* HomeBannerListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBannerListModel.swift; sourceTree = "<group>"; };
 		B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsListModel.swift; sourceTree = "<group>"; };
@@ -102,6 +101,9 @@
 		B5E827452030810E0095BF41 /* PageMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuCell.swift; sourceTree = "<group>"; };
 		B5E827462030810E0095BF41 /* PageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageScrollView.swift; sourceTree = "<group>"; };
 		B5E827472030810E0095BF41 /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
+		B5F6E4002048240D007425F9 /* HTTPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPProvider.swift; sourceTree = "<group>"; };
+		B5F6E4022048240E007425F9 /* HTTPCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPCache.swift; sourceTree = "<group>"; };
+		B5F6E9DC204824BF007425F9 /* ComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentFactory.swift; sourceTree = "<group>"; };
 		E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhihuDaily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F886866C7CEB86595A7BC528 /* Pods-ZhihuDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,7 +180,6 @@
 				B56223841FFC729B0012CCB2 /* Assets.xcassets */,
 				B56223AB1FFC730E0012CCB2 /* Classes */,
 				B5A7C9E82015B336000C54BC /* Component */,
-				B563AAFB2015AE1700F4AC66 /* Config */,
 				B56223B81FFC730E0012CCB2 /* Extension */,
 				B56223891FFC729C0012CCB2 /* Info.plist */,
 				B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */,
@@ -342,21 +343,13 @@
 		B56223BB1FFC730E0012CCB2 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				B563AAE92015AC8400F4AC66 /* BaseComponent */,
+				B5F6E9DB204824BF007425F9 /* Component */,
 				B563AAED2015AC8400F4AC66 /* Network */,
 				B563AAEF2015AC8500F4AC66 /* Router */,
 				B563AAEB2015AC8400F4AC66 /* UI */,
 				B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */,
 			);
 			path = Vendor;
-			sourceTree = "<group>";
-		};
-		B563AAE92015AC8400F4AC66 /* BaseComponent */ = {
-			isa = PBXGroup;
-			children = (
-				B563AAEA2015AC8400F4AC66 /* BaseComponent.swift */,
-			);
-			path = BaseComponent;
 			sourceTree = "<group>";
 		};
 		B563AAEB2015AC8400F4AC66 /* UI */ = {
@@ -373,6 +366,8 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B5F6E4022048240E007425F9 /* HTTPCache.swift */,
+				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
 				B563AAEE2015AC8400F4AC66 /* HTTPRequest.swift */,
 			);
 			path = Network;
@@ -384,14 +379,6 @@
 				B563AAF02015AC8500F4AC66 /* Router.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		B563AAFB2015AE1700F4AC66 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				B563AAFC2015AE2900F4AC66 /* HTTPRequestConfig.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		B5A7C9E82015B336000C54BC /* Component */ = {
@@ -435,6 +422,14 @@
 				B5E827462030810E0095BF41 /* PageScrollView.swift */,
 			);
 			path = PageScrollView;
+			sourceTree = "<group>";
+		};
+		B5F6E9DB204824BF007425F9 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B5F6E9DC204824BF007425F9 /* ComponentFactory.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -603,6 +598,8 @@
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -615,6 +612,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,11 +650,11 @@
 				B563AAF42015AC8500F4AC66 /* Router.swift in Sources */,
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF92015AC9A00F4AC66 /* UITableViewExtension.swift in Sources */,
-				B563AAF12015AC8500F4AC66 /* BaseComponent.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
 				B5E8273B203077370095BF41 /* MessageViewController.swift in Sources */,
 				B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */,
-				B563AAFD2015AE2900F4AC66 /* HTTPRequestConfig.swift in Sources */,
+				B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */,
+				B5F6E9DD204824BF007425F9 /* ComponentFactory.swift in Sources */,
 				B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */,
 				B5E827442030790C0095BF41 /* MessageRowCell.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
@@ -672,6 +671,7 @@
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
 				B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */,
+				B5F6E4052048240E007425F9 /* HTTPCache.swift in Sources */,
 				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,6 +836,12 @@
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JCore",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JPush",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhihuDaily/Vendor/ZhihuDaily-Bridging-Header.h";
@@ -855,6 +861,12 @@
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JCore",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JPush",
+					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhihuDaily/Vendor/ZhihuDaily-Bridging-Header.h";

@@ -75,7 +75,7 @@ class NewsDetailViewController: BaseViewController, Routable {
     }
     
     private func requestNewsDetail() {
-        HomeComponent().requestNewsDetail(newsID: newsID, success: { (model) in
+        HomeComponent.load().request(.newsDetail(newsID: newsID), success: { (model: NewsDetailModel?) in
             model?.image.map({
                 self.headerView.kf.setImage(with: URL(string: $0))
             })
@@ -84,16 +84,16 @@ class NewsDetailViewController: BaseViewController, Routable {
             })
             if let body = model?.body {
                 var html = """
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                      <meta charset="utf-8">
-                      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-                      <link rel="stylesheet" type="text/css" href="\(model?.css?.first ?? "")">
-                    </head>
-                    <body>
-                    </body>
-                    </html>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                <link rel="stylesheet" type="text/css" href="\(model?.css?.first ?? "")">
+                </head>
+                <body>
+                </body>
+                </html>
                 """
                 html = html.replacingOccurrences(of: "</body>", with: "\(body)</body>")
                 self.webView.loadHTMLString(html, baseURL: nil)

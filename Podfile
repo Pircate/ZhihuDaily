@@ -5,6 +5,7 @@ target 'ZhihuDaily' do
   use_frameworks!
 
   pod 'Alamofire'
+  pod 'Moya'
   pod 'Kingfisher'
   pod 'SnapKit'
   pod 'HandyJSON', '~> 4.0.0-beta.1'
