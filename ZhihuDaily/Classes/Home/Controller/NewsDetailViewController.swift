@@ -75,21 +75,21 @@ class NewsDetailViewController: BaseViewController, Routable {
     }
     
     private func requestNewsDetail() {
-        HomeComponent.load().request(.newsDetail(newsID: newsID), success: { (model: NewsDetailModel?) in
-            model?.image.map({
+        HomeComponent.load().request(.newsDetail(newsID: newsID), success: { (model: NewsDetailModel) in
+            model.image.map({
                 self.headerView.kf.setImage(with: URL(string: $0))
             })
-            model?.title.map({
+            model.title.map({
                 self.titleLabel.text = $0
             })
-            if let body = model?.body {
+            if let body = model.body {
                 var html = """
                 <!DOCTYPE html>
                 <html>
                 <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-                <link rel="stylesheet" type="text/css" href="\(model?.css?.first ?? "")">
+                <link rel="stylesheet" type="text/css" href="\(model.css?.first ?? "")">
                 </head>
                 <body>
                 </body>

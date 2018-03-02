@@ -109,14 +109,10 @@ class HomeViewController: BaseViewController {
     }
     
     private func requestLatestNewsList() {
-        HomeComponent.load().request(.latestNews, cache: { (model: HomeNewsListModel?) in
-            model.map({
-                self.handleLastestNews(model: $0)
-            })
-        }, success: { (model: HomeNewsListModel?) in
-            model.map({
-                self.handleLastestNews(model: $0)
-            })
+        HomeComponent.load().request(.latestNews, cache: { (model: HomeNewsListModel) in
+            self.handleLastestNews(model: model)
+        }, success: { (model: HomeNewsListModel) in
+            self.handleLastestNews(model: model)
         }) { (error) in
             
         }
@@ -144,15 +140,15 @@ class HomeViewController: BaseViewController {
     
     private func requestBeforeNewsList() {
         guard let date = self.date else { return }
-        HomeComponent.load().request(.beforeNews(date: date), success: { (model: HomeNewsListModel?) in
+        HomeComponent.load().request(.beforeNews(date: date), success: { (model: HomeNewsListModel) in
             if self.tableView.mj_footer.isRefreshing {
                 self.tableView.mj_footer.endRefreshing()
             }
-            model?.date.map({
+            model.date.map({
                 self.date = $0
                 self.sectionTitles.append($0)
             })
-            model?.stories.map({
+            model.stories.map({
                 self.dataSource.append($0.map({
                     Row<HomeNewsRowCell>(viewData: $0)
                 }))

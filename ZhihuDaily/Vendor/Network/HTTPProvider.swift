@@ -30,27 +30,22 @@ extension TargetType {
 open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
     
     var numberOfRequests = 0
+    
+    init() {
+        super.init(plugins: [HTTPLoggerPlugin()])
+    }
 
     @discardableResult
     func request<T: HandyJSON>(_ target: Target,
-                               cache: ((T?) -> Void)? = nil,
-                               success: @escaping (T?) -> Void,
+                               cache: ((T) -> Void)? = nil,
+                               success: @escaping (T) -> Void,
                                failure: @escaping (Error?) -> ()) -> Cancellable {
         
         if let cache = cache {
             if let cacheData = HTTPCache.cacheData(target) as? Data {
                 let json = String(data: cacheData, encoding: .utf8)
-                cache(JSONDeserializer<T>.deserializeFrom(json: json))
+                cache(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
             }
-        }
-        
-        debugPrint("-----start request-----")
-        debugPrint("baseURL:", target.baseURL)
-        switch target.task {
-        case .requestParameters(let parameters, _):
-            debugPrint("parameters:", parameters)
-        default:
-            break
         }
         
         numberOfRequests += 1
@@ -62,20 +57,14 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
             }
             switch result {
             case .success(let response):
-                debugPrint("-----request success-----")
                 do {
-                    let json = try response.mapString()
-                    success(JSONDeserializer<T>.deserializeFrom(json: json))
+                    let json = try response.filterSuccessfulStatusCodes().mapString()
+                    success(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
                     
                     guard cache != nil else { return }
-                    if let data = json.data(using: .utf8) {
-                        HTTPCache.saveDataToDisk(data, target: target)
-                    }
-                } catch {
-                    success(nil)
-                }
+                    HTTPCache.saveDataToDisk(response.data, target: target)
+                } catch {}
             case .failure(let error):
-                debugPrint("-----request failure-----")
                 failure(error)
             }
         })
