@@ -42,10 +42,13 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
                                failure: @escaping (Error?) -> ()) -> Cancellable {
         
         if let cache = cache {
-            if let cacheData = HTTPCache.cacheData(target) as? Data {
-                let json = String(data: cacheData, encoding: .utf8)
-                cache(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
-            }
+            do {
+                let response = URLCache.shared.cachedResponse(for: try endpoint(target).urlRequest())
+                if let data = response?.data {
+                    let json = String(data: data, encoding: .utf8)
+                    cache(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
+                }
+            } catch {}
         }
         
         numberOfRequests += 1
@@ -60,9 +63,6 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
                 do {
                     let json = try response.filterSuccessfulStatusCodes().mapString()
                     success(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
-                    
-                    guard cache != nil else { return }
-                    HTTPCache.saveDataToDisk(response.data, target: target)
                 } catch {}
             case .failure(let error):
                 failure(error)

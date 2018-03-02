@@ -368,10 +368,10 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
-				B587F896204973D200CC3BC7 /* NetworkConfig.swift */,
 				B5F6E4022048240E007425F9 /* HTTPCache.swift */,
+				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
 				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
+				B587F896204973D200CC3BC7 /* NetworkConfig.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";

@@ -11,6 +11,12 @@ import Result
 
 public struct HTTPLoggerPlugin: PluginType {
     
+    public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+        var request = request
+        request.timeoutInterval = 20
+        return request
+    }
+    
     public func willSend(_ request: RequestType, target: TargetType) {
         debugPrint("-----start request-----")
         debugPrint("requestURL:", request.request?.url?.absoluteString ?? "")
