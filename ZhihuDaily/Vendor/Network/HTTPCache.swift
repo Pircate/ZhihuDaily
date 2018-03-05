@@ -10,37 +10,48 @@ import Moya
 
 open class HTTPCache {
     
-    private static let shared = HTTPCache()
+    static let shared = HTTPCache()
     private init() {}
     
-    /// 缓存数据到磁盘
+    /// 存储缓存数据
     ///
-    /// - Parameter data: 请求数据
-    static func saveDataToDisk<Target: TargetType>(_ data: Any, target: Target) {
-        HTTPCache.shared.saveDataToDisk(data, target: target)
+    /// - Parameters:
+    ///   - data: 缓存数据
+    ///   - target: 请求target
+    open func storeCachedData(_ data: Data, for target: TargetType) {
+        let filePath = savedFilePath(target)
+        objc_sync_enter(self)
+        NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+        objc_sync_exit(self)
     }
     
     /// 读取缓存数据
     ///
+    /// - Parameter target: 请求target
     /// - Returns: 缓存数据
-    static func cacheData<Target: TargetType>(_ target: Target) -> Any? {
-        return HTTPCache.shared.cacheData(target)
-    }
-    
-    /// 清除当前target缓存
-    static func clearTargetCache<Target: TargetType>(_ target: Target) {
-        HTTPCache.shared.clearCache(target)
-    }
-    
-    /// 清除所有网络请求缓存
-    static func clearAllCache() {
-        let cachePath = HTTPCache.shared.cachePath()
-        if FileManager.default.fileExists(atPath: cachePath) {
-            do {
-                try FileManager.default.removeItem(atPath: cachePath)
-            }
-            catch {}
+    open func cachedData(for target: TargetType) -> Data? {
+        let filePath = savedFilePath(target)
+        guard FileManager.default.fileExists(atPath: filePath) else {
+            return nil
         }
+        objc_sync_enter(self)
+        let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data
+        objc_sync_exit(self)
+        return data
+    }
+    
+    /// 清除缓存数据
+    ///
+    /// - Parameter target: 请求target
+    open func removeCachedData(for target: TargetType) {
+        let filePath = savedFilePath(target)
+        removeItem(atPath: filePath)
+    }
+    
+    /// 清除所有缓存数据
+    open static func removeAllCachedData() {
+        let cachedPath = shared.cachedPath()
+        shared.removeItem(atPath: cachedPath)
     }
     
     // MARK: private
@@ -60,36 +71,36 @@ open class HTTPCache {
         }
     }
     
-    private func cachePath() -> String {
+    private func cachedPath() -> String {
         if let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
-            let cachePath = "\(path)/GXNetworkRequestCache"
-            checkDirectory(path: cachePath)
-            return cachePath
+            let cachedPath = "\(path)/GXNetworkRequestCache"
+            checkDirectory(path: cachedPath)
+            return cachedPath
         }
         return ""
     }
     
-    private func savedFilePath<Target: TargetType>(_ target: Target) -> String {
+    private func savedFilePath(_ target: TargetType) -> String {
         
         func savedFileDirectory() -> String {
-            let cachePath = self.cachePath()
-            let fileDirectory = "\(cachePath)"
+            let cachedPath = self.cachedPath()
+            let fileDirectory = "\(cachedPath)"
             self.checkDirectory(path: fileDirectory)
             return fileDirectory
         }
         
         func savedFileName() -> String {
-            var params: [String] = []
             switch target.task {
             case .requestParameters(let parameters, _):
-                params = parameters.map({
+                let params = parameters.map({
                     "\($0)=\($1)"
-                })
+                }).joined(separator: "&")
+                let fileName = "\(target.baseURL)\(target.path)?\(params)"
+                return convertToMD5(string: fileName)
             default:
                 break
             }
-            let parameters = params.joined(separator: "?")
-            let fileName = "\(target.path)/\(parameters)"
+            let fileName = "\(target.baseURL)\(target.path)"
             return convertToMD5(string: fileName)
         }
         
@@ -107,29 +118,10 @@ open class HTTPCache {
         return "\(savedFileDirectory())/\(savedFileName())"
     }
     
-    private func saveDataToDisk<Target: TargetType>(_ data: Any, target: Target) {
-        let filePath = savedFilePath(target)
-        objc_sync_enter(self)
-        NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
-        objc_sync_exit(self)
-    }
-    
-    private func cacheData<Target: TargetType>(_ target: Target) -> Any? {
-        let filePath = savedFilePath(target)
-        guard FileManager.default.fileExists(atPath: filePath) else {
-            return nil
-        }
-        objc_sync_enter(self)
-        let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath)
-        objc_sync_exit(self)
-        return data
-    }
-    
-    private func clearCache<Target: TargetType>(_ target: Target) {
-        let filePath = savedFilePath(target)
-        if FileManager.default.fileExists(atPath: filePath) {
+    private func removeItem(atPath path: String) {
+        if FileManager.default.fileExists(atPath: path) {
             do {
-                try FileManager.default.removeItem(atPath: filePath)
+                try FileManager.default.removeItem(atPath: path)
             }
             catch {}
         }

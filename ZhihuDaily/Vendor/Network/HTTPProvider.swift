@@ -43,8 +43,9 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
         
         if let cache = cache {
             do {
-                let response = URLCache.shared.cachedResponse(for: try endpoint(target).urlRequest())
-                if let data = response?.data {
+                if let data = target.method == .get
+                    ? URLCache.shared.cachedResponse(for: try endpoint(target).urlRequest())?.data
+                    : HTTPCache.shared.cachedData(for: target) {
                     let json = String(data: data, encoding: .utf8)
                     cache(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
                 }
@@ -63,6 +64,10 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
                 do {
                     let json = try response.filterSuccessfulStatusCodes().mapString()
                     success(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
+                    
+                    guard cache != nil else { return }
+                    guard target.method != .get else { return }
+                    HTTPCache.shared.storeCachedData(response.data, for: target)
                 } catch {}
             case .failure(let error):
                 failure(error)
