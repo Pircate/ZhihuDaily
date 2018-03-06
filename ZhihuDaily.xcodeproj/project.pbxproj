@@ -11,6 +11,7 @@
 		B5171438202F33C400881F95 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5171437202F33C400881F95 /* BannerView.swift */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531638D201FFF4200828CA2 /* ConfigurableCell.swift */; };
+		B555E5B7204EF11100F7A8F1 /* HTTPCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */; };
 		B56223851FFC729B0012CCB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56223841FFC729B0012CCB2 /* Assets.xcassets */; };
 		B56223881FFC729B0012CCB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */; };
 		B56223931FFC729C0012CCB2 /* ZhihuDailyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56223921FFC729C0012CCB2 /* ZhihuDailyTests.swift */; };
@@ -66,6 +67,7 @@
 		B5171437202F33C400881F95 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B531638D201FFF4200828CA2 /* ConfigurableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
+		B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPCache.swift; sourceTree = "<group>"; };
 		B562237A1FFC729B0012CCB2 /* ZhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56223841FFC729B0012CCB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56223871FFC729B0012CCB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 			children = (
 				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
 				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
+				B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */,
 				B587F896204973D200CC3BC7 /* NetworkConfig.swift */,
 			);
 			path = Network;
@@ -655,6 +658,7 @@
 				B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */,
 				B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */,
 				B5F6E9DD204824BF007425F9 /* ComponentFactory.swift in Sources */,
+				B555E5B7204EF11100F7A8F1 /* HTTPCache.swift in Sources */,
 				B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */,
 				B5E827442030790C0095BF41 /* MessageRowCell.swift in Sources */,
 				B587F898204973D200CC3BC7 /* NetworkConfig.swift in Sources */,
