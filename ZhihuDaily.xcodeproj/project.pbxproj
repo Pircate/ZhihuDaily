@@ -41,7 +41,6 @@
 		B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827462030810E0095BF41 /* PageScrollView.swift */; };
 		B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827472030810E0095BF41 /* PageMenuView.swift */; };
 		B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E4002048240D007425F9 /* HTTPProvider.swift */; };
-		B5F6E4052048240E007425F9 /* HTTPCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E4022048240E007425F9 /* HTTPCache.swift */; };
 		B5F6E9DD204824BF007425F9 /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E9DC204824BF007425F9 /* ComponentFactory.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,7 +103,6 @@
 		B5E827462030810E0095BF41 /* PageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageScrollView.swift; sourceTree = "<group>"; };
 		B5E827472030810E0095BF41 /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
 		B5F6E4002048240D007425F9 /* HTTPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPProvider.swift; sourceTree = "<group>"; };
-		B5F6E4022048240E007425F9 /* HTTPCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPCache.swift; sourceTree = "<group>"; };
 		B5F6E9DC204824BF007425F9 /* ComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentFactory.swift; sourceTree = "<group>"; };
 		E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhihuDaily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F886866C7CEB86595A7BC528 /* Pods-ZhihuDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.release.xcconfig"; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B5F6E4022048240E007425F9 /* HTTPCache.swift */,
 				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
 				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
 				B587F896204973D200CC3BC7 /* NetworkConfig.swift */,
@@ -674,7 +671,6 @@
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
 				B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */,
-				B5F6E4052048240E007425F9 /* HTTPCache.swift in Sources */,
 				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 				B587F897204973D200CC3BC7 /* HTTPLoggerPlugin.swift in Sources */,
 			);
