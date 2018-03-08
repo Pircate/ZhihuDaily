@@ -36,8 +36,6 @@
 		B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F72015D607000C54BC /* HomeViewController.swift */; };
 		B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */; };
 		B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */; };
-		B5E8273B203077370095BF41 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8273A203077370095BF41 /* MessageViewController.swift */; };
-		B5E827442030790C0095BF41 /* MessageRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827432030790C0095BF41 /* MessageRowCell.swift */; };
 		B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827452030810E0095BF41 /* PageMenuCell.swift */; };
 		B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827462030810E0095BF41 /* PageScrollView.swift */; };
 		B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827472030810E0095BF41 /* PageMenuView.swift */; };
@@ -99,8 +97,6 @@
 		B5A7C9F72015D607000C54BC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
-		B5E8273A203077370095BF41 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		B5E827432030790C0095BF41 /* MessageRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowCell.swift; sourceTree = "<group>"; };
 		B5E827452030810E0095BF41 /* PageMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuCell.swift; sourceTree = "<group>"; };
 		B5E827462030810E0095BF41 /* PageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageScrollView.swift; sourceTree = "<group>"; };
 		B5E827472030810E0095BF41 /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
@@ -253,7 +249,6 @@
 		B56223B01FFC730E0012CCB2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B5E82737203076F50095BF41 /* Message */,
 				B56223B11FFC730E0012CCB2 /* Controller */,
 				B56223B21FFC730E0012CCB2 /* Model */,
 				B56223B31FFC730E0012CCB2 /* View */,
@@ -390,31 +385,6 @@
 				B5A7C9E92015B336000C54BC /* HomeComponent.swift */,
 			);
 			path = Component;
-			sourceTree = "<group>";
-		};
-		B5E82737203076F50095BF41 /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				B5E82738203076F50095BF41 /* Controller */,
-				B5E82739203076F50095BF41 /* View */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		B5E82738203076F50095BF41 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5E8273A203077370095BF41 /* MessageViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B5E82739203076F50095BF41 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B5E827432030790C0095BF41 /* MessageRowCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B5E8273C2030777A0095BF41 /* PageScrollView */ = {
@@ -654,13 +624,11 @@
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF92015AC9A00F4AC66 /* UITableViewExtension.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
-				B5E8273B203077370095BF41 /* MessageViewController.swift in Sources */,
 				B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */,
 				B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */,
 				B5F6E9DD204824BF007425F9 /* ComponentFactory.swift in Sources */,
 				B555E5B7204EF11100F7A8F1 /* HTTPCache.swift in Sources */,
 				B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */,
-				B5E827442030790C0095BF41 /* MessageRowCell.swift in Sources */,
 				B587F898204973D200CC3BC7 /* NetworkConfig.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B563AAF82015AC9A00F4AC66 /* StringExtension.swift in Sources */,
@@ -837,6 +805,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -865,6 +834,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

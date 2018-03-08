@@ -12,6 +12,8 @@ open class HTTPCache {
     
     static let shared = HTTPCache()
     private init() {}
+    
+    private let memoryCache = NSCache<NSString, AnyObject>()
 
     /// 存储缓存数据
     ///
@@ -20,6 +22,9 @@ open class HTTPCache {
     ///   - target: 请求target
     open func storeCachedData(_ data: Data, for target: TargetType) {
         let filePath = savedFilePath(target)
+        
+        memoryCache.setObject(data as AnyObject, forKey: filePath as NSString)
+        
         objc_sync_enter(self)
         NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
         objc_sync_exit(self)
@@ -31,13 +36,18 @@ open class HTTPCache {
     /// - Returns: 缓存数据
     open func cachedData(for target: TargetType) -> Data? {
         let filePath = savedFilePath(target)
+        
+        if let memoryCachedData = memoryCache.object(forKey: filePath as NSString) as? Data {
+            return memoryCachedData
+        }
+        
         guard FileManager.default.fileExists(atPath: filePath) else {
             return nil
         }
         objc_sync_enter(self)
-        let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data
+        let diskCachedData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data
         objc_sync_exit(self)
-        return data
+        return diskCachedData
     }
     
     /// 清除缓存数据
