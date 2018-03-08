@@ -34,6 +34,11 @@ class HomeViewController: BaseViewController {
         return tableView
     }()
     
+    private lazy var progressView: ProgressView = {
+        let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        return progressView
+    }()
+    
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom)
         menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 44, height: 32)
@@ -62,17 +67,12 @@ class HomeViewController: BaseViewController {
     private var dataSource: [[Configurable]] = []
     private var date: String?
     private var sectionTitles: [String] = []
+    private var isLoadable = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        registerNavigationBar()
-        ay_navigationBar.alpha = 0
-        ay_navigationBar.backgroundColor = UIColor.global
-        ay_navigationBar.contentOffset = -14;
-        ay_navigationItem.title = "今日要闻"
-        ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
         
+        setupNavigationItem()
         addSubviews()
         setupTableViewRefresh()
         requestLatestNewsList()
@@ -87,6 +87,21 @@ class HomeViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - private
+    
+    private func setupNavigationItem() {
+        
+        registerNavigationBar()
+        ay_navigationBar.alpha = 0
+        ay_navigationBar.backgroundColor = UIColor.global
+        ay_navigationBar.contentOffset = -14;
+        ay_navigationItem.title = "今日要闻"
+        ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width / 2 - 60, height: 0))
+        ay_navigationItem.leftBarItems = [leftView, progressView]
     }
     
     private func addSubviews() {
@@ -112,9 +127,10 @@ class HomeViewController: BaseViewController {
         HomeComponent.load().request(.latestNews, cache: { (model: HomeNewsListModel) in
             self.handleLastestNews(model: model)
         }, success: { (model: HomeNewsListModel) in
+            self.progressView.stopLoading()
             self.handleLastestNews(model: model)
         }) { (error) in
-            
+            self.progressView.stopLoading()
         }
     }
     
@@ -233,6 +249,7 @@ extension HomeViewController: UIScrollViewDelegate {
             if tableView.contentOffset.y > 0 {
                 let alpha = tableView.contentOffset.y / (tableHeaderViewHeight - UIApplication.statusBarHeight - ay_navigationBar.frame.height)
                 ay_navigationBar.alpha = alpha
+                progressView.progress = 0
             }
             else {
                 ay_navigationBar.alpha = 0
@@ -246,6 +263,10 @@ extension HomeViewController: UIScrollViewDelegate {
                     bannerView.frame = CGRect(x: 0, y: -pullDownHeight, width: UIScreen.width, height: tableHeaderViewHeight + pullDownHeight)
                     tableView.contentOffset = CGPoint(x: 0, y: -pullDownHeight)
                 }
+                
+                guard isLoadable else { return }
+                let progress = tableView.panGestureRecognizer.translation(in: tableView).y / pullDownHeight
+                progressView.progress = progress < 1.0 ? progress : 1.0
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
@@ -261,10 +282,21 @@ extension HomeViewController: UIScrollViewDelegate {
         }
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if tableView.contentOffset == CGPoint.zero {
+            isLoadable = true
+        }
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if tableView.contentOffset.y <= -pullDownHeight {
+        if progressView.progress >= 1.0 {
+            progressView.startLoading()
             requestLatestNewsList()
         }
+        else {
+            progressView.progress = 0
+        }
+        isLoadable = false
     }
 }
 
