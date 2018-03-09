@@ -40,6 +40,7 @@
 		B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827472030810E0095BF41 /* PageMenuView.swift */; };
 		B5F20DAE2052A50A008D757B /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */; };
 		B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAF2052A5A2008D757B /* HomeTarget.swift */; };
+		B5F20DB22052B172008D757B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DB12052B172008D757B /* Network.swift */; };
 		B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6E4002048240D007425F9 /* HTTPProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		B5E827472030810E0095BF41 /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
 		B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		B5F20DAF2052A5A2008D757B /* HomeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTarget.swift; sourceTree = "<group>"; };
+		B5F20DB12052B172008D757B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		B5F6E4002048240D007425F9 /* HTTPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPProvider.swift; sourceTree = "<group>"; };
 		E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhihuDaily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F886866C7CEB86595A7BC528 /* Pods-ZhihuDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				B56223841FFC729B0012CCB2 /* Assets.xcassets */,
 				B56223AB1FFC730E0012CCB2 /* Classes */,
 				B56223B81FFC730E0012CCB2 /* Extension */,
+				B563AAED2015AC8400F4AC66 /* Network */,
 				B56223891FFC729C0012CCB2 /* Info.plist */,
 				B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */,
 				B56223BB1FFC730E0012CCB2 /* Vendor */,
@@ -341,7 +344,7 @@
 		B56223BB1FFC730E0012CCB2 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				B563AAED2015AC8400F4AC66 /* Network */,
+				B5F20DB32052B476008D757B /* HTTPProvider */,
 				B563AAEF2015AC8500F4AC66 /* Router */,
 				B563AAEB2015AC8400F4AC66 /* UI */,
 				B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */,
@@ -363,10 +366,8 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
-				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
 				B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */,
-				B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */,
+				B5F20DB12052B172008D757B /* Network.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -395,6 +396,16 @@
 				B5F20DAF2052A5A2008D757B /* HomeTarget.swift */,
 			);
 			path = Target;
+			sourceTree = "<group>";
+		};
+		B5F20DB32052B476008D757B /* HTTPProvider */ = {
+			isa = PBXGroup;
+			children = (
+				B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */,
+				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
+				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
+			);
+			path = HTTPProvider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -628,6 +639,7 @@
 				B56223BE1FFC734E0012CCB2 /* MainViewController.swift in Sources */,
 				B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */,
 				B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */,
+				B5F20DB22052B172008D757B /* Network.swift in Sources */,
 				B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */,
 				B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */,
 				B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */,
