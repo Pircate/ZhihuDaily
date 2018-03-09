@@ -124,12 +124,12 @@ class HomeViewController: BaseViewController {
     }
     
     private func requestLatestNewsList() {
-        HomeComponent.load().request(.latestNews, cache: { (model: HomeNewsListModel) in
+        HomeTarget.latestNews.request(cache: { (model: HomeNewsListModel) in
             self.handleLastestNews(model: model)
         }, success: { (model: HomeNewsListModel) in
             self.progressView.stopLoading()
             self.handleLastestNews(model: model)
-        }) { (error) in
+        }) { _ in
             self.progressView.stopLoading()
         }
     }
@@ -156,7 +156,7 @@ class HomeViewController: BaseViewController {
     
     private func requestBeforeNewsList() {
         guard let date = self.date else { return }
-        HomeComponent.load().request(.beforeNews(date: date), success: { (model: HomeNewsListModel) in
+        HomeTarget.beforeNews(date: date).request(success: { (model: HomeNewsListModel) in
             if self.tableView.mj_footer.isRefreshing {
                 self.tableView.mj_footer.endRefreshing()
             }
@@ -170,7 +170,7 @@ class HomeViewController: BaseViewController {
                 }))
             })
             self.tableView.reloadData()
-        }) { (error) in
+        }) { _ in
             
         }
     }

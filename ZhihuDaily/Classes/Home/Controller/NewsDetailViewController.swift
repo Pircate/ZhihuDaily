@@ -75,7 +75,7 @@ class NewsDetailViewController: BaseViewController, Routable {
     }
     
     private func requestNewsDetail() {
-        HomeComponent.load().request(.newsDetail(newsID: newsID), success: { (model: NewsDetailModel) in
+        HomeTarget.newsDetail(newsID: newsID).request(success: { (model: NewsDetailModel) in
             model.image.map({
                 self.headerView.kf.setImage(with: URL(string: $0))
             })
@@ -98,7 +98,7 @@ class NewsDetailViewController: BaseViewController, Routable {
                 html = html.replacingOccurrences(of: "</body>", with: "\(body)</body>")
                 self.webView.loadHTMLString(html, baseURL: nil)
             }
-        }) { (error) in
+        }) { _ in
             
         }
     }

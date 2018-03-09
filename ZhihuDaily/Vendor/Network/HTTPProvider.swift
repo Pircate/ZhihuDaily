@@ -11,7 +11,7 @@ import HandyJSON
 
 extension TargetType {
     var baseURL: URL {
-        return URL(string: NetworkEnvironment.develop.baseUrl)!
+        return URL(string: NetworkEnvironment.environment.baseURL)!
     }
     
     var method: Moya.Method {
@@ -25,21 +25,49 @@ extension TargetType {
     var headers: [String: String]? {
         return nil
     }
+    
+    public func request<T: HandyJSON>(cache: ((T) -> Void)? = nil,
+                                      success: @escaping (T) -> Void,
+                                      failure: @escaping (Error) -> ()) {
+        MultiProvider.shared.request(.target(self), cache: cache, success: success, failure: failure)
+    }
+}
+
+fileprivate final class MultiProvider {
+    static let shared = HTTPProvider<MultiTarget>()
+    private init() {}
+}
+
+extension NetworkActivityPlugin {
+    static var numberOfRequests: Int = 0 {
+        didSet {
+            if numberOfRequests > 1 { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.numberOfRequests > 0
+            }
+        }
+    }
 }
 
 open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
     
-    var numberOfRequests = 0
-    
     init() {
-        super.init(plugins: [HTTPLoggerPlugin()])
+        let networkActivityPlugin = NetworkActivityPlugin { (changeType, target) in
+            switch changeType {
+            case .began:
+                NetworkActivityPlugin.numberOfRequests += 1
+            case .ended:
+                NetworkActivityPlugin.numberOfRequests -= 1
+            }
+        }
+        super.init(plugins: [HTTPLoggerPlugin(), networkActivityPlugin])
     }
-
+    
     @discardableResult
-    func request<T: HandyJSON>(_ target: Target,
-                               cache: ((T) -> Void)? = nil,
-                               success: @escaping (T) -> Void,
-                               failure: @escaping (Error?) -> ()) -> Cancellable {
+    open func request<T: HandyJSON>(_ target: Target,
+                                    cache: ((T) -> Void)? = nil,
+                                    success: @escaping (T) -> Void,
+                                    failure: @escaping (Error) -> ()) -> Cancellable {
         
         if let cache = cache {
             do {
@@ -52,17 +80,11 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
             } catch {}
         }
         
-        numberOfRequests += 1
-        setNetworkActivityIndicatorVisible(true)
         return request(target, completion: { (result) in
-            self.numberOfRequests -= 1
-            if self.numberOfRequests == 0 {
-                self.setNetworkActivityIndicatorVisible(false)
-            }
             switch result {
             case .success(let response):
                 do {
-                    let json = try response.filterSuccessfulStatusCodes().mapString()
+                    let json = try response.filterSuccessfulStatusAndRedirectCodes().mapString()
                     success(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
                     
                     guard cache != nil else { return }
@@ -73,11 +95,5 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
                 failure(error)
             }
         })
-    }
-    
-    private func setNetworkActivityIndicatorVisible(_ isVisible: Bool) {
-        DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = isVisible
-        }
     }
 }
