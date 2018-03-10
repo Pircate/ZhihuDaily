@@ -151,6 +151,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B50976782053DD7700001A4C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B56223711FFC729B0012CCB2 = {
 			isa = PBXGroup;
 			children = (
@@ -176,14 +183,14 @@
 		B562237C1FFC729B0012CCB2 /* ZhihuDaily */ = {
 			isa = PBXGroup;
 			children = (
-				B5F20DAC2052A399008D757B /* Target */,
 				B56223B91FFC730E0012CCB2 /* App */,
 				B56223841FFC729B0012CCB2 /* Assets.xcassets */,
 				B56223AB1FFC730E0012CCB2 /* Classes */,
 				B56223B81FFC730E0012CCB2 /* Extension */,
-				B563AAED2015AC8400F4AC66 /* Network */,
 				B56223891FFC729C0012CCB2 /* Info.plist */,
 				B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */,
+				B563AAED2015AC8400F4AC66 /* Network */,
+				B5F20DAC2052A399008D757B /* Target */,
 				B56223BB1FFC730E0012CCB2 /* Vendor */,
 			);
 			path = ZhihuDaily;
@@ -252,6 +259,7 @@
 		B56223B01FFC730E0012CCB2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B50976782053DD7700001A4C /* ViewModel */,
 				B56223B11FFC730E0012CCB2 /* Controller */,
 				B56223B21FFC730E0012CCB2 /* Model */,
 				B56223B31FFC730E0012CCB2 /* View */,
@@ -576,6 +584,8 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -590,6 +600,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

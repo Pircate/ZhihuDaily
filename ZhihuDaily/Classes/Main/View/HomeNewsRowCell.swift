@@ -11,6 +11,15 @@ import Hue
 
 class HomeNewsRowCell: UITableViewCell {
     
+    var model: HomeNewsModel? {
+        didSet {
+            titleLabel.text = model?.title
+            if let url = model?.images?.first {
+                coverImageView.kf.setImage(with: URL(string: url))
+            }
+        }
+    }
+    
     lazy var coverImageView: UIImageView = {
         let imgView = UIImageView()
         return imgView

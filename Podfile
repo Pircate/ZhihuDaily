@@ -5,7 +5,7 @@ target 'ZhihuDaily' do
   use_frameworks!
 
   pod 'Alamofire'
-  pod 'Moya'
+  pod 'Moya/RxSwift'
   pod 'Kingfisher'
   pod 'SnapKit'
   pod 'HandyJSON', '~> 4.0.0-beta.1'
@@ -13,5 +13,6 @@ target 'ZhihuDaily' do
   pod 'MJRefresh'
   pod 'Hue'
   pod 'FSPagerView'
+  pod 'RxCocoa'
 
 end
