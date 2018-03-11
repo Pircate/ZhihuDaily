@@ -24,7 +24,6 @@ class HomeViewController: BaseViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds)
-        tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80;
         tableView.estimatedSectionHeaderHeight = 0
@@ -52,7 +51,7 @@ class HomeViewController: BaseViewController {
         bannerView.pageControlBottomOffset = 36
         bannerView.didSelectItemHandler = { [weak self] (index) in
             self.map({
-                let model = $0.bannerList[index]
+                let model = $0.viewModel.bannerList[index]
                 $0.push(NewsDetailViewController.self) {
                     $0.newsID = model.id ?? ""
                 }
@@ -69,13 +68,28 @@ class HomeViewController: BaseViewController {
     private var sectionTitles: [String] = []
     private var isLoadable = false
     
+    private let viewModel = HomeViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationItem()
         addSubviews()
         setupTableViewRefresh()
-        requestLatestNewsList()
+        viewModel.bindToViews(bannerView: bannerView, tableView: tableView)
+        viewModel.requestLatestNewsList()
+        viewModel.loadingStatus.subscribe(onNext: { [weak self] (status) in
+            if status == .end {
+                self?.progressView.stopLoading()
+                self?.tableView.mj_footer.endRefreshing()
+            }
+        }).disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(HomeNewsModel.self).subscribe(onNext: { [weak self] (model) in
+            self?.push(NewsDetailViewController.self) {
+                $0.newsID = model.id ?? ""
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,56 +137,8 @@ class HomeViewController: BaseViewController {
         })
     }
     
-    private func requestLatestNewsList() {
-        HomeTarget.latestNews.request(cache: { (model: HomeNewsListModel) in
-            self.handleLastestNews(model: model)
-        }, success: { (model: HomeNewsListModel) in
-            self.progressView.stopLoading()
-            self.handleLastestNews(model: model)
-        }) { _ in
-            self.progressView.stopLoading()
-        }
-    }
-    
-    private func handleLastestNews(model: HomeNewsListModel) {
-        self.sectionTitles.removeAll()
-        self.date = model.date
-        model.topStories.map({
-            self.bannerList = $0
-            self.bannerView.imageDataSource = $0.map({
-                $0.image ?? ""
-            })
-            self.bannerView.titleDataSource = $0.map({
-                $0.title ?? ""
-            })
-        })
-        model.stories.map({
-          self.dataSource = [$0.map({
-            Row<HomeNewsRowCell>(viewData: $0)
-          })]
-        })
-        self.tableView.reloadData()
-    }
-    
     private func requestBeforeNewsList() {
-        guard let date = self.date else { return }
-        HomeTarget.beforeNews(date: date).request(success: { (model: HomeNewsListModel) in
-            if self.tableView.mj_footer.isRefreshing {
-                self.tableView.mj_footer.endRefreshing()
-            }
-            model.date.map({
-                self.date = $0
-                self.sectionTitles.append($0)
-            })
-            model.stories.map({
-                self.dataSource.append($0.map({
-                    Row<HomeNewsRowCell>(viewData: $0)
-                }))
-            })
-            self.tableView.reloadData()
-        }) { _ in
-            
-        }
+        viewModel.requestBeforeNewsList()
     }
     
     @objc private func menuBtnAction(sender: UIButton) {
@@ -187,25 +153,6 @@ class HomeViewController: BaseViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
-extension HomeViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = dataSource[indexPath.section][indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseIdentifier, for: indexPath)
-        row.update(cell: cell)
-        return cell
-    }
-}
-
 // MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -217,7 +164,7 @@ extension HomeViewController: UITableViewDelegate {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: customNavigationBarHeight))
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
-        label.text = sectionTitles[section - 1]
+        label.text = viewModel.sectionTitles[section - 1]
         label.textAlignment = .center
         header.addSubview(label)
         return header
@@ -228,15 +175,6 @@ extension HomeViewController: UITableViewDelegate {
             return CGFloat.leastNormalMagnitude
         }
         return customNavigationBarHeight
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let row = dataSource[indexPath.section][indexPath.row]
-        let model: HomeNewsModel = row.cellItem()
-        push(NewsDetailViewController.self) {
-            $0.newsID = model.id ?? ""
-        }
     }
 }
 
@@ -291,7 +229,7 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if progressView.progress >= 1.0 {
             progressView.startLoading()
-            requestLatestNewsList()
+            viewModel.requestLatestNewsList()
         }
         else {
             progressView.progress = 0
