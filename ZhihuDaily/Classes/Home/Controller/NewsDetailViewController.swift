@@ -35,7 +35,7 @@ class NewsDetailViewController: BaseViewController, Routable {
     }()
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
-    
+    private let viewModel = NewsDetailViewModel()
     
     static func register(parameters: [String : Any]?) -> Routable {
         return NewsDetailViewController()
@@ -48,7 +48,8 @@ class NewsDetailViewController: BaseViewController, Routable {
         ay_navigationItem.alpha = 0
         ay_navigationBar.backgroundColor = UIColor.white
         addSubviews()
-        requestNewsDetail()
+        viewModel.bindToViews(webView: webView, titleLabel: titleLabel, imageView: headerView)
+        viewModel.requestNewsDetail(newsID: newsID)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -71,35 +72,6 @@ class NewsDetailViewController: BaseViewController, Routable {
             make.bottom.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
             make.width.equalTo(UIScreen.width - 30)
-        }
-    }
-    
-    private func requestNewsDetail() {
-        HomeTarget.newsDetail(newsID: newsID).request(success: { (model: NewsDetailModel) in
-            model.image.map({
-                self.headerView.kf.setImage(with: URL(string: $0))
-            })
-            model.title.map({
-                self.titleLabel.text = $0
-            })
-            if let body = model.body {
-                var html = """
-                <!DOCTYPE html>
-                <html>
-                <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-                <link rel="stylesheet" type="text/css" href="\(model.css?.first ?? "")">
-                </head>
-                <body>
-                </body>
-                </html>
-                """
-                html = html.replacingOccurrences(of: "</body>", with: "\(body)</body>")
-                self.webView.loadHTMLString(html, baseURL: nil)
-            }
-        }) { _ in
-            
         }
     }
 }

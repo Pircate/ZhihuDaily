@@ -10,15 +10,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Moya
-import HandyJSON
-
-extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
-    public func mapObject<T: HandyJSON>(_ type: T.Type) -> Single<T> {
-        return flatMap { response -> Single<T> in
-            return Single.just(JSONDeserializer.deserializeFrom(json: try response.mapString()) ?? T())
-        }
-    }
-}
 
 enum LoadingStatus {
     case none, begin, isLoading, end
@@ -50,7 +41,7 @@ class HomeViewModel {
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeNewsSection> = {
         let dataSource = RxTableViewSectionedReloadDataSource<HomeNewsSection>(configureCell: { (ds, tv, ip, item) -> HomeNewsRowCell in
-            let cell: HomeNewsRowCell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
+            let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
             cell.model = item
             return cell
         })

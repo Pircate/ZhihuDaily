@@ -35,6 +35,8 @@
 		B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F72015D607000C54BC /* HomeViewController.swift */; };
 		B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */; };
 		B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */; };
+		B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */; };
+		B5D652BC20550E9D00AE726F /* PrimitiveSequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */; };
 		B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE316420544DD200661203 /* HomeViewModel.swift */; };
 		B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827452030810E0095BF41 /* PageMenuCell.swift */; };
 		B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827462030810E0095BF41 /* PageScrollView.swift */; };
@@ -98,6 +100,8 @@
 		B5A7C9F72015D607000C54BC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
+		B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
+		B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitiveSequenceExtension.swift; sourceTree = "<group>"; };
 		B5DE316420544DD200661203 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B5E827452030810E0095BF41 /* PageMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuCell.swift; sourceTree = "<group>"; };
 		B5E827462030810E0095BF41 /* PageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageScrollView.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				B5DE316420544DD200661203 /* HomeViewModel.swift */,
+				B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				B563AAF52015AC9A00F4AC66 /* StringExtension.swift */,
 				B563AAF62015AC9A00F4AC66 /* UITableViewExtension.swift */,
 				B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */,
+				B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -644,6 +650,7 @@
 				B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */,
 				B563AAF42015AC8500F4AC66 /* Router.swift in Sources */,
 				B5F20DAE2052A50A008D757B /* NetworkEnvironment.swift in Sources */,
+				B5D652BC20550E9D00AE726F /* PrimitiveSequenceExtension.swift in Sources */,
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF92015AC9A00F4AC66 /* UITableViewExtension.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
@@ -654,6 +661,7 @@
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B563AAF82015AC9A00F4AC66 /* StringExtension.swift in Sources */,
 				B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */,
+				B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */,
 				B56EA5432051102B0011D6E9 /* ProgressView.swift in Sources */,
 				B56223BE1FFC734E0012CCB2 /* MainViewController.swift in Sources */,
 				B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */,

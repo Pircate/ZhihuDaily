@@ -25,26 +25,4 @@ extension TargetType {
     var headers: [String: String]? {
         return nil
     }
-    
-    public func request<T: HandyJSON>(cache: ((T) -> Void)? = nil,
-                                      success: @escaping (T) -> Void,
-                                      failure: @escaping (Error) -> ()) {
-        MultiProvider.shared.request(.target(self), cache: { (data) in
-            cache.map({
-                let json = String.init(data: data, encoding: .utf8)
-                $0(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
-            })
-        }, success: { (response) in
-            do {
-                let json = try response.filterSuccessfulStatusAndRedirectCodes().mapString()
-                success(JSONDeserializer<T>.deserializeFrom(json: json) ?? T())
-            } catch {}
-        }) { (error) in
-            failure(error)
-        }
-    }
-}
-
-fileprivate final class MultiProvider {
-    static let shared = HTTPProvider<MultiTarget>()
 }
