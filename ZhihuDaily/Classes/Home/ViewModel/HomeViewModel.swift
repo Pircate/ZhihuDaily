@@ -32,6 +32,7 @@ extension HomeNewsSection: SectionModelType {
 class HomeViewModel {
     
     let subject: BehaviorSubject<HomeNewsListModel>
+    let bannerSubject: BehaviorSubject<[HomeNewsModel]>
     let loadingStatus: BehaviorSubject<LoadingStatus>
     var items: Driver<[HomeNewsSection]>
     var bannerItems: Driver<[HomeNewsModel]>
@@ -54,6 +55,7 @@ class HomeViewModel {
     
     init() {
         subject = BehaviorSubject(value: HomeNewsListModel())
+        bannerSubject = BehaviorSubject(value: [])
         loadingStatus = BehaviorSubject(value: .none)
         items = Driver.never()
         bannerItems = Driver.never()
@@ -66,6 +68,8 @@ class HomeViewModel {
             self.sectionTitles.removeAll()
             self.sections.removeAll()
             self.subject.onNext(response)
+            self.bannerList = response.topStories ?? []
+            self.bannerSubject.onNext(response.topStories ?? [])
         }, onError: nil).disposed(by: disposeBag)
     }
     
@@ -88,10 +92,7 @@ class HomeViewModel {
             return self.sections
         }).asDriver(onErrorJustReturn: [])
         
-        bannerItems = subject.map({
-            self.bannerList = $0.topStories ?? []
-            return self.bannerList
-        }).asDriver(onErrorJustReturn: [])
+        bannerItems = bannerSubject.asDriver(onErrorJustReturn: [])
         
         items.drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
