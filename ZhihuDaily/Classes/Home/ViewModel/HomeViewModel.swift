@@ -34,6 +34,7 @@ class HomeViewModel {
     let subject: BehaviorSubject<HomeNewsListModel>
     let loadingStatus: BehaviorSubject<LoadingStatus>
     var items: Driver<[HomeNewsSection]>
+    var bannerItems: Driver<[HomeNewsModel]>
     var date: String?
     var sectionTitles: [String] = []
     var bannerList: [HomeNewsModel] = []
@@ -55,6 +56,7 @@ class HomeViewModel {
         subject = BehaviorSubject(value: HomeNewsListModel())
         loadingStatus = BehaviorSubject(value: .none)
         items = Driver.never()
+        bannerItems = Driver.never()
     }
     
     func requestLatestNewsList() {
@@ -86,18 +88,23 @@ class HomeViewModel {
             return self.sections
         }).asDriver(onErrorJustReturn: [])
         
+        bannerItems = subject.map({
+            self.bannerList = $0.topStories ?? []
+            return self.bannerList
+        }).asDriver(onErrorJustReturn: [])
+        
         items.drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
-        subject.subscribe(onNext: { (model) in
-            model.topStories.map({
-                self.bannerList = $0
-                bannerView.imageDataSource = $0.flatMap({
-                    $0.image
-                })
-                bannerView.titleDataSource = $0.flatMap({
-                    $0.title
-                })
+        bannerItems.map({
+            $0.flatMap({
+                $0.image
             })
-        }).disposed(by: disposeBag)
+        }).drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
+        
+        bannerItems.map({
+            $0.flatMap({
+                $0.title
+            })
+        }).drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
     }
 }

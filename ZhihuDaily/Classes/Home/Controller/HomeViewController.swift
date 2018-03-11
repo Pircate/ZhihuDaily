@@ -61,11 +61,6 @@ class HomeViewController: BaseViewController {
     }()
     
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
-    
-    private var bannerList: [HomeNewsModel] = []
-    private var dataSource: [[Configurable]] = []
-    private var date: String?
-    private var sectionTitles: [String] = []
     private var isLoadable = false
     
     private let viewModel = HomeViewModel()
@@ -132,13 +127,9 @@ class HomeViewController: BaseViewController {
     private func setupTableViewRefresh() {
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
             self.map({
-                $0.requestBeforeNewsList()
+                $0.viewModel.requestBeforeNewsList()
             })
         })
-    }
-    
-    private func requestBeforeNewsList() {
-        viewModel.requestBeforeNewsList()
     }
     
     @objc private func menuBtnAction(sender: UIButton) {
@@ -237,4 +228,3 @@ extension HomeViewController: UIScrollViewDelegate {
         isLoadable = false
     }
 }
-

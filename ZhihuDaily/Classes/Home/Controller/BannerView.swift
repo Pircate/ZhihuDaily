@@ -8,6 +8,23 @@
 
 import UIKit
 import FSPagerView
+import RxSwift
+import RxCocoa
+
+extension Reactive where Base: BannerView {
+    
+    var imageDataSource: Binder<[String]> {
+        return Binder(self.base) { bannerView, imageDataSource in
+            bannerView.imageDataSource = imageDataSource
+        }
+    }
+    
+    var titleDataSource: Binder<[String]> {
+        return Binder(self.base) { bannerView, titleDataSource in
+            bannerView.titleDataSource = titleDataSource
+        }
+    }
+}
 
 class BannerView: UIView {
     
@@ -46,7 +63,7 @@ class BannerView: UIView {
         }
     }
     
-    private lazy var pagerView: FSPagerView = {
+    fileprivate lazy var pagerView: FSPagerView = {
         let pagerView = FSPagerView(frame: bounds)
         pagerView.dataSource = self
         pagerView.delegate = self
@@ -57,7 +74,7 @@ class BannerView: UIView {
         return pagerView
     }()
     
-    private lazy var pageControl: FSPageControl = {
+    fileprivate lazy var pageControl: FSPageControl = {
         let pageControl = FSPageControl(frame: CGRect(x: 0, y: bounds.height - 20, width: bounds.width, height: 20))
         pageControl.hidesForSinglePage = true
         return pageControl
