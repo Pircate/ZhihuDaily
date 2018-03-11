@@ -62,27 +62,37 @@ class HomeViewModel {
     }
     
     func requestLatestNewsList() {
-        provider.rx.request(.latestNews).mapObject(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
-            self.loadingStatus.onNext(.end)
-            self.date = response.date
-            self.sectionTitles.removeAll()
-            self.sections.removeAll()
-            self.subject.onNext(response)
-            self.bannerList = response.topStories ?? []
-            self.bannerSubject.onNext(response.topStories ?? [])
-        }, onError: nil).disposed(by: disposeBag)
+        provider.request(.latestNews) { [weak self] (response: HomeNewsListModel) in
+            self?.handleLatestResponse(response)
+            }.subscribe(onSuccess: { [weak self] (response) in
+                self?.loadingStatus.onNext(.end)
+                self?.handleLatestResponse(response)
+            }, onError: nil).disposed(by: disposeBag)
+    }
+    
+    func handleLatestResponse(_ response: HomeNewsListModel) {
+        date = response.date
+        sectionTitles.removeAll()
+        sections.removeAll()
+        subject.onNext(response)
+        bannerList = response.topStories ?? []
+        bannerSubject.onNext(response.topStories ?? [])
     }
     
     func requestBeforeNewsList() {
         guard let date = date else { return }
-        provider.rx.request(.beforeNews(date: date)).mapObject(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
-            self.loadingStatus.onNext(.end)
-            response.date.map({
-                self.date = $0
-                self.sectionTitles.append($0)
-            })
-            self.subject.onNext(response)
+        provider.rx.request(.beforeNews(date: date)).mapObject(HomeNewsListModel.self).subscribe(onSuccess: { [weak self] (response) in
+            self?.handleBeforeResponse(response)
         }, onError: nil).disposed(by: disposeBag)
+    }
+    
+    func handleBeforeResponse(_ response: HomeNewsListModel) {
+        loadingStatus.onNext(.end)
+        if let date = response.date {
+            self.date = date
+            sectionTitles.append(date)
+        }
+        subject.onNext(response)
     }
     
     func bindToViews(bannerView: BannerView, tableView: UITableView) {

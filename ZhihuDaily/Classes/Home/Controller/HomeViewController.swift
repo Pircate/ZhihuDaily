@@ -8,7 +8,6 @@
 
 import UIKit
 import MJRefresh
-import FSPagerView
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {

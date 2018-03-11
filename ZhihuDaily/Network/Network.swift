@@ -7,7 +7,6 @@
 //
 
 import Moya
-import HandyJSON
 
 extension TargetType {
     var baseURL: URL {

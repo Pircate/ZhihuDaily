@@ -36,7 +36,8 @@
 		B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */; };
 		B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */; };
 		B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */; };
-		B5D652BC20550E9D00AE726F /* PrimitiveSequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */; };
+		B5D652BE2055336300AE726F /* HTTPCachePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652BD2055336300AE726F /* HTTPCachePlugin.swift */; };
+		B5D652C0205552ED00AE726F /* HTTPProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652BF205552ED00AE726F /* HTTPProvider+Rx.swift */; };
 		B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE316420544DD200661203 /* HomeViewModel.swift */; };
 		B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827452030810E0095BF41 /* PageMenuCell.swift */; };
 		B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E827462030810E0095BF41 /* PageScrollView.swift */; };
@@ -101,7 +102,8 @@
 		B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
 		B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
-		B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitiveSequenceExtension.swift; sourceTree = "<group>"; };
+		B5D652BD2055336300AE726F /* HTTPCachePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCachePlugin.swift; sourceTree = "<group>"; };
+		B5D652BF205552ED00AE726F /* HTTPProvider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPProvider+Rx.swift"; sourceTree = "<group>"; };
 		B5DE316420544DD200661203 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B5E827452030810E0095BF41 /* PageMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuCell.swift; sourceTree = "<group>"; };
 		B5E827462030810E0095BF41 /* PageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageScrollView.swift; sourceTree = "<group>"; };
@@ -345,7 +347,6 @@
 				B563AAF52015AC9A00F4AC66 /* StringExtension.swift */,
 				B563AAF62015AC9A00F4AC66 /* UITableViewExtension.swift */,
 				B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */,
-				B5D652BB20550E9D00AE726F /* PrimitiveSequenceExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -385,6 +386,7 @@
 			children = (
 				B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */,
 				B5F20DB12052B172008D757B /* Network.swift */,
+				B5D652BF205552ED00AE726F /* HTTPProvider+Rx.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -419,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				B555E5B6204EF11100F7A8F1 /* HTTPCache.swift */,
+				B5D652BD2055336300AE726F /* HTTPCachePlugin.swift */,
 				B587F895204973D200CC3BC7 /* HTTPLoggerPlugin.swift */,
 				B5F6E4002048240D007425F9 /* HTTPProvider.swift */,
 			);
@@ -650,7 +653,6 @@
 				B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */,
 				B563AAF42015AC8500F4AC66 /* Router.swift in Sources */,
 				B5F20DAE2052A50A008D757B /* NetworkEnvironment.swift in Sources */,
-				B5D652BC20550E9D00AE726F /* PrimitiveSequenceExtension.swift in Sources */,
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF92015AC9A00F4AC66 /* UITableViewExtension.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
@@ -658,6 +660,7 @@
 				B5F6E4032048240E007425F9 /* HTTPProvider.swift in Sources */,
 				B555E5B7204EF11100F7A8F1 /* HTTPCache.swift in Sources */,
 				B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */,
+				B5D652BE2055336300AE726F /* HTTPCachePlugin.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B563AAF82015AC9A00F4AC66 /* StringExtension.swift in Sources */,
 				B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */,
@@ -673,6 +676,7 @@
 				B5A7C9EC2015B421000C54BC /* HomeBannerListModel.swift in Sources */,
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
+				B5D652C0205552ED00AE726F /* HTTPProvider+Rx.swift in Sources */,
 				B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */,
 				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 				B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */,

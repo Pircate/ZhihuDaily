@@ -36,11 +36,15 @@ open class HTTPProvider<Target: TargetType>: MoyaProvider<Target> {
             }
         }
         self.taskClosure = taskClosure
-        super.init(plugins: [HTTPLoggerPlugin(), networkActivityPlugin])
+        super.init(plugins: [HTTPLoggerPlugin(), networkActivityPlugin, HTTPCachePlugin()])
     }
     
     open override func endpoint(_ token: Target) -> Endpoint {
         return super.endpoint(token).replacing(task: taskClosure(token))
+    }
+    
+    open func cachedData(_ target: Target) -> Data? {
+        return HTTPCache.shared.cachedData(for: target)
     }
     
     @discardableResult
