@@ -31,9 +31,9 @@ extension HomeNewsSection: SectionModelType {
 
 class HomeViewModel {
     
-    let subject: BehaviorSubject<HomeNewsListModel>
-    let bannerSubject: BehaviorSubject<[HomeNewsModel]>
-    let loadingStatus: BehaviorSubject<LoadingStatus>
+    let relay: BehaviorRelay<HomeNewsListModel>
+    let bannerRelay: BehaviorRelay<[HomeNewsModel]>
+    let loadingStatus: BehaviorRelay<LoadingStatus>
     var items: Driver<[HomeNewsSection]>
     var bannerItems: Driver<[HomeNewsModel]>
     var date: String?
@@ -54,9 +54,9 @@ class HomeViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        subject = BehaviorSubject(value: HomeNewsListModel())
-        bannerSubject = BehaviorSubject(value: [])
-        loadingStatus = BehaviorSubject(value: .none)
+        relay = BehaviorRelay(value: HomeNewsListModel())
+        bannerRelay = BehaviorRelay(value: [])
+        loadingStatus = BehaviorRelay(value: .none)
         items = Driver.never()
         bannerItems = Driver.never()
     }
@@ -65,7 +65,7 @@ class HomeViewModel {
         provider.request(.latestNews) { [weak self] (response: HomeNewsListModel) in
             self?.handleLatestResponse(response)
             }.subscribe(onSuccess: { [weak self] (response) in
-                self?.loadingStatus.onNext(.end)
+                self?.loadingStatus.accept(.end)
                 self?.handleLatestResponse(response)
             }, onError: nil).disposed(by: disposeBag)
     }
@@ -74,9 +74,9 @@ class HomeViewModel {
         date = response.date
         sectionTitles.removeAll()
         sections.removeAll()
-        subject.onNext(response)
+        relay.accept(response)
         bannerList = response.topStories ?? []
-        bannerSubject.onNext(response.topStories ?? [])
+        bannerRelay.accept(response.topStories ?? [])
     }
     
     func requestBeforeNewsList() {
@@ -87,22 +87,22 @@ class HomeViewModel {
     }
     
     func handleBeforeResponse(_ response: HomeNewsListModel) {
-        loadingStatus.onNext(.end)
+        loadingStatus.accept(.end)
         if let date = response.date {
             self.date = date
             sectionTitles.append(date)
         }
-        subject.onNext(response)
+        relay.accept(response)
     }
     
     func bindToViews(bannerView: BannerView, tableView: UITableView) {
         
-        items = subject.map({
+        items = relay.map({
             self.sections.append(HomeNewsSection(items: $0.stories ?? []))
             return self.sections
         }).asDriver(onErrorJustReturn: [])
         
-        bannerItems = bannerSubject.asDriver(onErrorJustReturn: [])
+        bannerItems = bannerRelay.asDriver(onErrorJustReturn: [])
         
         items.drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         

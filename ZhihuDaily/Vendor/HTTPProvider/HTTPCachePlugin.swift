@@ -11,11 +11,8 @@ import Result
 
 struct HTTPCachePlugin: PluginType {
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        switch result {
-        case .success(let response):
+        if case .success(let response) = result {
             HTTPCache.shared.storeCachedData(response.data, for: target)
-        case .failure:
-            break
         }
     }
 }
