@@ -10,9 +10,7 @@
 #endif
 #endif
 
-#import "AYNavigationBar.h"
-#import "AYNavigationBarContentView.h"
 
-FOUNDATION_EXPORT double AYNavigationBarVersionNumber;
-FOUNDATION_EXPORT const unsigned char AYNavigationBarVersionString[];
+FOUNDATION_EXPORT double FKNavigationBarVersionNumber;
+FOUNDATION_EXPORT const unsigned char FKNavigationBarVersionString[];
 

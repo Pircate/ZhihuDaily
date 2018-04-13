@@ -25,7 +25,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
     
     lazy var backButton: UIButton = {
         let backBtn = UIButton(type: .system)
-        backBtn.frame = CGRect(x: 0, y: 0, width: 48, height: 44)
         backBtn.setTitle("返回", for: .normal)
         backBtn.setTitleColor(.white, for: .normal)
         backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -35,7 +34,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
     
     lazy var closeButton: UIButton = {
         let closeBtn = UIButton(type: .system)
-        closeBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 44)
         closeBtn.setTitle("关闭", for: .normal)
         closeBtn.setTitleColor(.white, for: .normal)
         closeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -85,23 +83,24 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
     }
     
     private func addSubviews() {
-        registerNavigationBar()
-        ay_navigationBar.backgroundColor = UIColor.global
-        ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigation.bar.backgroundColor = UIColor.global
+        navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         view.addSubview(container)
         container.snp.makeConstraints { (make) in
-            make.top.equalTo(ay_navigationBar.snp.bottom)
+            make.top.equalTo(navigation.bar.snp.bottom)
             make.left.bottom.right.equalToSuperview()
         }
     }
     
     private func updateLeftNavigationBarItem() {
         if container.webView.canGoBack {
-            ay_navigationItem.leftBarItems = [backButton, closeButton]
+            navigation.item.leftBarButtonItems = [backButton, closeButton].map({
+                UIBarButtonItem(customView: $0)
+            })
         }
         else {
-            ay_navigationItem.leftBarButton = backButton
+            navigation.item.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         }
     }
     
@@ -129,13 +128,13 @@ class WebViewController: UIViewController, WKNavigationDelegate, Routable {
     }
     
     private func loadFail() {
-        ay_navigationItem.title = "很抱歉，加载失败"
+        navigation.item.title = "很抱歉，加载失败"
     }
     
     // MARK: - observe
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "title" {
-            ay_navigationItem.title = container.webView.title
+            navigation.item.title = container.webView.title
         }
         if keyPath == "canGoBack" {
             updateLeftNavigationBarItem()

@@ -44,9 +44,9 @@ class NewsDetailViewController: BaseViewController, Routable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ay_navigationBar.verticalOffset = -44;
-        ay_navigationItem.alpha = 0
-        ay_navigationBar.backgroundColor = UIColor.white
+        navigation.bar.isUnrestoredWhenViewWillLayoutSubviews = true
+        navigation.bar.frame.origin.y = -24;
+        navigation.bar.backgroundColor = UIColor.white
         addSubviews()
         viewModel.bindToViews(webView: webView, titleLabel: titleLabel, imageView: headerView)
         viewModel.requestNewsDetail(newsID: newsID)
@@ -117,7 +117,7 @@ extension NewsDetailViewController: UIScrollViewDelegate {
                 scrollView.contentOffset = CGPoint(x: 0, y: -60)
             }
         }
-        ay_navigationBar.isHidden = scrollView.contentOffset.y < 180
+        navigation.bar.isHidden = scrollView.contentOffset.y < 180
         statusBarStyle = scrollView.contentOffset.y < 180 ? .lightContent : .default
         setNeedsStatusBarAppearanceUpdate()
     }

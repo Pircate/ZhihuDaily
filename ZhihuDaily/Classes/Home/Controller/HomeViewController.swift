@@ -17,7 +17,7 @@ extension UIApplication {
 
 class HomeViewController: BaseViewController {
     
-    private let customNavigationBarHeight: CGFloat = 30
+    private let customNavigationBarHeight: CGFloat = 44
     private let tableHeaderViewHeight: CGFloat = 200
     private let pullDownHeight: CGFloat = 60
 
@@ -39,7 +39,7 @@ class HomeViewController: BaseViewController {
     
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom)
-        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight, width: 44, height: 32)
+        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
         menuBtn.setImage(UIImage(named: "menu"), for: .normal)
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
@@ -89,6 +89,7 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        view.bringSubview(toFront: navigation.bar)
         view.bringSubview(toFront: menuButton)
     }
 
@@ -101,15 +102,16 @@ class HomeViewController: BaseViewController {
     
     private func setupNavigationItem() {
         
-        registerNavigationBar()
-        ay_navigationBar.alpha = 0
-        ay_navigationBar.backgroundColor = UIColor.global
-        ay_navigationBar.contentOffset = -14;
-        ay_navigationItem.title = "今日要闻"
-        ay_navigationItem.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigation.bar.isHidden = false
+        navigation.bar.shadowImage = UIImage()
+        navigation.bar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.main.bounds.width, height: 44)
+        view.addSubview(navigation.bar)
+        navigation.bar.alpha = 0
+        navigation.bar.backgroundColor = UIColor.global
+        navigation.item.title = "今日要闻"
+        navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width / 2 - 60, height: 0))
-        ay_navigationItem.leftBarItems = [leftView, progressView]
+        navigation.item.leftBarButtonItem = UIBarButtonItem(customView: progressView)
     }
     
     private func addSubviews() {
@@ -175,12 +177,12 @@ extension HomeViewController: UIScrollViewDelegate {
         
         if scrollView == tableView {
             if tableView.contentOffset.y > 0 {
-                let alpha = tableView.contentOffset.y / (tableHeaderViewHeight - UIApplication.statusBarHeight - ay_navigationBar.frame.height)
-                ay_navigationBar.alpha = alpha
+                let alpha = tableView.contentOffset.y / (tableHeaderViewHeight - UIApplication.statusBarHeight - navigation.bar.frame.height)
+                navigation.bar.alpha = alpha
                 progressView.progress = 0
             }
             else {
-                ay_navigationBar.alpha = 0
+                navigation.bar.alpha = 0
                 if tableView.contentOffset.y > -pullDownHeight {
                     var frame = bannerView.frame
                     frame.origin.y = tableView.contentOffset.y
@@ -198,13 +200,13 @@ extension HomeViewController: UIScrollViewDelegate {
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
-                ay_navigationBar.verticalOffset = -30.0
-                ay_navigationItem.alpha = 0
+                navigation.bar.frame.origin.y = -10.0
+                navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white.alpha(0)]
                 tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
             }
             else {
-                ay_navigationBar.verticalOffset = 0
-                ay_navigationItem.alpha = 1
+                navigation.bar.frame.origin.y = 20
+                navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
                 tableView.contentInset = UIEdgeInsets.zero
             }
         }
