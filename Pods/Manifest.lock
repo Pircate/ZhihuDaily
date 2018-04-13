@@ -5,7 +5,7 @@ PODS:
   - Differentiator (3.0.2)
   - FDFullscreenPopGesture (1.1)
   - FSPagerView (0.7.1)
-  - HandyJSON (4.0.0-beta.1)
+  - HandyJSON (4.1.1)
   - Hue (3.0.1)
   - Kingfisher (4.6.1)
   - MJRefresh (3.1.15.3)
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - Alamofire
   - AYNavigationBar
   - FSPagerView
-  - HandyJSON (~> 4.0.0-beta.1)
+  - HandyJSON (~> 4.1.1)
   - Hue
   - Kingfisher
   - MJRefresh
@@ -38,13 +38,31 @@ DEPENDENCIES:
   - RxDataSources
   - SnapKit
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AYNavigationBar
+    - Differentiator
+    - FDFullscreenPopGesture
+    - FSPagerView
+    - HandyJSON
+    - Hue
+    - Kingfisher
+    - MJRefresh
+    - Moya
+    - Result
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - SnapKit
+
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   AYNavigationBar: e739632143ab6afa9cb2be3c815d8193226f635c
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
-  HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
+  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -55,6 +73,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 501001f035fbbfb8321a03daca7175d35831fd0e
+PODFILE CHECKSUM: 7c1efad6e052b4c1a4885fe904e21e8a68e55967
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

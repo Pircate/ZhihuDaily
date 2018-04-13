@@ -8,7 +8,7 @@ target 'ZhihuDaily' do
   pod 'Moya/RxSwift'
   pod 'Kingfisher'
   pod 'SnapKit'
-  pod 'HandyJSON', '~> 4.0.0-beta.1'
+  pod 'HandyJSON', '~> 4.1.1'
   pod 'AYNavigationBar'
   pod 'MJRefresh'
   pod 'Hue'

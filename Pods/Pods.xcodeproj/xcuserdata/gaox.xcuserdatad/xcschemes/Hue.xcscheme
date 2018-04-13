@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B2542602E50EDF091ADB18B4688DF34F'
-               BlueprintName = 'Hue'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Hue.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B2542602E50EDF091ADB18B4688DF34F"
+               BlueprintName = "Hue"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Hue.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
