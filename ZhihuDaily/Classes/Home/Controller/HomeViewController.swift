@@ -33,7 +33,7 @@ class HomeViewController: BaseViewController {
     }()
     
     private lazy var progressView: ProgressView = {
-        let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let progressView = ProgressView(frame: CGRect(x: UIScreen.width / 2 - 60, y: 12, width: 20, height: 20))
         return progressView
     }()
     
@@ -104,14 +104,14 @@ class HomeViewController: BaseViewController {
         
         navigation.bar.isHidden = false
         navigation.bar.shadowImage = UIImage()
-        navigation.bar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.main.bounds.width, height: 44)
+        navigation.bar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44)
         view.addSubview(navigation.bar)
         navigation.bar.alpha = 0
         navigation.bar.backgroundColor = UIColor.global
         navigation.item.title = "今日要闻"
         navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        navigation.item.leftBarButtonItem = UIBarButtonItem(customView: progressView)
+        navigation.bar.addSubview(progressView)
     }
     
     private func addSubviews() {
@@ -200,12 +200,12 @@ extension HomeViewController: UIScrollViewDelegate {
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
-                navigation.bar.frame.origin.y = -10.0
+                navigation.bar.frame.origin.y = -44.0 + UIApplication.statusBarHeight
                 navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white.alpha(0)]
                 tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
             }
             else {
-                navigation.bar.frame.origin.y = 20
+                navigation.bar.frame.origin.y = UIApplication.statusBarHeight
                 navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
                 tableView.contentInset = UIEdgeInsets.zero
             }
