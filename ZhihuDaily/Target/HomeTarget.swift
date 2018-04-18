@@ -12,7 +12,7 @@ enum HomeTarget: TargetType {
     
     case latestNews
     case beforeNews(date: String)
-    case newsDetail(newsID: Int)
+    case newsDetail(newsID: String)
     
     var path: String {
         switch self {

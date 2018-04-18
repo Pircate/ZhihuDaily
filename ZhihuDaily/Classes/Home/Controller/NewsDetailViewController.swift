@@ -11,7 +11,7 @@ import WebKit
 
 class NewsDetailViewController: BaseViewController, Routable {
 
-    var newsID: Int?
+    var newsID = ""
     
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: view.bounds)
@@ -49,9 +49,7 @@ class NewsDetailViewController: BaseViewController, Routable {
         navigation.bar.backgroundColor = UIColor.white
         addSubviews()
         viewModel.bindToViews(webView: webView, titleLabel: titleLabel, imageView: headerView)
-        if let newsID = newsID {
-            viewModel.requestNewsDetail(newsID: newsID)
-        }
+        viewModel.requestNewsDetail(newsID: newsID)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

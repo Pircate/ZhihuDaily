@@ -57,7 +57,7 @@ class NewsDetailViewModel {
         })
     }
     
-    func requestNewsDetail(newsID: Int) {
+    func requestNewsDetail(newsID: String) {
         HomeTarget.newsDetail(newsID: newsID).request(NewsDetailModel.self).subscribe(onSuccess: { (response) in
             self.subject.onNext(response)
         }, onError: nil).disposed(by: disposeBag)

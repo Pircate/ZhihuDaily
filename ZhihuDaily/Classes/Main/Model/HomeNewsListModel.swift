@@ -22,7 +22,7 @@ struct HomeNewsListModel: Codable {
 
 struct HomeNewsModel: Codable {
     var images: [String]?
-    var id: Int?
+    var id: String?
     var title: String?
     var image: String?
 }

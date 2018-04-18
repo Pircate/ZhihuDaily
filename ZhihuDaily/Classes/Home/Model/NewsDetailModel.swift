@@ -17,6 +17,6 @@ struct NewsDetailModel: Codable {
     var js: [String]?
     var ga_prefix: String?
     var images: [String]?
-    var id: Int?
+    var id: String?
     var css: [String]?
 }

@@ -52,7 +52,7 @@ class HomeViewController: BaseViewController {
             self.map({
                 let model = $0.viewModel.bannerList[index]
                 $0.push(NewsDetailViewController.self) {
-                    $0.newsID = model.id
+                    $0.newsID = model.id ?? ""
                 }
             })
         }
@@ -81,7 +81,7 @@ class HomeViewController: BaseViewController {
         
         tableView.rx.modelSelected(HomeNewsModel.self).subscribe(onNext: { [weak self] (model) in
             self?.push(NewsDetailViewController.self) {
-                $0.newsID = model.id
+                $0.newsID = model.id ?? ""
             }
         }).disposed(by: disposeBag)
     }
