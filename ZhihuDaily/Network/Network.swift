@@ -1,21 +1,15 @@
 //
 //  Network.swift
-//  ZhihuDaily
+//  SwiftNetwork
 //
-//  Created by G-Xi0N on 2018/3/9.
+//  Created by GorXion on 2018/4/17.
 //  Copyright © 2018年 gaoX. All rights reserved.
 //
 
 import Moya
+import Cache
 
 extension TargetType {
-    var baseURL: URL {
-        return URL(string: NetworkEnvironment.environment.baseURL)!
-    }
-    
-    var method: Moya.Method {
-        return .get
-    }
     
     var sampleData: Data {
         return "".data(using: .utf8)!
@@ -24,4 +18,19 @@ extension TargetType {
     var headers: [String: String]? {
         return nil
     }
+}
+
+extension MoyaProvider {
+    public convenience init(taskClosure: @escaping (TargetType) -> Task) {
+        self.init(endpointClosure: { (target) -> Endpoint in
+            MoyaProvider.defaultEndpointMapping(for: target).replacing(task: taskClosure(target))
+        }, plugins: [NetworkIndicatorPlugin(), HTTPLoggerPlugin()])
+    }
+}
+
+public final class Network {
+    public static var taskClosure: (TargetType) -> Task = { $0.task }
+    public static let provider = MoyaProvider<MultiTarget>(taskClosure: taskClosure)
+    public static let storage = try? Storage(diskConfig: DiskConfig(name: "NetworkRequestCache"),
+                                             memoryConfig: MemoryConfig())
 }

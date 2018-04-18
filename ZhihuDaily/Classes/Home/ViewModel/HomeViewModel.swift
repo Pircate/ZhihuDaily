@@ -50,7 +50,6 @@ class HomeViewModel {
         return dataSource
     }()
     
-    private let provider = HTTPProvider<HomeTarget>()
     private let disposeBag = DisposeBag()
     
     init() {
@@ -62,11 +61,11 @@ class HomeViewModel {
     }
     
     func requestLatestNewsList() {
-        provider.request(.latestNews) { [weak self] (response: HomeNewsListModel) in
-            self?.handleLatestResponse(response)
-            }.subscribe(onSuccess: { [weak self] (response) in
-                self?.loadingStatus.accept(.end)
-                self?.handleLatestResponse(response)
+        HomeTarget.latestNews.cachedObject(HomeNewsListModel.self) { (response) in
+            self.handleLatestResponse(response)
+            }.request(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
+                self.loadingStatus.accept(.end)
+                self.handleLatestResponse(response)
             }, onError: nil).disposed(by: disposeBag)
     }
     
@@ -81,8 +80,8 @@ class HomeViewModel {
     
     func requestBeforeNewsList() {
         guard let date = date else { return }
-        provider.rx.request(.beforeNews(date: date)).mapObject(HomeNewsListModel.self).subscribe(onSuccess: { [weak self] (response) in
-            self?.handleBeforeResponse(response)
+        HomeTarget.beforeNews(date: date).request(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
+            self.handleBeforeResponse(response)
         }, onError: nil).disposed(by: disposeBag)
     }
     
@@ -107,13 +106,13 @@ class HomeViewModel {
         items.drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
         bannerItems.map({
-            $0.flatMap({
+            $0.compactMap({
                 $0.image
             })
         }).drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
         
         bannerItems.map({
-            $0.flatMap({
+            $0.compactMap({
                 $0.title
             })
         }).drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)

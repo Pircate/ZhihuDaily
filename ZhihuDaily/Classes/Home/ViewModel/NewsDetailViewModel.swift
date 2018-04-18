@@ -27,7 +27,6 @@ class NewsDetailViewModel {
     let body: Driver<String>
     let image: Observable<String>
     
-    private let provider = HTTPProvider<HomeTarget>()
     private let disposeBag = DisposeBag()
     
     init() {
@@ -58,8 +57,8 @@ class NewsDetailViewModel {
         })
     }
     
-    func requestNewsDetail(newsID: String) {
-        provider.rx.request(.newsDetail(newsID: newsID)).mapObject(NewsDetailModel.self).subscribe(onSuccess: { (response) in
+    func requestNewsDetail(newsID: Int) {
+        HomeTarget.newsDetail(newsID: newsID).request(NewsDetailModel.self).subscribe(onSuccess: { (response) in
             self.subject.onNext(response)
         }, onError: nil).disposed(by: disposeBag)
     }

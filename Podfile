@@ -8,7 +8,6 @@ target 'ZhihuDaily' do
   pod 'Cache'
   pod 'Kingfisher'
   pod 'SnapKit'
-  pod 'HandyJSON', '~> 4.1.1'
   pod 'FKNavigationBar'
   pod 'FDFullscreenPopGesture'
   pod 'MJRefresh'

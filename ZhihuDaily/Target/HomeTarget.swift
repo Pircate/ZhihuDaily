@@ -9,9 +9,10 @@
 import Moya
 
 enum HomeTarget: TargetType {
+    
     case latestNews
     case beforeNews(date: String)
-    case newsDetail(newsID: String)
+    case newsDetail(newsID: Int)
     
     var path: String {
         switch self {

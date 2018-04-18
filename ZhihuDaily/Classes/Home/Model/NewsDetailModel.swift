@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import HandyJSON
 
-struct NewsDetailModel: HandyJSON {
+struct NewsDetailModel: Codable {
     var body: String?
     var image_source: String?
     var title: String?
@@ -18,7 +17,6 @@ struct NewsDetailModel: HandyJSON {
     var js: [String]?
     var ga_prefix: String?
     var images: [String]?
-    var type: String?
-    var id: String?
+    var id: Int?
     var css: [String]?
 }

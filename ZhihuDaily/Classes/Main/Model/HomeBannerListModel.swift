@@ -7,19 +7,21 @@
 //
 
 import Foundation
-import HandyJSON
 
-struct HomeBannerListModel: HandyJSON {
+struct HomeBannerListModel: Codable {
     var recent: [HomeBannerRecentModel]?
 }
 
-struct HomeBannerRecentModel: HandyJSON {
+struct HomeBannerRecentModel: Codable {
     var newsID: Int?
     var url: String?
     var thumbnail: String?
     var title: String?
-    
-    mutating func mapping(mapper: HelpingMapper) {
-        mapper.specify(property: &newsID, name: "news_id")
+
+    enum CodingKeys: String, CodingKey {
+        case newsID = "news_id"
+        case url = "url"
+        case thumbnail = "thumbnail"
+        case title = "title"
     }
 }

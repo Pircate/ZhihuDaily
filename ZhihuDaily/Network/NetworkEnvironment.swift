@@ -6,6 +6,8 @@
 //  Copyright © 2018年 adinnet. All rights reserved.
 //
 
+import Moya
+
 public enum NetworkEnvironment {
     case develop
     case product
@@ -37,5 +39,15 @@ public enum NetworkEnvironment {
         case .product:
             return ""
         }
+    }
+}
+
+extension TargetType {
+    var baseURL: URL {
+        return URL(string: NetworkEnvironment.environment.baseURL)!
+    }
+    
+    var method: Moya.Method {
+        return .get
     }
 }

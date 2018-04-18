@@ -5,7 +5,6 @@ PODS:
   - FDFullscreenPopGesture (1.1)
   - FKNavigationBar (0.0.2)
   - FSPagerView (0.7.1)
-  - HandyJSON (4.1.1)
   - Hue (3.0.1)
   - Kingfisher (4.7.0)
   - MJRefresh (3.1.15.3)
@@ -30,7 +29,6 @@ DEPENDENCIES:
   - FDFullscreenPopGesture
   - FKNavigationBar
   - FSPagerView
-  - HandyJSON (~> 4.1.1)
   - Hue
   - Kingfisher
   - MJRefresh
@@ -47,7 +45,6 @@ SPEC REPOS:
     - FDFullscreenPopGesture
     - FKNavigationBar
     - FSPagerView
-    - HandyJSON
     - Hue
     - Kingfisher
     - MJRefresh
@@ -65,7 +62,6 @@ SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FKNavigationBar: 8dee336e7eb4cd52701e5df5eeb7a54936b51e95
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
-  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -76,6 +72,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: d7a9270ef19f4213193fa81b08089056d6ed0b3f
+PODFILE CHECKSUM: 2f754b109f3b8993d0000a572c76c20f5ea3d52c
 
 COCOAPODS: 1.5.0

@@ -7,24 +7,22 @@
 //
 
 import Foundation
-import HandyJSON
 
-struct HomeNewsListModel: HandyJSON {
+struct HomeNewsListModel: Codable {
     var date: String?
     var stories: [HomeNewsModel]?
     var topStories: [HomeNewsModel]?
     
-    mutating func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.topStories <-- "top_stories"
+    enum CodingKeys: String, CodingKey {
+        case date = "date"
+        case stories = "stories"
+        case topStories = "top_stories"
     }
 }
 
-struct HomeNewsModel: HandyJSON {
+struct HomeNewsModel: Codable {
     var images: [String]?
-    var type: Int?
-    var id: String?
-    var gaPrefix: String?
+    var id: Int?
     var title: String?
     var image: String?
 }
