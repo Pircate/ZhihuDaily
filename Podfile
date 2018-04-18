@@ -4,8 +4,8 @@ target 'ZhihuDaily' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Alamofire'
   pod 'Moya/RxSwift'
+  pod 'Cache'
   pod 'Kingfisher'
   pod 'SnapKit'
   pod 'HandyJSON', '~> 4.1.1'
