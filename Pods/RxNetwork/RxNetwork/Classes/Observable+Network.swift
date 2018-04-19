@@ -1,6 +1,6 @@
 //
 //  Observable+Network.swift
-//  Network
+//  RxNetwork
 //
 //  Created by GorXion on 2018/4/18.
 //  Copyright © 2018年 gaoX. All rights reserved.
@@ -11,7 +11,6 @@ import Moya
 import Result
 
 extension ObservableType where E: TargetType {
-    @available(iOS 9.0, *)
     public func request<T: Codable>(_ type: T.Type,
                                     atKeyPath keyPath: String? = nil,
                                     using decoder: JSONDecoder = .init()) -> Observable<T> {
