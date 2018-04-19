@@ -2,8 +2,8 @@ PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
   - Differentiator (3.0.2)
+  - EachNavigationBar (0.1.0)
   - FDFullscreenPopGesture (1.1)
-  - FKNavigationBar (0.0.2)
   - FSPagerView (0.7.1)
   - Hue (3.0.1)
   - Kingfisher (4.7.0)
@@ -26,8 +26,8 @@ PODS:
 
 DEPENDENCIES:
   - Cache
+  - EachNavigationBar
   - FDFullscreenPopGesture
-  - FKNavigationBar
   - FSPagerView
   - Hue
   - Kingfisher
@@ -42,8 +42,8 @@ SPEC REPOS:
     - Alamofire
     - Cache
     - Differentiator
+    - EachNavigationBar
     - FDFullscreenPopGesture
-    - FKNavigationBar
     - FSPagerView
     - Hue
     - Kingfisher
@@ -59,8 +59,8 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  EachNavigationBar: bfd9364d97754e081bf3d36c1d2a675ccd70fcdb
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  FKNavigationBar: 8dee336e7eb4cd52701e5df5eeb7a54936b51e95
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
@@ -72,6 +72,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 2f754b109f3b8993d0000a572c76c20f5ea3d52c
+PODFILE CHECKSUM: 17a9b8637e3ef4630b89685d9146672eca9ef86e
 
 COCOAPODS: 1.5.0

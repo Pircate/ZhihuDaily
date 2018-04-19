@@ -1,14 +1,14 @@
 //
-//  FKNavigationBar.swift
-//  UIViewController+NavigationBar
+//  EachNavigationBar.swift
+//  EachNavigationBar
 //
-//  Created by GorXion on 2018/3/28.
+//  Created by gaoX on 2018/3/28.
 //  Copyright © 2018年 gaoX. All rights reserved.
 //
 
 import UIKit
 
-open class FKNavigationBar: UINavigationBar {
+open class EachNavigationBar: UINavigationBar {
 
     private var _alpha: CGFloat = 1
     

@@ -8,7 +8,7 @@ target 'ZhihuDaily' do
   pod 'Cache'
   pod 'Kingfisher'
   pod 'SnapKit'
-  pod 'FKNavigationBar'
+  pod 'EachNavigationBar'
   pod 'FDFullscreenPopGesture'
   pod 'MJRefresh'
   pod 'Hue'

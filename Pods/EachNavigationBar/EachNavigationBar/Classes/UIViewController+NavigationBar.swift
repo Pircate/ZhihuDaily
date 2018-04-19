@@ -1,8 +1,8 @@
 //
 //  UIViewController+NavigationBar.swift
-//  UIViewController+NavigationBar
+//  EachNavigationBar
 //
-//  Created by GorXion on 2018/3/26.
+//  Created by gaoX on 2018/3/26.
 //  Copyright © 2018年 gaoX. All rights reserved.
 //
 
@@ -37,7 +37,7 @@ extension UIViewController {
             public var titleTextAttributes: [NSAttributedStringKey : Any]?
         }
         
-        public let bar: FKNavigationBar
+        public let bar: EachNavigationBar
         public let item: UINavigationItem
         public let configuration = Configuration()
     }
@@ -51,11 +51,11 @@ extension UIViewController {
         return navigation
     }
     
-    private var _navigationBar: FKNavigationBar {
-        if let bar = objc_getAssociatedObject(self, &kUIViewControllerNavigationBarKey) as? FKNavigationBar {
+    private var _navigationBar: EachNavigationBar {
+        if let bar = objc_getAssociatedObject(self, &kUIViewControllerNavigationBarKey) as? EachNavigationBar {
             return bar
         }
-        let bar = FKNavigationBar(navigationItem: _navigationItem)
+        let bar = EachNavigationBar(navigationItem: _navigationItem)
         objc_setAssociatedObject(self, &kUIViewControllerNavigationBarKey, bar, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return bar
     }
@@ -70,9 +70,10 @@ extension UIViewController {
     }
     
     private func bindNavigationBar() {
-        guard let configuration = navigationController?.navigation.configuration, configuration.enabled else { return }
-        navigationController?.navigationBar.isHidden = true
-        configureNavigationBarStyle(configuration)
+        guard let navigationController = navigationController,
+            navigationController.navigation.configuration.enabled else { return }
+        navigationController.navigationBar.isHidden = true
+        configureNavigationBarStyle()
         view.addSubview(_navigationBar)
     }
     
@@ -82,7 +83,8 @@ extension UIViewController {
         view.bringSubview(toFront: _navigationBar)
     }
     
-    private func configureNavigationBarStyle(_ configuration: Navigation.Configuration) {
+    private func configureNavigationBarStyle() {
+        guard let configuration = navigationController?.navigation.configuration else { return }
         _navigationBar.barTintColor = configuration.barTintColor
         _navigationBar.shadowImage = configuration.shadowImage
         _navigationBar.titleTextAttributes = configuration.titleTextAttributes
@@ -106,8 +108,21 @@ extension UINavigationController {
         super.viewWillLayoutSubviews()
         
         guard let bar = topViewController?.navigation.bar else { return }
-        bar.isUnrestoredWhenViewWillLayoutSubviews
-            ? (bar.frame.size = navigationBar.frame.size)
-            : (bar.frame = navigationBar.frame)
+        
+        if #available(iOS 11.0, *) {
+            bar.prefersLargeTitles = navigationBar.prefersLargeTitles
+            bar.largeTitleTextAttributes = navigationBar.largeTitleTextAttributes
+        }
+        
+        if bar.isUnrestoredWhenViewWillLayoutSubviews {
+            bar.frame.size = navigationBar.frame.size
+        }
+        else {
+            bar.frame = navigationBar.frame
+            guard #available(iOS 11.0, *) else { return }
+            if bar.prefersLargeTitles {
+                bar.frame.origin.y = UIApplication.shared.statusBarFrame.maxY
+            }
+        }
     }
 }
