@@ -50,4 +50,12 @@ extension TargetType {
     var method: Moya.Method {
         return .get
     }
+    
+    var sampleData: Data {
+        return "".data(using: .utf8)!
+    }
+    
+    var headers: [String: String]? {
+        return nil
+    }
 }

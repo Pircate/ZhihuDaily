@@ -1,6 +1,6 @@
 //
 //  ActivityIndicatorPlugin.swift
-//  SwiftNetwork
+//  Network
 //
 //  Created by GorXion on 2018/4/17.
 //  Copyright © 2018年 gaoX. All rights reserved.
@@ -20,11 +20,7 @@ public final class NetworkIndicatorPlugin: PluginType {
         }
     }
     
-    public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        var request = request
-        request.timeoutInterval = 10
-        return request
-    }
+    public init() {}
     
     public func willSend(_ request: RequestType, target: TargetType) {
         NetworkIndicatorPlugin.numberOfRequests += 1

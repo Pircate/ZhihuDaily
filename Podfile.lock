@@ -21,20 +21,22 @@ PODS:
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
+  - RxNetwork (0.1.0):
+    - Cache
+    - Moya/RxSwift
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
-  - Cache
   - EachNavigationBar
   - FDFullscreenPopGesture
   - FSPagerView
   - Hue
   - Kingfisher
   - MJRefresh
-  - Moya/RxSwift
   - RxCocoa
   - RxDataSources
+  - RxNetwork
   - SnapKit
 
 SPEC REPOS:
@@ -52,6 +54,7 @@ SPEC REPOS:
     - Result
     - RxCocoa
     - RxDataSources
+    - RxNetwork
     - RxSwift
     - SnapKit
 
@@ -69,9 +72,10 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxNetwork: 2db5afb97a4d482754b99d1b0163cb1611e519df
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 17a9b8637e3ef4630b89685d9146672eca9ef86e
+PODFILE CHECKSUM: 4af1466817375a5194b439111aae1cca4b185d8c
 
 COCOAPODS: 1.5.0

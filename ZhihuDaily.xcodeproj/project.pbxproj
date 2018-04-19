@@ -11,9 +11,6 @@
 		B5171438202F33C400881F95 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5171437202F33C400881F95 /* BannerView.swift */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531638D201FFF4200828CA2 /* ConfigurableCell.swift */; };
-		B55FF17D2086F75C005641E1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55FF17A2086F75B005641E1 /* Network.swift */; };
-		B55FF17E2086F75C005641E1 /* Network+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55FF17B2086F75B005641E1 /* Network+Rx.swift */; };
-		B55FF17F2086F75C005641E1 /* NetworkIndicatorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55FF17C2086F75B005641E1 /* NetworkIndicatorPlugin.swift */; };
 		B56223851FFC729B0012CCB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56223841FFC729B0012CCB2 /* Assets.xcassets */; };
 		B56223881FFC729B0012CCB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */; };
 		B56223931FFC729C0012CCB2 /* ZhihuDailyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56223921FFC729C0012CCB2 /* ZhihuDailyTests.swift */; };
@@ -69,9 +66,6 @@
 		B5171437202F33C400881F95 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B531638D201FFF4200828CA2 /* ConfigurableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
-		B55FF17A2086F75B005641E1 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		B55FF17B2086F75B005641E1 /* Network+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network+Rx.swift"; sourceTree = "<group>"; };
-		B55FF17C2086F75B005641E1 /* NetworkIndicatorPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorPlugin.swift; sourceTree = "<group>"; };
 		B562237A1FFC729B0012CCB2 /* ZhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56223841FFC729B0012CCB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56223871FFC729B0012CCB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -382,9 +376,6 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B55FF17A2086F75B005641E1 /* Network.swift */,
-				B55FF17B2086F75B005641E1 /* Network+Rx.swift */,
-				B55FF17C2086F75B005641E1 /* NetworkIndicatorPlugin.swift */,
 				B5ADB443208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift */,
 				B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */,
 			);
@@ -595,6 +586,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxNetwork/RxNetwork.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -613,6 +605,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxNetwork.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -641,7 +634,6 @@
 				B5E827482030810E0095BF41 /* PageMenuCell.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B563AAF82015AC9A00F4AC66 /* StringExtension.swift in Sources */,
-				B55FF17F2086F75C005641E1 /* NetworkIndicatorPlugin.swift in Sources */,
 				B531638E201FFF4200828CA2 /* ConfigurableCell.swift in Sources */,
 				B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */,
 				B56EA5432051102B0011D6E9 /* ProgressView.swift in Sources */,
@@ -650,7 +642,6 @@
 				B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */,
 				B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */,
 				B5ADB444208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift in Sources */,
-				B55FF17D2086F75C005641E1 /* Network.swift in Sources */,
 				B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */,
 				B5E8274A2030810E0095BF41 /* PageMenuView.swift in Sources */,
 				B5A7C9EC2015B421000C54BC /* HomeBannerListModel.swift in Sources */,
@@ -659,7 +650,6 @@
 				B5E827492030810E0095BF41 /* PageScrollView.swift in Sources */,
 				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 				B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */,
-				B55FF17E2086F75C005641E1 /* Network+Rx.swift in Sources */,
 				B587F897204973D200CC3BC7 /* HTTPLoggerPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
