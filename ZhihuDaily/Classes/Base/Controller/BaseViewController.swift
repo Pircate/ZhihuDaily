@@ -17,6 +17,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         navigation.bar.isHidden = true
+        navigation.bar.isTranslucent = false
     }
 
     override func didReceiveMemoryWarning() {

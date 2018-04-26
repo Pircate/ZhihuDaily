@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
   - Differentiator (3.0.2)
-  - EachNavigationBar (0.1.0)
+  - EachNavigationBar (0.1.1)
   - FDFullscreenPopGesture (1.1)
   - FSPagerView (0.7.1)
   - Hue (3.0.1)
@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  EachNavigationBar: bfd9364d97754e081bf3d36c1d2a675ccd70fcdb
+  EachNavigationBar: 8e2824048aa9dc85948bc534a7b51a0631e4f441
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2

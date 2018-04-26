@@ -17,11 +17,11 @@ extension UIViewController {
     
     public static let setupNavigationBar: Void = {
         if let viewDidLoad = class_getInstanceMethod(UIViewController.self, #selector(viewDidLoad)),
-            let fk_viewDidLoad = class_getInstanceMethod(UIViewController.self, #selector(fk_viewDidLoad)),
+            let each_viewDidLoad = class_getInstanceMethod(UIViewController.self, #selector(each_viewDidLoad)),
             let viewWillAppear = class_getInstanceMethod(UIViewController.self, #selector(viewWillAppear(_:))),
-            let fk_viewWillAppear = class_getInstanceMethod(UIViewController.self, #selector(fk_viewWillAppear(_:))) {
-            method_exchangeImplementations(viewDidLoad, fk_viewDidLoad)
-            method_exchangeImplementations(viewWillAppear, fk_viewWillAppear)
+            let each_viewWillAppear = class_getInstanceMethod(UIViewController.self, #selector(each_viewWillAppear(_:))) {
+            method_exchangeImplementations(viewDidLoad, each_viewDidLoad)
+            method_exchangeImplementations(viewWillAppear, each_viewWillAppear)
         }
     }()
     
@@ -35,6 +35,8 @@ extension UIViewController {
             public var position: UIBarPosition = .any
             public var shadowImage: UIImage?
             public var titleTextAttributes: [NSAttributedStringKey : Any]?
+            public var isTranslucent: Bool = true
+            public var barStyle: UIBarStyle = .default
         }
         
         public let bar: EachNavigationBar
@@ -89,15 +91,17 @@ extension UIViewController {
         _navigationBar.shadowImage = configuration.shadowImage
         _navigationBar.titleTextAttributes = configuration.titleTextAttributes
         _navigationBar.setBackgroundImage(configuration.backgroundImage, for: configuration.position, barMetrics: configuration.metrics)
+        _navigationBar.isTranslucent = configuration.isTranslucent
+        _navigationBar.barStyle = configuration.barStyle
     }
     
-    @objc private func fk_viewDidLoad() {
-        fk_viewDidLoad()
+    @objc private func each_viewDidLoad() {
+        each_viewDidLoad()
         bindNavigationBar()
     }
     
-    @objc private func fk_viewWillAppear(_ animated: Bool) {
-        fk_viewWillAppear(animated)
+    @objc private func each_viewWillAppear(_ animated: Bool) {
+        each_viewWillAppear(animated)
         bringNavigationBarToFront()
     }
 }

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5FA4D32DD385B283DBEACDAF2851DBA3"
-               BlueprintName = "SnapKit"
+               BlueprintIdentifier = "829E0BCCDE3222299272BD457AAAD94A"
+               BlueprintName = "RxNetwork"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SnapKit.framework">
+               BuildableName = "RxNetwork.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
