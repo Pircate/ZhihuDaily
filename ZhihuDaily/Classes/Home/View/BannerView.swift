@@ -10,6 +10,7 @@ import UIKit
 import FSPagerView
 import RxSwift
 import RxCocoa
+import Delegated
 
 extension Reactive where Base: BannerView {
     
@@ -28,7 +29,7 @@ extension Reactive where Base: BannerView {
 
 class BannerView: UIView {
     
-    public var didSelectItemHandler: ((Int) -> Void)?
+    public var didSelectItemHandler = Delegated<Int, Void>()
     
     public var placeholder: UIImage?
     
@@ -125,8 +126,6 @@ extension BannerView: FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        didSelectItemHandler.map({
-            $0(index)
-        })
+        didSelectItemHandler.call(index)
     }
 }

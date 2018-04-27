@@ -10,6 +10,7 @@ import UIKit
 import MJRefresh
 import RxSwift
 import RxCocoa
+import Delegated
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {
@@ -54,18 +55,16 @@ class HomeViewController: BaseViewController {
     lazy var bannerView: BannerView = {
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
         bannerView.pageControlBottomOffset = 36
-        bannerView.didSelectItemHandler = { [weak self] (index) in
-            self.map({
-                let model = $0.viewModel.bannerList[index]
-                $0.push(NewsDetailViewController.self) {
-                    $0.newsID = model.id ?? ""
-                }
-            })
-        }
+        bannerView.didSelectItemHandler.delegate(to: self, with: { (self, index) in
+            let model = self.viewModel.bannerList[index]
+            self.push(NewsDetailViewController.self) {
+                $0.newsID = model.id ?? ""
+            }
+        })
         return bannerView
     }()
     
-    var menuButtonDidSelectHandler: ((UIButton) -> Void)?
+    var menuButtonDidSelectHandler = Delegated<UIButton, Void>()
     private var isLoadable = false
     
     override func viewDidLoad() {
@@ -118,9 +117,7 @@ class HomeViewController: BaseViewController {
     
     @objc private func menuBtnAction(sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        if let handler = menuButtonDidSelectHandler {
-            handler(sender)
-        }
+        menuButtonDidSelectHandler.call(sender)
     }
     
     public func setMenuButtonSelected(_ isSelected: Bool) {

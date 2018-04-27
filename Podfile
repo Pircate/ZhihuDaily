@@ -14,5 +14,6 @@ target 'ZhihuDaily' do
   pod 'FSPagerView'
   pod 'RxCocoa'
   pod 'RxDataSources'
+  pod 'Delegated'
 
 end

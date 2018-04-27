@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
+  - Delegated (0.1.0)
   - Differentiator (3.0.2)
   - EachNavigationBar (0.1.1)
   - FDFullscreenPopGesture (1.1)
@@ -28,6 +29,7 @@ PODS:
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - Delegated
   - EachNavigationBar
   - FDFullscreenPopGesture
   - FSPagerView
@@ -43,6 +45,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Cache
+    - Delegated
     - Differentiator
     - EachNavigationBar
     - FDFullscreenPopGesture
@@ -61,6 +64,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
+  Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   EachNavigationBar: 8e2824048aa9dc85948bc534a7b51a0631e4f441
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
@@ -76,6 +80,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 4af1466817375a5194b439111aae1cca4b185d8c
+PODFILE CHECKSUM: 202f4ba19f42c8994bca3752537cdeeaa7f3333d
 
 COCOAPODS: 1.5.0

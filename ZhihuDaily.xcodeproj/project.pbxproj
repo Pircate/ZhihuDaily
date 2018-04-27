@@ -278,7 +278,6 @@
 			children = (
 				B5A7C9F72015D607000C54BC /* HomeViewController.swift */,
 				B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */,
-				B5171437202F33C400881F95 /* BannerView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -294,6 +293,7 @@
 		B56223B31FFC730E0012CCB2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5171437202F33C400881F95 /* BannerView.swift */,
 				B56EA5422051102B0011D6E9 /* ProgressView.swift */,
 			);
 			path = View;
@@ -581,6 +581,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/Delegated/Delegated.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
@@ -600,6 +601,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Delegated.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EachNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
