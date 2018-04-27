@@ -8,6 +8,8 @@
 
 import UIKit
 import WebKit
+import RxSwift
+import RxCocoa
 
 class NewsDetailViewController: BaseViewController, Routable {
 
@@ -35,7 +37,6 @@ class NewsDetailViewController: BaseViewController, Routable {
     }()
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
-    private let viewModel = NewsDetailViewModel()
     
     static func register(parameters: [String : Any]?) -> Routable {
         return NewsDetailViewController()
@@ -48,8 +49,7 @@ class NewsDetailViewController: BaseViewController, Routable {
         navigation.bar.frame.origin.y = -24;
         navigation.bar.backgroundColor = UIColor.white
         addSubviews()
-        viewModel.bindToViews(webView: webView, titleLabel: titleLabel, imageView: headerView)
-        viewModel.requestNewsDetail(newsID: newsID)
+        bindViewModel()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -73,6 +73,17 @@ class NewsDetailViewController: BaseViewController, Routable {
             make.centerX.equalToSuperview()
             make.width.equalTo(UIScreen.width - 30)
         }
+    }
+    
+    private func bindViewModel() {
+        let viewModel = NewsDetailViewModel()
+        let refresh = Observable.just(newsID)
+        let input = NewsDetailViewModel.Input(refresh: refresh)
+        let output = viewModel.transform(input)
+        
+        output.title.drive(titleLabel.rx.text).disposed(by: disposeBag)
+        output.body.drive(webView.rx.htmlString).disposed(by: disposeBag)
+        output.image.drive(headerView.rx.webImage).disposed(by: disposeBag)
     }
 }
 

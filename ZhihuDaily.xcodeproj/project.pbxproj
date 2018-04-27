@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331F305E20933E2A0017D475 /* UIImageView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F305D20933E2A0017D475 /* UIImageView+Rx.swift */; };
 		7E87DC5196D1C5BBEB13B48B /* Pods_ZhihuDaily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */; };
 		B5171438202F33C400881F95 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5171437202F33C400881F95 /* BannerView.swift */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		331F305D20933E2A0017D475 /* UIImageView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Rx.swift"; sourceTree = "<group>"; };
 		83CE6E074FEB0F0C30BFDD04 /* Pods-ZhihuDaily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.debug.xcconfig"; sourceTree = "<group>"; };
 		B5171437202F33C400881F95 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				B563AAF52015AC9A00F4AC66 /* StringExtension.swift */,
 				B563AAF62015AC9A00F4AC66 /* UITableViewExtension.swift */,
 				B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */,
+				331F305D20933E2A0017D475 /* UIImageView+Rx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331F305E20933E2A0017D475 /* UIImageView+Rx.swift in Sources */,
 				B5171438202F33C400881F95 /* BannerView.swift in Sources */,
 				B5A7C9F42015C625000C54BC /* UIColorExtension.swift in Sources */,
 				B5A7C9F62015D273000C54BC /* UIScreenExtension.swift in Sources */,

@@ -38,7 +38,8 @@ class HomeViewModel {
     }
     
     struct Output {
-        let bannerItems: Driver<[HomeNewsModel]>
+        let bannerImages: Driver<[String]>
+        let bannerTitles: Driver<[String]>
         let items: Driver<[HomeNewsSection]>
     }
 
@@ -62,17 +63,17 @@ class HomeViewModel {
     func transform(_ input: Input) -> Output {
         
         let result = input.refresh.flatMap { _ in
-            HomeTarget.latestNews.request(HomeNewsListModel.self)
-            }.do(onNext: { (model) in
-                self.date = model.date ?? ""
-                self.sectionTitles.removeAll()
-            }).share(replay: 1)
+            self.requestLatestNews()
+            }.share(replay: 1)
         
         let bannerItems = result.map({
             $0.topStories ?? []
         }).do(onNext: { (banners) in
             self.bannerList = banners
-        }).asDriver(onErrorJustReturn: [])
+        })
+        
+        let bannerImages = bannerItems.map({ $0.compactMap({ $0.image })}).asDriver(onErrorJustReturn: [])
+        let bannerTitles = bannerItems.map({ $0.compactMap({ $0.title })}).asDriver(onErrorJustReturn: [])
         
         let items = relay.asDriver(onErrorJustReturn: [])
         
@@ -84,17 +85,32 @@ class HomeViewModel {
         }).disposed(by: disposeBag)
         
         input.loading.flatMap { _ in
-            HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { (model) in
-                self.date = model.date ?? ""
-                self.sectionTitles.append(self.date)
-            }).map({
-                HomeNewsSection(items: $0.stories ?? [])
-            })
+            self.requestBeforeNews()
             }.subscribe(onNext: { (section) in
                 self.sections.append(section)
                 self.relay.accept(self.sections)
             }).disposed(by: disposeBag)
         
-        return Output(bannerItems: bannerItems, items: items)
+        return Output(bannerImages: bannerImages, bannerTitles: bannerTitles, items: items)
+    }
+    
+    private func requestLatestNews() -> Single<HomeNewsListModel> {
+        return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { (model) in
+            self.date = model.date ?? ""
+            self.sectionTitles.removeAll()
+        }).catchError({ error in
+            Single.error(error)
+        })
+    }
+    
+    private func requestBeforeNews() -> Single<HomeNewsSection> {
+        return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { (model) in
+            self.date = model.date ?? ""
+            self.sectionTitles.append(self.date)
+        }).map({
+            HomeNewsSection(items: $0.stories ?? [])
+        }).catchError({ error in
+            Single.error(error)
+        })
     }
 }

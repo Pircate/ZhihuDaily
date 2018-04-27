@@ -132,13 +132,8 @@ class HomeViewController: BaseViewController {
         let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshClosure)
         let output = viewModel.transform(input)
         
-        output.bannerItems.map({
-            $0.compactMap({$0.image})
-        }).drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
-        
-        output.bannerItems.map({
-            $0.compactMap({$0.title})
-        }).drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
+        output.bannerImages.drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
+        output.bannerTitles.drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
         
         output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
         output.items.map({ _ in RefreshStatus.endFooterRefresh }).drive(tableView.rx.endRefreshing).disposed(by: disposeBag)
