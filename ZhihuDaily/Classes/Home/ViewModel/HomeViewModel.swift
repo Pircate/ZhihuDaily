@@ -79,14 +79,16 @@ class HomeViewModel {
         
         result.map({
             HomeNewsSection(items: $0.stories ?? [])
-        }).subscribe(onNext: { (section) in
+        }).subscribe(onNext: { [weak self] (section) in
+            guard let `self` = self else { return }
             self.sections = [section]
             self.relay.accept(self.sections)
         }).disposed(by: disposeBag)
         
         input.loading.flatMap { _ in
             self.requestBeforeNews()
-            }.subscribe(onNext: { (section) in
+            }.subscribe(onNext: { [weak self] (section) in
+                guard let `self` = self else { return }
                 self.sections.append(section)
                 self.relay.accept(self.sections)
             }).disposed(by: disposeBag)
@@ -95,7 +97,8 @@ class HomeViewModel {
     }
     
     private func requestLatestNews() -> Single<HomeNewsListModel> {
-        return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { (model) in
+        return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
+            guard let `self` = self else { return }
             self.date = model.date ?? ""
             self.sectionTitles.removeAll()
         }).catchError({ error in
@@ -104,7 +107,8 @@ class HomeViewModel {
     }
     
     private func requestBeforeNews() -> Single<HomeNewsSection> {
-        return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { (model) in
+        return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
+            guard let `self` = self else { return }
             self.date = model.date ?? ""
             self.sectionTitles.append(self.date)
         }).map({

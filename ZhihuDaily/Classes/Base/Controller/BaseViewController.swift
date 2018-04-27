@@ -18,6 +18,7 @@ class BaseViewController: UIViewController {
         
         navigation.bar.isHidden = true
         navigation.bar.isTranslucent = false
+        navigation.bar.subviews.first?.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +26,10 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    deinit {
+        debugPrint("\(type(of: self)) deinit")
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
