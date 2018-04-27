@@ -32,17 +32,25 @@ extension HomeNewsSection: SectionModelType {
 
 class HomeViewModel {
     
-    let relay: BehaviorRelay<HomeNewsListModel>
-    let bannerRelay: BehaviorRelay<[HomeNewsModel]>
-    let loadingStatus: BehaviorRelay<LoadingStatus>
-    var items: Driver<[HomeNewsSection]>
-    var bannerItems: Driver<[HomeNewsModel]>
-    var date: String?
+    struct Input {
+        let refresh: Observable<Void>
+        let loading: ControlEvent<RefreshStatus>
+    }
+    
+    struct Output {
+        let bannerItems: Driver<[HomeNewsModel]>
+        let items: Driver<[HomeNewsSection]>
+    }
+
+    private let relay: BehaviorRelay<[HomeNewsSection]> = BehaviorRelay(value: [])
+    private var date: String = ""
+    private var sections: [HomeNewsSection] = []
+    private let disposeBag = DisposeBag()
+    
     var sectionTitles: [String] = []
     var bannerList: [HomeNewsModel] = []
-    var sections: [HomeNewsSection] = []
     
-    private lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeNewsSection> = {
+    lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeNewsSection> = {
         let dataSource = RxTableViewSectionedReloadDataSource<HomeNewsSection>(configureCell: { (ds, tv, ip, item) -> HomeNewsRowCell in
             let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
             cell.model = item
@@ -51,71 +59,42 @@ class HomeViewModel {
         return dataSource
     }()
     
-    private let disposeBag = DisposeBag()
-    
-    init() {
-        relay = BehaviorRelay(value: HomeNewsListModel())
-        bannerRelay = BehaviorRelay(value: [])
-        loadingStatus = BehaviorRelay(value: .none)
-        items = Driver.never()
-        bannerItems = Driver.never()
-    }
-    
-    func requestLatestNewsList() {
-        HomeTarget.latestNews.cachedObject(HomeNewsListModel.self) { (response) in
-            self.handleLatestResponse(response)
-            }.request(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
-                self.loadingStatus.accept(.end)
-                self.handleLatestResponse(response)
-            }, onError: nil).disposed(by: disposeBag)
-    }
-    
-    func handleLatestResponse(_ response: HomeNewsListModel) {
-        date = response.date
-        sectionTitles.removeAll()
-        sections.removeAll()
-        relay.accept(response)
-        bannerList = response.topStories ?? []
-        bannerRelay.accept(response.topStories ?? [])
-    }
-    
-    func requestBeforeNewsList() {
-        guard let date = date else { return }
-        HomeTarget.beforeNews(date: date).request(HomeNewsListModel.self).subscribe(onSuccess: { (response) in
-            self.handleBeforeResponse(response)
-        }, onError: nil).disposed(by: disposeBag)
-    }
-    
-    func handleBeforeResponse(_ response: HomeNewsListModel) {
-        loadingStatus.accept(.end)
-        if let date = response.date {
-            self.date = date
-            sectionTitles.append(date)
-        }
-        relay.accept(response)
-    }
-    
-    func bindToViews(bannerView: BannerView, tableView: UITableView) {
+    func transform(_ input: Input) -> Output {
         
-        items = relay.map({
-            self.sections.append(HomeNewsSection(items: $0.stories ?? []))
-            return self.sections
+        let result = input.refresh.flatMap { _ in
+            HomeTarget.latestNews.request(HomeNewsListModel.self)
+            }.do(onNext: { (model) in
+                self.date = model.date ?? ""
+                self.sectionTitles.removeAll()
+            }).share(replay: 1)
+        
+        let bannerItems = result.map({
+            $0.topStories ?? []
+        }).do(onNext: { (banners) in
+            self.bannerList = banners
         }).asDriver(onErrorJustReturn: [])
         
-        bannerItems = bannerRelay.asDriver(onErrorJustReturn: [])
+        let items = relay.asDriver(onErrorJustReturn: [])
         
-        items.drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        result.map({
+            HomeNewsSection(items: $0.stories ?? [])
+        }).subscribe(onNext: { (section) in
+            self.sections = [section]
+            self.relay.accept(self.sections)
+        }).disposed(by: disposeBag)
         
-        bannerItems.map({
-            $0.compactMap({
-                $0.image
+        input.loading.flatMap { _ in
+            HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { (model) in
+                self.date = model.date ?? ""
+                self.sectionTitles.append(self.date)
+            }).map({
+                HomeNewsSection(items: $0.stories ?? [])
             })
-        }).drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
+            }.subscribe(onNext: { (section) in
+                self.sections.append(section)
+                self.relay.accept(self.sections)
+            }).disposed(by: disposeBag)
         
-        bannerItems.map({
-            $0.compactMap({
-                $0.title
-            })
-        }).drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
+        return Output(bannerItems: bannerItems, items: items)
     }
 }

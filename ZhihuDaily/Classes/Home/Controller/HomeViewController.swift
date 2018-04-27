@@ -8,6 +8,8 @@
 
 import UIKit
 import MJRefresh
+import RxSwift
+import RxCocoa
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {
@@ -29,6 +31,7 @@ class HomeViewController: BaseViewController {
         tableView.estimatedSectionFooterHeight = 0
         tableView.separatorColor = UIColor(hex: "#eeeeee")
         tableView.register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell")
+        tableView.mj_footer = MJRefreshAutoFooter()
         return tableView
     }()
     
@@ -44,6 +47,9 @@ class HomeViewController: BaseViewController {
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
     }()
+    
+    private let viewModel = HomeViewModel()
+    private let refresh: PublishSubject<Void> = PublishSubject<Void>()
     
     lazy var bannerView: BannerView = {
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
@@ -62,28 +68,13 @@ class HomeViewController: BaseViewController {
     var menuButtonDidSelectHandler: ((UIButton) -> Void)?
     private var isLoadable = false
     
-    private let viewModel = HomeViewModel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationItem()
         addSubviews()
-        setupTableViewRefresh()
-        viewModel.bindToViews(bannerView: bannerView, tableView: tableView)
-        viewModel.requestLatestNewsList()
-        viewModel.loadingStatus.subscribe(onNext: { [weak self] (status) in
-            if status == .end {
-                self?.progressView.stopLoading()
-                self?.tableView.mj_footer.endRefreshing()
-            }
-        }).disposed(by: disposeBag)
-        
-        tableView.rx.modelSelected(HomeNewsModel.self).subscribe(onNext: { [weak self] (model) in
-            self?.push(NewsDetailViewController.self) {
-                $0.newsID = model.id ?? ""
-            }
-        }).disposed(by: disposeBag)
+        bindViewModel()
+        refresh.onNext(())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,14 +116,6 @@ class HomeViewController: BaseViewController {
         tableView.tableHeaderView = tableHeaderView
     }
     
-    private func setupTableViewRefresh() {
-        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: { [weak self] in
-            self.map({
-                $0.viewModel.requestBeforeNewsList()
-            })
-        })
-    }
-    
     @objc private func menuBtnAction(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if let handler = menuButtonDidSelectHandler {
@@ -142,6 +125,31 @@ class HomeViewController: BaseViewController {
     
     public func setMenuButtonSelected(_ isSelected: Bool) {
         menuButton.isSelected = isSelected
+    }
+    
+    private func bindViewModel() {
+        
+        let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshClosure)
+        let output = viewModel.transform(input)
+        
+        output.bannerItems.map({
+            $0.compactMap({$0.image})
+        }).drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
+        
+        output.bannerItems.map({
+            $0.compactMap({$0.title})
+        }).drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
+        
+        output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
+        output.items.map({ _ in RefreshStatus.endFooterRefresh }).drive(tableView.rx.endRefreshing).disposed(by: disposeBag)
+        
+        output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(HomeNewsModel.self).subscribe { (event) in
+            self.push(NewsDetailViewController.self) {
+                $0.newsID = event.element?.id ?? ""
+            }
+        }.disposed(by: disposeBag)
     }
 }
 
@@ -221,7 +229,7 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if progressView.progress >= 1.0 {
             progressView.startLoading()
-            viewModel.requestLatestNewsList()
+            refresh.onNext(())
         }
         else {
             progressView.progress = 0

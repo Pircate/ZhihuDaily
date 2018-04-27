@@ -7,6 +7,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+extension Reactive where Base == ProgressView {
+    internal var stop: Binder<Void> {
+        return Binder(self.base) { view, _ in
+            view.stopLoading()
+        }
+    }
+}
 
 class ProgressView: UIView {
 
