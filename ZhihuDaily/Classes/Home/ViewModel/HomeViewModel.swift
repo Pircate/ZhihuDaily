@@ -61,11 +61,11 @@ class HomeViewModel {
     
     func transform(_ input: Input) -> Output {
         
-        let result = input.refresh.flatMap { _ in
+        let source1 = input.refresh.flatMap { _ in
             self.requestLatestNews()
             }.share(replay: 1)
         
-        let bannerItems = result.map({
+        let bannerItems = source1.map({
             $0.topStories ?? []
         }).do(onNext: { (banners) in
             self.bannerList = banners
@@ -74,37 +74,37 @@ class HomeViewModel {
         let bannerImages = bannerItems.map({ $0.compactMap({ $0.image })}).asDriver(onErrorJustReturn: [])
         let bannerTitles = bannerItems.map({ $0.compactMap({ $0.title })}).asDriver(onErrorJustReturn: [])
         
-        let items = Observable.merge(result, input.loading.flatMap({ _ in
+        let source2 = input.loading.flatMap { _ in
             self.requestBeforeNews()
-        }).asObservable()).flatMap { response -> Observable<[HomeNewsSection]> in
+        }
+        
+        let items = Observable.merge(source1, source2).flatMap { response -> Observable<[HomeNewsSection]> in
             if let topStories = response.topStories, topStories.count > 0 {
                 self.sections = [HomeNewsSection(items: response.stories ?? [])]
             }
             else {
-                self.sections.append(HomeNewsSection(items: response.stories ?? []))
+                if let items = response.stories, items.count > 0 {
+                    self.sections.append(HomeNewsSection(items: items))
+                }
             }
             return Observable.just(self.sections)
         }.asDriver(onErrorJustReturn: [])
         return Output(bannerImages: bannerImages, bannerTitles: bannerTitles, items: items)
     }
     
-    private func requestLatestNews() -> Single<HomeNewsListModel> {
+    private func requestLatestNews() -> Observable<HomeNewsListModel> {
         return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
             self.date = model.date ?? ""
             self.sectionTitles.removeAll()
-        }).catchError({ error in
-            Single.error(error)
-        })
+        }).asObservable().catchErrorJustReturn(HomeNewsListModel())
     }
     
-    private func requestBeforeNews() -> Single<HomeNewsListModel> {
+    private func requestBeforeNews() -> Observable<HomeNewsListModel> {
         return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
             self.date = model.date ?? ""
             self.sectionTitles.append(self.date)
-        }).catchError({ error in
-            Single.error(error)
-        })
+        }).asObservable().catchErrorJustReturn(HomeNewsListModel())
     }
 }

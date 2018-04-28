@@ -154,7 +154,9 @@ extension HomeViewController: UITableViewDelegate {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: customNavigationBarHeight))
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
-        label.text = viewModel.sectionTitles[section - 1]
+        if viewModel.sectionTitles.count >= section {
+            label.text = viewModel.sectionTitles[section - 1]
+        }
         label.textAlignment = .center
         header.addSubview(label)
         return header

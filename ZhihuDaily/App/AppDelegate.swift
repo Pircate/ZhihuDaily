@@ -8,6 +8,7 @@
 
 import UIKit
 import EachNavigationBar
+import RxNetwork
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Network.shared.plugins = [NetworkIndicatorPlugin()]
         UIViewController.setupNavigationBar
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
