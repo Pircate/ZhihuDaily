@@ -6,8 +6,6 @@
 //  Copyright © 2018年 gaoX. All rights reserved.
 //
 
-import RxSwift
-import RxCocoa
 import Moya
 import WebKit
 

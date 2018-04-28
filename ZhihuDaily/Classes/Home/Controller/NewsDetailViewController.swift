@@ -8,8 +8,6 @@
 
 import UIKit
 import WebKit
-import RxSwift
-import RxCocoa
 
 class NewsDetailViewController: BaseViewController, Routable {
 
