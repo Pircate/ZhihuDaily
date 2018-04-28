@@ -3,5 +3,4 @@
 //
 
 #import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
-#import <CommonCrypto/CommonDigest.h>
 #import <MJRefresh/MJRefresh.h>

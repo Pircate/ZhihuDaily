@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base == UIImageView {
+extension Reactive where Base: UIImageView {
     var webImage: Binder<String> {
         return Binder(base) { imageView, url in
             imageView.kf.setImage(with: URL(string: url))

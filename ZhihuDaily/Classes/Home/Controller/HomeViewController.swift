@@ -8,8 +8,6 @@
 
 import UIKit
 import MJRefresh
-import RxSwift
-import RxCocoa
 import Delegated
 
 extension UIApplication {

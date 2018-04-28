@@ -43,7 +43,6 @@ class HomeViewModel {
         let items: Driver<[HomeNewsSection]>
     }
 
-    private let relay: BehaviorRelay<[HomeNewsSection]> = BehaviorRelay(value: [])
     private var date: String = ""
     private var sections: [HomeNewsSection] = []
     private let disposeBag = DisposeBag()
@@ -75,24 +74,17 @@ class HomeViewModel {
         let bannerImages = bannerItems.map({ $0.compactMap({ $0.image })}).asDriver(onErrorJustReturn: [])
         let bannerTitles = bannerItems.map({ $0.compactMap({ $0.title })}).asDriver(onErrorJustReturn: [])
         
-        let items = relay.asDriver(onErrorJustReturn: [])
-        
-        result.map({
-            HomeNewsSection(items: $0.stories ?? [])
-        }).subscribe(onNext: { [weak self] (section) in
-            guard let `self` = self else { return }
-            self.sections = [section]
-            self.relay.accept(self.sections)
-        }).disposed(by: disposeBag)
-        
-        input.loading.flatMap { _ in
+        let items = Observable.merge(result, input.loading.flatMap({ _ in
             self.requestBeforeNews()
-            }.subscribe(onNext: { [weak self] (section) in
-                guard let `self` = self else { return }
-                self.sections.append(section)
-                self.relay.accept(self.sections)
-            }).disposed(by: disposeBag)
-        
+        }).asObservable()).flatMap { response -> Observable<[HomeNewsSection]> in
+            if let topStories = response.topStories, topStories.count > 0 {
+                self.sections = [HomeNewsSection(items: response.stories ?? [])]
+            }
+            else {
+                self.sections.append(HomeNewsSection(items: response.stories ?? []))
+            }
+            return Observable.just(self.sections)
+        }.asDriver(onErrorJustReturn: [])
         return Output(bannerImages: bannerImages, bannerTitles: bannerTitles, items: items)
     }
     
@@ -106,13 +98,11 @@ class HomeViewModel {
         })
     }
     
-    private func requestBeforeNews() -> Single<HomeNewsSection> {
+    private func requestBeforeNews() -> Single<HomeNewsListModel> {
         return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
             self.date = model.date ?? ""
             self.sectionTitles.append(self.date)
-        }).map({
-            HomeNewsSection(items: $0.stories ?? [])
         }).catchError({ error in
             Single.error(error)
         })
