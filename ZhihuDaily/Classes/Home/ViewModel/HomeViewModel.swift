@@ -45,7 +45,6 @@ class HomeViewModel {
 
     private var date: String = ""
     private var sections: [HomeNewsSection] = []
-    private let disposeBag = DisposeBag()
     
     var sectionTitles: [String] = []
     var bannerList: [HomeNewsModel] = []

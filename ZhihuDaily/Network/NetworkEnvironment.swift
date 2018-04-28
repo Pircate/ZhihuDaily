@@ -7,44 +7,30 @@
 //
 
 import Moya
+import RxNetwork
 
-public enum NetworkEnvironment {
-    case develop
-    case product
+extension Network {
     
-    static let environment: NetworkEnvironment = .develop
-    
-    var baseURL: String {
-        switch self {
-        case .develop:
-            return "https://news-at.zhihu.com/api"
-        case .product:
-            return ""
+    enum Environment {
+        case develop
+        case product
+        
+        var baseURL: URL {
+            switch self {
+            case .develop:
+                return URL(string: "https://news-at.zhihu.com/api")!
+            case .product:
+                return URL(string: "https://news-at.zhihu.com/api")!
+            }
         }
     }
     
-    var uploadURL: String {
-        switch self {
-        case .develop:
-            return "http://192.168.20.70/upload/"
-        case .product:
-            return "http://192.168.20.70/upload/"
-        }
-    }
-    
-    var H5BaseURL: String {
-        switch self {
-        case .develop:
-            return "http://192.168.1.135/"
-        case .product:
-            return ""
-        }
-    }
+    static var environment: Environment = .develop
 }
 
 extension TargetType {
     var baseURL: URL {
-        return URL(string: NetworkEnvironment.environment.baseURL)!
+        return Network.environment.baseURL
     }
     
     var method: Moya.Method {
