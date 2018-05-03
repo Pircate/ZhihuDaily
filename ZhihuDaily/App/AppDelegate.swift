@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         let nav = UINavigationController(rootViewController: MainViewController())
-        nav.navigation.configuration.enabled = true
+        nav.navigation.configuration.isEnabled = true
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
         return true

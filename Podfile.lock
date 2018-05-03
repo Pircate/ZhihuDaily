@@ -3,7 +3,7 @@ PODS:
   - Cache (4.2.0)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
-  - EachNavigationBar (0.1.1)
+  - EachNavigationBar (0.1.2)
   - FDFullscreenPopGesture (1.1)
   - FSPagerView (0.7.1)
   - Hue (3.0.1)
@@ -66,7 +66,7 @@ SPEC CHECKSUMS:
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  EachNavigationBar: 8e2824048aa9dc85948bc534a7b51a0631e4f441
+  EachNavigationBar: 899d8bdb544e6283d631b05648a6974a7c3d2573
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
