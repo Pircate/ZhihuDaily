@@ -20,9 +20,31 @@ it, simply add the following line to your Podfile:
 pod 'RxNetwork'
 ```
 
+## Usage
+
+### Import
+
+``` swift
+import RxNetwork
+```
+
+### Configure
+
+![](https://github.com/Ginxx/RxNetwork/blob/master/Example/config.png)
+
+### Request with cache
+
+![](https://github.com/Ginxx/RxNetwork/blob/master/Example/cached_object.png)
+
+![](https://github.com/Ginxx/RxNetwork/blob/master/Example/cache.png)
+
+### Request without cache
+
+![](https://github.com/Ginxx/RxNetwork/blob/master/Example/without_cache.png)
+
 ## Author
 
-G-Xi0N, gao497868860@163.com
+gaoX, gao497868860@163.com
 
 ## License
 
