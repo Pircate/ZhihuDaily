@@ -135,6 +135,7 @@ class HomeViewController: BaseViewController {
         
         output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
         
+        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
         tableView.rx.modelSelected(HomeNewsModel.self).subscribe { (event) in
             self.push(NewsDetailViewController.self) {
                 $0.newsID = event.element?.id ?? ""

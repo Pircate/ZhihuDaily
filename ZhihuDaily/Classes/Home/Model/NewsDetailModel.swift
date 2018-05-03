@@ -10,13 +10,9 @@ import Foundation
 
 struct NewsDetailModel: Codable {
     let body: String
-    let image_source: String
     let title: String
     let image: String
-    let share_url: String
     let js: [String]
-    let ga_prefix: String
-    let images: [String]
     let id: String
     let css: [String]
 }
