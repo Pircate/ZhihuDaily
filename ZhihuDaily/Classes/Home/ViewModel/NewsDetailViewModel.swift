@@ -35,8 +35,8 @@ class NewsDetailViewModel {
             HomeTarget.newsDetail(newsID: $0).request(NewsDetailModel.self)
         }.share(replay: 1)
         
-        let title = response.map({ $0.title ?? "" }).asDriver(onErrorJustReturn: "")
-        let image = response.map({ $0.image ?? ""}).asDriver(onErrorJustReturn: "")
+        let title = response.map({ $0.title }).asDriver(onErrorJustReturn: "")
+        let image = response.map({ $0.image }).asDriver(onErrorJustReturn: "")
         let body = response.map({ model -> String in
             let html = """
             <!DOCTYPE html>
@@ -44,13 +44,13 @@ class NewsDetailViewModel {
             <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-            <link rel="stylesheet" type="text/css" href="\(model.css?.first ?? "")">
+            <link rel="stylesheet" type="text/css" href="\(model.css.first ?? "")">
             </head>
             <body>
             </body>
             </html>
             """
-            return html.replacingOccurrences(of: "</body>", with: "\(model.body ?? "")</body>")
+            return html.replacingOccurrences(of: "</body>", with: "\(model.body)</body>")
         }).asDriver(onErrorJustReturn: "")
         return Output(title: title, body: body, image: image)
     }

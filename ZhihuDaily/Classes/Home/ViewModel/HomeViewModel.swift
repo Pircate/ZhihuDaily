@@ -59,7 +59,7 @@ class HomeViewModel {
             }.share(replay: 1)
         
         let bannerItems = source1.map({
-            $0.topStories ?? []
+            $0.topStories
         }).do(onNext: { (banners) in
             self.bannerList = banners
         })
@@ -72,12 +72,12 @@ class HomeViewModel {
         }
         
         let items = Observable.merge(source1, source2).flatMap { response -> Observable<[HomeNewsSection]> in
-            if let topStories = response.topStories, topStories.count > 0 {
-                self.sections = [HomeNewsSection(items: response.stories ?? [])]
+            if response.topStories.count > 0 {
+                self.sections = [HomeNewsSection(items: response.stories)]
             }
             else {
-                if let items = response.stories, items.count > 0 {
-                    self.sections.append(HomeNewsSection(items: items))
+                if response.stories.count > 0 {
+                    self.sections.append(HomeNewsSection(items: response.stories))
                 }
             }
             return Observable.just(self.sections)
@@ -88,16 +88,16 @@ class HomeViewModel {
     private func requestLatestNews() -> Observable<HomeNewsListModel> {
         return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
-            self.date = model.date ?? ""
+            self.date = model.date
             self.sectionTitles.removeAll()
-        }).asObservable().catchErrorJustReturn(HomeNewsListModel())
+        }).asObservable().catchErrorJustReturn(HomeNewsListModel(date: "", stories: [], topStories: []))
     }
     
     private func requestBeforeNews() -> Observable<HomeNewsListModel> {
         return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
-            self.date = model.date ?? ""
+            self.date = model.date
             self.sectionTitles.append(self.date)
-        }).asObservable().catchErrorJustReturn(HomeNewsListModel())
+        }).asObservable().catchErrorJustReturn(HomeNewsListModel(date: "", stories: [], topStories: []))
     }
 }

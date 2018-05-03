@@ -9,14 +9,14 @@
 import Foundation
 
 struct NewsDetailModel: Codable {
-    var body: String?
-    var image_source: String?
-    var title: String?
-    var image: String?
-    var share_url: String?
-    var js: [String]?
-    var ga_prefix: String?
-    var images: [String]?
-    var id: String?
-    var css: [String]?
+    let body: String
+    let image_source: String
+    let title: String
+    let image: String
+    let share_url: String
+    let js: [String]
+    let ga_prefix: String
+    let images: [String]
+    let id: String
+    let css: [String]
 }

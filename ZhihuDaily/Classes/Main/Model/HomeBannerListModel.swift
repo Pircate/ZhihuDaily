@@ -9,14 +9,14 @@
 import Foundation
 
 struct HomeBannerListModel: Codable {
-    var recent: [HomeBannerRecentModel]?
+    let recent: [HomeBannerRecentModel]
 }
 
 struct HomeBannerRecentModel: Codable {
-    var newsID: Int?
-    var url: String?
-    var thumbnail: String?
-    var title: String?
+    let newsID: Int
+    let url: String
+    let thumbnail: String
+    let title: String
 
     enum CodingKeys: String, CodingKey {
         case newsID = "news_id"

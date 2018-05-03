@@ -14,7 +14,7 @@ class HomeNewsRowCell: UITableViewCell {
     var model: HomeNewsModel? {
         didSet {
             titleLabel.text = model?.title
-            if let url = model?.images?.first {
+            if let url = model?.images.first {
                 coverImageView.kf.setImage(with: URL(string: url))
             }
         }
@@ -73,7 +73,7 @@ extension HomeNewsRowCell: Updatable {
     
     func update(viewData: HomeNewsModel) {
         titleLabel.text = viewData.title
-        if let url = viewData.images?.first {
+        if let url = viewData.images.first {
             coverImageView.kf.setImage(with: URL(string: url))
         }
     }

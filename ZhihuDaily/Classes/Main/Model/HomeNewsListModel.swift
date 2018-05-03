@@ -9,9 +9,9 @@
 import Foundation
 
 struct HomeNewsListModel: Codable {
-    var date: String?
-    var stories: [HomeNewsModel]?
-    var topStories: [HomeNewsModel]?
+    let date: String
+    let stories: [HomeNewsModel]
+    let topStories: [HomeNewsModel]
     
     enum CodingKeys: String, CodingKey {
         case date = "date"
@@ -21,8 +21,8 @@ struct HomeNewsListModel: Codable {
 }
 
 struct HomeNewsModel: Codable {
-    var images: [String]?
-    var id: String?
-    var title: String?
-    var image: String?
+    let images: [String]
+    let id: String
+    let title: String
+    let image: String
 }

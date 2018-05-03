@@ -56,7 +56,7 @@ class HomeViewController: BaseViewController {
         bannerView.didSelectItemHandler.delegate(to: self, with: { (self, index) in
             let model = self.viewModel.bannerList[index]
             self.push(NewsDetailViewController.self) {
-                $0.newsID = model.id ?? ""
+                $0.newsID = model.id
             }
         })
         return bannerView
