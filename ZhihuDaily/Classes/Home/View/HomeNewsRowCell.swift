@@ -14,6 +14,7 @@ class HomeNewsRowCell: UITableViewCell {
     var model: HomeNewsModel? {
         didSet {
             titleLabel.text = model?.title
+            coverImageView.hero.id = model?.id
             if let url = model?.images.first {
                 coverImageView.kf.setImage(with: URL(string: url))
             }

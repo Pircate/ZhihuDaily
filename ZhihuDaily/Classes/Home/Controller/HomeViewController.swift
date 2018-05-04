@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import Delegated
+import Hero
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {
@@ -55,6 +56,7 @@ class HomeViewController: BaseViewController {
         bannerView.pageControlBottomOffset = 36
         bannerView.didSelectItemHandler.delegate(to: self, with: { (self, index) in
             let model = self.viewModel.bannerList[index]
+            self.navigationController?.hero.isEnabled = false
             self.push(NewsDetailViewController.self) {
                 $0.newsID = model.id
             }
@@ -137,9 +139,12 @@ class HomeViewController: BaseViewController {
         
         tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
         tableView.rx.modelSelected(HomeNewsModel.self).subscribe { (event) in
-            self.push(NewsDetailViewController.self) {
-                $0.newsID = event.element?.id ?? ""
-            }
+            let detailVC = NewsDetailViewController()
+            detailVC.newsID = event.element?.id ?? ""
+            detailVC.heroID = event.element?.id
+            self.navigationController?.hero.isEnabled = true
+            self.navigationController?.hero.navigationAnimationType = .auto
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }.disposed(by: disposeBag)
     }
 }

@@ -13,6 +13,12 @@ class NewsDetailViewController: BaseViewController, Routable {
 
     var newsID = ""
     
+    var heroID: String? {
+        didSet {
+            headerView.hero.id = heroID
+        }
+    }
+    
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: view.bounds)
         webView.navigationDelegate = self

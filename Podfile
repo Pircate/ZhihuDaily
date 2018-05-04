@@ -15,5 +15,6 @@ target 'ZhihuDaily' do
   pod 'RxCocoa'
   pod 'RxDataSources'
   pod 'Delegated'
+  pod 'Hero'
 
 end

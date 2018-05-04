@@ -293,6 +293,7 @@
 		B56223B31FFC730E0012CCB2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5A7C9F12015C22F000C54BC /* HomeNewsRowCell.swift */,
 				B5171437202F33C400881F95 /* BannerView.swift */,
 				B56EA5422051102B0011D6E9 /* ProgressView.swift */,
 			);
@@ -329,7 +330,6 @@
 		B56223B71FFC730E0012CCB2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B5A7C9F12015C22F000C54BC /* HomeNewsRowCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -586,6 +586,7 @@
 				"${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -606,6 +607,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EachNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
