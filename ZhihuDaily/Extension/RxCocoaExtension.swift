@@ -10,6 +10,14 @@ import RxSwift
 import RxCocoa
 import FSCycleScrollView
 
+extension Reactive where Base: UIImageView {
+    var webImage: Binder<String> {
+        return Binder(base) { imageView, url in
+            imageView.kf.setImage(with: URL(string: url))
+        }
+    }
+}
+
 extension Reactive where Base: UITableView {
     var deselect: Binder<IndexPath> {
         return Binder(base) { tableView, indexPath in
