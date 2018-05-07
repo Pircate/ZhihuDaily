@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -57,6 +57,8 @@ class MenuViewController: UIViewController {
             make.top.equalTo(headerView.snp.bottom)
             make.left.bottom.right.equalToSuperview()
         }
+        
+        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
     }
 }
 

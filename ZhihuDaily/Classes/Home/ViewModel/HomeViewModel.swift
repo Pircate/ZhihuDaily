@@ -15,9 +15,6 @@ struct HomeNewsSection {
 }
 
 extension HomeNewsSection: SectionModelType {
-    
-    typealias Item = HomeNewsModel
-    
     init(original: HomeNewsSection, items: [HomeNewsModel]) {
         self = original
         self.items = items
