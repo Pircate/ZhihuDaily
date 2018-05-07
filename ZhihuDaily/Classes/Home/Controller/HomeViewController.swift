@@ -10,6 +10,7 @@ import UIKit
 import MJRefresh
 import Delegated
 import Hero
+import FSCycleScrollView
 
 extension UIApplication {
     static var statusBarHeight: CGFloat {
@@ -51,16 +52,19 @@ class HomeViewController: BaseViewController {
     private let viewModel = HomeViewModel()
     private let refresh: PublishSubject<Void> = PublishSubject<Void>()
     
-    lazy var bannerView: BannerView = {
-        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
+    lazy var bannerView: FSCycleScrollView = {
+        let bannerView = FSCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
+        bannerView.isInfinite = true
         bannerView.pageControlBottomOffset = 36
-        bannerView.didSelectItemHandler.delegate(to: self, with: { (self, index) in
+        bannerView.automaticSlidingInterval = 5
+        bannerView.selectItemAtIndex = { [weak self] index in
+            guard let `self` = self else { return }
             let model = self.viewModel.bannerList[index]
             self.navigationController?.hero.isEnabled = false
             self.push(NewsDetailViewController.self) {
                 $0.newsID = model.id
             }
-        })
+        }
         return bannerView
     }()
     
@@ -128,9 +132,8 @@ class HomeViewController: BaseViewController {
         
         let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshClosure)
         let output = viewModel.transform(input)
-        
-        output.bannerImages.drive(bannerView.rx.imageDataSource).disposed(by: disposeBag)
-        output.bannerTitles.drive(bannerView.rx.titleDataSource).disposed(by: disposeBag)
+
+        output.bannerItems.drive(bannerView.rx.items).disposed(by: disposeBag)
         
         output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
         output.items.map({ _ in RefreshStatus.endFooterRefresh }).drive(tableView.rx.endRefreshing).disposed(by: disposeBag)

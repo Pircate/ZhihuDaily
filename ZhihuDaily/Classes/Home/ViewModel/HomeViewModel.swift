@@ -32,8 +32,7 @@ class HomeViewModel {
     }
     
     struct Output {
-        let bannerImages: Driver<[String]>
-        let bannerTitles: Driver<[String]>
+        let bannerItems: Driver<[(image: String, title: String)]>
         let items: Driver<[HomeNewsSection]>
     }
 
@@ -62,10 +61,9 @@ class HomeViewModel {
             $0.topStories
         }).do(onNext: { (banners) in
             self.bannerList = banners
-        })
-        
-        let bannerImages = bannerItems.map({ $0.compactMap({ $0.image })}).asDriver(onErrorJustReturn: [])
-        let bannerTitles = bannerItems.map({ $0.compactMap({ $0.title })}).asDriver(onErrorJustReturn: [])
+        }).map({
+            $0.compactMap({ (image: $0.image, title: $0.title) })
+        }).asDriver(onErrorJustReturn: [])
         
         let source2 = input.loading.flatMap { _ in
             self.requestBeforeNews()
@@ -82,7 +80,7 @@ class HomeViewModel {
             }
             return Observable.just(self.sections)
         }.asDriver(onErrorJustReturn: [])
-        return Output(bannerImages: bannerImages, bannerTitles: bannerTitles, items: items)
+        return Output(bannerItems: bannerItems, items: items)
     }
     
     private func requestLatestNews() -> Observable<HomeNewsListModel> {

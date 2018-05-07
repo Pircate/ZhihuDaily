@@ -11,7 +11,7 @@ target 'ZhihuDaily' do
   pod 'FDFullscreenPopGesture'
   pod 'MJRefresh'
   pod 'Hue'
-  pod 'FSPagerView'
+  pod 'FSCycleScrollView'
   pod 'RxCocoa'
   pod 'RxDataSources'
   pod 'Delegated'
