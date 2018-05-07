@@ -68,8 +68,12 @@ class HomeViewController: BaseViewController {
         return bannerView
     }()
     
-    var menuButtonDidSelectHandler = Delegated<UIButton, Void>()
+    var didSelectMenuButton = Delegated<UIButton, Void>()
     private var isLoadable = false
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +101,7 @@ class HomeViewController: BaseViewController {
     private func setupNavigationItem() {
         
         navigation.bar.isHidden = false
-        navigation.bar.shadowImage = UIImage()
+        navigation.bar.subviews.first?.clipsToBounds = true
         navigation.bar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44)
         view.addSubview(navigation.bar)
         navigation.bar.alpha = 0
@@ -121,7 +125,7 @@ class HomeViewController: BaseViewController {
     
     @objc private func menuBtnAction(sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        menuButtonDidSelectHandler.call(sender)
+        didSelectMenuButton.call(sender)
     }
     
     public func setMenuButtonSelected(_ isSelected: Bool) {

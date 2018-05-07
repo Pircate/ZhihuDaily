@@ -19,7 +19,6 @@ class BaseViewController: UIViewController {
         
         navigation.bar.isHidden = true
         navigation.bar.isTranslucent = false
-        navigation.bar.subviews.first?.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {

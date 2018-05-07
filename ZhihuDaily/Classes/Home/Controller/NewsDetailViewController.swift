@@ -45,6 +45,10 @@ class NewsDetailViewController: BaseViewController, Routable {
     static func register(parameters: [String : Any]?) -> Routable {
         return NewsDetailViewController()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +58,6 @@ class NewsDetailViewController: BaseViewController, Routable {
         navigation.bar.backgroundColor = UIColor.white
         addSubviews()
         bindViewModel()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
     }
 
     override func didReceiveMemoryWarning() {
@@ -134,6 +134,7 @@ extension NewsDetailViewController: UIScrollViewDelegate {
         }
         navigation.bar.isHidden = scrollView.contentOffset.y < 180
         statusBarStyle = scrollView.contentOffset.y < 180 ? .lightContent : .default
+        navigationController?.navigationBar.barStyle = scrollView.contentOffset.y < 180 ? .black : .default
         setNeedsStatusBarAppearanceUpdate()
     }
 }
