@@ -27,7 +27,9 @@ class NewsDetailViewController: BaseViewController, Routable {
     }()
     
     lazy var headerView: UIImageView = {
-        return UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 200)).chain.backgroundColor(UIColor.global).installed
+        return UIImageView().chain
+            .frame(x: 0, y: 0, width: UIScreen.width, height: 200)
+            .backgroundColor(UIColor.global).installed
     }()
     
     lazy var titleLabel: UILabel = {

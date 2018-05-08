@@ -20,9 +20,25 @@ it, simply add the following line to your Podfile:
 pod 'CocoaChainKit'
 ```
 
+## Usage
+
+```swift
+UIButton().chain
+    .frame(x: 0, y: 0, width: 120, height: 30)
+    .center(view.center)
+    .backgroundColor(UIColor.red)
+    .systemFont(ofSize: 14)
+    .title("Hello World", for: .normal)
+    .titleColor(UIColor.blue, for: .normal)
+    .cornerRadius(15)
+    .masksToBounds(true)
+    .addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    .installed
+```
+
 ## Author
 
-G-Xi0N, gao497868860@163.com
+gaoX, gao497868860@163.com
 
 ## License
 

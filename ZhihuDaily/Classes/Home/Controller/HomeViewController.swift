@@ -25,13 +25,13 @@ class HomeViewController: BaseViewController {
     private let pullDownHeight: CGFloat = 60
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: view.bounds)
-        tableView.delegate = self
-        tableView.rowHeight = 80;
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
-        tableView.separatorColor = UIColor(hex: "#eeeeee")
-        tableView.register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell")
+        let tableView = UITableView(frame: view.bounds).chain
+            .delegate(self)
+            .rowHeight(80)
+            .estimatedSectionHeaderHeight(0)
+            .estimatedSectionFooterHeight(0)
+            .separatorColor(UIColor(hex: "#eeeeee"))
+        .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").installed
         tableView.mj_footer = MJRefreshAutoFooter()
         return tableView
     }()
@@ -44,8 +44,8 @@ class HomeViewController: BaseViewController {
     lazy var menuButton: UIButton = {
         let menuBtn = UIButton(type: .custom).chain
             .frame(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
-            .image(#imageLiteral(resourceName: "menu"), for: .normal).installed
-        menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
+            .image(#imageLiteral(resourceName: "menu"), for: .normal)
+            .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).installed
         return menuBtn
     }()
     
