@@ -42,8 +42,8 @@ class HomeViewController: BaseViewController {
     }()
     
     lazy var menuButton: UIButton = {
-        let menuBtn = UIButton(type: .custom).style
-            .frame(CGRect(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32))
+        let menuBtn = UIButton(type: .custom).chain
+            .frame(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
             .image(#imageLiteral(resourceName: "menu"), for: .normal).installed
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
@@ -100,9 +100,9 @@ class HomeViewController: BaseViewController {
     
     private func setupNavigationItem() {
         
-        navigation.bar.style
+        navigation.bar.chain
             .isHidden(false)
-            .frame(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44))
+            .frame(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44)
             .alpha(0)
             .backgroundColor(UIColor.global)
             .titleTextAttributes([.foregroundColor: UIColor.white])

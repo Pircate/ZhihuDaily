@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double StyleChainVersionNumber;
-FOUNDATION_EXPORT const unsigned char StyleChainVersionString[];
+FOUNDATION_EXPORT double CocoaChainKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char CocoaChainKitVersionString[];
 

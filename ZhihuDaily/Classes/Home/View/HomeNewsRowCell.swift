@@ -8,7 +8,7 @@
 
 import UIKit
 import Hue
-import StyleChain
+import CocoaChainKit
 
 class HomeNewsRowCell: UITableViewCell {
     
@@ -27,7 +27,7 @@ class HomeNewsRowCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        return UILabel().style.systemFont(of: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).installed
+        return UILabel().chain.systemFont(ofSize: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).installed
     }()
 
     override func awakeFromNib() {

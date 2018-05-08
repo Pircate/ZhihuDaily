@@ -27,11 +27,11 @@ class NewsDetailViewController: BaseViewController, Routable {
     }()
     
     lazy var headerView: UIImageView = {
-        return UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 200)).style.backgroundColor(UIColor.global).installed
+        return UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: 200)).chain.backgroundColor(UIColor.global).installed
     }()
     
     lazy var titleLabel: UILabel = {
-        return UILabel().style.textColor(UIColor.white).systemFont(of: 18).numberOfLines(2).installed
+        return UILabel().chain.textColor(UIColor.white).systemFont(ofSize: 18).numberOfLines(2).installed
     }()
     
     var statusBarStyle: UIStatusBarStyle = .lightContent

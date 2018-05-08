@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
+  - CocoaChainKit (0.1.0)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
   - EachNavigationBar (0.1.2)
@@ -31,9 +32,9 @@ PODS:
     - Moya/RxSwift
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
-  - StyleChain (0.1.0)
 
 DEPENDENCIES:
+  - CocoaChainKit
   - Delegated
   - EachNavigationBar
   - FDFullscreenPopGesture
@@ -46,12 +47,12 @@ DEPENDENCIES:
   - RxDataSources
   - RxNetwork
   - SnapKit
-  - StyleChain
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Cache
+    - CocoaChainKit
     - Delegated
     - Differentiator
     - EachNavigationBar
@@ -69,11 +70,11 @@ SPEC REPOS:
     - RxNetwork
     - RxSwift
     - SnapKit
-    - StyleChain
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
+  CocoaChainKit: 687eb29c23993dfaf7a01cb1425d128a012c8808
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   EachNavigationBar: 899d8bdb544e6283d631b05648a6974a7c3d2573
@@ -91,8 +92,7 @@ SPEC CHECKSUMS:
   RxNetwork: 29dded93a5a20dc8f9d4b7f206e2eb2b1beaafb3
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  StyleChain: a1878422b51d01a895e96d7851c70bea6cedbe9b
 
-PODFILE CHECKSUM: 0f523d19e0ab0fb3692613ff7d17968eb871c367
+PODFILE CHECKSUM: 812974030041d7d55538e13108ed8695d944ed0a
 
 COCOAPODS: 1.5.0
