@@ -1,0 +1,6 @@
+framework module StyleChain {
+  umbrella header "StyleChain-umbrella.h"
+
+  export *
+  module * { export * }
+}

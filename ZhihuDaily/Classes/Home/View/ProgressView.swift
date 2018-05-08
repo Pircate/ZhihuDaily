@@ -38,16 +38,12 @@ class ProgressView: UIView {
     }()
     
     private lazy var indicatorView: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        indicatorView.frame = bounds
-        return indicatorView
+        return UIActivityIndicatorView(activityIndicatorStyle: .white).style.frame(bounds).installed
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.clear
-        layer.cornerRadius = bounds.width / 2
-        layer.masksToBounds = true
+        style.backgroundColor(UIColor.clear).cornerRadius(bounds.width / 2).masksToBounds(true)
         
         addSubview(indicatorView)
     }

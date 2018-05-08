@@ -8,6 +8,7 @@
 
 import UIKit
 import Hue
+import StyleChain
 
 class HomeNewsRowCell: UITableViewCell {
     
@@ -22,16 +23,11 @@ class HomeNewsRowCell: UITableViewCell {
     }
     
     lazy var coverImageView: UIImageView = {
-        let imgView = UIImageView()
-        return imgView
+        return UIImageView()
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = UIColor(hex: "#333333")
-        label.numberOfLines = 0
-        return label
+        return UILabel().style.systemFont(of: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).installed
     }()
 
     override func awakeFromNib() {

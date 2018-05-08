@@ -16,5 +16,6 @@ target 'ZhihuDaily' do
   pod 'RxDataSources'
   pod 'Delegated'
   pod 'Hero'
+  pod 'StyleChain'
 
 end

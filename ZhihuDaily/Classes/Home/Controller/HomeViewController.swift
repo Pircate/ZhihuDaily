@@ -42,9 +42,9 @@ class HomeViewController: BaseViewController {
     }()
     
     lazy var menuButton: UIButton = {
-        let menuBtn = UIButton(type: .custom)
-        menuBtn.frame = CGRect(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
-        menuBtn.setImage(UIImage(named: "menu"), for: .normal)
+        let menuBtn = UIButton(type: .custom).style
+            .frame(CGRect(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32))
+            .image(#imageLiteral(resourceName: "menu"), for: .normal).installed
         menuBtn.addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside)
         return menuBtn
     }()
@@ -100,15 +100,15 @@ class HomeViewController: BaseViewController {
     
     private func setupNavigationItem() {
         
-        navigation.bar.isHidden = false
+        navigation.bar.style
+            .isHidden(false)
+            .frame(CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44))
+            .alpha(0)
+            .backgroundColor(UIColor.global)
+            .titleTextAttributes([.foregroundColor: UIColor.white])
         navigation.bar.subviews.first?.clipsToBounds = true
-        navigation.bar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: UIScreen.width, height: 44)
         view.addSubview(navigation.bar)
-        navigation.bar.alpha = 0
-        navigation.bar.backgroundColor = UIColor.global
         navigation.item.title = "今日要闻"
-        navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        
         navigation.bar.addSubview(progressView)
     }
     

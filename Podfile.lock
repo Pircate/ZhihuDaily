@@ -31,6 +31,7 @@ PODS:
     - Moya/RxSwift
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
+  - StyleChain (0.1.0)
 
 DEPENDENCIES:
   - Delegated
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - RxDataSources
   - RxNetwork
   - SnapKit
+  - StyleChain
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -67,6 +69,7 @@ SPEC REPOS:
     - RxNetwork
     - RxSwift
     - SnapKit
+    - StyleChain
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -88,7 +91,8 @@ SPEC CHECKSUMS:
   RxNetwork: 29dded93a5a20dc8f9d4b7f206e2eb2b1beaafb3
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  StyleChain: a1878422b51d01a895e96d7851c70bea6cedbe9b
 
-PODFILE CHECKSUM: d3eda89795591c8b356abba255aaaa5f7000015d
+PODFILE CHECKSUM: 0f523d19e0ab0fb3692613ff7d17968eb871c367
 
 COCOAPODS: 1.5.0
