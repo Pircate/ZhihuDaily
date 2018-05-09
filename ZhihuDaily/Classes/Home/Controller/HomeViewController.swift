@@ -106,6 +106,7 @@ class HomeViewController: BaseViewController {
             .alpha(0)
             .backgroundColor(UIColor.global)
             .titleTextAttributes([.foregroundColor: UIColor.white])
+            .shadowImage(UIImage())
         navigation.bar.subviews.first?.clipsToBounds = true
         view.addSubview(navigation.bar)
         navigation.item.title = "今日要闻"
