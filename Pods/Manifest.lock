@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
-  - CocoaChainKit (0.1.1)
+  - CocoaChainKit (0.2.0)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
   - EachNavigationBar (0.1.2)
@@ -74,7 +74,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
-  CocoaChainKit: 7fc4f3a2ef8413a4f73a5dc6c448be492bd126d4
+  CocoaChainKit: 8f011a5a96b86f67d42e52f7ee0d8ef8a60da8fe
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   EachNavigationBar: 899d8bdb544e6283d631b05648a6974a7c3d2573

@@ -5,9 +5,13 @@
 //  Created by GorXion on 2018/5/8.
 //
 
-extension UIView: ChainCompatible {}
-
 public extension Chain where Base: UIView {
+    
+    @discardableResult
+    func tag(_ tag: Int) -> Chain {
+        base.tag = tag
+        return self
+    }
     
     @discardableResult
     func frame(_ frame: CGRect) -> Chain {

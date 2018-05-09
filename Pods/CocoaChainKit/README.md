@@ -22,19 +22,13 @@ pod 'CocoaChainKit'
 
 ## Usage
 
-```swift
-UIButton().chain
-    .frame(x: 0, y: 0, width: 120, height: 30)
-    .center(view.center)
-    .backgroundColor(UIColor.red)
-    .systemFont(ofSize: 14)
-    .title("Hello World", for: .normal)
-    .titleColor(UIColor.blue, for: .normal)
-    .cornerRadius(15)
-    .masksToBounds(true)
-    .addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    .installed
-```
+### before
+
+![](https://github.com/Ginxx/CocoaChainKit/blob/master/Example/before.png)
+
+### use chain kit
+
+![](https://github.com/Ginxx/CocoaChainKit/blob/master/Example/cocoa_chain_kit.png)
 
 ## Author
 
