@@ -8,11 +8,14 @@
 
 import Moya
 
-enum HomeTarget: TargetType {
+enum HomeTarget {
     
     case latestNews
     case beforeNews(date: String)
     case newsDetail(newsID: String)
+}
+
+extension HomeTarget: TargetType {
     
     var path: String {
         switch self {

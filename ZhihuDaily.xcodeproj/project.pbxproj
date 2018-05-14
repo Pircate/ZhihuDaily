@@ -22,6 +22,7 @@
 		B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAEC2015AC8400F4AC66 /* WebViewController.swift */; };
 		B563AAF42015AC8500F4AC66 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF02015AC8500F4AC66 /* Router.swift */; };
 		B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */; };
+		B5650FEC20A98DE000BA7B87 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */; };
 		B56EA5432051102B0011D6E9 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EA5422051102B0011D6E9 /* ProgressView.swift */; };
 		B5747747209AF98A0006BF7C /* RxCocoaExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5747746209AF98A0006BF7C /* RxCocoaExtension.swift */; };
 		B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */; };
@@ -31,7 +32,6 @@
 		B5A7C9F82015D607000C54BC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F72015D607000C54BC /* HomeViewController.swift */; };
 		B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */; };
 		B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */; };
-		B5ADB444208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADB443208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift */; };
 		B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */; };
 		B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE316420544DD200661203 /* HomeViewModel.swift */; };
 		B5F20DAE2052A50A008D757B /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */; };
@@ -78,6 +78,7 @@
 		B563AAEC2015AC8400F4AC66 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B563AAF02015AC8500F4AC66 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleanJSON.swift; sourceTree = "<group>"; };
 		B56EA5422051102B0011D6E9 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		B5747746209AF98A0006BF7C /* RxCocoaExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCocoaExtension.swift; sourceTree = "<group>"; };
 		B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsListModel.swift; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		B5A7C9F72015D607000C54BC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5A7C9F92015DAB6000C54BC /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		B5A7C9FB2015E030000C54BC /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
-		B5ADB443208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+TypeConversion.swift"; sourceTree = "<group>"; };
 		B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
 		B5DE316420544DD200661203 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
@@ -360,7 +360,7 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B5ADB443208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift */,
+				B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */,
 				B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */,
 			);
 			path = Network;
@@ -604,6 +604,7 @@
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
 				B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */,
+				B5650FEC20A98DE000BA7B87 /* CleanJSON.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B531638E201FFF4200828CA2 /* Updatable.swift in Sources */,
 				B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */,
@@ -612,7 +613,6 @@
 				B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */,
 				B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */,
 				B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */,
-				B5ADB444208730A60029D40F /* KeyedDecodingContainer+TypeConversion.swift in Sources */,
 				B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */,
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
