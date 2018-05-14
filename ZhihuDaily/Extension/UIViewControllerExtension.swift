@@ -44,6 +44,12 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func push<T: UIViewController>(_ type: T.Type, animated: Bool = true, configuration: (T) -> Void = { _ in }) {
+        let viewController = type.init()
+        configuration(viewController)
+        navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
     func goBack(animated: Bool = true, completion: (() -> Void)? = nil) {
         guard presentingViewController != nil else {
             navigationController?.popViewController(animated: animated)

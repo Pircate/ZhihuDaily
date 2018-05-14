@@ -10,7 +10,7 @@ import UIKit
 import Hue
 import CocoaChainKit
 
-class HomeNewsRowCell: UITableViewCell {
+final class HomeNewsRowCell: UITableViewCell {
     
     lazy var coverImageView: UIImageView = {
         return UIImageView()

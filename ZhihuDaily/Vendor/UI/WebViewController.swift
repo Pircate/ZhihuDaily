@@ -9,10 +9,7 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController, WKNavigationDelegate, Routable {
-    static func register(parameters: [String : Any]?) -> Routable {
-        return WebViewController()
-    }
+class WebViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - properties
     var url = ""

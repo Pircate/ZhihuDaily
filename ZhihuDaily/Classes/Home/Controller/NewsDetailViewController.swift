@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class NewsDetailViewController: BaseViewController, Routable {
+final class NewsDetailViewController: BaseViewController {
 
     var newsID = ""
     
@@ -37,10 +37,6 @@ class NewsDetailViewController: BaseViewController, Routable {
     }()
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
-    
-    static func register(parameters: [String : Any]?) -> Routable {
-        return NewsDetailViewController()
-    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle

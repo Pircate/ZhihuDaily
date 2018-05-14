@@ -18,7 +18,7 @@ extension UIApplication {
     }
 }
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     private let customNavigationBarHeight: CGFloat = 44
     private let tableHeaderViewHeight: CGFloat = 200

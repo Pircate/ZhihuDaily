@@ -18,7 +18,7 @@ extension Reactive where Base == ProgressView {
     }
 }
 
-class ProgressView: UIView {
+final class ProgressView: UIView {
 
     public var progress: CGFloat = 0 {
         didSet {
