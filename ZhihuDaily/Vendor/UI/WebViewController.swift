@@ -41,6 +41,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        disableAdjustsScrollViewInsets(container.webView.scrollView)
         updateLeftNavigationBarItem()
         addObserver()
         addSubviews()
