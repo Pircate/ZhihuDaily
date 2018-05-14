@@ -20,22 +20,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         return container
     }()
     
-    lazy var backButton: UIButton = {
-        let backBtn = UIButton(type: .system)
-        backBtn.setTitle("返回", for: .normal)
-        backBtn.setTitleColor(.white, for: .normal)
-        backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        backBtn.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
-        return backBtn
+    lazy var backButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(backBtnAction))
     }()
     
-    lazy var closeButton: UIButton = {
-        let closeBtn = UIButton(type: .system)
-        closeBtn.setTitle("关闭", for: .normal)
-        closeBtn.setTitleColor(.white, for: .normal)
-        closeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        closeBtn.addTarget(self, action: #selector(closeBtnAction), for: .touchUpInside)
-        return closeBtn
+    lazy var closeButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeBtnAction))
     }()
 
     override func viewDidLoad() {
@@ -81,8 +71,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func addSubviews() {
-        navigation.bar.backgroundColor = UIColor.global
-        navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigation.bar.chain
+            .barTintColor(UIColor.global)
+            .titleTextAttributes([.foregroundColor: UIColor.white])
+            .tintColor(UIColor.white)
         
         view.addSubview(container)
         container.snp.makeConstraints { (make) in
@@ -93,12 +85,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     private func updateLeftNavigationBarItem() {
         if container.webView.canGoBack {
-            navigation.item.leftBarButtonItems = [backButton, closeButton].map({
-                UIBarButtonItem(customView: $0)
-            })
+            navigation.item.leftBarButtonItems = [backButton, closeButton]
         }
         else {
-            navigation.item.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+            navigation.item.leftBarButtonItem = backButton
         }
     }
     
