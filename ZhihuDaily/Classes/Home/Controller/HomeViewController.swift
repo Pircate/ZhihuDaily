@@ -31,22 +31,20 @@ final class HomeViewController: BaseViewController {
             .estimatedSectionHeaderHeight(0)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
-        .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
+            .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
         tableView.mj_footer = MJRefreshAutoFooter()
         return tableView
     }()
     
     private lazy var progressView: ProgressView = {
-        let progressView = ProgressView(frame: CGRect(x: UIScreen.width / 2 - 60, y: 12, width: 20, height: 20))
-        return progressView
+        return ProgressView(frame: CGRect(x: UIScreen.width / 2 - 60, y: 12, width: 20, height: 20))
     }()
     
     lazy var menuButton: UIButton = {
-        let menuBtn = UIButton(type: .custom).chain
+        UIButton(type: .custom).chain
             .frame(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
             .image(#imageLiteral(resourceName: "menu"), for: .normal)
             .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).build
-        return menuBtn
     }()
     
     private let viewModel = HomeViewModel()

@@ -27,13 +27,16 @@ final class NewsDetailViewController: BaseViewController {
     }()
     
     lazy var headerView: UIImageView = {
-        return UIImageView().chain
+        UIImageView().chain
             .frame(x: 0, y: 0, width: UIScreen.width, height: 200)
             .backgroundColor(UIColor.global).build
     }()
     
     lazy var titleLabel: UILabel = {
-        return UILabel().chain.textColor(UIColor.white).systemFont(ofSize: 18).numberOfLines(2).build
+        UILabel().chain
+            .textColor(UIColor.white)
+            .systemFont(ofSize: 18)
+            .numberOfLines(2).build
     }()
     
     var statusBarStyle: UIStatusBarStyle = .lightContent
