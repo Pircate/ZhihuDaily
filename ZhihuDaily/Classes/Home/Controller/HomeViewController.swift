@@ -31,7 +31,7 @@ final class HomeViewController: BaseViewController {
             .estimatedSectionHeaderHeight(0)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
-        .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").installed
+        .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
         tableView.mj_footer = MJRefreshAutoFooter()
         return tableView
     }()
@@ -45,7 +45,7 @@ final class HomeViewController: BaseViewController {
         let menuBtn = UIButton(type: .custom).chain
             .frame(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
             .image(#imageLiteral(resourceName: "menu"), for: .normal)
-            .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).installed
+            .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).build
         return menuBtn
     }()
     

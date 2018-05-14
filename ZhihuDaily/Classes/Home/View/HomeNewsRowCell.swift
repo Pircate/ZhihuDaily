@@ -17,7 +17,7 @@ final class HomeNewsRowCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        return UILabel().chain.systemFont(ofSize: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).installed
+        return UILabel().chain.systemFont(ofSize: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).build
     }()
 
     override func awakeFromNib() {

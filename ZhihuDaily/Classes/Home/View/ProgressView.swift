@@ -38,7 +38,7 @@ final class ProgressView: UIView {
     }()
     
     private lazy var indicatorView: UIActivityIndicatorView = {
-        return UIActivityIndicatorView(activityIndicatorStyle: .white).chain.frame(bounds).installed
+        return UIActivityIndicatorView(activityIndicatorStyle: .white).chain.frame(bounds).build
     }()
     
     override init(frame: CGRect) {
