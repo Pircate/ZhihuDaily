@@ -11,10 +11,6 @@ import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     
-    // MARK: - properties
-    var url = ""
-    var HTMLString = ""
-    
     lazy var container: WebViewContainer = {
         let container = WebViewContainer()
         return container
@@ -35,16 +31,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         updateLeftNavigationBarItem()
         addObserver()
         addSubviews()
-
-        if !url.isEmpty {
-            loadURLRequest()
-        }
-        else if !HTMLString.isEmpty {
-            loadHTMLString()
-        }
-        else {
-            loadFail()
-        }
     }
     
     deinit {
@@ -92,7 +78,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    private func loadURLRequest() {
+    func loadURL(_ url: String) {
         if url.isEmpty {
             loadFail()
             return
@@ -100,10 +86,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         do {
             let dataDetector = try NSDataDetector(types: NSTextCheckingTypes(NSTextCheckingResult.CheckingType.link.rawValue))
             let result = dataDetector.firstMatch(in: url, options: .reportCompletion, range: NSMakeRange(0, url.count))
-            if let URL = result?.url {
-                container.webView.load(URLRequest(url: URL))
-            }
-            else {
+            if let url = result?.url {
+                container.webView.load(URLRequest(url: url))
+            } else {
                 loadFail()
             }
         } catch {
@@ -111,8 +96,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    private func loadHTMLString() {
-        container.webView.loadHTMLString(HTMLString, baseURL: nil)
+    func loadHTMLString(_ string: String, baseURL: URL? = nil) {
+        container.webView.loadHTMLString(string, baseURL: baseURL)
     }
     
     private func loadFail() {

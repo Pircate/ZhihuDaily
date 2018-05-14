@@ -100,9 +100,11 @@ extension NewsDetailViewController: WKNavigationDelegate {
         }
         else {
             if navigationAction.sourceFrame.isMainFrame {
-                push(WebViewController.self, configuration: { (web) in
-                    web.url = url ?? ""
-                })
+                if let url = url {
+                    push(WebViewController.self) {
+                        $0.loadURL(url)
+                    }
+                }
                 decisionHandler(.cancel)
             }
             else {
