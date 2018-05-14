@@ -12,16 +12,6 @@ import CocoaChainKit
 
 class HomeNewsRowCell: UITableViewCell {
     
-    var model: HomeNewsModel? {
-        didSet {
-            titleLabel.text = model?.title
-            coverImageView.hero.id = model?.id
-            if let url = model?.images.first {
-                coverImageView.kf.setImage(with: URL(string: url))
-            }
-        }
-    }
-    
     lazy var coverImageView: UIImageView = {
         return UIImageView()
     }()
@@ -48,14 +38,13 @@ class HomeNewsRowCell: UITableViewCell {
         contentView.addSubview(coverImageView)
         
         coverImageView.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-15)
+            make.right.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
             make.size.equalTo(CGSize(width: 64, height: 44))
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(15)
-            make.left.equalToSuperview().offset(15)
+            make.left.top.equalToSuperview().inset(15)
             make.right.equalTo(coverImageView.snp.left).offset(-20)
         }
     }
@@ -66,11 +55,11 @@ class HomeNewsRowCell: UITableViewCell {
 }
 
 extension HomeNewsRowCell: Updatable {
-    typealias ViewData = HomeNewsModel
     
-    func update(viewData: HomeNewsModel) {
-        titleLabel.text = viewData.title
-        if let url = viewData.images.first {
+    func update(_ item: HomeNewsModel) {
+        titleLabel.text = item.title
+        coverImageView.hero.id = item.id
+        if let url = item.images.first {
             coverImageView.kf.setImage(with: URL(string: url))
         }
     }

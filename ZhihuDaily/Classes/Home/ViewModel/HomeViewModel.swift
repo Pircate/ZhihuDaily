@@ -42,7 +42,7 @@ class HomeViewModel {
     lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeNewsSection> = {
         let dataSource = RxTableViewSectionedReloadDataSource<HomeNewsSection>(configureCell: { (ds, tv, ip, item) -> HomeNewsRowCell in
             let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
-            cell.model = item
+            cell.update(item)
             return cell
         })
         return dataSource

@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - Cache (4.2.0)
-  - CocoaChainKit (0.2.0)
+  - CocoaChainKit (0.3.1)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
   - EachNavigationBar (0.1.2)
@@ -49,7 +49,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Cache
     - CocoaChainKit
@@ -74,7 +74,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
-  CocoaChainKit: 8f011a5a96b86f67d42e52f7ee0d8ef8a60da8fe
+  CocoaChainKit: 0f88104be97f63ff2a33e82e3954911842b56c6c
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   EachNavigationBar: 899d8bdb544e6283d631b05648a6974a7c3d2573
@@ -95,4 +95,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 812974030041d7d55538e13108ed8695d944ed0a
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
