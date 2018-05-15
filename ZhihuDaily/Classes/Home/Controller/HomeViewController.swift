@@ -72,14 +72,6 @@ final class HomeViewController: BaseViewController {
         bannerView.isInfinite = true
         bannerView.pageControl.contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0)
         bannerView.automaticSlidingInterval = 5
-        bannerView.selectItemAtIndex = { [weak self] index in
-            guard let `self` = self else { return }
-            let model = self.viewModel.bannerList[index]
-            self.navigationController?.hero.isEnabled = false
-            self.push(NewsDetailViewController.self) {
-                $0.newsID = model.id
-            }
-        }
         return bannerView
     }()
     
@@ -158,6 +150,8 @@ final class HomeViewController: BaseViewController {
         output.items.map({ _ in RefreshStatus.endFooterRefresh }).drive(tableView.rx.endRefreshing).disposed(by: disposeBag)
         
         output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
+        
+        bannerView.rx.itemSelected.map({ self.viewModel.bannerList[$0] }).bind(to: rx.pushDetail).disposed(by: disposeBag)
         
         tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
         tableView.rx.modelSelected(HomeNewsModel.self).asDriver().drive(rx.pushDetail).disposed(by: disposeBag)
