@@ -21,13 +21,13 @@ extension UIApplication {
 final class HomeViewController: BaseViewController {
     
     private let customNavigationBarHeight: CGFloat = 44
-    private let tableHeaderViewHeight: CGFloat = 200
+    private let tableHeaderViewHeight: CGFloat = 240
     private let pullDownHeight: CGFloat = 60
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds).chain
             .delegate(self)
-            .rowHeight(80)
+            .rowHeight(88)
             .estimatedSectionHeaderHeight(0)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
@@ -53,7 +53,7 @@ final class HomeViewController: BaseViewController {
     lazy var bannerView: FSCycleScrollView = {
         let bannerView = FSCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
         bannerView.isInfinite = true
-        bannerView.pageControlBottomOffset = 36
+        bannerView.pageControl.contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0)
         bannerView.automaticSlidingInterval = 5
         bannerView.selectItemAtIndex = { [weak self] index in
             guard let `self` = self else { return }

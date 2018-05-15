@@ -61,34 +61,16 @@ open class FSCycleScrollView: UIView {
         }
     }
     
+    open var imageViewContentMode: UIViewContentMode = .scaleToFill
+    
     open var selectItemAtIndex: (Int) -> Void = { _ in }
     
-    /// Title label style
-    open var titleLabelTextColor: UIColor = UIColor.white
+    /// Text label style
+    open var textLabelTextColor: UIColor = UIColor.white
     
-    open var titleLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+    open var textLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
     
-    open var titleLabelBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.6)
-    
-    /// Page Control
-    
-    open var hidesPageControl: Bool = false {
-        didSet {
-            pageControl.isHidden = hidesPageControl
-        }
-    }
-    
-    open var hidesPageControlForSinglePage: Bool = false {
-        didSet {
-            pageControl.hidesForSinglePage = hidesPageControlForSinglePage
-        }
-    }
-    
-    open var pageControlBottomOffset: CGFloat = 20 {
-        didSet {
-            pageControl.contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: pageControlBottomOffset + 20, right: 0)
-        }
-    }
+    open var textLabelBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.6)
 
     private lazy var pagerView: FSPagerView = {
         let pagerView = FSPagerView(frame: bounds)
@@ -99,7 +81,7 @@ open class FSCycleScrollView: UIView {
         return pagerView
     }()
     
-    private lazy var pageControl: FSPageControl = {
+    public lazy var pageControl: FSPageControl = {
         let pageControl = FSPageControl(frame: CGRect(x: 0, y: bounds.height - 20, width: bounds.width, height: 20))
         pageControl.hidesForSinglePage = true
         return pageControl
@@ -142,6 +124,7 @@ extension FSCycleScrollView: FSPagerViewDataSource {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "FSPagerViewCell", at: index)
         switch dataSourceType {
         case .onlyImage(let images):
+            cell.imageView?.contentMode = imageViewContentMode
             if let url = URL(string: images[index]) {
                 cell.imageView?.kf.setImage(with: url, placeholder: placeholder)
             }
@@ -149,6 +132,7 @@ extension FSCycleScrollView: FSPagerViewDataSource {
             cell.textLabel?.text = titles[index]
             configureTitleLabelStyle(cell.textLabel)
         case .both(let items):
+            cell.imageView?.contentMode = imageViewContentMode
             if let url = URL(string: items[index].image) {
                 cell.imageView?.kf.setImage(with: url, placeholder: placeholder)
             }
@@ -158,10 +142,10 @@ extension FSCycleScrollView: FSPagerViewDataSource {
         return cell
     }
     
-    private func configureTitleLabelStyle(_ titleLabel: UILabel?) {
-        titleLabel?.textColor = titleLabelTextColor
-        titleLabel?.font = titleLabelFont
-        titleLabel?.backgroundColor = titleLabelBackgroundColor
+    private func configureTitleLabelStyle(_ textLabel: UILabel?) {
+        textLabel?.textColor = textLabelTextColor
+        textLabel?.font = textLabelFont
+        textLabel?.backgroundColor = textLabelBackgroundColor
     }
 }
 
