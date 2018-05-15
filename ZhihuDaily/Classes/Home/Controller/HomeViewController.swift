@@ -11,23 +11,40 @@ import MJRefresh
 import Delegated
 import Hero
 import FSCycleScrollView
+import RxSwift
+import RxCocoa
 
 extension UIApplication {
+    
     static var statusBarHeight: CGFloat {
         return shared.statusBarFrame.height
+    }
+}
+
+extension Reactive where Base == HomeViewController {
+    
+    var pushDetail: Binder<HomeNewsModel> {
+        return Binder(base) { vc, model in
+            let detailVC = NewsDetailViewController()
+            detailVC.newsID = model.id
+            detailVC.heroID = model.id
+            vc.navigationController?.hero.isEnabled = true
+            vc.navigationController?.hero.navigationAnimationType = .auto
+            vc.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
 
 final class HomeViewController: BaseViewController {
     
     private let customNavigationBarHeight: CGFloat = 44
-    private let tableHeaderViewHeight: CGFloat = 240
+    private let tableHeaderViewHeight: CGFloat = 200
     private let pullDownHeight: CGFloat = 60
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds).chain
             .delegate(self)
-            .rowHeight(88)
+            .rowHeight(100)
             .estimatedSectionHeaderHeight(0)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
@@ -37,7 +54,7 @@ final class HomeViewController: BaseViewController {
     }()
     
     private lazy var progressView: ProgressView = {
-        return ProgressView(frame: CGRect(x: UIScreen.width / 2 - 60, y: 12, width: 20, height: 20))
+        ProgressView(frame: CGRect(x: UIScreen.width / 2 - 60, y: 12, width: 20, height: 20))
     }()
     
     lazy var menuButton: UIButton = {
@@ -77,7 +94,7 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         
         setupNavigationItem()
-        addSubviews()
+        setupSubviews()
         bindViewModel()
         refresh.onNext(())
     }
@@ -104,14 +121,13 @@ final class HomeViewController: BaseViewController {
             .alpha(0)
             .backgroundColor(UIColor.global)
             .titleTextAttributes([.foregroundColor: UIColor.white])
-            .shadowImage(UIImage())
+            .shadowImage(UIImage()).addSubview(progressView)
         navigation.bar.subviews.first?.clipsToBounds = true
         view.addSubview(navigation.bar)
         navigation.item.title = "今日要闻"
-        navigation.bar.addSubview(progressView)
     }
     
-    private func addSubviews() {
+    private func setupSubviews() {
         
         disableAdjustsScrollViewInsets(tableView)
         view.addSubview(tableView)
@@ -144,34 +160,24 @@ final class HomeViewController: BaseViewController {
         output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
         
         tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
-        tableView.rx.modelSelected(HomeNewsModel.self).subscribe { (event) in
-            let detailVC = NewsDetailViewController()
-            detailVC.newsID = event.element?.id ?? ""
-            detailVC.heroID = event.element?.id
-            self.navigationController?.hero.isEnabled = true
-            self.navigationController?.hero.navigationAnimationType = .auto
-            self.navigationController?.pushViewController(detailVC, animated: true)
-        }.disposed(by: disposeBag)
+        tableView.rx.modelSelected(HomeNewsModel.self).asDriver().drive(rx.pushDetail).disposed(by: disposeBag)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section > 0 else {
-            return nil
-        }
-        let header = UIView()
-        header.backgroundColor = UIColor.global
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: customNavigationBarHeight))
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.white
+        guard section > 0 else { return nil }
+        let titleLabel = UILabel().chain
+            .frame(x: 0, y: 0, width: UIScreen.width, height: customNavigationBarHeight)
+            .backgroundColor(UIColor.global)
+            .systemFont(ofSize: 16)
+            .textColor(UIColor.white)
+            .textAlignment(.center).build
         if viewModel.sectionTitles.count >= section {
-            label.text = viewModel.sectionTitles[section - 1]
+            titleLabel.text = viewModel.sectionTitles[section - 1]
         }
-        label.textAlignment = .center
-        header.addSubview(label)
-        return header
+        return titleLabel
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -195,20 +201,22 @@ extension HomeViewController: UIScrollViewDelegate {
             }
             else {
                 navigation.bar.alpha = 0
-                if tableView.contentOffset.y > -pullDownHeight {
+                if tableView.contentOffset.y >= -pullDownHeight {
                     var frame = bannerView.frame
                     frame.origin.y = tableView.contentOffset.y
                     frame.size.height = tableHeaderViewHeight - tableView.contentOffset.y
                     bannerView.frame = frame
+                    
+                    guard isLoadable else { return }
+                    let progress = -tableView.contentOffset.y / pullDownHeight
+                    progressView.progress = progress < 1.0 ? progress : 1.0
                 }
                 else {
                     bannerView.frame = CGRect(x: 0, y: -pullDownHeight, width: UIScreen.width, height: tableHeaderViewHeight + pullDownHeight)
                     tableView.contentOffset = CGPoint(x: 0, y: -pullDownHeight)
                 }
                 
-                guard isLoadable else { return }
-                let progress = tableView.panGestureRecognizer.translation(in: tableView).y / pullDownHeight
-                progressView.progress = progress < 1.0 ? progress : 1.0
+                
             }
             guard tableView.numberOfSections > 0 else { return }
             if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {

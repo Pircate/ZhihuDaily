@@ -13,11 +13,18 @@ import CocoaChainKit
 final class HomeNewsRowCell: UITableViewCell {
     
     lazy var coverImageView: UIImageView = {
-        return UIImageView()
+        UIImageView().chain
+            .shadowColor(UIColor.black)
+            .shadowRadius(1)
+            .shadowOpacity(0.15)
+            .shadowOffset(CGSize.zero).build
     }()
     
     lazy var titleLabel: UILabel = {
-        return UILabel().chain.systemFont(ofSize: 14).textColor(UIColor(hex: "#333333")).numberOfLines(0).build
+        UILabel().chain
+            .systemFont(ofSize: 14)
+            .textColor(UIColor(hex: "#333333"))
+            .numberOfLines(0).build
     }()
 
     override func awakeFromNib() {
@@ -40,7 +47,7 @@ final class HomeNewsRowCell: UITableViewCell {
         coverImageView.snp.makeConstraints { (make) in
             make.right.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 64, height: 44))
+            make.size.equalTo(CGSize(width: 80, height: 60))
         }
         
         titleLabel.snp.makeConstraints { (make) in
