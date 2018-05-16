@@ -25,12 +25,12 @@ extension Reactive where Base == HomeViewController {
     
     var pushDetail: Binder<HomeNewsModel> {
         return Binder(base) { vc, model in
-            let detailVC = NewsDetailViewController()
-            detailVC.newsID = model.id
-            detailVC.heroID = model.id
             vc.navigationController?.hero.isEnabled = true
             vc.navigationController?.hero.navigationAnimationType = .auto
-            vc.navigationController?.pushViewController(detailVC, animated: true)
+            NewsDetailViewController().start {
+                $0.newsID = model.id
+                $0.heroID = model.id
+            }
         }
     }
 }

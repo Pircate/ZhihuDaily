@@ -135,3 +135,11 @@ extension NewsDetailViewController: UIScrollViewDelegate {
         setNeedsStatusBarAppearanceUpdate()
     }
 }
+
+extension NewsDetailViewController: Navigatable {
+    
+    func start(_ closure: (NewsDetailViewController) -> Void = { _ in }) {
+        closure(self)
+        navigator?.pushViewController(self, animated: true)
+    }
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3381049D20AC7E3700B02833 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381049C20AC7E3700B02833 /* Navigatable.swift */; };
 		7E87DC5196D1C5BBEB13B48B /* Pods_ZhihuDaily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B531638E201FFF4200828CA2 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531638D201FFF4200828CA2 /* Updatable.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3381049C20AC7E3700B02833 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
 		83CE6E074FEB0F0C30BFDD04 /* Pods-ZhihuDaily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.debug.xcconfig"; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B531638D201FFF4200828CA2 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
@@ -341,8 +343,9 @@
 		B56223BB1FFC730E0012CCB2 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				B531638D201FFF4200828CA2 /* Updatable.swift */,
+				3381049C20AC7E3700B02833 /* Navigatable.swift */,
 				B563AAEB2015AC8400F4AC66 /* UI */,
+				B531638D201FFF4200828CA2 /* Updatable.swift */,
 				B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */,
 			);
 			path = Vendor;
@@ -607,6 +610,7 @@
 				B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */,
 				B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */,
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
+				3381049D20AC7E3700B02833 /* Navigatable.swift in Sources */,
 				B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */,
 				B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */,
 				B5747747209AF98A0006BF7C /* RxCocoaExtension.swift in Sources */,
