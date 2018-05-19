@@ -101,9 +101,7 @@ extension NewsDetailViewController: WKNavigationDelegate {
         else {
             if navigationAction.sourceFrame.isMainFrame {
                 if let url = url {
-                    push(WebViewController.self) {
-                        $0.loadURL(url)
-                    }
+                    Driver.of(url).drive(rx.openURL).disposed(by: disposeBag)
                 }
                 decisionHandler(.cancel)
             }

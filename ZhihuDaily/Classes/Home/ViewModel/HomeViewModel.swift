@@ -96,3 +96,17 @@ class HomeViewModel {
         }).asObservable().catchErrorJustReturn(HomeNewsListModel(date: "", stories: [], topStories: []))
     }
 }
+
+extension Reactive where Base == HomeViewController {
+    
+    var pushDetail: Binder<HomeNewsModel> {
+        return Binder(base) { vc, model in
+            vc.navigationController?.hero.isEnabled = true
+            vc.navigationController?.hero.navigationAnimationType = .auto
+            NewsDetailViewController().start {
+                $0.newsID = model.id
+                $0.heroID = model.id
+            }
+        }
+    }
+}

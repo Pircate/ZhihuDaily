@@ -9,15 +9,6 @@
 import Moya
 import WebKit
 
-extension Reactive where Base: WKWebView {
-    
-    var htmlString: Binder<String> {
-        return Binder(self.base) { webView, htmlString in
-            webView.loadHTMLString(htmlString, baseURL: nil)
-        }
-    }
-}
-
 class NewsDetailViewModel {
     
     struct Input {
@@ -53,5 +44,25 @@ class NewsDetailViewModel {
             return html.replacingOccurrences(of: "</body>", with: "\(model.body)</body>")
         }).asDriver(onErrorJustReturn: "")
         return Output(title: title, body: body, image: image)
+    }
+}
+
+extension Reactive where Base: WKWebView {
+    
+    var htmlString: Binder<String> {
+        return Binder(self.base) { webView, htmlString in
+            webView.loadHTMLString(htmlString, baseURL: nil)
+        }
+    }
+}
+
+extension Reactive where Base: UIViewController {
+    
+    var openURL: Binder<String> {
+        return Binder(base) { vc, url in
+            vc.push(WebViewController.self) {
+                $0.loadURL(url)
+            }
+        }
     }
 }
