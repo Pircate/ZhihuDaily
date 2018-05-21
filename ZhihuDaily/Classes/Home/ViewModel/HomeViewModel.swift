@@ -81,7 +81,7 @@ class HomeViewModel {
     }
     
     private func requestLatestNews() -> Observable<HomeNewsListModel> {
-        return HomeTarget.latestNews.request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
+        return NewsAPI.latestNews.request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
             self.date = model.date
             self.sectionTitles.removeAll()
@@ -89,7 +89,7 @@ class HomeViewModel {
     }
     
     private func requestBeforeNews() -> Observable<HomeNewsListModel> {
-        return HomeTarget.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
+        return NewsAPI.beforeNews(date: self.date).request(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
             guard let `self` = self else { return }
             self.date = model.date
             self.sectionTitles.append(self.date)

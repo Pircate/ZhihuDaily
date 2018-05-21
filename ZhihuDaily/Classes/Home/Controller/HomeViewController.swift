@@ -71,8 +71,8 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationItem()
-        setupSubviews()
+        buildNavigation()
+        buildSubviews()
         bindViewModel()
         refresh.onNext(())
     }
@@ -91,7 +91,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - private
     
-    private func setupNavigationItem() {
+    private func buildNavigation() {
         
         navigation.bar.chain
             .isHidden(false)
@@ -105,7 +105,7 @@ final class HomeViewController: BaseViewController {
         navigation.item.title = "今日要闻"
     }
     
-    private func setupSubviews() {
+    private func buildSubviews() {
         
         disableAdjustsScrollViewInsets(tableView)
         view.addSubview(tableView)

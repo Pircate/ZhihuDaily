@@ -36,7 +36,7 @@
 		B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */; };
 		B5DE316520544DD300661203 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE316420544DD200661203 /* HomeViewModel.swift */; };
 		B5F20DAE2052A50A008D757B /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */; };
-		B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAF2052A5A2008D757B /* HomeTarget.swift */; };
+		B5F20DB02052A5A2008D757B /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F20DAF2052A5A2008D757B /* NewsAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +93,7 @@
 		B5D652B82054FC6F00AE726F /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
 		B5DE316420544DD200661203 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
-		B5F20DAF2052A5A2008D757B /* HomeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTarget.swift; sourceTree = "<group>"; };
+		B5F20DAF2052A5A2008D757B /* NewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPI.swift; sourceTree = "<group>"; };
 		E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhihuDaily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F886866C7CEB86595A7BC528 /* Pods-ZhihuDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,7 +182,7 @@
 				B56223891FFC729C0012CCB2 /* Info.plist */,
 				B56223861FFC729B0012CCB2 /* LaunchScreen.storyboard */,
 				B563AAED2015AC8400F4AC66 /* Network */,
-				B5F20DAC2052A399008D757B /* Target */,
+				B5F20DAC2052A399008D757B /* API */,
 				B56223BB1FFC730E0012CCB2 /* Vendor */,
 			);
 			path = ZhihuDaily;
@@ -369,12 +369,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		B5F20DAC2052A399008D757B /* Target */ = {
+		B5F20DAC2052A399008D757B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				B5F20DAF2052A5A2008D757B /* HomeTarget.swift */,
+				B5F20DAF2052A5A2008D757B /* NewsAPI.swift */,
 			);
-			path = Target;
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,7 +606,7 @@
 				B5D62F0B20AAA703002F8FB3 /* FSCycleScrollView+Rx.swift in Sources */,
 				B56223BE1FFC734E0012CCB2 /* MainViewController.swift in Sources */,
 				B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */,
-				B5F20DB02052A5A2008D757B /* HomeTarget.swift in Sources */,
+				B5F20DB02052A5A2008D757B /* NewsAPI.swift in Sources */,
 				B5A7C9FC2015E030000C54BC /* NewsDetailModel.swift in Sources */,
 				B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */,
 				B5A7C9F22015C22F000C54BC /* HomeNewsRowCell.swift in Sources */,
