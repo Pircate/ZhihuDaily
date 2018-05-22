@@ -25,7 +25,7 @@ class HomeViewModel {
     
     struct Input {
         let refresh: Observable<Void>
-        let loading: ControlEvent<RefreshStatus>
+        let loading: ControlEvent<Void>
     }
     
     struct Output {

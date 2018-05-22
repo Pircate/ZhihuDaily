@@ -133,7 +133,7 @@ final class HomeViewController: BaseViewController {
         output.bannerItems.drive(bannerView.rx.items).disposed(by: disposeBag)
         
         output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
-        output.items.map({ _ in RefreshStatus.endFooterRefresh }).drive(tableView.rx.endRefreshing).disposed(by: disposeBag)
+        output.items.map({ _ in }).drive(tableView.mj_footer.rx.endRefreshing).disposed(by: disposeBag)
         
         output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
         
