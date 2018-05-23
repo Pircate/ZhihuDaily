@@ -8,9 +8,9 @@
 
 import RxSwift
 import Moya
-import Result
 
 extension PrimitiveSequence where TraitType == SingleTrait, ElementType: TargetType {
+    
     public func request<T: Codable>(_ type: T.Type,
                                     atKeyPath keyPath: String? = nil,
                                     using decoder: JSONDecoder = .init()) -> Single<T> {
@@ -20,7 +20,18 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType: TargetT
     }
 }
 
+extension PrimitiveSequence where TraitType == SingleTrait, ElementType: Codable {
+    
+    public func storeCachedObject(for target: TargetType) -> Single<ElementType> {
+        return flatMap { object -> Single<ElementType> in
+            try? Network.storage?.setObject(object, forKey: target.cachedKey)
+            return Single.just(object)
+        }
+    }
+}
+
 extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
+    
     public func mapObject<T: Codable>(_ type: T.Type,
                                       atKeyPath keyPath: String? = nil,
                                       using decoder: JSONDecoder = .init()) -> Single<T> {
@@ -36,27 +47,6 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
                 }
                 return Single.error(error)
             }
-        }
-    }
-    
-    public func mapResult<T: Codable>(_ type: T.Type,
-                                      atKeyPath keyPath: String? = nil,
-                                      using decoder: JSONDecoder = .init()) -> Single<Result<T, MoyaError>> {
-        return flatMap { response -> Single<Result<T, MoyaError>> in
-            do {
-                return Single.just(.success(try response.map(type, atKeyPath: keyPath, using: decoder)))
-            } catch let error {
-                return Single.just(.failure(.objectMapping(error, response)))
-            }
-        }
-    }
-}
-
-extension PrimitiveSequence where TraitType == SingleTrait, ElementType: Codable {
-    public func storeCachedObject(for target: TargetType) -> Single<ElementType> {
-        return flatMap { object -> Single<ElementType> in
-            try? Network.storage?.setObject(object, forKey: target.cachedKey)
-            return Single.just(object)
         }
     }
 }

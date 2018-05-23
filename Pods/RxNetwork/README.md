@@ -34,13 +34,36 @@ import RxNetwork
 
 ### Request with cache
 
-![](https://github.com/Ginxx/RxNetwork/blob/master/Example/cached_object.png)
+```swift
+TestTarget.test(count: 10)
+    .cachedObject([TestModel].self, onCache: { (response) in
 
-![](https://github.com/Ginxx/RxNetwork/blob/master/Example/cache.png)
+    })
+    .request([TestModel].self, atKeyPath: "result")
+    .subscribe(onSuccess: { (response) in
+
+    })
+    .disposed(by: disposeBag)
+// or
+TestTarget.test(count: 10)
+    .cache
+    .request([TestModel].self, atKeyPath: "result")
+    .subscribe(onNext: { (response) in
+    
+    })
+    .disposed(by: disposeBag)
+```
 
 ### Request without cache
 
-![](https://github.com/Ginxx/RxNetwork/blob/master/Example/without_cache.png)
+```swift
+TestTarget.test(count: 10)
+    .request([TestModel].self, atKeyPath: "result")
+    .subscribe(onSuccess: { (response) in
+    
+    })
+    .disposed(by: disposeBag)
+```
 
 ## Author
 
