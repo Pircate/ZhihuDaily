@@ -23,6 +23,8 @@ extension UIApplication {
 
 final class HomeViewController: BaseViewController {
     
+    var didSelectMenuButton = Delegated<UIButton, Void>()
+    
     private let customNavigationBarHeight: CGFloat = 44
     private let tableHeaderViewHeight: CGFloat = 200
     private let pullDownHeight: CGFloat = 60
@@ -36,6 +38,7 @@ final class HomeViewController: BaseViewController {
             .separatorColor(UIColor(hex: "#eeeeee"))
             .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
         tableView.mj_footer = MJRefreshAutoFooter()
+        disableAdjustsScrollViewInsets(tableView)
         return tableView
     }()
     
@@ -50,9 +53,6 @@ final class HomeViewController: BaseViewController {
             .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).build
     }()
     
-    private let viewModel = HomeViewModel()
-    private let refresh: PublishSubject<Void> = PublishSubject<Void>()
-    
     lazy var bannerView: FSCycleScrollView = {
         let bannerView = FSCycleScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: tableHeaderViewHeight))
         bannerView.isInfinite = true
@@ -61,7 +61,8 @@ final class HomeViewController: BaseViewController {
         return bannerView
     }()
     
-    var didSelectMenuButton = Delegated<UIButton, Void>()
+    private let viewModel = HomeViewModel()
+    private let refresh: PublishSubject<Void> = PublishSubject<Void>()
     private var isLoadable = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -107,7 +108,6 @@ final class HomeViewController: BaseViewController {
     
     private func buildSubviews() {
         
-        disableAdjustsScrollViewInsets(tableView)
         view.addSubview(tableView)
         view.addSubview(menuButton)
         

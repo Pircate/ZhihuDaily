@@ -50,11 +50,11 @@ class HomeViewModel {
     
     func transform(_ input: Input) -> Output {
         
-        let source1 = input.refresh.flatMap { _ in
+        let refresh = input.refresh.flatMap { _ in
             self.requestLatestNews()
             }.share(replay: 1)
         
-        let bannerItems = source1.map({
+        let bannerItems = refresh.map({
             $0.topStories
         }).do(onNext: { (banners) in
             self.bannerList = banners
@@ -62,21 +62,20 @@ class HomeViewModel {
             $0.compactMap({ (image: $0.image, title: $0.title) })
         }).asDriver(onErrorJustReturn: [])
         
+        let source1 = refresh.map({ response -> [HomeNewsSection] in
+            self.sections = [HomeNewsSection(items: response.stories)]
+            return self.sections
+        })
+        
         let source2 = input.loading.flatMap { _ in
             self.requestBeforeNews()
-        }
+        }.map({ response -> [HomeNewsSection] in
+            self.sections.append(HomeNewsSection(items: response.stories))
+            return self.sections
+        })
         
-        let items = Observable.merge(source1, source2).flatMap { response -> Observable<[HomeNewsSection]> in
-            if response.topStories.count > 0 {
-                self.sections = [HomeNewsSection(items: response.stories)]
-            }
-            else {
-                if response.stories.count > 0 {
-                    self.sections.append(HomeNewsSection(items: response.stories))
-                }
-            }
-            return Observable.just(self.sections)
-        }.asDriver(onErrorJustReturn: [])
+        let items = Observable.merge(source1, source2).asDriver(onErrorJustReturn: [])
+        
         return Output(bannerItems: bannerItems, items: items)
     }
     
