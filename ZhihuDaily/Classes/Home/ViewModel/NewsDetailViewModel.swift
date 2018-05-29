@@ -23,7 +23,7 @@ class NewsDetailViewModel {
     
     func transform(_ input: Input) -> Output {
         let response = input.refresh.flatMap {
-            NewsAPI.newsDetail(newsID: $0).request(NewsDetailModel.self)
+            NewsAPI.newsDetail(newsID: $0).request().map(NewsDetailModel.self)
         }.share(replay: 1)
         
         let title = response.map({ $0.title }).asDriver(onErrorJustReturn: "")
