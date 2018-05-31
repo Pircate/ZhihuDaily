@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Network.shared.plugins = [NetworkIndicatorPlugin()]
+        Network.default.plugins = [NetworkIndicatorPlugin()]
         UIViewController.setupNavigationBar
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
