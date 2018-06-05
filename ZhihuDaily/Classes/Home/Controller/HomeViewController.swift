@@ -155,20 +155,20 @@ final class HomeViewController: BaseViewController {
         tableView.rx.modelSelected(HomeNewsModel.self).asDriver().drive(rx.pushDetail).disposed(by: disposeBag)
         
         bindMenuTap()
+        bindDragging()
         bindContentOffset()
     }
     
     private func bindMenuTap() {
         let menuTap = menuButton.rx.tap.map(to: !self.menuButton.isSelected).shareOnce()
-        menuTap.asDriver(onErrorJustReturnClosure: false).drive(menuButton.rx.isSelected).disposed(by: disposeBag)
-        menuTap.bind { (isSelected) in
-            self.didSelectMenuButton.call(isSelected)
-            }.disposed(by: disposeBag)
+        menuTap.bind(to: menuButton.rx.isSelected).disposed(by: disposeBag)
+        menuTap.bind(to: rx.didSelectMenuButton).disposed(by: disposeBag)
     }
     
-    private func bindContentOffset() {
-        
-        tableView.rx.willBeginDragging.map(to: self.tableView.contentOffset == CGPoint.zero).bind(to: rx.isLoadable).disposed(by: disposeBag)
+    private func bindDragging() {
+        tableView.rx.willBeginDragging
+            .map(to: self.tableView.contentOffset == CGPoint.zero)
+            .bind(to: rx.isLoadable).disposed(by: disposeBag)
         
         tableView.rx.didEndDragging.bind(onNext: { [weak self] _ in
             guard let self = self else { return }
@@ -180,8 +180,10 @@ final class HomeViewController: BaseViewController {
             }
             self.isLoadable = false
         }).disposed(by: disposeBag)
-        
-        tableView.rx.contentOffset.bind(onNext: { [weak self] offset in
+    }
+    
+    private func bindContentOffset() {
+        tableView.rx.contentOffset.observeOn(MainScheduler.asyncInstance).bind(onNext: { [weak self] offset in
             guard let self = self else { return }
             if offset.y > 0 {
                 let alpha = offset.y / (self.tableHeaderViewHeight - UIApplication.statusBarHeight - self.navigation.bar.frame.height)
@@ -233,6 +235,12 @@ extension Reactive where Base == HomeViewController {
                 $0.newsID = model.id
                 $0.heroID = model.id
             }
+        }
+    }
+    
+    var didSelectMenuButton: Binder<Bool> {
+        return Binder(base) { vc, isSelected in
+            vc.didSelectMenuButton.call(isSelected)
         }
     }
 }
