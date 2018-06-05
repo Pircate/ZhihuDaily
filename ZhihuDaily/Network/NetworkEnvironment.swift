@@ -7,7 +7,7 @@
 //
 
 import Moya
-import RxNetwork
+import RxSwiftX
 
 extension Network {
     

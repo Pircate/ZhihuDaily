@@ -13,6 +13,7 @@ import Hero
 import FSCycleScrollView
 import RxSwift
 import RxCocoa
+import RxSwiftX
 
 extension UIApplication {
     
@@ -23,7 +24,7 @@ extension UIApplication {
 
 final class HomeViewController: BaseViewController {
     
-    var didSelectMenuButton = Delegated<UIButton, Void>()
+    var didSelectMenuButton = Delegated<Bool, Void>()
     
     private let customNavigationBarHeight: CGFloat = 44
     private let tableHeaderViewHeight: CGFloat = 200
@@ -31,15 +32,36 @@ final class HomeViewController: BaseViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds).chain
-            .delegate(self)
-            .rowHeight(100)
-            .estimatedSectionHeaderHeight(0)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
             .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
         tableView.mj_footer = MJRefreshAutoFooter()
         disableAdjustsScrollViewInsets(tableView)
         return tableView
+    }()
+    
+    lazy var dataSource: RxTableViewSectionedReloadProxy<HomeNewsSection> = {
+        let dataSource = RxTableViewSectionedReloadProxy<HomeNewsSection>(configureCell: { (ds, tv, ip, item) -> HomeNewsRowCell in
+            let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
+            cell.update(item)
+            return cell
+        }, heightForRowAtIndexPath: { _, _, _ in
+            return 100
+        }, heightForHeaderInSection: { _, section in
+            guard section > 0 else { return CGFloat.leastNormalMagnitude }
+            return 44
+        }, viewForHeaderInSection: { proxy, section in
+            guard section > 0 else { return nil }
+            let titleLabel = UILabel().chain
+                .frame(x: 0, y: 0, width: UIScreen.width, height: 44)
+                .backgroundColor(UIColor.global)
+                .systemFont(ofSize: 16)
+                .textColor(UIColor.white)
+                .textAlignment(.center)
+                .text(proxy[section].title).build
+            return titleLabel
+        })
+        return dataSource
     }()
     
     private lazy var progressView: ProgressView = {
@@ -49,8 +71,7 @@ final class HomeViewController: BaseViewController {
     lazy var menuButton: UIButton = {
         UIButton(type: .custom).chain
             .frame(x: 0, y: UIApplication.statusBarHeight + 6, width: 44, height: 32)
-            .image(#imageLiteral(resourceName: "menu"), for: .normal)
-            .addTarget(self, action: #selector(menuBtnAction(sender:)), for: .touchUpInside).build
+            .image(#imageLiteral(resourceName: "menu"), for: .normal).build
     }()
     
     lazy var bannerView: FSCycleScrollView = {
@@ -63,7 +84,7 @@ final class HomeViewController: BaseViewController {
     
     private let viewModel = HomeViewModel()
     private let refresh: PublishSubject<Void> = PublishSubject<Void>()
-    private var isLoadable = false
+    fileprivate var isLoadable = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -116,15 +137,6 @@ final class HomeViewController: BaseViewController {
         tableView.tableHeaderView = tableHeaderView
     }
     
-    @objc private func menuBtnAction(sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        didSelectMenuButton.call(sender)
-    }
-    
-    public func setMenuButtonSelected(_ isSelected: Bool) {
-        menuButton.isSelected = isSelected
-    }
-    
     private func bindViewModel() {
         
         let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshClosure)
@@ -135,97 +147,92 @@ final class HomeViewController: BaseViewController {
         output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
         output.items.map({ _ in }).drive(tableView.mj_footer.rx.endRefreshing).disposed(by: disposeBag)
         
-        output.items.drive(tableView.rx.items(dataSource: viewModel.dataSource)).disposed(by: disposeBag)
+        output.items.drive(tableView.rx.items(proxy: dataSource)).disposed(by: disposeBag)
         
         bannerView.rx.itemSelected.map({ self.viewModel.bannerList[$0] }).bind(to: rx.pushDetail).disposed(by: disposeBag)
         
         tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
         tableView.rx.modelSelected(HomeNewsModel.self).asDriver().drive(rx.pushDetail).disposed(by: disposeBag)
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section > 0 else { return nil }
-        let titleLabel = UILabel().chain
-            .frame(x: 0, y: 0, width: UIScreen.width, height: customNavigationBarHeight)
-            .backgroundColor(UIColor.global)
-            .systemFont(ofSize: 16)
-            .textColor(UIColor.white)
-            .textAlignment(.center).build
-        if viewModel.sectionTitles.count >= section {
-            titleLabel.text = viewModel.sectionTitles[section - 1]
-        }
-        return titleLabel
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section > 0 else {
-            return CGFloat.leastNormalMagnitude
-        }
-        return customNavigationBarHeight
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-extension HomeViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView == tableView {
-            if tableView.contentOffset.y > 0 {
-                let alpha = tableView.contentOffset.y / (tableHeaderViewHeight - UIApplication.statusBarHeight - navigation.bar.frame.height)
-                navigation.bar.alpha = alpha
-                progressView.progress = 0
+        bindMenuTap()
+        bindContentOffset()
+    }
+    
+    private func bindMenuTap() {
+        let menuTap = menuButton.rx.tap.map(to: !self.menuButton.isSelected).shareOnce()
+        menuTap.asDriver(onErrorJustReturnClosure: false).drive(menuButton.rx.isSelected).disposed(by: disposeBag)
+        menuTap.bind { (isSelected) in
+            self.didSelectMenuButton.call(isSelected)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindContentOffset() {
+        
+        tableView.rx.willBeginDragging.map(to: self.tableView.contentOffset == CGPoint.zero).bind(to: rx.isLoadable).disposed(by: disposeBag)
+        
+        tableView.rx.didEndDragging.bind(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            if self.progressView.progress >= 1.0 {
+                self.progressView.startLoading()
+                self.refresh.onNext(())
+            } else {
+                self.progressView.progress = 0
             }
-            else {
-                navigation.bar.alpha = 0
-                if tableView.contentOffset.y >= -pullDownHeight {
-                    var frame = bannerView.frame
-                    frame.origin.y = tableView.contentOffset.y
-                    frame.size.height = tableHeaderViewHeight - tableView.contentOffset.y
-                    bannerView.frame = frame
+            self.isLoadable = false
+        }).disposed(by: disposeBag)
+        
+        tableView.rx.contentOffset.bind(onNext: { [weak self] offset in
+            guard let self = self else { return }
+            if offset.y > 0 {
+                let alpha = offset.y / (self.tableHeaderViewHeight - UIApplication.statusBarHeight - self.navigation.bar.frame.height)
+                self.navigation.bar.alpha = alpha
+                self.progressView.progress = 0
+            } else {
+                self.navigation.bar.alpha = 0
+                if offset.y >= -60 {
+                    var frame = self.bannerView.frame
+                    frame.origin.y = offset.y
+                    frame.size.height = self.tableHeaderViewHeight - offset.y
+                    self.bannerView.frame = frame
                     
-                    guard isLoadable else { return }
-                    let progress = -tableView.contentOffset.y / pullDownHeight
-                    progressView.progress = progress < 1.0 ? progress : 1.0
+                    guard self.isLoadable else { return }
+                    let progress = -offset.y / 60
+                    self.progressView.progress = progress < 1.0 ? progress : 1.0
+                } else {
+                    self.bannerView.frame = CGRect(x: 0, y: -60, width: UIScreen.width, height: self.tableHeaderViewHeight + 60)
+                    self.tableView.contentOffset = CGPoint(x: 0, y: -60)
                 }
-                else {
-                    bannerView.frame = CGRect(x: 0, y: -pullDownHeight, width: UIScreen.width, height: tableHeaderViewHeight + pullDownHeight)
-                    tableView.contentOffset = CGPoint(x: 0, y: -pullDownHeight)
-                }
-                
-                
             }
-            guard tableView.numberOfSections > 0 else { return }
-            if tableView.contentOffset.y > tableHeaderViewHeight - UIApplication.statusBarHeight + tableView.rect(forSection: 0).height {
-                navigation.bar.frame.origin.y = -44.0 + UIApplication.statusBarHeight
-                navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white.alpha(0)]
-                tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
+            guard self.tableView.numberOfSections > 0 else { return }
+            if offset.y > self.tableHeaderViewHeight - UIApplication.statusBarHeight + self.tableView.rect(forSection: 0).height {
+                self.navigation.bar.frame.origin.y = -44.0 + UIApplication.statusBarHeight
+                self.navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white.alpha(0)]
+                self.tableView.contentInset = UIEdgeInsets(top: UIApplication.statusBarHeight, left: 0, bottom: 0, right: 0)
+            } else {
+                self.navigation.bar.frame.origin.y = UIApplication.statusBarHeight
+                self.navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
+                self.tableView.contentInset = UIEdgeInsets.zero
             }
-            else {
-                navigation.bar.frame.origin.y = UIApplication.statusBarHeight
-                navigation.bar.titleTextAttributes = [.foregroundColor: UIColor.white]
-                tableView.contentInset = UIEdgeInsets.zero
-            }
+        }).disposed(by: disposeBag)
+    }
+}
+
+extension Reactive where Base == HomeViewController {
+    
+    var isLoadable: Binder<Bool> {
+        return Binder(base) { vc, isLoadable in
+            vc.isLoadable = isLoadable
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if tableView.contentOffset == CGPoint.zero {
-            isLoadable = true
+    var pushDetail: Binder<HomeNewsModel> {
+        return Binder(base) { vc, model in
+            vc.navigationController?.hero.isEnabled = true
+            vc.navigationController?.hero.navigationAnimationType = .auto
+            NewsDetailViewController().start {
+                $0.newsID = model.id
+                $0.heroID = model.id
+            }
         }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if progressView.progress >= 1.0 {
-            progressView.startLoading()
-            refresh.onNext(())
-        }
-        else {
-            progressView.progress = 0
-        }
-        isLoadable = false
     }
 }

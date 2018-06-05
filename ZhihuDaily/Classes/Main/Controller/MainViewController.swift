@@ -10,6 +10,7 @@ import UIKit
 import Kingfisher
 import SnapKit
 import MJRefresh
+import RxSwift
 
 class MainViewController: UIViewController {
     
@@ -21,10 +22,11 @@ class MainViewController: UIViewController {
         scrollView.contentOffset = CGPoint(x: leftMenuWidth, y: 0)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.delegate = self
         scrollView.bounces = false
         return scrollView
     }()
+    
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,20 +58,18 @@ class MainViewController: UIViewController {
         scrollView.addSubview(menuVC.view)
         
         let homeVC = HomeViewController()
-        homeVC.didSelectMenuButton.delegate(to: self, with: { (self, sender) in
-            let point = sender.isSelected ? CGPoint.zero : CGPoint(x: self.leftMenuWidth, y: 0)
+        homeVC.didSelectMenuButton.delegate(to: self, with: { (self, isSelected) in
+            let point = isSelected ? CGPoint.zero : CGPoint(x: self.leftMenuWidth, y: 0)
             self.scrollView.setContentOffset(point, animated: true)
         })
         homeVC.view.frame = CGRect(x: leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
         addChildViewController(homeVC)
         scrollView.addSubview(homeVC.view)
-    }
-}
-
-extension MainViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let homeVC = childViewControllers.last as! HomeViewController
-        homeVC.setMenuButtonSelected(scrollView.contentOffset.x == 0)
+        
+        scrollView.rx.contentOffset
+            .map({ $0.x == 0 })
+            .asDriver(onErrorJustReturnClosure: false)
+            .drive(homeVC.menuButton.rx.isSelected)
+            .disposed(by: disposeBag)
     }
 }

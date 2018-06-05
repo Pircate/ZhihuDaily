@@ -130,14 +130,14 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>RxNetwork.xcscheme</key>
+		<key>RxSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
-		<key>RxSwift.xcscheme</key>
+		<key>RxSwiftX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

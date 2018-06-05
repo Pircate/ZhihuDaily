@@ -8,16 +8,23 @@
 
 import RxDataSources
 import Moya
-import RxNetwork
+import RxSwiftX
 
 struct HomeNewsSection {
+    var title: String
     var items: [HomeNewsModel]
 }
 
 extension HomeNewsSection: SectionModelType {
+    
     init(original: HomeNewsSection, items: [HomeNewsModel]) {
         self = original
         self.items = items
+    }
+    
+    init(title: String, original: HomeNewsSection, items: [HomeNewsModel]) {
+        self.init(original: original, items: items)
+        self.title = title
     }
 }
 
@@ -32,27 +39,18 @@ class HomeViewModel {
         let bannerItems: Driver<[(image: String, title: String)]>
         let items: Driver<[HomeNewsSection]>
     }
-
-    private var date: String = ""
-    private var sections: [HomeNewsSection] = []
     
-    var sectionTitles: [String] = []
     var bannerList: [HomeNewsModel] = []
-    
-    lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeNewsSection> = {
-        let dataSource = RxTableViewSectionedReloadDataSource<HomeNewsSection>(configureCell: { (ds, tv, ip, item) -> HomeNewsRowCell in
-            let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
-            cell.update(item)
-            return cell
-        })
-        return dataSource
-    }()
     
     func transform(_ input: Input) -> Output {
         
+        var sections: [HomeNewsSection] = []
+        
         let refresh = input.refresh.flatMap { _ in
-            self.requestLatestNews()
-            }.share(replay: 1)
+            NewsAPI.latestNews.request()
+                .map(HomeNewsListModel.self)
+                .asObservable()
+            }.shareOnce()
         
         let bannerItems = refresh.map({
             $0.topStories
@@ -63,49 +61,19 @@ class HomeViewModel {
         }).asDriver(onErrorJustReturn: [])
         
         let source1 = refresh.map({ response -> [HomeNewsSection] in
-            self.sections = [HomeNewsSection(items: response.stories)]
-            return self.sections
+            sections = [HomeNewsSection(title: response.date, items: response.topStories)]
+            return sections
         })
         
-        let source2 = input.loading.flatMap { _ in
-            self.requestBeforeNews()
+        let source2 = input.loading.flatMap {
+            NewsAPI.beforeNews(date: sections.last?.title ?? "").request().map(HomeNewsListModel.self).asObservable()
         }.map({ response -> [HomeNewsSection] in
-            self.sections.append(HomeNewsSection(items: response.stories))
-            return self.sections
+            sections.append(HomeNewsSection(title: response.date, items: response.stories))
+            return sections
         })
         
         let items = Observable.merge(source1, source2).asDriver(onErrorJustReturn: [])
         
         return Output(bannerItems: bannerItems, items: items)
-    }
-    
-    private func requestLatestNews() -> Observable<HomeNewsListModel> {
-        return NewsAPI.latestNews.request().map(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
-            guard let `self` = self else { return }
-            self.date = model.date
-            self.sectionTitles.removeAll()
-        }).asObservable().catchErrorJustReturn(HomeNewsListModel(date: "", stories: [], topStories: []))
-    }
-    
-    private func requestBeforeNews() -> Observable<HomeNewsListModel> {
-        return NewsAPI.beforeNews(date: self.date).request().map(HomeNewsListModel.self).do(onSuccess: { [weak self] (model) in
-            guard let `self` = self else { return }
-            self.date = model.date
-            self.sectionTitles.append(self.date)
-        }).asObservable().catchErrorJustReturn(HomeNewsListModel(date: "", stories: [], topStories: []))
-    }
-}
-
-extension Reactive where Base == HomeViewController {
-    
-    var pushDetail: Binder<HomeNewsModel> {
-        return Binder(base) { vc, model in
-            vc.navigationController?.hero.isEnabled = true
-            vc.navigationController?.hero.navigationAnimationType = .auto
-            NewsDetailViewController().start {
-                $0.newsID = model.id
-                $0.heroID = model.id
-            }
-        }
     }
 }
