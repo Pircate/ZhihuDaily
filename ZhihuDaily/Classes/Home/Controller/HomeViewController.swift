@@ -139,7 +139,7 @@ final class HomeViewController: BaseViewController {
     
     private func bindViewModel() {
         
-        let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshClosure)
+        let input = HomeViewModel.Input(refresh: refresh, loading: tableView.mj_footer.rx.refreshing)
         let output = viewModel.transform(input)
 
         output.bannerItems.drive(bannerView.rx.items).disposed(by: disposeBag)
@@ -151,7 +151,7 @@ final class HomeViewController: BaseViewController {
         
         bannerView.rx.itemSelected.map({ self.viewModel.bannerList[$0] }).bind(to: rx.pushDetail).disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
+        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselectRow(animated: true)).disposed(by: disposeBag)
         tableView.rx.modelSelected(HomeNewsModel.self).asDriver().drive(rx.pushDetail).disposed(by: disposeBag)
         
         bindMenuTap()

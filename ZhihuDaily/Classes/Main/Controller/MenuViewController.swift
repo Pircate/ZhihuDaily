@@ -58,7 +58,7 @@ class MenuViewController: BaseViewController {
             make.left.bottom.right.equalToSuperview()
         }
         
-        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselect).disposed(by: disposeBag)
+        tableView.rx.itemSelected.asDriver().drive(tableView.rx.deselectRow(animated: true)).disposed(by: disposeBag)
     }
 }
 
