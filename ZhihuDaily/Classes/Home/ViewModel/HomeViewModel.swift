@@ -10,23 +10,7 @@ import RxDataSources
 import Moya
 import RxSwiftX
 
-struct HomeNewsSection {
-    var title: String
-    var items: [HomeNewsModel]
-}
-
-extension HomeNewsSection: SectionModelType {
-    
-    init(original: HomeNewsSection, items: [HomeNewsModel]) {
-        self = original
-        self.items = items
-    }
-    
-    init(title: String, original: HomeNewsSection, items: [HomeNewsModel]) {
-        self.init(original: original, items: items)
-        self.title = title
-    }
-}
+typealias HomeNewsSection = SectionModel<String, HomeNewsModel>
 
 class HomeViewModel {
     
@@ -61,14 +45,14 @@ class HomeViewModel {
         }).asDriver(onErrorJustReturn: [])
         
         let source1 = refresh.map({ response -> [HomeNewsSection] in
-            sections = [HomeNewsSection(title: response.date, items: response.topStories)]
+            sections = [HomeNewsSection(model: response.date, items: response.topStories)]
             return sections
         })
         
         let source2 = input.loading.flatMap {
-            NewsAPI.beforeNews(date: sections.last?.title ?? "").request().map(HomeNewsListModel.self).asObservable()
+            NewsAPI.beforeNews(date: sections.last?.model ?? "").request().map(HomeNewsListModel.self).asObservable()
         }.map({ response -> [HomeNewsSection] in
-            sections.append(HomeNewsSection(title: response.date, items: response.stories))
+            sections.append(HomeNewsSection(model: response.date, items: response.stories))
             return sections
         })
         

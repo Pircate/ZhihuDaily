@@ -50,7 +50,7 @@ final class HomeViewController: BaseViewController {
         }, heightForHeaderInSection: { _, section in
             guard section > 0 else { return CGFloat.leastNormalMagnitude }
             return 44
-        }, viewForHeaderInSection: { proxy, section in
+        }, viewForHeaderInSection: { proxy, _, section in
             guard section > 0 else { return nil }
             let titleLabel = UILabel().chain
                 .frame(x: 0, y: 0, width: UIScreen.width, height: 44)
@@ -58,7 +58,7 @@ final class HomeViewController: BaseViewController {
                 .systemFont(ofSize: 16)
                 .textColor(UIColor.white)
                 .textAlignment(.center)
-                .text(proxy[section].title).build
+                .text(proxy[section].model).build
             return titleLabel
         })
         return dataSource
