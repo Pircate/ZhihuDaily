@@ -33,6 +33,10 @@ class HomeViewModel {
         let refresh = input.refresh.flatMap { _ in
             NewsAPI.latestNews.cache.request()
                 .map(HomeNewsListModel.self)
+                .asObservable()
+                .catchError({ error in
+                    Observable.empty()
+                })
             }.shareOnce()
         
         let bannerItems = refresh.map({
@@ -49,11 +53,16 @@ class HomeViewModel {
         })
         
         let source2 = input.loading.flatMap {
-            NewsAPI.beforeNews(date: sections.last?.model ?? "").request().map(HomeNewsListModel.self).asObservable()
-        }.map({ response -> [HomeNewsSection] in
-            sections.append(HomeNewsSection(model: response.date, items: response.stories))
-            return sections
-        })
+            NewsAPI.beforeNews(date: sections.last?.model ?? "")
+                .request()
+                .map(HomeNewsListModel.self)
+                .map({ response -> [HomeNewsSection] in
+                    sections.append(HomeNewsSection(model: response.date, items: response.stories))
+                    return sections
+                })
+                .asObservable()
+                .catchErrorJustReturn([])
+        }
         
         let items = Observable.merge(source1, source2).asDriver(onErrorJustReturn: [])
         
