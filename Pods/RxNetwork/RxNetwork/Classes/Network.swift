@@ -1,14 +1,14 @@
 //
 //  Network.swift
-//  RxSwiftX
+//  RxNetwork
 //
-//  Created by Pircate on 2018/4/17.
-//  Copyright © 2018年 Pircate. All rights reserved.
+//  Created by GorXion on 2018/4/17.
+//  Copyright © 2018年 gaoX. All rights reserved.
 //
 
 import Moya
+import Result
 import Cache
-import enum Result.Result
 
 public let kNetworkTimeoutInterval: TimeInterval = 60
 
@@ -29,9 +29,13 @@ public final class Network {
     }()
 }
 
-extension Network {
+public extension Network {
     
-    public static let storage = try? Storage(diskConfig: DiskConfig(name: "RxNetworkCache"), memoryConfig: MemoryConfig())
+    static let storage = try? Storage(diskConfig: DiskConfig(name: "RxNetworkResponseCache"),
+                                      memoryConfig: MemoryConfig(),
+                                      transformer: Transformer<Response>(
+                                        toData: { $0.data },
+                                        fromData: { Response(statusCode: 200, data: $0) }))
 }
 
 extension MoyaProvider {

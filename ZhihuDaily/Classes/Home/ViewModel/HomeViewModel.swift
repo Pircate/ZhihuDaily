@@ -31,9 +31,8 @@ class HomeViewModel {
         var sections: [HomeNewsSection] = []
         
         let refresh = input.refresh.flatMap { _ in
-            NewsAPI.latestNews.request()
+            NewsAPI.latestNews.cache.request()
                 .map(HomeNewsListModel.self)
-                .asObservable()
             }.shareOnce()
         
         let bannerItems = refresh.map({

@@ -1,13 +1,14 @@
 //
 //  TargetType+Rx.swift
-//  RxSwiftX
+//  RxNetwork
 //
-//  Created by Pircate on 2018/4/17.
-//  Copyright © 2018年 Pircate. All rights reserved.
+//  Created by GorXion on 2018/4/17.
+//  Copyright © 2018年 gaoX. All rights reserved.
 //
 
 import RxSwift
 import Moya
+import Cache
 
 public extension TargetType {
     
@@ -20,16 +21,26 @@ public extension TargetType {
     }
     
     func cachedObject<T: Codable>(_ type: T.Type) -> T? {
-        if let entry = try? Network.storage?.entry(ofType: type, forKey: cachedKey), let object = entry?.object {
+        if let storage = try? Storage(diskConfig: DiskConfig(name: "RxNetworkObjectCache"),
+                                      memoryConfig: MemoryConfig(),
+                                      transformer: TransformerFactory.forCodable(ofType: type)),
+            let object = try? storage.object(forKey: cachedKey) {
             return object
         }
         return nil
     }
     
+    var cachedResponse: Response? {
+        if let response = try? Network.storage?.object(forKey: cachedKey) {
+            return response
+        }
+        return nil
+    }
+    
     func onCache<T: Codable>(_ type: T.Type,
-                             _ closure: (T) -> Void) -> Single<Self> {
+                             _ closure: (T) -> Void) -> OnCache<Self, T> {
         if let object = cachedObject(type) { closure(object) }
-        return Single.just(self)
+        return OnCache(self)
     }
     
     var cache: Observable<Self> {

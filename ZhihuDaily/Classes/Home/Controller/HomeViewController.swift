@@ -85,7 +85,7 @@ final class HomeViewController: BaseViewController {
     private let viewModel = HomeViewModel()
     private let refresh: PublishSubject<Void> = PublishSubject<Void>()
     fileprivate var isLoadable = false
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -171,7 +171,7 @@ final class HomeViewController: BaseViewController {
             .bind(to: rx.isLoadable).disposed(by: disposeBag)
         
         tableView.rx.didEndDragging.bind(onNext: { [weak self] _ in
-            guard let self = self else { return }
+            guard let `self` = self else { return }
             if self.progressView.progress >= 1.0 {
                 self.progressView.startLoading()
                 self.refresh.onNext(())
@@ -184,7 +184,7 @@ final class HomeViewController: BaseViewController {
     
     private func bindContentOffset() {
         tableView.rx.contentOffset.observeOn(MainScheduler.asyncInstance).bind(onNext: { [weak self] offset in
-            guard let self = self else { return }
+            guard let `self` = self else { return }
             if offset.y > 0 {
                 let alpha = offset.y / (self.tableHeaderViewHeight - UIApplication.statusBarHeight - self.navigation.bar.frame.height)
                 self.navigation.bar.alpha = alpha

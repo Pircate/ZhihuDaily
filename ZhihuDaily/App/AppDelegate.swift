@@ -8,7 +8,7 @@
 
 import UIKit
 import EachNavigationBar
-import RxSwiftX
+import RxNetwork
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
