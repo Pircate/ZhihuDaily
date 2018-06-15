@@ -22,6 +22,8 @@ class HomeViewModel {
     struct Output {
         let bannerItems: Driver<[(image: String, title: String)]>
         let items: Driver<[HomeNewsSection]>
+        let endRefresh: Driver<Void>
+        let endMore: Driver<Void>
     }
     
     var bannerList: [HomeNewsModel] = []
@@ -52,20 +54,27 @@ class HomeViewModel {
             return sections
         })
         
+        let endRefresh = source1.map(to: ()).asDriver(onErrorJustReturn: ())
+        
         let source2 = input.loading.flatMap {
             NewsAPI.beforeNews(date: sections.last?.model ?? "")
                 .request()
                 .map(HomeNewsListModel.self)
+                .asObservable()
                 .map({ response -> [HomeNewsSection] in
                     sections.append(HomeNewsSection(model: response.date, items: response.stories))
                     return sections
                 })
-                .asObservable()
-                .catchErrorJustReturn([])
-        }
+                .catchErrorJustReturn(sections)
+            }
+        
+        let endMore = source2.map(to: ()).asDriver(onErrorJustReturn: ())
         
         let items = Observable.merge(source1, source2).asDriver(onErrorJustReturn: [])
         
-        return Output(bannerItems: bannerItems, items: items)
+        return Output(bannerItems: bannerItems,
+                      items: items,
+                      endRefresh: endRefresh,
+                      endMore: endMore)
     }
 }

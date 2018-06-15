@@ -144,8 +144,8 @@ final class HomeViewController: BaseViewController {
 
         output.bannerItems.drive(bannerView.rx.items).disposed(by: disposeBag)
         
-        output.items.map({ _ in }).drive(progressView.rx.stop).disposed(by: disposeBag)
-        output.items.map({ _ in }).drive(tableView.mj_footer.rx.endRefreshing).disposed(by: disposeBag)
+        output.endRefresh.drive(progressView.rx.stop).disposed(by: disposeBag)
+        output.endMore.drive(tableView.mj_footer.rx.endRefreshing).disposed(by: disposeBag)
         
         output.items.drive(tableView.rx.items(proxy: dataSource)).disposed(by: disposeBag)
         
