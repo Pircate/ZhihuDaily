@@ -85,10 +85,6 @@ final class HomeViewController: BaseViewController {
     private let viewModel = HomeViewModel()
     private let refresh: PublishSubject<Void> = PublishSubject<Void>()
     fileprivate var isLoadable = false
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +100,12 @@ final class HomeViewController: BaseViewController {
         
         view.bringSubview(toFront: navigation.bar)
         view.bringSubview(toFront: menuButton)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.navigationBar.barStyle = .black
     }
 
     override func didReceiveMemoryWarning() {

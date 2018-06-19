@@ -38,12 +38,6 @@ final class NewsDetailViewController: BaseViewController {
             .systemFont(ofSize: 18)
             .numberOfLines(2).build
     }()
-    
-    var statusBarStyle: UIStatusBarStyle = .lightContent
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,9 +122,7 @@ extension NewsDetailViewController: UIScrollViewDelegate {
             }
         }
         navigation.bar.isHidden = scrollView.contentOffset.y < 180
-        statusBarStyle = scrollView.contentOffset.y < 180 ? .lightContent : .default
         navigationController?.navigationBar.barStyle = scrollView.contentOffset.y < 180 ? .black : .default
-        setNeedsStatusBarAppearanceUpdate()
     }
 }
 
