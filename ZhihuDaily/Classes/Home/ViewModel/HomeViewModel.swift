@@ -66,7 +66,7 @@ class HomeViewModel {
                     return sections
                 })
                 .catchErrorJustReturn(sections)
-            }
+            }.shareOnce()
         
         let endMore = source2.map(to: ()).asDriver(onErrorJustReturn: ())
         
