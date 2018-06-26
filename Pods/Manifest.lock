@@ -4,7 +4,7 @@ PODS:
   - CocoaChainKit (0.4.7)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
-  - EachNavigationBar (0.2.1)
+  - EachNavigationBar (0.3.0)
   - FDFullscreenPopGesture (1.1)
   - FSCycleScrollView (0.2.0):
     - FSPagerView
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   CocoaChainKit: 8a9548d22a59e53304bea6aab91a70f0ddcae6bc
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  EachNavigationBar: 2f1449a956d160acadbf8dc17de84a61c3c7b1f1
+  EachNavigationBar: 9d7f4391e8fbda7e07f52243c43ec7da9f074a7f
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSCycleScrollView: 7b86b4000aa8a958d338e0ed294a3c02f9fb73de
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
