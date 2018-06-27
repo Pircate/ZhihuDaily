@@ -52,25 +52,24 @@ class HomeViewModel {
         let source1 = refresh.map({ response -> [HomeNewsSection] in
             sections = [HomeNewsSection(model: response.date, items: response.topStories)]
             return sections
-        })
+        }).asDriver(onErrorJustReturn: [])
         
-        let endRefresh = source1.map(to: ()).asDriver(onErrorJustReturn: ())
+        let endRefresh = source1.map(to: ())
         
         let source2 = input.loading.flatMap {
             NewsAPI.beforeNews(date: sections.last?.model ?? "")
                 .request()
                 .map(HomeNewsListModel.self)
-                .asObservable()
-                .map({ response -> [HomeNewsSection] in
-                    sections.append(HomeNewsSection(model: response.date, items: response.stories))
-                    return sections
-                })
-                .catchErrorJustReturn(sections)
-            }.shareOnce()
+                .map({ [HomeNewsSection(model: $0.date, items: $0.stories)] })
+                .catchErrorJustReturn([])
+            }.map({ section -> [HomeNewsSection] in
+                sections += section
+                return sections
+            }).asDriver(onErrorJustReturn: [])
         
-        let endMore = source2.map(to: ()).asDriver(onErrorJustReturn: ())
+        let endMore = source2.map(to: ())
         
-        let items = Observable.merge(source1, source2).asDriver(onErrorJustReturn: [])
+        let items = Driver.of(source1, source2).merge()
         
         return Output(bannerItems: bannerItems,
                       items: items,
