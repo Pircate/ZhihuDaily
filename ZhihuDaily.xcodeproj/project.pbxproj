@@ -72,7 +72,6 @@
 		B562239F1FFC729C0012CCB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B56223BA1FFC730E0012CCB2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B56223BD1FFC734E0012CCB2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhihuDaily-Bridging-Header.h"; sourceTree = "<group>"; };
 		B56223C71FFC7E1D0012CCB2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B563AAE72015AB4B00F4AC66 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B563AAEC2015AC8400F4AC66 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -343,7 +342,6 @@
 				3381049C20AC7E3700B02833 /* Navigatable.swift */,
 				B563AAEB2015AC8400F4AC66 /* UI */,
 				B531638D201FFF4200828CA2 /* Updatable.swift */,
-				B56223BF1FFC767C0012CCB2 /* ZhihuDaily-Bridging-Header.h */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -778,21 +776,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BDD68D98V;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JCore",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JPush",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/JCore",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/JPush",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ZhihuDaily/Vendor/ZhihuDaily-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -807,21 +798,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BDD68D98V;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JCore",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/JPush",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/chengtaytong/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/JCore",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/JPush",
-					"$(PROJECT_DIR)/ZhihuDaily/Vendor/Network/ChengTayTong/Pods/WechatOpenSDK/OpenSDK1.8.1",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ZhihuDaily/Vendor/ZhihuDaily-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
