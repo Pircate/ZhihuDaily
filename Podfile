@@ -4,7 +4,7 @@ target 'ZhihuDaily' do
   
   use_frameworks!
 
-  pod 'RxNetwork'
+  pod 'RxNetwork/Cache'
   pod 'RxSwiftX'
   pod 'RxSwiftX/DataSources'
   pod 'RxSwiftX/MJRefresh'
