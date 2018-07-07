@@ -29,7 +29,6 @@
 		0A827AA32B5C77906DE7C404E87F570E /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A557B00D61A3C9EB7B9957811005059A /* Bag.swift */; };
 		0ADD6071BF70E2DCE27CF25E400D0D4C /* ChainCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD008E0CC944F764579DB9BBDD9F8705 /* ChainCompatible.swift */; };
 		0B26526C8FCCDB7F42D4970A772656D7 /* DelegateProxyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75D5C88E1CF0B3EE4B07B51D433998E /* DelegateProxyType.swift */; };
-		0B37E95FAE74C9B186B32415D09B0BC0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2392E0A884FCC717A76D10AE5853D72C /* Network.swift */; };
 		0C258DFFF79CA92AC40DBC2E0DD58E83 /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787058F051A2F4B8B533A08F8E63006 /* Platform.Darwin.swift */; };
 		0CF6741F5074EE65E310C5A8CDD065D3 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EC60DCD63628DBC9C058E25B1AA1C5 /* AnyEncodable.swift */; };
 		0D015AAB2E75DE08EC7FE9AC390103AF /* RxTextStorageDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFB31B5F0246B117ACFC59C7216971 /* RxTextStorageDelegateProxy.swift */; };
@@ -54,6 +53,7 @@
 		13014B17A893F67B7B6874E75CA73236 /* KVORepresentable+CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E3E7D6D68DDA60C7E0D6902299854 /* KVORepresentable+CoreGraphics.swift */; };
 		13FB00B18FE67317388F6340FD1FEEDC /* UITextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA4F0BBB369C1A3A9D48C118BDBB66A /* UITextField+Rx.swift */; };
 		148C3F4622FB19C73303F2ECE3F050E2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B93BBED9BCB3194C997DC43FED75BA /* Image.swift */; };
+		1535CC9D4E3D07DC145AD418C81CA77D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5724052172CEE2B5F85FCFCDAA928A /* Network.swift */; };
 		15C6E1464BBCAF12FD9792D39566597B /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00967A0049116B8B2636BE68F4024536 /* DisposeBag.swift */; };
 		16E69AA023CD1FC1AABF73B06E3551A5 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8265916B050F5FC6702763B7C4499B /* Zip.swift */; };
 		17258B9FFE74A7E0F264DFC97296CD27 /* ExpirationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED80EF1D85BE571506F9E2AC713F45 /* ExpirationMode.swift */; };
@@ -94,7 +94,9 @@
 		21ABE61743D7966A54D2F507E0A8568B /* Deferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0994020C9EE3EF1D2483265B25483B8 /* Deferred.swift */; };
 		22003FD0BE5C235F6147C4A76AD80E2A /* Completable+AndThen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0897AE9F01D768DBA03BAC2F413A9AEA /* Completable+AndThen.swift */; };
 		2216B88D5A894A59CAF8700E932B1E61 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E884AD35206E39CDA23AE81543C08F42 /* MultipartFormData.swift */; };
+		2234C33A1A9E78E99A91C3DA0E9A318E /* OnCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3ACED5CE1F91E53144E45E5EECCE8 /* OnCache.swift */; };
 		23080AD01B6FC551C83D64F883DDA9DF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA34ADF817E5D92C643A38F3695F3EE /* RxSwift.framework */; };
+		23A3F6EE3CDE6FACAB3C8360A202DBB2 /* Network+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317EE794BEF6B77A13DB94FF892C7566 /* Network+Cache.swift */; };
 		23B3F16D41995A98E65F9BEF34EAEA9E /* HasFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780E968563ABFEF1A65F66029F89472C /* HasFont.swift */; };
 		24191C2911CF05AF7BC2454C28071175 /* UITextView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80404F12DEF8DEBD215C2FE6BFFE04A1 /* UITextView+Rx.swift */; };
 		247F701B4E070B9A98A81C1CA56B28AE /* RxNavigationControllerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989814363F0EAC1FB4D5ABF5EEB9402D /* RxNavigationControllerDelegateProxy.swift */; };
@@ -168,7 +170,6 @@
 		3F02ACDC271D2E43CC67EE2628A2E729 /* SourcePreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69421E0EE2939AF23CBC042EE64965 /* SourcePreprocessor.swift */; };
 		3F0CC2D754C2DCC0E75C15C64F641130 /* HeroTransition+Complete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18580DEA6AC0679231801EA538206F4 /* HeroTransition+Complete.swift */; };
 		3F7E72105B19373C5344A0A17C6AC43A /* RxCocoa-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98211E4310F3BBEEEEDD7F7B23F2892F /* RxCocoa-dummy.m */; };
-		3FC518C31C29822AD836D7595C7973E9 /* TargetType+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2889514B23AE1CB52CEEA923866316 /* TargetType+Cache.swift */; };
 		4072D85A80463AD035E0F457B4682E50 /* ObservableConvertibleType+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231A61C432792D26296F55E0062CFE15 /* ObservableConvertibleType+Signal.swift */; };
 		40791B398FCEA653BF9149472E88F9CA /* HeroTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8641F02761F4829C2A42E39F5AB7C23 /* HeroTypes.swift */; };
 		4195A45DCE56DDFDFFC902536D5DBDB4 /* CocoaChainKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ACA54EA5ADDB1DAA7B5EB07EE903BD8E /* CocoaChainKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -238,7 +239,6 @@
 		58E6E68D10EF3D64522BD267CC1761A6 /* NSBundle+MJRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 92C172F26C8405E0EB2F8148F448F81E /* NSBundle+MJRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59454047898A0676560C19DD3EA679BD /* ToArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29190C449D0970166698DC906C4C4E22 /* ToArray.swift */; };
 		594C169842DF4F2ABC61B18192B4A46D /* DeprecationWarner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34015C8E7F50211C33EA19B030FA3CE /* DeprecationWarner.swift */; };
-		59C0A35B4A743896E2E50774D3F1F053 /* Network+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78939AC283858C9B984551589B9FDD72 /* Network+Configuration.swift */; };
 		5A6B7157B2BB214412602E9CAE5A69BC /* CompositeDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A5F6DCDC8E2039D8FEDF258F9756E /* CompositeDisposable.swift */; };
 		5B34ECFD10573AC448FEEDCC93B8D143 /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED2EDE8612522A811BEA1E3BFE857D4 /* RecursiveLock.swift */; };
 		5B627A82BBB54E31F5055700E0C98A64 /* UIButton+Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C3ED2D03695BA1BF4CC299AC8990A3 /* UIButton+Chain.swift */; };
@@ -249,7 +249,6 @@
 		5DAE36C060D623436AE19EA3D48672A7 /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E29EF3D9E0B18673610C547BC8926 /* Reduce.swift */; };
 		5DF025BF1D50816B78DBED25B26C33B1 /* DisposeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE65C7F8B4EC0BF0A16560A05223B70 /* DisposeBase.swift */; };
 		5E16EDC4BD8B288A4C6FD751033C5D62 /* Driver+Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532B31AFCC7603382E11E9195F6AC4F /* Driver+Subscription.swift */; };
-		5E392BAB16D3E663D4E7B4A5863CD650 /* Single+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440296F0215079EB3C2EA5BA8C1E0B73 /* Single+Cache.swift */; };
 		5E65D19438DABB9B2306092EF245A03A /* UINavigationItem+Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C670A17E9FDFD8D4BAB6969549CFD5 /* UINavigationItem+Chain.swift */; };
 		5ECEF7CC31C59D96047893A3991A26DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2813837B57B332B1AE88A8D71F5F949 /* Foundation.framework */; };
 		5ED37B6B7BCE8583241906830680A5AD /* ObservableConvertibleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282328BAA8D4D848A6BA74A61967C6CB /* ObservableConvertibleType.swift */; };
@@ -281,7 +280,7 @@
 		67D77F29D69BA9602618BFB994A07405 /* UIGestureRecognizer+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71D314A0834B9E50234ACD64A04EEF /* UIGestureRecognizer+Rx.swift */; };
 		6855D299002C29356E19891AE19389F9 /* RxCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 863F364B506145508B98AEB33BF7A3DA /* RxCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		68B2C6EAE824CF14174CFC71AA6EEDC7 /* JSONArrayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E2EA264C81BED703BBE7B396EA3573 /* JSONArrayWrapper.swift */; };
-		68EF07EC1665CBB3EC99B0553ADA0807 /* RxNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 80354911F8CEA16580EBDAFBC20DCEC0 /* RxNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68EF07EC1665CBB3EC99B0553ADA0807 /* RxNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A5DA6D36D2BAC464D97A3BCEFDFB8BC /* RxNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		691F55D0A50AF28F4682D9B2CC6F1A0C /* SwitchIfEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933234B954ECE1177ABA9BFE247E19BF /* SwitchIfEmpty.swift */; };
 		6A0B1A0FA7A75C861B9D401D0E8CC95E /* MJRefreshGifHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F3E22CB35482E4405D3A8CF3954307 /* MJRefreshGifHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B7A6C7DB460C423B7DB5C9CBACDB2F1 /* HeroDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193FB65350E49A9E05D8BB6C190CDDE /* HeroDebugView.swift */; };
@@ -315,6 +314,7 @@
 		7718718BA955BC1ADF13A14CF2FAEC0D /* AnimatableSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC42E4DAEDAC58001BD83D26111861B /* AnimatableSectionModel.swift */; };
 		776702E8743007AC3AFC1E7F76299616 /* FDFullscreenPopGesture-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B8D23D9DE885293724ED692C5A78C450 /* FDFullscreenPopGesture-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77C5736951C157B0CD11238F81902E2B /* Do.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84134E8B687170D2834750C60D53791 /* Do.swift */; };
+		787DBD04BC4F1DCE06A10DD71A85D11A /* TargetType+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469ED8D904F07D6DBBBA6A5120DD6E37 /* TargetType+Cache.swift */; };
 		79115B98C81C6F148D4EA24B55CD5D50 /* HeroAnimatorViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC355B91393B93B3BC12D71D0510308 /* HeroAnimatorViewContext.swift */; };
 		7942D242D079A5710A72B659A54D7E26 /* MJRefreshNormalHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 79B5CF74330F3C2856CEB8760F28D542 /* MJRefreshNormalHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A5AD6E43ACE0DF81CBFAE29B2BEB426 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EDD177EBA52DDC39F3A892D7DE07C /* UITableView+Rx.swift */; };
@@ -324,6 +324,7 @@
 		7C14CB963E6A0CD329337656F5F93AC9 /* GroupedObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589E5A942A5A8A5A20F2C04471E77404 /* GroupedObservable.swift */; };
 		7C4AC3BB4BDFD2FC86B1294497DA7370 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76588A5E41D8EE86E8F89473915AB20E /* Chain.swift */; };
 		7CC587435D8D1E2DF702C9AE3012AE52 /* UIBarItem+Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E7226C45A0E33CB6B0B91A9D23175 /* UIBarItem+Chain.swift */; };
+		7CE4A8D288C92A55EA3A96EC2BD6FDF5 /* RxNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C4F59C5D73FA81F43FBA7CE9F724B /* RxNetwork-dummy.m */; };
 		7D572ADB6EB7D56958FF0956B270C948 /* BehaviorRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1715AA075B51F11633DCFB17C29B4 /* BehaviorRelay.swift */; };
 		7D5BE85A72B8C4286302A095D6EB30B0 /* AsyncLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4A4875B962A9B812A45255CF273FFA /* AsyncLock.swift */; };
 		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8D3AE476881560C63868AF99C7ED2 /* Result.swift */; };
@@ -336,6 +337,7 @@
 		800658950852AC0B1B304DD4A3D86119 /* Delegated-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B3EF1DEF5A427C14A31EA4695720A63 /* Delegated-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		803A76967AD10A92304BBA4A4328FFB8 /* SynchronizedDisposeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B3671EE2CE71F3C30D9E0FBE5DCA7 /* SynchronizedDisposeType.swift */; };
 		8069223DDD6D0F2E1A87D8E66966709B /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 35511BA9AA51BC570C84B1FFCC307D0A /* MJRefreshConst.m */; };
+		808C35D70E6BD03C494ED1EF7B8AB583 /* NetworkIndicatorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7A049D8FA9BF3C618889CA22F8C82 /* NetworkIndicatorPlugin.swift */; };
 		80FC1FB1573C34871A2E4F212C90DA2B /* Amb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71075B3EB8125FDCB1A90782BFAC242A /* Amb.swift */; };
 		811CB2AAE8D72C3158BB4E82F4346B73 /* Enumerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C70A9B4D2BBBA69C374EF184A59E1F /* Enumerated.swift */; };
 		81A26E48B5EF6CA274D862F33C655D07 /* Zip+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAFFA149DD1872F581F739E0119F8D0 /* Zip+Collection.swift */; };
@@ -386,7 +388,6 @@
 		9325E5FC5A16A35E3763244755FE8B92 /* KVORepresentable+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5426C25B5C8263EF32EBA72CFB4B136 /* KVORepresentable+Swift.swift */; };
 		9327455289A6B8F3D0B8E01FCB719138 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2813837B57B332B1AE88A8D71F5F949 /* Foundation.framework */; };
 		936C89C05071939B04B9674DD5776B23 /* UINavigationController+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AA2A8FEF16AD104F567483844292E2 /* UINavigationController+Configuration.swift */; };
-		946220C007C083018D57136CB3A413C0 /* NetworkIndicatorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA7587FA27D6C4C7A072A7AE5472EE /* NetworkIndicatorPlugin.swift */; };
 		9480E517449BDB7ACA88E53A909E9CE7 /* RxPickerViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B262B45937C0C82F04B3B1629D4BAF9 /* RxPickerViewDataSourceProxy.swift */; };
 		95228A853A612899ADE49EF73A7F72C2 /* Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94959B78AC8E3B2784F1420AC4D17FC /* Take.swift */; };
 		963297FCB94C2AE93ED1B593A653C4B1 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07666A58D39A8D681014F544225CF354 /* Range.swift */; };
@@ -412,8 +413,6 @@
 		9B4553AFF23D441B668C667951ABE161 /* UINavigationBar+Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AE3B2F2E0042B571441D16BE2DAFF /* UINavigationBar+Chain.swift */; };
 		9B6FF2865166F38ED0F8C7152AB33B68 /* RxCollectionViewDataSourcePrefetchingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4417E69E290386B248B57E29CDC964 /* RxCollectionViewDataSourcePrefetchingProxy.swift */; };
 		9C5DE96EC8D327AD2B48E5EE92F63BEE /* RxCollectionViewDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C57979CF3C0C73CBD30248EF9AB665 /* RxCollectionViewDataSourceType.swift */; };
-		9D203E7FA7EF69B5A3B6B70082F251E7 /* TargetType+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84598E3F805D6AAB7537CCDEFBB8B02E /* TargetType+Rx.swift */; };
-		9D59675BDD31E233CB0EA30F0B5E34F4 /* OnCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65C4A1DF8F12842944B619F352504D /* OnCache.swift */; };
 		9D69938DEE8ACD4E8E9EE13023EF7634 /* URLSession+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B84D40B92DECA522473F7763595F90B /* URLSession+Rx.swift */; };
 		9DC2DC2B7E61C4780A70D4DDE59EF2E0 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8105D9ADF9CDCAE0F686CE52BF3CA9 /* PriorityQueue.swift */; };
 		9E15CD9446994BBB61E32D6FA5FF2671 /* UIRefreshControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CA734B786298D9E7B89AAA7D56B8A1 /* UIRefreshControl+Rx.swift */; };
@@ -428,6 +427,7 @@
 		A0E6483419942ECB999BFC876DA05ED7 /* SynchronizedUnsubscribeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C609BB8312F041E6DFFB76F44BA8D27 /* SynchronizedUnsubscribeType.swift */; };
 		A1059CDCBB9C4F39B748BDFB1A997927 /* SharedSequence+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2720083EA9FCE172B17CFC0211FD563 /* SharedSequence+Operators.swift */; };
 		A156FCC98EC0AC9DF82F502DFCA7D25F /* TableViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC01F3B25A8C6F70B46230DFD912946 /* TableViewSectionedDataSource.swift */; };
+		A163C00213EEC041A579174DFE771BD8 /* Observable+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C150BD8C376CF49EC10107042074E9DD /* Observable+Cache.swift */; };
 		A19FDF5E3A4EAE209EFFA1820954FD27 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ED1D436FEB31A002D9BEF99A98534B /* Parser.swift */; };
 		A29D25DC316D435AA68B41197DACA784 /* RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B382E328F86D61989A08B5450B11A5CF /* RequestModifier.swift */; };
 		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC15E0A6A48AA24675236E60E9392E0 /* NetworkReachabilityManager.swift */; };
@@ -440,6 +440,7 @@
 		A54AF941309171E461F141A3EC65FD7C /* RxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280535E9481DB7E5EEAE6C8BBC10D5F8 /* RxTableViewSectionedAnimatedDataSource.swift */; };
 		A6A60A4EED8E54C7F7CF50CA02EF9C25 /* FSPagerView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 97FDC3D2801F509C15B150877DF1C304 /* FSPagerView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EBEE2A353C8D1C162F6AF8FDB85980 /* TakeWhile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F26F309AA0038AD1CF730B0C6A48C8 /* TakeWhile.swift */; };
+		A7240A06067ADCFFC6360E2EC6966902 /* TargetType+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA4CE84CBBDE1A8CBDA265F0C765B0 /* TargetType+Rx.swift */; };
 		A72D242BEF61E27D6C29092DF4666A4A /* MJRefreshComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DB531B14A3439095F327F40B59784C4 /* MJRefreshComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A793E8E726FC800C745DDFBCD207A1BD /* Moya+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C1450AB09D8D9E1FAC19B72D6819B /* Moya+Alamofire.swift */; };
 		A8C8F1214F1231F5935B78BA2022426B /* AddRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F052160449863D01C2CC216E5F5D5 /* AddRef.swift */; };
@@ -495,9 +496,9 @@
 		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E71A8162E6135ADDF5DA9DB1A4022C /* Validation.swift */; };
 		BC13B1A4968ED919D66FB8860B54EE3C /* SubscriptionDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676866933450D0181D5AD467BCB4FB2D /* SubscriptionDisposable.swift */; };
 		BC2409C2C868B2630464C2FC196E4386 /* Cache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2BA79D8E29C5B0813FF725F4412D0 /* Cache-dummy.m */; };
+		BD1C0E5D1CBFD1AF128D6FC5998A75C1 /* Single+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9FCDF66B813B6FF6646E911DA1653 /* Single+Cache.swift */; };
 		BD31BD2AA99ADF9DC2CC02E4FEC1F508 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B89F8FB945EAA3184BA74963CD689BE /* ConstraintMakerExtendable.swift */; };
 		BD66B45146F8BB0B57C1555B2C7906DE /* ThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98D2FC0D46F2FD127441F3992055C0 /* ThreadHelper.swift */; };
-		BD694489BF3C447DC849092F20480738 /* Observable+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE5E6B72D3C1DE7530E0AD5E371A68E /* Observable+Cache.swift */; };
 		BD92C5A42665099C96B1F3F1BF93BDB4 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCACBC9A2929255A22179CC362237E6 /* ConstraintDescription.swift */; };
 		BDA02DF5A9B9C010956C4E630EBD3402 /* VirtualTimeConverterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F155A64378F66C22CFBFC2DF94EDBEDB /* VirtualTimeConverterType.swift */; };
 		BDB33C3708110C6D755175D1F0A2A70B /* MJRefreshStateHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 240DB9DA11BBAAAD7A1C51672329879F /* MJRefreshStateHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -569,6 +570,7 @@
 		D467DD9164F159B9E9C246841C1A6F2F /* HeroViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B8360989263E23AC9DD2F10C95F608 /* HeroViewControllerDelegate.swift */; };
 		D4CF1BA55A430C05AD6274AFF6219173 /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1F998C5B8FEA125DAD6A650EDD634 /* RecursiveLock.swift */; };
 		D53592EB00ED1950DFE17A8F1941DED6 /* UITableView+Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70E4B6935167F00D78166C8910793DF /* UITableView+Chain.swift */; };
+		D555191BFEF627DD6B97453AE8ACD2D1 /* Network+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA5B773CC9E96A50FEAEA351B65F30 /* Network+Configuration.swift */; };
 		D62F24C11CA1F19D8E7FA8E2E5238528 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71F7E0C6C5205DE4BD4DF12AC46B33 /* Cancelable.swift */; };
 		D66E78D63935A98894E702D922AA8B91 /* MJRefreshBackGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE068F365B01492A332C298E20D79061 /* MJRefreshBackGifFooter.m */; };
 		D70AE85D0EA5CEBEC005E27067AAAAC4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E2E8C0FD8EC1A962AFFBB78F14E558 /* Storage.swift */; };
@@ -641,7 +643,6 @@
 		EFDB2F0FA8B1E773E28DA3263912B74B /* RxPickerViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD54C442282E304D2F65ADF0072EF9F9 /* RxPickerViewDelegateProxy.swift */; };
 		F11C4099F77748525975EDA939D79896 /* RxSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDFD06472E7CADA31626D3AD708EB46 /* RxSwift-dummy.m */; };
 		F17CF76C742A41ACC4F313C47A974E69 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 133AB61F050CA1DF88A25429DB024A28 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F21E8FF05F06A8ECB65693C1DB7B5B4C /* RxNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3759A3CD71359B574DE0AFD689011B /* RxNetwork-dummy.m */; };
 		F24F74F3C6E3DA9E1F86AE567FF9DF05 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D629E471DD5FDCD82A9ECD0C42727274 /* Observable.swift */; };
 		F2653B87DA0CA7FA08C28FD44A4FB207 /* RxDataSources-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F301FBBAC6EA5664EAD2B4D4D2D43FB0 /* RxDataSources-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2986EAE60155740AA92A96BD8598598 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7248139ED2F92610A47C42D3291EA457 /* Switch.swift */; };
@@ -993,6 +994,7 @@
 		07F35F9309EDEFE462FC2C073C426032 /* FSPageViewLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPageViewLayout.swift; path = Sources/FSPageViewLayout.swift; sourceTree = "<group>"; };
 		085B8E4F8682B5B0B5F805C3E318E6A4 /* CombineLatest+Collection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CombineLatest+Collection.swift"; path = "RxSwift/Observables/CombineLatest+Collection.swift"; sourceTree = "<group>"; };
 		0897AE9F01D768DBA03BAC2F413A9AEA /* Completable+AndThen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Completable+AndThen.swift"; path = "RxSwift/Traits/Completable+AndThen.swift"; sourceTree = "<group>"; };
+		08C7A049D8FA9BF3C618889CA22F8C82 /* NetworkIndicatorPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkIndicatorPlugin.swift; path = RxNetwork/Classes/Core/NetworkIndicatorPlugin.swift; sourceTree = "<group>"; };
 		08CC748AB258FBEE9E0A978BA96427E6 /* ObserveOn.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObserveOn.swift; path = RxSwiftX/Classes/Swift/ObserveOn.swift; sourceTree = "<group>"; };
 		08EB76C59B5AA291A640742A2AA3D701 /* FSPagerCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPagerCollectionView.swift; path = Sources/FSPagerCollectionView.swift; sourceTree = "<group>"; };
 		0958BF7217EC718DC8A9D41CC253F3B0 /* SchedulerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SchedulerType.swift; path = RxSwift/SchedulerType.swift; sourceTree = "<group>"; };
@@ -1019,6 +1021,7 @@
 		1281E3050AB6740CE7F27C771FBE926F /* UICollectionView+Proxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Proxy.swift"; path = "RxSwiftX/Classes/DataSources/UICollectionView+Proxy.swift"; sourceTree = "<group>"; };
 		133AB61F050CA1DF88A25429DB024A28 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
 		134C0D614916A22438F7B60092AAE00A /* Timer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = RxSwift/Observables/Timer.swift; sourceTree = "<group>"; };
+		13AA4CE84CBBDE1A8CBDA265F0C765B0 /* TargetType+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TargetType+Rx.swift"; path = "RxNetwork/Classes/Core/TargetType+Rx.swift"; sourceTree = "<group>"; };
 		13EE58D5B1C946E7610A9AC79865E4AB /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F4988AEE6556DB797EA4BC3CDF0E2B /* TypeWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypeWrapper.swift; path = Source/Shared/Library/TypeWrapper.swift; sourceTree = "<group>"; };
 		147677E9CA0D95C5439D67CA51D337D7 /* JSONDictionaryWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONDictionaryWrapper.swift; path = Source/Shared/Library/JSONDictionaryWrapper.swift; sourceTree = "<group>"; };
@@ -1046,6 +1049,7 @@
 		1C609BB8312F041E6DFFB76F44BA8D27 /* SynchronizedUnsubscribeType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SynchronizedUnsubscribeType.swift; path = RxSwift/Concurrency/SynchronizedUnsubscribeType.swift; sourceTree = "<group>"; };
 		1C9F01A9C802C874E788CD34DC1F46D8 /* HistoricalScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HistoricalScheduler.swift; path = RxSwift/Schedulers/HistoricalScheduler.swift; sourceTree = "<group>"; };
 		1CB3889903167AFA38CFD1715F9728C8 /* UITabBar+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITabBar+Rx.swift"; path = "RxCocoa/iOS/UITabBar+Rx.swift"; sourceTree = "<group>"; };
+		1CE3ACED5CE1F91E53144E45E5EECCE8 /* OnCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnCache.swift; path = RxNetwork/Classes/Cache/OnCache.swift; sourceTree = "<group>"; };
 		1D774FE839F806ECDC7C0112A35E5DFC /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		1DB531B14A3439095F327F40B59784C4 /* MJRefreshComponent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshComponent.h; path = MJRefresh/Base/MJRefreshComponent.h; sourceTree = "<group>"; };
 		1F2749DDC857A5E6939924B7E11BFBAD /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = RxSwift/Deprecated.swift; sourceTree = "<group>"; };
@@ -1060,8 +1064,8 @@
 		2242BE701421C113E18FD27C0268A8C8 /* ObservableConvertibleType+Driver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableConvertibleType+Driver.swift"; path = "RxCocoa/Traits/Driver/ObservableConvertibleType+Driver.swift"; sourceTree = "<group>"; };
 		225523F4DE3FE5C6FFCD7ED44B46B1E4 /* _RXKVOObserver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = _RXKVOObserver.m; path = RxCocoa/Runtime/_RXKVOObserver.m; sourceTree = "<group>"; };
 		225B0112182F0B28A8610964C69C33F1 /* FSPagerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSPagerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EA5B773CC9E96A50FEAEA351B65F30 /* Network+Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Network+Configuration.swift"; path = "RxNetwork/Classes/Core/Network+Configuration.swift"; sourceTree = "<group>"; };
 		231A61C432792D26296F55E0062CFE15 /* ObservableConvertibleType+Signal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableConvertibleType+Signal.swift"; path = "RxCocoa/Traits/Signal/ObservableConvertibleType+Signal.swift"; sourceTree = "<group>"; };
-		2392E0A884FCC717A76D10AE5853D72C /* Network.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Network.swift; path = RxNetwork/Classes/Core/Network.swift; sourceTree = "<group>"; };
 		23D1C3682313636619AB3ED7017DE1F9 /* SchedulerType+SharedSequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SchedulerType+SharedSequence.swift"; path = "RxCocoa/Traits/SharedSequence/SchedulerType+SharedSequence.swift"; sourceTree = "<group>"; };
 		23E99E3F143F41DA516590FAD9BCBBA1 /* UITabBarItem+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITabBarItem+Rx.swift"; path = "RxCocoa/iOS/UITabBarItem+Rx.swift"; sourceTree = "<group>"; };
 		240DB9DA11BBAAAD7A1C51672329879F /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshStateHeader.h; path = MJRefresh/Custom/Header/MJRefreshStateHeader.h; sourceTree = "<group>"; };
@@ -1085,6 +1089,7 @@
 		29190C449D0970166698DC906C4C4E22 /* ToArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToArray.swift; path = RxSwift/Observables/ToArray.swift; sourceTree = "<group>"; };
 		2A2316D7F14D14E41DAF953AA579E16C /* UIButton+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+Kingfisher.swift"; path = "Sources/UIButton+Kingfisher.swift"; sourceTree = "<group>"; };
 		2A4157DC92AE91ACE209FCE28F7B8411 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		2A5DA6D36D2BAC464D97A3BCEFDFB8BC /* RxNetwork-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxNetwork-umbrella.h"; sourceTree = "<group>"; };
 		2A785576A26787A065B34A7B48973307 /* Sample.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sample.swift; path = RxSwift/Observables/Sample.swift; sourceTree = "<group>"; };
 		2ABF581474988FF5B2E108035E076820 /* HeroTransition+UITabBarControllerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HeroTransition+UITabBarControllerDelegate.swift"; path = "Sources/Transition/HeroTransition+UITabBarControllerDelegate.swift"; sourceTree = "<group>"; };
 		2AEE1A5AE9EFB665BA9553C67F83C115 /* RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1107,6 +1112,7 @@
 		308CB43BF1147E5DFE9CA7A07356060F /* AnonymousDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnonymousDisposable.swift; path = RxSwift/Disposables/AnonymousDisposable.swift; sourceTree = "<group>"; };
 		30C0E8CCBC03EA1137C33EDBF8D74C01 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
 		314FC79E1FAF6B48203833AAE6A7342E /* SerialDispatchQueueScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerialDispatchQueueScheduler.swift; path = RxSwift/Schedulers/SerialDispatchQueueScheduler.swift; sourceTree = "<group>"; };
+		317EE794BEF6B77A13DB94FF892C7566 /* Network+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Network+Cache.swift"; path = "RxNetwork/Classes/Cache/Network+Cache.swift"; sourceTree = "<group>"; };
 		31825BD7A051041192AE7EE6774EF07C /* Merge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Merge.swift; path = RxSwift/Observables/Merge.swift; sourceTree = "<group>"; };
 		327B536FAF225A026A61F3A401C7FF5E /* SubjectType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SubjectType.swift; path = RxSwift/Subjects/SubjectType.swift; sourceTree = "<group>"; };
 		331013E12AE181971155B1F3629D4675 /* Cache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cache-prefix.pch"; sourceTree = "<group>"; };
@@ -1120,7 +1126,6 @@
 		36E47E6F6991C453D028B297E880995F /* FSPagerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSPagerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		378BA0882B6B254704309EAFAFADFFA2 /* NetworkActivityPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkActivityPlugin.swift; path = Sources/Moya/Plugins/NetworkActivityPlugin.swift; sourceTree = "<group>"; };
 		3890936ED6A8F1E703D366F0843855F1 /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MoyaProvider+Rx.swift"; path = "Sources/RxMoya/MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
-		38BA5DB79587F5E16C2D65D51F4431D0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38C3EEB2F8D64430DC3A98383B640CD2 /* Maybe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Maybe.swift; path = RxSwift/Traits/Maybe.swift; sourceTree = "<group>"; };
 		391E687BDE14CC3F52D92513D5E84510 /* Expiry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expiry.swift; path = Source/Shared/Library/Expiry.swift; sourceTree = "<group>"; };
 		3988EDA86B7070169E26885C56701768 /* UserDefaults+Chain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Chain.swift"; path = "CocoaChainKit/Classes/UserDefaults+Chain.swift"; sourceTree = "<group>"; };
@@ -1154,6 +1159,7 @@
 		4106CE4980AC5BA50E06C123E06B22FE /* HeroModifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeroModifier.swift; path = Sources/HeroModifier.swift; sourceTree = "<group>"; };
 		4114D2437DE5E34194E29AE3C4334AD8 /* UIPickerView+Chain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPickerView+Chain.swift"; path = "CocoaChainKit/Classes/UIPickerView+Chain.swift"; sourceTree = "<group>"; };
 		414A42A114C6F97B811ADAD96C5A01BC /* UINavigationController+Navigation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Navigation.swift"; path = "EachNavigationBar/Classes/UINavigationController+Navigation.swift"; sourceTree = "<group>"; };
+		41555B77EDE643CEAA9DD486E5F955D2 /* RxNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RxNetwork.modulemap; sourceTree = "<group>"; };
 		41AB5628F64D421D84EEABFA6207FDAE /* RxSearchBarDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxSearchBarDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxSearchBarDelegateProxy.swift; sourceTree = "<group>"; };
 		41CF50E6DDB353A88CFE578410856614 /* Cache.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cache.modulemap; sourceTree = "<group>"; };
 		41E464FED762DD91EF9B2F875BADCBDE /* RxCollectionViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCollectionViewSectionedReloadDataSource.swift; path = Sources/RxDataSources/RxCollectionViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
@@ -1167,12 +1173,12 @@
 		43C469532ACB43B4D1C943E2D04A9793 /* ConditionalPreprocessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConditionalPreprocessor.swift; path = Sources/Preprocessors/ConditionalPreprocessor.swift; sourceTree = "<group>"; };
 		43D7198EC03BC32B13E29128EC07FBF4 /* StorageAware.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StorageAware.swift; path = Source/Shared/Storage/StorageAware.swift; sourceTree = "<group>"; };
 		43DDBF7F8032D7E1D7137CF46C13C208 /* RxDataSources-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxDataSources-dummy.m"; sourceTree = "<group>"; };
-		440296F0215079EB3C2EA5BA8C1E0B73 /* Single+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Single+Cache.swift"; path = "RxNetwork/Classes/Cache/Single+Cache.swift"; sourceTree = "<group>"; };
 		44097F4983E3DFF812B8A41AB8E19C62 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
 		441F8A49F541ECB1917DCAFB866568AC /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Filter.swift; sourceTree = "<group>"; };
 		44925369AFF4765DE61A215DEAFB031D /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = RxSwift/Errors.swift; sourceTree = "<group>"; };
 		4532B31AFCC7603382E11E9195F6AC4F /* Driver+Subscription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Driver+Subscription.swift"; path = "RxCocoa/Traits/Driver/Driver+Subscription.swift"; sourceTree = "<group>"; };
 		45BA76918172D0B2388F684B322854B9 /* Types.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Types.swift; path = Source/Shared/Library/Types.swift; sourceTree = "<group>"; };
+		469ED8D904F07D6DBBBA6A5120DD6E37 /* TargetType+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TargetType+Cache.swift"; path = "RxNetwork/Classes/Cache/TargetType+Cache.swift"; sourceTree = "<group>"; };
 		46F6F6DBC09E0BC1C9D2E8F29B357B81 /* RxSwiftX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxSwiftX.xcconfig; sourceTree = "<group>"; };
 		4792A4A14BE0FDAB7E35E68306C0D354 /* Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Sources/Differentiator/Utilities.swift; sourceTree = "<group>"; };
 		4794198B89B93F2C54533ACAC6380267 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
@@ -1280,6 +1286,7 @@
 		662964077EE573229E6D7BF027321EBB /* NSTextStorage+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSTextStorage+Rx.swift"; path = "RxCocoa/iOS/NSTextStorage+Rx.swift"; sourceTree = "<group>"; };
 		6662CE58DA29C86F1BA64237A302FAAB /* Deprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deprecated.swift; path = Sources/RxDataSources/Deprecated.swift; sourceTree = "<group>"; };
 		668AD8CB80C98981B3A3BB249204BEA6 /* SerialDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerialDisposable.swift; path = RxSwift/Disposables/SerialDisposable.swift; sourceTree = "<group>"; };
+		66C9FCDF66B813B6FF6646E911DA1653 /* Single+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Single+Cache.swift"; path = "RxNetwork/Classes/Cache/Single+Cache.swift"; sourceTree = "<group>"; };
 		66DF33CBFE29400286BD482E25146238 /* UISlider+Chain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UISlider+Chain.swift"; path = "CocoaChainKit/Classes/UISlider+Chain.swift"; sourceTree = "<group>"; };
 		66F35B95225E2A4D28633F36F5A4CA5A /* FSPageControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPageControl.swift; path = Sources/FSPageControl.swift; sourceTree = "<group>"; };
 		66FA43A0B210BC606A0A2B2A113102D0 /* HeroTransition+Start.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HeroTransition+Start.swift"; path = "Sources/Transition/HeroTransition+Start.swift"; sourceTree = "<group>"; };
@@ -1297,15 +1304,12 @@
 		6B642C2BF3FA77C7BD3BD9DDE8F84056 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BED1A59EC47DEAD018DBE059F6F78F9 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
 		6C7AD6A4A82C8F27AB6A01F775EF4187 /* _RXObjCRuntime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = _RXObjCRuntime.h; path = RxCocoa/Runtime/include/_RXObjCRuntime.h; sourceTree = "<group>"; };
-		6CE5E6B72D3C1DE7530E0AD5E371A68E /* Observable+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Observable+Cache.swift"; path = "RxNetwork/Classes/Cache/Observable+Cache.swift"; sourceTree = "<group>"; };
 		6D1C5F95E701FA66CC6A8B842E456BFB /* RxDataSources.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RxDataSources.modulemap; sourceTree = "<group>"; };
 		6E4075C4427B02058CF8A6D969AA7BBC /* First.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = First.swift; path = RxSwift/Observables/First.swift; sourceTree = "<group>"; };
 		6E56BC505A82AB2A011EAC53DFE6E32F /* CAMediaTimingFunction+Hero.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CAMediaTimingFunction+Hero.swift"; path = "Sources/Extensions/CAMediaTimingFunction+Hero.swift"; sourceTree = "<group>"; };
-		6E622364C701962855C074E376F41687 /* RxNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RxNetwork.modulemap; sourceTree = "<group>"; };
 		6EA7ACF99C7E534CFCF14D86A657CA40 /* RxSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxSwift-prefix.pch"; sourceTree = "<group>"; };
 		6F108551BCB17C9E10E3753CF11A9A60 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+FDFullscreenPopGesture.h"; path = "FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		6F2B19089F258626F3FE21F3960C72C7 /* Queue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = Platform/DataStructures/Queue.swift; sourceTree = "<group>"; };
-		6F3759A3CD71359B574DE0AFD689011B /* RxNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxNetwork-dummy.m"; sourceTree = "<group>"; };
 		6F69EE2648460B164BEEA78FDCFDF4DB /* UIPickerView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPickerView+Rx.swift"; path = "RxCocoa/iOS/UIPickerView+Rx.swift"; sourceTree = "<group>"; };
 		6F786A5DFC85685D278FD86C5BA852CC /* UIImageView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+Rx.swift"; path = "RxCocoa/iOS/UIImageView+Rx.swift"; sourceTree = "<group>"; };
 		6F91A2A985D5894572A58BF06924053E /* FDFullscreenPopGesture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FDFullscreenPopGesture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1332,7 +1336,6 @@
 		780E968563ABFEF1A65F66029F89472C /* HasFont.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HasFont.swift; path = CocoaChainKit/Classes/HasFont.swift; sourceTree = "<group>"; };
 		782C8230779C1506A810C745C97DBC1A /* Regex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Regex.swift; path = Sources/Parser/Regex.swift; sourceTree = "<group>"; };
 		7847053EAB800B518C72494A6142782B /* DefaultIfEmpty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultIfEmpty.swift; path = RxSwift/Observables/DefaultIfEmpty.swift; sourceTree = "<group>"; };
-		78939AC283858C9B984551589B9FDD72 /* Network+Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Network+Configuration.swift"; path = "RxNetwork/Classes/Core/Network+Configuration.swift"; sourceTree = "<group>"; };
 		78E38D997DEE6EF4555FFB8FC21E9DDD /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackFooter.h; path = MJRefresh/Base/MJRefreshBackFooter.h; sourceTree = "<group>"; };
 		795CFA0E492B951F0ACFAF388ACB8DCC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796D0FA306B82058EC41ACF8D8F0E8C9 /* UIPageControl+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPageControl+Rx.swift"; path = "RxCocoa/iOS/UIPageControl+Rx.swift"; sourceTree = "<group>"; };
@@ -1361,7 +1364,6 @@
 		7E5F356D887D84A9F122A2AE4400B57A /* EachNavigationBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EachNavigationBar-umbrella.h"; sourceTree = "<group>"; };
 		7F4001165D4C59A42E19DB389D30FE35 /* Pods-ZhihuDaily-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZhihuDaily-resources.sh"; sourceTree = "<group>"; };
 		7F56AD9DE60F284D07F5898933690E98 /* Hero-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Hero-umbrella.h"; sourceTree = "<group>"; };
-		80354911F8CEA16580EBDAFBC20DCEC0 /* RxNetwork-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxNetwork-umbrella.h"; sourceTree = "<group>"; };
 		80404F12DEF8DEBD215C2FE6BFFE04A1 /* UITextView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextView+Rx.swift"; path = "RxCocoa/iOS/UITextView+Rx.swift"; sourceTree = "<group>"; };
 		814654B00402C3062445E9CE2B8C68D0 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoGifFooter.h; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
 		81C670A17E9FDFD8D4BAB6969549CFD5 /* UINavigationItem+Chain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UINavigationItem+Chain.swift"; path = "CocoaChainKit/Classes/UINavigationItem+Chain.swift"; sourceTree = "<group>"; };
@@ -1370,8 +1372,8 @@
 		82F6D45BDA21FB589D79B0B33AE63B1B /* UIViewController+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIViewController+Rx.swift"; path = "RxCocoa/iOS/UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		83009D962DEFF83578C75FEBB4F10EEF /* Pods-ZhihuDaily-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZhihuDaily-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8349F9D8809C1A885EAE499C4E0EB00B /* ControlEvent+Signal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ControlEvent+Signal.swift"; path = "RxCocoa/Traits/Signal/ControlEvent+Signal.swift"; sourceTree = "<group>"; };
+		843AE681EFE3D11131960853FE6B3A76 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845458EC48B927A6878CB78CB352419A /* AnonymousObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnonymousObserver.swift; path = RxSwift/Observers/AnonymousObserver.swift; sourceTree = "<group>"; };
-		84598E3F805D6AAB7537CCDEFBB8B02E /* TargetType+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TargetType+Rx.swift"; path = "RxNetwork/Classes/Core/TargetType+Rx.swift"; sourceTree = "<group>"; };
 		848B6E9FE2CA3A86B758C547FD76A69E /* BehaviorRelay+Driver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BehaviorRelay+Driver.swift"; path = "RxCocoa/Traits/Driver/BehaviorRelay+Driver.swift"; sourceTree = "<group>"; };
 		8622402147293572F505147281809FF6 /* InvocableType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InvocableType.swift; path = RxSwift/Schedulers/Internal/InvocableType.swift; sourceTree = "<group>"; };
 		863F364B506145508B98AEB33BF7A3DA /* RxCocoa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RxCocoa.h; path = RxCocoa/RxCocoa.h; sourceTree = "<group>"; };
@@ -1394,6 +1396,7 @@
 		8C71F7E0C6C5205DE4BD4DF12AC46B33 /* Cancelable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cancelable.swift; path = RxSwift/Cancelable.swift; sourceTree = "<group>"; };
 		8CC987C2153B185E9EBC03FD30993C4F /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackGifFooter.h; path = MJRefresh/Custom/Footer/Back/MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
 		8CEE3DF81DCBCB4B124DDF9DD91E2320 /* Producer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Producer.swift; path = RxSwift/Observables/Producer.swift; sourceTree = "<group>"; };
+		8D4C4F59C5D73FA81F43FBA7CE9F724B /* RxNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxNetwork-dummy.m"; sourceTree = "<group>"; };
 		8D7C74D71F1E51E678A2E285246A587F /* Platform.Darwin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Platform.Darwin.swift; path = Platform/Platform.Darwin.swift; sourceTree = "<group>"; };
 		8E0A499ECD5E931F62E181EEC99F22AF /* MJRefreshBackNormalFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackNormalFooter.h; path = MJRefresh/Custom/Footer/Back/MJRefreshBackNormalFooter.h; sourceTree = "<group>"; };
 		8E57F597221AC07515137907D9F7F3B5 /* DistinctUntilChanged.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DistinctUntilChanged.swift; path = RxSwift/Observables/DistinctUntilChanged.swift; sourceTree = "<group>"; };
@@ -1406,6 +1409,7 @@
 		913B737EAD35C1CDB9CEE81660B4D5F4 /* UIButton+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+Rx.swift"; path = "RxCocoa/iOS/UIButton+Rx.swift"; sourceTree = "<group>"; };
 		916E990681820F818676E1FDA96BAB0F /* DataSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataSerializer.swift; path = Source/Shared/Library/DataSerializer.swift; sourceTree = "<group>"; };
 		921FCFC6477D8E6C37E7073EBFAA3BD2 /* RxCocoa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxCocoa.xcconfig; sourceTree = "<group>"; };
+		9297298B703F4AE0D65F1BA91960FA77 /* RxNetwork.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxNetwork.xcconfig; sourceTree = "<group>"; };
 		92C172F26C8405E0EB2F8148F448F81E /* NSBundle+MJRefresh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+MJRefresh.h"; path = "MJRefresh/NSBundle+MJRefresh.h"; sourceTree = "<group>"; };
 		933234B954ECE1177ABA9BFE247E19BF /* SwitchIfEmpty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchIfEmpty.swift; path = RxSwift/Observables/SwitchIfEmpty.swift; sourceTree = "<group>"; };
 		934534903F10A1C90035EA3A166E653F /* Platform.Linux.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Platform.Linux.swift; path = Platform/Platform.Linux.swift; sourceTree = "<group>"; };
@@ -1438,6 +1442,7 @@
 		9B262B45937C0C82F04B3B1629D4BAF9 /* RxPickerViewDataSourceProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxPickerViewDataSourceProxy.swift; path = RxCocoa/iOS/Proxies/RxPickerViewDataSourceProxy.swift; sourceTree = "<group>"; };
 		9B28F9CEDA1502610438E04D0ECF60D0 /* IntegerType+IdentifiableType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IntegerType+IdentifiableType.swift"; path = "Sources/RxDataSources/IntegerType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		9B84D40B92DECA522473F7763595F90B /* URLSession+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLSession+Rx.swift"; path = "RxCocoa/Foundation/URLSession+Rx.swift"; sourceTree = "<group>"; };
+		9C5724052172CEE2B5F85FCFCDAA928A /* Network.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Network.swift; path = RxNetwork/Classes/Core/Network.swift; sourceTree = "<group>"; };
 		9CBAFE984E7FE4A2C3389422886C9307 /* MJRefreshBackStateFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshBackStateFooter.m; path = MJRefresh/Custom/Footer/Back/MJRefreshBackStateFooter.m; sourceTree = "<group>"; };
 		9CD9EDC8F62732547D6E0C9951BAAEE7 /* String+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Rx.swift"; path = "RxSwiftX/Classes/Swift/String+Rx.swift"; sourceTree = "<group>"; };
 		9D7A6AB78394744B2328364A59284408 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Source/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
@@ -1486,8 +1491,6 @@
 		A9C245655F92066E8F125E3854B2B118 /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIBarButtonItem+Rx.swift"; path = "RxCocoa/iOS/UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		AA00FF55F517EE1FB3A5307DCC63A7C2 /* ControlProperty+Driver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ControlProperty+Driver.swift"; path = "RxCocoa/Traits/Driver/ControlProperty+Driver.swift"; sourceTree = "<group>"; };
 		AA1E3E7D6D68DDA60C7E0D6902299854 /* KVORepresentable+CoreGraphics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KVORepresentable+CoreGraphics.swift"; path = "RxCocoa/Foundation/KVORepresentable+CoreGraphics.swift"; sourceTree = "<group>"; };
-		AA2889514B23AE1CB52CEEA923866316 /* TargetType+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TargetType+Cache.swift"; path = "RxNetwork/Classes/Cache/TargetType+Cache.swift"; sourceTree = "<group>"; };
-		AA2D3450E5A3520289987BA41B9668AB /* RxNetwork.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxNetwork.xcconfig; sourceTree = "<group>"; };
 		AAB9C387F8C3851506AE9BA25EF6F06A /* Result-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Result-dummy.m"; sourceTree = "<group>"; };
 		AAC81A8F1CA73749278C5E2BE8452DFB /* ShareOnce.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareOnce.swift; path = RxSwiftX/Classes/Swift/ShareOnce.swift; sourceTree = "<group>"; };
 		AB1008AE47478E378EBA15B27B5085F6 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1551,8 +1554,10 @@
 		BFAE8DAD2B318A9554E917F99DB46EBD /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableType+Extensions.swift"; path = "RxSwift/ObservableType+Extensions.swift"; sourceTree = "<group>"; };
 		BFE0A522DF8976EA97B0EB58C8A9BADD /* Sink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sink.swift; path = RxSwift/Observables/Sink.swift; sourceTree = "<group>"; };
 		C002EAC6E0B394A391A8449C68F224F1 /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Source/Typealiases.swift; sourceTree = "<group>"; };
+		C05839865FC20683CBBDC7D71283FD26 /* RxNetwork-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxNetwork-prefix.pch"; sourceTree = "<group>"; };
 		C0972DEC0A87D5B1A5D378D5A0FFE9B7 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Source/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
 		C140EE59C07A95004D88ACBA60AC046F /* MJRefreshFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshFooter.h; path = MJRefresh/Base/MJRefreshFooter.h; sourceTree = "<group>"; };
+		C150BD8C376CF49EC10107042074E9DD /* Observable+Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Observable+Cache.swift"; path = "RxNetwork/Classes/Cache/Observable+Cache.swift"; sourceTree = "<group>"; };
 		C16474C2AF531F2C648E1D0117C75E14 /* Delegated-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Delegated-dummy.m"; sourceTree = "<group>"; };
 		C1CA734B786298D9E7B89AAA7D56B8A1 /* UIRefreshControl+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIRefreshControl+Rx.swift"; path = "RxCocoa/iOS/UIRefreshControl+Rx.swift"; sourceTree = "<group>"; };
 		C209DB3BFF8945FE9764DF6B89862CB0 /* VirtualTimeScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VirtualTimeScheduler.swift; path = RxSwift/Schedulers/VirtualTimeScheduler.swift; sourceTree = "<group>"; };
@@ -1587,7 +1592,6 @@
 		CC83E1AE4C198FDF8764F50700EEA9FB /* Cancellable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cancellable.swift; path = Sources/Moya/Cancellable.swift; sourceTree = "<group>"; };
 		CD4BD0AE290719C569872A102233A9F0 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Extensions.swift"; path = "Platform/DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		CD71522E70925638728468EF53DB7B7E /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
-		CE65C4A1DF8F12842944B619F352504D /* OnCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnCache.swift; path = RxNetwork/Classes/Cache/OnCache.swift; sourceTree = "<group>"; };
 		CEB409D80795A717566AC9F7C9B63AD8 /* Moya.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Moya.modulemap; sourceTree = "<group>"; };
 		CEBAB4392598F6652A81F3759A5755D3 /* RxPickerViewAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxPickerViewAdapter.swift; path = RxCocoa/iOS/DataSources/RxPickerViewAdapter.swift; sourceTree = "<group>"; };
 		CEE4A2433F0A971D298E2813A051FE88 /* CocoaChainKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaChainKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1706,7 +1710,6 @@
 		F57080D3ACA00F4E9E195E6DE9A63ADC /* UIView+MJExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+MJExtension.h"; path = "MJRefresh/UIView+MJExtension.h"; sourceTree = "<group>"; };
 		F6285FD97179C4F41125E15BEAA8D10A /* RxCollectionViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCollectionViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxCollectionViewDelegateProxy.swift; sourceTree = "<group>"; };
 		F68B993B3FA58BAA4A9061D1F185C51A /* Pods-ZhihuDaily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZhihuDaily.release.xcconfig"; sourceTree = "<group>"; };
-		F6AA7587FA27D6C4C7A072A7AE5472EE /* NetworkIndicatorPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkIndicatorPlugin.swift; path = RxNetwork/Classes/Core/NetworkIndicatorPlugin.swift; sourceTree = "<group>"; };
 		F6F20C0B9695585AB7E03ACDDC525196 /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+MJExtension.h"; path = "MJRefresh/UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
 		F72058719607373510DBAFE608EFC711 /* MJRefresh-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MJRefresh-prefix.pch"; sourceTree = "<group>"; };
 		F73F23E62BACF965AC4939EC08DDC65A /* FormatIndicatedCacheSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormatIndicatedCacheSerializer.swift; path = Sources/FormatIndicatedCacheSerializer.swift; sourceTree = "<group>"; };
@@ -1723,7 +1726,6 @@
 		FC2D4BD4C613E6D3250B9DDDF9EA4626 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD487618BF1B385C9BBD8040384E41E8 /* MJRefreshComponent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshComponent.m; path = MJRefresh/Base/MJRefreshComponent.m; sourceTree = "<group>"; };
 		FD600E3C05923A4F8345BB4D82627034 /* NotificationCenter+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NotificationCenter+Rx.swift"; path = "RxCocoa/Foundation/NotificationCenter+Rx.swift"; sourceTree = "<group>"; };
-		FDA744700BD343993392FBAB77B9807C /* RxNetwork-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxNetwork-prefix.pch"; sourceTree = "<group>"; };
 		FDAA936CDF636A27D713380B03969616 /* PublishRelay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PublishRelay.swift; path = RxCocoa/Traits/PublishRelay.swift; sourceTree = "<group>"; };
 		FDB90294FDF25D1126462B2F911A2747 /* UIView+Chain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Chain.swift"; path = "CocoaChainKit/Classes/UIView+Chain.swift"; sourceTree = "<group>"; };
 		FEAEB8C0D991E7B89CE5286648C9FAC6 /* RxNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1944,17 +1946,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		026A2E0B6AA9BE356CBF711E5BE74832 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				6CE5E6B72D3C1DE7530E0AD5E371A68E /* Observable+Cache.swift */,
-				CE65C4A1DF8F12842944B619F352504D /* OnCache.swift */,
-				440296F0215079EB3C2EA5BA8C1E0B73 /* Single+Cache.swift */,
-				AA2889514B23AE1CB52CEEA923866316 /* TargetType+Cache.swift */,
-			);
-			name = Cache;
-			sourceTree = "<group>";
-		};
 		04430E641AE4648A86C6E2C8F81BC385 /* RxSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -2144,6 +2135,18 @@
 			name = RxSwift;
 			sourceTree = "<group>";
 		};
+		12FF8EBDE158844E769FAB507070B1C9 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				317EE794BEF6B77A13DB94FF892C7566 /* Network+Cache.swift */,
+				C150BD8C376CF49EC10107042074E9DD /* Observable+Cache.swift */,
+				1CE3ACED5CE1F91E53144E45E5EECCE8 /* OnCache.swift */,
+				66C9FCDF66B813B6FF6646E911DA1653 /* Single+Cache.swift */,
+				469ED8D904F07D6DBBBA6A5120DD6E37 /* TargetType+Cache.swift */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
 		15A2C665B0DBB3D514618CA58C2263AB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -2320,18 +2323,14 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
-		54A2B16B2C5292E3EE23D1D9A6C3E7E2 /* Support Files */ = {
+		560548FA59F9AF04A88DFA69046ECF36 /* RxNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				38BA5DB79587F5E16C2D65D51F4431D0 /* Info.plist */,
-				6E622364C701962855C074E376F41687 /* RxNetwork.modulemap */,
-				AA2D3450E5A3520289987BA41B9668AB /* RxNetwork.xcconfig */,
-				6F3759A3CD71359B574DE0AFD689011B /* RxNetwork-dummy.m */,
-				FDA744700BD343993392FBAB77B9807C /* RxNetwork-prefix.pch */,
-				80354911F8CEA16580EBDAFBC20DCEC0 /* RxNetwork-umbrella.h */,
+				12FF8EBDE158844E769FAB507070B1C9 /* Cache */,
+				5FB4C33F5E12A8D66F88756D73747D3E /* Core */,
+				88FCA52197B759AE16EBBC4DB28D0D90 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/RxNetwork";
+			path = RxNetwork;
 			sourceTree = "<group>";
 		};
 		5BA94516E50C3D6124076BCE3F6815D4 /* Support Files */ = {
@@ -2370,6 +2369,17 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/EachNavigationBar";
+			sourceTree = "<group>";
+		};
+		5FB4C33F5E12A8D66F88756D73747D3E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9C5724052172CEE2B5F85FCFCDAA928A /* Network.swift */,
+				22EA5B773CC9E96A50FEAEA351B65F30 /* Network+Configuration.swift */,
+				08C7A049D8FA9BF3C618889CA22F8C82 /* NetworkIndicatorPlugin.swift */,
+				13AA4CE84CBBDE1A8CBDA265F0C765B0 /* TargetType+Rx.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		60CC7021CD1F1AD72C776E6469CC449C /* SnapKit */ = {
@@ -2426,16 +2436,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Kingfisher";
-			sourceTree = "<group>";
-		};
-		68DB8DE68E609A180B95AE9B5EA9C505 /* RxNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				026A2E0B6AA9BE356CBF711E5BE74832 /* Cache */,
-				ABDBE206DD689F008F9E8C6FC0B106CA /* Core */,
-				54A2B16B2C5292E3EE23D1D9A6C3E7E2 /* Support Files */,
-			);
-			path = RxNetwork;
 			sourceTree = "<group>";
 		};
 		6F648A5DD188E29413812BF45894FAD3 /* RxSwiftX */ = {
@@ -2528,6 +2528,20 @@
 				709A4ADBC70BE8EA75B2B8FFCAE39FBD /* UIViewController+Rx.swift */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		88FCA52197B759AE16EBBC4DB28D0D90 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				843AE681EFE3D11131960853FE6B3A76 /* Info.plist */,
+				41555B77EDE643CEAA9DD486E5F955D2 /* RxNetwork.modulemap */,
+				9297298B703F4AE0D65F1BA91960FA77 /* RxNetwork.xcconfig */,
+				8D4C4F59C5D73FA81F43FBA7CE9F724B /* RxNetwork-dummy.m */,
+				C05839865FC20683CBBDC7D71283FD26 /* RxNetwork-prefix.pch */,
+				2A5DA6D36D2BAC464D97A3BCEFDFB8BC /* RxNetwork-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/RxNetwork";
 			sourceTree = "<group>";
 		};
 		8D1B60221D069194935C58A1AA69AF19 /* DataSources */ = {
@@ -2694,17 +2708,6 @@
 				76D35B64A0A0C998964D962E5028DF11 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		ABDBE206DD689F008F9E8C6FC0B106CA /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				2392E0A884FCC717A76D10AE5853D72C /* Network.swift */,
-				78939AC283858C9B984551589B9FDD72 /* Network+Configuration.swift */,
-				F6AA7587FA27D6C4C7A072A7AE5472EE /* NetworkIndicatorPlugin.swift */,
-				84598E3F805D6AAB7537CCDEFBB8B02E /* TargetType+Rx.swift */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 		AC4739854183CC4381536F24669E3BC2 /* Core */ = {
@@ -3057,7 +3060,7 @@
 				87E5E0B8A3A7F579CBA6844FA4FC30D3 /* Result */,
 				D69EB0CF44635FF7B3B98B4DC9EAFAF4 /* RxCocoa */,
 				B122333E075C9B8E6AEF20D770BF85F0 /* RxDataSources */,
-				68DB8DE68E609A180B95AE9B5EA9C505 /* RxNetwork */,
+				560548FA59F9AF04A88DFA69046ECF36 /* RxNetwork */,
 				04430E641AE4648A86C6E2C8F81BC385 /* RxSwift */,
 				6F648A5DD188E29413812BF45894FAD3 /* RxSwiftX */,
 				60CC7021CD1F1AD72C776E6469CC449C /* SnapKit */,
@@ -3449,7 +3452,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B79E39836850C80BFF5AA3EBB86BFDAC /* Build configuration list for PBXNativeTarget "RxNetwork" */;
 			buildPhases = (
-				7A49D812CA0D31829D78307C0839FE38 /* Sources */,
+				94D5072200207782007157A2B6E0BCD1 /* Sources */,
 				2B6C116445ABFF50076A497048F98510 /* Frameworks */,
 				4D54D199A8353828D7C2A769369921A8 /* Headers */,
 			);
@@ -4404,22 +4407,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A49D812CA0D31829D78307C0839FE38 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				59C0A35B4A743896E2E50774D3F1F053 /* Network+Configuration.swift in Sources */,
-				0B37E95FAE74C9B186B32415D09B0BC0 /* Network.swift in Sources */,
-				946220C007C083018D57136CB3A413C0 /* NetworkIndicatorPlugin.swift in Sources */,
-				BD694489BF3C447DC849092F20480738 /* Observable+Cache.swift in Sources */,
-				9D59675BDD31E233CB0EA30F0B5E34F4 /* OnCache.swift in Sources */,
-				F21E8FF05F06A8ECB65693C1DB7B5B4C /* RxNetwork-dummy.m in Sources */,
-				5E392BAB16D3E663D4E7B4A5863CD650 /* Single+Cache.swift in Sources */,
-				3FC518C31C29822AD836D7595C7973E9 /* TargetType+Cache.swift in Sources */,
-				9D203E7FA7EF69B5A3B6B70082F251E7 /* TargetType+Rx.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7BBD4B6424B86B6578ACDED2B7D7DCD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4525,6 +4512,23 @@
 				09C8CD8B9444DE64228F7BC1ED0B2677 /* Types.swift in Sources */,
 				53004670D490DE6828B721AE8385EC20 /* TypeWrapper.swift in Sources */,
 				3C0C777FFFD4B7D6BF99924B20931575 /* UIImage+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94D5072200207782007157A2B6E0BCD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23A3F6EE3CDE6FACAB3C8360A202DBB2 /* Network+Cache.swift in Sources */,
+				D555191BFEF627DD6B97453AE8ACD2D1 /* Network+Configuration.swift in Sources */,
+				1535CC9D4E3D07DC145AD418C81CA77D /* Network.swift in Sources */,
+				808C35D70E6BD03C494ED1EF7B8AB583 /* NetworkIndicatorPlugin.swift in Sources */,
+				A163C00213EEC041A579174DFE771BD8 /* Observable+Cache.swift in Sources */,
+				2234C33A1A9E78E99A91C3DA0E9A318E /* OnCache.swift in Sources */,
+				7CE4A8D288C92A55EA3A96EC2BD6FDF5 /* RxNetwork-dummy.m in Sources */,
+				BD1C0E5D1CBFD1AF128D6FC5998A75C1 /* Single+Cache.swift in Sources */,
+				787DBD04BC4F1DCE06A10DD71A85D11A /* TargetType+Cache.swift in Sources */,
+				A7240A06067ADCFFC6360E2EC6966902 /* TargetType+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5535,7 +5539,7 @@
 		};
 		75555F6749812A94128AC04E5744642E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA2D3450E5A3520289987BA41B9668AB /* RxNetwork.xcconfig */;
+			baseConfigurationReference = 9297298B703F4AE0D65F1BA91960FA77 /* RxNetwork.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -6249,7 +6253,7 @@
 		};
 		F9788AEB9DFFACAC5B17B6D634F77A87 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA2D3450E5A3520289987BA41B9668AB /* RxNetwork.xcconfig */;
+			baseConfigurationReference = 9297298B703F4AE0D65F1BA91960FA77 /* RxNetwork.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
