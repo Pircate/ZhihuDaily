@@ -13,11 +13,12 @@ public struct OnCache<Target: TargetType, C: Codable> {
     
     public let target: Target
     
-    init(_ target: Target) {
+    public init(_ target: Target) {
         self.target = target
     }
     
-    public func request() -> Single<C> {
-        return target.request().map(C.self).storeCachedObject(for: target)
+    public func request(atKeyPath keyPath: String? = nil,
+                        using decoder: JSONDecoder = .init()) -> Single<C> {
+        return target.request().map(C.self, atKeyPath: keyPath, using: decoder).storeCachedObject(for: target)
     }
 }

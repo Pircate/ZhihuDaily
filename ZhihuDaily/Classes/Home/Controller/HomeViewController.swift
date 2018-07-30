@@ -32,6 +32,7 @@ final class HomeViewController: BaseViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.bounds).chain
+            .rowHeight(100)
             .estimatedSectionFooterHeight(0)
             .separatorColor(UIColor(hex: "#eeeeee"))
             .register(HomeNewsRowCell.self, forCellReuseIdentifier: "HomeNewsRowCell").build
@@ -45,11 +46,8 @@ final class HomeViewController: BaseViewController {
             let cell = tv.dequeueReusableCell(withIdentifier: "HomeNewsRowCell", for: ip) as! HomeNewsRowCell
             cell.update(item)
             return cell
-        }, heightForRowAtIndexPath: { _, _, _ in
-            return 100
-        }, heightForHeaderInSection: { _, section in
-            guard section > 0 else { return CGFloat.leastNormalMagnitude }
-            return 44
+        }, heightForHeaderInSection: { _, _, section in
+            return section > 0 ? 44 : CGFloat.leastNormalMagnitude
         }, viewForHeaderInSection: { proxy, _, section in
             guard section > 0 else { return nil }
             let titleLabel = UILabel().chain

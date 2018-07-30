@@ -37,11 +37,11 @@ public extension TargetType {
         return Observable.just(self)
     }
     
-    func cachedResponse() throws -> Response {
+    func cachedResponse() throws -> Moya.Response {
         return try Network.Cache.shared.cachedResponse(for: self)
     }
     
-    func storeCachedResponse(_ cachedResponse: Response) throws {
+    func storeCachedResponse(_ cachedResponse: Moya.Response) throws {
         try Network.Cache.shared.storeCachedResponse(cachedResponse, for: self)
     }
     
@@ -53,22 +53,19 @@ public extension TargetType {
 extension TargetType {
     
     var cachedKey: String {
-        return "\(URL(target: self).absoluteString)?\(task.parameters)"
-    }
-}
-
-fileprivate extension Task {
-    
-    var parameters: String {
-        switch self {
-        case .requestParameters(let parameters, _):
-            return "\(parameters)"
-        case .requestCompositeData(_, let urlParameters):
-            return "\(urlParameters)"
-        case let .requestCompositeParameters(bodyParameters, _, urlParameters):
-            return "\(bodyParameters)\(urlParameters)"
-        default:
-            return ""
+        if let urlRequest = try? endpoint.urlRequest(),
+            let data = urlRequest.httpBody,
+            let parameters = String(data: data, encoding: .utf8) {
+            return "\(method.rawValue):\(endpoint.url)?\(parameters)"
         }
+        return "\(method.rawValue):\(endpoint.url)"
+    }
+    
+    private var endpoint: Endpoint {
+        return Endpoint(url: URL(target: self).absoluteString,
+                        sampleResponseClosure: { .networkResponse(200, self.sampleData) },
+                        method: method,
+                        task: task,
+                        httpHeaderFields: headers)
     }
 }
