@@ -1,16 +1,16 @@
 PODS:
   - Alamofire (4.7.3)
   - Cache (5.0.0)
-  - CocoaChainKit (0.5.2)
+  - CocoaChainKit (0.6.0)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
-  - EachNavigationBar (0.3.0)
+  - EachNavigationBar (0.3.2)
   - FDFullscreenPopGesture (1.1)
   - FSCycleScrollView (0.2.0):
     - FSPagerView
     - Kingfisher
-  - FSPagerView (0.7.1)
-  - Hero (1.2.0)
+  - FSPagerView (0.7.2)
+  - Hero (1.3.0)
   - Hue (3.0.1)
   - Kingfisher (4.8.1)
   - MJRefresh (3.1.15.3)
@@ -92,14 +92,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Cache: fae4826ba52d7a5d9a3a0ad6fe73e3501a82964f
-  CocoaChainKit: 98559e247bde72a0ac646ad937661c503ee3b5f6
+  CocoaChainKit: 69b773a62dcbfb7274da555ac02c67e186fa90cc
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  EachNavigationBar: 9d7f4391e8fbda7e07f52243c43ec7da9f074a7f
+  EachNavigationBar: e74fcaa39bd40f2f244fd09874df094e5066bc80
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSCycleScrollView: 7b86b4000aa8a958d338e0ed294a3c02f9fb73de
-  FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
-  Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
+  FSPagerView: 7515f63c424da71623d299d4fbbfb3dd884642ff
+  Hero: 3eecd3fd62dd2425cbc7e35505c557b86d5a379e
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
