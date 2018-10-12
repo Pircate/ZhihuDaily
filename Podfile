@@ -17,5 +17,6 @@ target 'ZhihuDaily' do
   pod 'Delegated'
   pod 'Hero'
   pod 'CocoaChainKit'
+  pod 'CleanJSON'
 
 end

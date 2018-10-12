@@ -9,8 +9,26 @@
 import RxDataSources
 import Moya
 import RxSwiftX
+import CleanJSON
+import RxSwift
 
 typealias HomeNewsSection = SectionModel<String, HomeNewsModel>
+
+extension Response {
+    
+    func mapObject<D: Decodable>(_ type: D.Type) throws -> D {
+        return try CleanJSONDecoder().decode(type, from: data)
+    }
+}
+
+extension ObservableType where E == Response {
+    
+    func mapObject<D: Decodable>(_ type: D.Type) -> Observable<D> {
+        return map { response -> D in
+            return try response.mapObject(type)
+        }
+    }
+}
 
 class HomeViewModel {
     
@@ -34,7 +52,7 @@ class HomeViewModel {
         
         let refresh = input.refresh.flatMap { _ in
             NewsAPI.latestNews.cache.request()
-                .map(HomeNewsListModel.self)
+                .mapObject(HomeNewsListModel.self)
                 .asObservable()
                 .catchError({ error in
                     Observable.empty()
@@ -59,7 +77,7 @@ class HomeViewModel {
         let source2 = input.loading.flatMap {
             NewsAPI.beforeNews(date: sections.last?.model ?? "")
                 .request()
-                .map(HomeNewsListModel.self)
+                .map(HomeNewsListModel.self, using: CleanJSONDecoder())
                 .map({ [HomeNewsSection(model: $0.date, items: $0.stories)] })
                 .catchErrorJustReturn([])
             }.map({ section -> [HomeNewsSection] in

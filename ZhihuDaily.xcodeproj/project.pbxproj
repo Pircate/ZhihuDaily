@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3381049D20AC7E3700B02833 /* Navigatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381049C20AC7E3700B02833 /* Navigatable.swift */; };
+		6C6323FF217102230080146C /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C6323FE217102220080146C /* data.json */; };
 		7E87DC5196D1C5BBEB13B48B /* Pods_ZhihuDaily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC03925F055F8689CA7C96 /* Pods_ZhihuDaily.framework */; };
 		B51ACD32201B06B300469329 /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51ACD31201B06B300469329 /* WebViewContainer.swift */; };
 		B531638E201FFF4200828CA2 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531638D201FFF4200828CA2 /* Updatable.swift */; };
@@ -21,7 +22,6 @@
 		B563AAE82015AB4B00F4AC66 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAE72015AB4B00F4AC66 /* BaseViewController.swift */; };
 		B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAEC2015AC8400F4AC66 /* WebViewController.swift */; };
 		B563AAFA2015AC9A00F4AC66 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */; };
-		B5650FEC20A98DE000BA7B87 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */; };
 		B56EA5432051102B0011D6E9 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EA5422051102B0011D6E9 /* ProgressView.swift */; };
 		B5747747209AF98A0006BF7C /* RxCocoaExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5747746209AF98A0006BF7C /* RxCocoaExtension.swift */; };
 		B5A7C9EE2015BA97000C54BC /* HomeNewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */; };
@@ -57,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		3381049C20AC7E3700B02833 /* Navigatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigatable.swift; sourceTree = "<group>"; };
+		6C6323FE217102220080146C /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = SOURCE_ROOT; };
 		83CE6E074FEB0F0C30BFDD04 /* Pods-ZhihuDaily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhihuDaily.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily.debug.xcconfig"; sourceTree = "<group>"; };
 		B51ACD31201B06B300469329 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
 		B531638D201FFF4200828CA2 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		B563AAE72015AB4B00F4AC66 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B563AAEC2015AC8400F4AC66 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B563AAF72015AC9A00F4AC66 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleanJSON.swift; sourceTree = "<group>"; };
 		B56EA5422051102B0011D6E9 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		B5747746209AF98A0006BF7C /* RxCocoaExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCocoaExtension.swift; sourceTree = "<group>"; };
 		B5A7C9ED2015BA97000C54BC /* HomeNewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsListModel.swift; sourceTree = "<group>"; };
@@ -206,6 +206,7 @@
 		B56223AB1FFC730E0012CCB2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6C6323FE217102220080146C /* data.json */,
 				B56223AC1FFC730E0012CCB2 /* Base */,
 				B56223B01FFC730E0012CCB2 /* Home */,
 				B56223B41FFC730E0012CCB2 /* Main */,
@@ -358,7 +359,6 @@
 		B563AAED2015AC8400F4AC66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B5650FEB20A98DE000BA7B87 /* CleanJSON.swift */,
 				B5F20DAD2052A50A008D757B /* NetworkEnvironment.swift */,
 			);
 			path = Network;
@@ -483,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56223881FFC729B0012CCB2 /* LaunchScreen.storyboard in Resources */,
+				6C6323FF217102230080146C /* data.json in Resources */,
 				B56223851FFC729B0012CCB2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +532,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ZhihuDaily/Pods-ZhihuDaily-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/CleanJSON/CleanJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaChainKit/CocoaChainKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Delegated/Delegated.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
@@ -555,6 +557,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CleanJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaChainKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Delegated.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
@@ -594,7 +597,6 @@
 				B5A7C9FA2015DAB6000C54BC /* NewsDetailViewController.swift in Sources */,
 				B563AAF22015AC8500F4AC66 /* WebViewController.swift in Sources */,
 				B56223C81FFC7E1D0012CCB2 /* MenuViewController.swift in Sources */,
-				B5650FEC20A98DE000BA7B87 /* CleanJSON.swift in Sources */,
 				B56223BC1FFC730E0012CCB2 /* AppDelegate.swift in Sources */,
 				B531638E201FFF4200828CA2 /* Updatable.swift in Sources */,
 				B5D652B92054FC6F00AE726F /* NewsDetailViewModel.swift in Sources */,
