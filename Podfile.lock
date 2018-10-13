@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.7.3)
   - Cache (5.1.0)
-  - CleanJSON (0.2.0)
+  - CleanJSON (0.2.2)
   - CocoaChainKit (0.6.0)
   - Delegated (0.1.0)
   - Differentiator (3.0.2)
@@ -95,7 +95,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Cache: 7737c595aae7d94c7c0feca2c887288624e3b07e
-  CleanJSON: d5c67ab5640f92edfc3d0ab484a196e33d3fa9c0
+  CleanJSON: 5aa6fce4f9b1e2e0fe4cb023e893173bc7d60322
   CocoaChainKit: 69b773a62dcbfb7274da555ac02c67e186fa90cc
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
