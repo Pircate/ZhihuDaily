@@ -52,7 +52,7 @@ Licensed under the **MIT** license
 
 ## CleanJSON
 
-Copyright (c) 2018 Pircate <gao497868860@163.com>
+Copyright (c) 2018 Pircate <gao497868860@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -149,7 +149,7 @@ SOFTWARE.
 
 ## EachNavigationBar
 
-Copyright (c) 2018 Pircate <gao497868860@163.com>
+Copyright (c) 2018 Pircate <gao497868860@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
