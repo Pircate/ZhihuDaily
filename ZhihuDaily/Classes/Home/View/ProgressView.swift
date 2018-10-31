@@ -32,13 +32,13 @@ final class ProgressView: UIView {
         layer.bounds = bounds
         layer.fillColor = UIColor.clear.cgColor
         layer.strokeColor = UIColor.white.cgColor
-        layer.lineCap = kCALineCapRound
+        layer.lineCap = CAShapeLayerLineCap.round
         layer.lineWidth = 4
         return layer
     }()
     
     private lazy var indicatorView: UIActivityIndicatorView = {
-        return UIActivityIndicatorView(activityIndicatorStyle: .white).chain.frame(bounds).build
+        return UIActivityIndicatorView(style: .white).chain.frame(bounds).build
     }()
     
     override init(frame: CGRect) {

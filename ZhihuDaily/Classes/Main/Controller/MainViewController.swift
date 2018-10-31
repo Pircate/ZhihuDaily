@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
         
         let menuVC = MenuViewController()
         menuVC.view.frame = CGRect(x: 0, y: 0, width: leftMenuWidth, height: view.bounds.height)
-        addChildViewController(menuVC)
+        addChild(menuVC)
         scrollView.addSubview(menuVC.view)
         
         let homeVC = HomeViewController()
@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
             self.scrollView.setContentOffset(point, animated: true)
         })
         homeVC.view.frame = CGRect(x: leftMenuWidth, y: 0, width: UIScreen.width, height: UIScreen.height)
-        addChildViewController(homeVC)
+        addChild(homeVC)
         scrollView.addSubview(homeVC.view)
         
         scrollView.rx.contentOffset

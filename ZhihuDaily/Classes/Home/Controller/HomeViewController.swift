@@ -106,8 +106,8 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        view.bringSubview(toFront: navigation.bar)
-        view.bringSubview(toFront: menuButton)
+        view.bringSubviewToFront(navigation.bar)
+        view.bringSubviewToFront(menuButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {

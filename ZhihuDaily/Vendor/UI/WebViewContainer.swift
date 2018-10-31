@@ -93,7 +93,7 @@ extension WebViewContainer: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         showProgressView()
         progressView.transform = CGAffineTransform(scaleX: 1.0, y: 1.5)
-        bringSubview(toFront: progressView)
+        bringSubviewToFront(progressView)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

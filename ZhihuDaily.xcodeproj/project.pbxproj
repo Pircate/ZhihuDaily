@@ -442,16 +442,18 @@
 				TargetAttributes = {
 					B56223791FFC729B0012CCB2 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					B562238D1FFC729C0012CCB2 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B56223791FFC729B0012CCB2;
 					};
 					B56223981FFC729C0012CCB2 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B56223791FFC729B0012CCB2;
 					};
@@ -787,7 +789,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -808,7 +810,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDaily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -823,7 +825,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDailyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhihuDaily.app/ZhihuDaily";
 			};
@@ -839,7 +841,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDailyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhihuDaily.app/ZhihuDaily";
 			};
@@ -854,7 +856,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDailyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ZhihuDaily;
 			};
@@ -869,7 +871,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaoX.ZhihuDailyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ZhihuDaily;
 			};
