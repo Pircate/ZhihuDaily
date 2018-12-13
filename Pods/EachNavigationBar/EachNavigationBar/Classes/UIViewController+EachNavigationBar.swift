@@ -12,53 +12,19 @@ import ObjectiveC
 // MARK: - Public
 extension UIViewController {
     
-    public static let setupNavigationBar: Void = {
-        selector_exchangeImplementations(#selector(viewDidLoad), #selector(each_viewDidLoad))
-        selector_exchangeImplementations(#selector(viewWillAppear(_:)), #selector(each_viewWillAppear(_:)))
-        selector_exchangeImplementations(#selector(setNeedsStatusBarAppearanceUpdate), #selector(each_setNeedsStatusBarAppearanceUpdate))
-    }()
-    
-    @available(swift, obsoleted: 4.2, message: "Please use navigation.bar")
+    @available(swift, obsoleted: 4.2, message: "Only for Objective-C call.")
     @objc public var each_navigationBar: EachNavigationBar {
         return _navigationBar
     }
     
-    @available(swift, obsoleted: 4.2, message: "Please use navigation.item")
+    @available(swift, obsoleted: 4.2, message: "Only for Objective-C call.")
     @objc public var each_navigationItem: UINavigationItem {
         return _navigationItem
-    }
-    
-    @available(swift, obsoleted: 4.2, message: "Please use setupNavigationBar")
-    @objc public static func swizzle_setupNavigationBar() {
-        setupNavigationBar
-    }
-    
-    @objc public func adjustsNavigationBarPosition() {
-        guard let navigationBar = navigationController?.navigationBar else { return }
-        _navigationBar.frame = navigationBar.frame
-        _navigationBar.frame.size.height += _navigationBar.additionalHeight
-        _navigationBar.setNeedsLayout()
-    }
-    
-    @objc public func adjustsScrollViewContentInset(_ scrollView: UIScrollView) {
-        let top: CGFloat
-        if #available(iOS 11.0, *) {
-            top = scrollView.contentInsetAdjustmentBehavior == .never ? statusBarMaxY : 0
-        } else {
-            top = automaticallyAdjustsScrollViewInsets ? 0 : statusBarMaxY
-        }
-        let contentInsetTop = top + (_navigationBar.isHidden ? 0 : _navigationBar.bounds.height)
-        scrollView.contentInset.top = contentInsetTop
-        scrollView.scrollIndicatorInsets.top = contentInsetTop
     }
 }
 
 // MARK: - Swizzle
 extension UIViewController {
-    
-    private var asTableViewController: UITableViewController? {
-        return self as? UITableViewController
-    }
     
     private static func selector_exchangeImplementations(_ sel1: Selector, _ sel2: Selector) {
         if let originalMethod = class_getInstanceMethod(UIViewController.self, sel1),
@@ -67,6 +33,21 @@ extension UIViewController {
         }
     }
     
+    @available(swift, obsoleted: 4.2, message: "Only for Objective-C call.")
+    @objc public static func each_methodSwizzling() {
+        method_swizzling
+    }
+    
+    private static let method_swizzling: Void = {
+        selector_exchangeImplementations(#selector(viewDidLoad), #selector(each_viewDidLoad))
+        selector_exchangeImplementations(
+            #selector(viewWillAppear(_:)),
+            #selector(each_viewWillAppear(_:)))
+        selector_exchangeImplementations(
+            #selector(setNeedsStatusBarAppearanceUpdate),
+            #selector(each_setNeedsStatusBarAppearanceUpdate))
+    }()
+    
     @objc private func each_viewDidLoad() {
         each_viewDidLoad()
         
@@ -74,7 +55,10 @@ extension UIViewController {
             navigationController.navigation.configuration.isEnabled else { return }
         
         bindNavigationBar()
-        asTableViewController?.addObserverForContentOffset()
+        
+        if let tableViewController = self as? UITableViewController {
+            tableViewController.addObserverForContentOffset()
+        }
     }
     
     @objc private func each_viewWillAppear(_ animated: Bool) {
@@ -83,8 +67,8 @@ extension UIViewController {
         guard let navigationController = navigationController,
             navigationController.navigation.configuration.isEnabled else { return }
         
+        updateNavigationBarWhenViewWillAppear()
         bringNavigationBarToFront()
-        asTableViewController?.adjustsTableViewContentInset()
     }
     
     @objc private func each_setNeedsStatusBarAppearanceUpdate() {
@@ -98,16 +82,22 @@ extension UIViewController {
 extension UIViewController {
     
     var _navigationBar: EachNavigationBar {
-        if let bar = objc_getAssociatedObject(self, &AssociatedKeys.navigationBar) as? EachNavigationBar {
+        if let bar = objc_getAssociatedObject(
+            self,
+            &AssociatedKeys.navigationBar)
+            as? EachNavigationBar {
             return bar
         }
-        let bar = EachNavigationBar(navigationItem: _navigationItem)
+        let bar = EachNavigationBar(viewController: self)
         objc_setAssociatedObject(self, &AssociatedKeys.navigationBar, bar, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return bar
     }
     
     var _navigationItem: UINavigationItem {
-        if let item = objc_getAssociatedObject(self, &AssociatedKeys.navigationItem) as? UINavigationItem {
+        if let item = objc_getAssociatedObject(
+            self,
+            &AssociatedKeys.navigationItem)
+            as? UINavigationItem {
             return item
         }
         let item = UINavigationItem()
@@ -117,18 +107,14 @@ extension UIViewController {
     
     private func bindNavigationBar() {
         guard let navigationController = navigationController else { return }
-        navigationController.navigationBar.isHidden = true
+        navigationController.sendNavigationBarToBack()
         setupNavigationBarStyle()
         setupBackBarButtonItem()
         view.addSubview(_navigationBar)
     }
     
     private func bringNavigationBarToFront() {
-        #if swift(>=4.2)
         view.bringSubviewToFront(_navigationBar)
-        #else
-        view.bringSubview(toFront: each_navigationBar)
-        #endif
     }
     
     private func setupNavigationBarStyle() {
@@ -145,10 +131,22 @@ extension UIViewController {
             barMetrics: configuration.barMetrics)
         _navigationBar.isTranslucent = configuration.isTranslucent
         _navigationBar.barStyle = configuration.barStyle
+        _navigationBar.statusBarStyle = configuration.statusBarStyle
         _navigationBar.extraHeight = configuration.extraHeight
         if #available(iOS 11.0, *) {
             _navigationBar.prefersLargeTitles = configuration.prefersLargeTitles
             _navigationBar.largeTitleTextAttributes = configuration.largeTitleTextAttributes
+        }
+    }
+    
+    private func updateNavigationBarWhenViewWillAppear() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        navigationBar.barStyle = _navigationBar._barStyle
+        navigationBar.isHidden = _navigationBar.isHidden
+        if #available(iOS 11.0, *) {
+            adjustsSafeAreaInsetsAfterIOS11()
+            navigationBar.prefersLargeTitles = _navigationBar.prefersLargeTitles
+            navigationBar.largeTitleTextAttributes = _navigationBar.largeTitleTextAttributes
         }
     }
     
@@ -170,7 +168,15 @@ extension UIViewController {
 
 extension UIViewController {
     
-    var statusBarMaxY: CGFloat {
-        return UIApplication.shared.statusBarFrame.maxY
+    private func adjustsNavigationBarPosition() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        _navigationBar.frame = navigationBar.frame
+        _navigationBar.frame.size.height += _navigationBar.additionalHeight
+        _navigationBar.setNeedsLayout()
+    }
+    
+    func adjustsSafeAreaInsetsAfterIOS11() {
+        guard #available(iOS 11.0, *) else { return }
+        additionalSafeAreaInsets.top = _navigationBar.isHidden ? -view.safeAreaInsets.top : 0
     }
 }

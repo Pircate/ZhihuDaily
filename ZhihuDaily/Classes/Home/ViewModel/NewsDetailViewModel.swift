@@ -8,6 +8,7 @@
 
 import Moya
 import WebKit
+import CleanJSON
 
 class NewsDetailViewModel {
     
@@ -23,7 +24,9 @@ class NewsDetailViewModel {
     
     func transform(_ input: Input) -> Output {
         let response = input.refresh.flatMap {
-            NewsAPI.newsDetail(newsID: $0).request().map(NewsDetailModel.self)
+            NewsAPI.newsDetail(newsID: $0)
+                .request()
+                .map(NewsDetailModel.self, using: CleanJSONDecoder())
         }.share(replay: 1)
         
         let title = response.map({ $0.title }).asDriver(onErrorJustReturn: "")

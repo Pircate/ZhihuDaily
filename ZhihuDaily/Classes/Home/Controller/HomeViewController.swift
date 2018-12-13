@@ -92,15 +92,6 @@ final class HomeViewController: BaseViewController {
         buildSubviews()
         bindViewModel()
         refresh.onNext(())
-        
-        let url = Bundle.main.url(forResource: "data", withExtension: "json")!
-        do {
-            let data = try Data(contentsOf: url)
-            let model = try CleanJSONDecoder().decode(HomeNewsListModel.self, from: data)
-            debugPrint(model.topStories)
-        } catch {
-            debugPrint(error)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

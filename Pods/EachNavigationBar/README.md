@@ -4,7 +4,8 @@
 [![Version](https://img.shields.io/cocoapods/v/EachNavigationBar.svg?style=flat)](http://cocoapods.org/pods/EachNavigationBar)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/EachNavigationBar.svg?style=flat)](http://cocoapods.org/pods/EachNavigationBar)
-![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
+![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
+[![中文文档](https://woolson.gitee.io/npmer-badge/-007ec6-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-007ec6-github-ffffff-square-gradient-shadow.svg)](https://github.com/Pircate/EachNavigationBar/blob/master/README_CN.md)
 
 [中文文档](https://github.com/Pircate/EachNavigationBar/blob/master/README_CN.md)
 
@@ -14,8 +15,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-* iOS 8.0+
-* Swift 4
+* iOS 9.0
+* Swift 4.2
 
 ## Installation
 
@@ -35,8 +36,8 @@ github "Pircate/EachNavigationBar"
 
 ## Overview
 
-![](https://github.com/Pircate/EachNavigationBar/blob/master/demo.gif)
-![](https://github.com/Pircate/EachNavigationBar/blob/master/new_demo.gif)
+![](https://github.com/Pircate/EachNavigationBar/blob/master/demo_new.gif)
+![](https://github.com/Pircate/EachNavigationBar/blob/master/demo_push.gif)
 
 ## Usage
 
@@ -51,20 +52,7 @@ Objective-C
 @import EachNavigationBar;
 ```
 
-### Setup 
-#### before window set rootViewController (Don't Forget)
-
-Swift
-``` swift
-UIViewController.setupNavigationBar
-```
-
-Objective-C
-``` ObjC
-[UIViewController swizzle_setupNavigationBar];
-```
-
-### To enable EachNavigationBar of a navigation controller
+### Enable
 
 Swift
 ``` swift
@@ -83,7 +71,6 @@ nav.global_configuration.isEnabled = YES;
 
 Swift
 ``` swift
-let nav = UINavigationController(rootViewController: vc)
 nav.navigation.configuration.titleTextAttributes = [.foregroundColor: UIColor.blue]
 nav.navigation.configuration.barTintColor = UIColor.red
 nav.navigation.configuration.shadowImage = UIImage(named: "shadow")
@@ -93,7 +80,6 @@ nav.navigation.configuration.setBackgroundImage(UIImage(named: "nav"), for: .any
 
 Objective-C
 ``` ObjC
-UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 nav.global_configuration.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.blueColor};
 nav.global_configuration.barTintColor = UIColor.redColor;
 nav.global_configuration.shadowImage = [UIImage imageNamed:@"shadow"];
@@ -131,8 +117,8 @@ navigation.bar.isTranslucent = false
 // hide bottom black line
 navigation.bar.isShadowHidden = true
 
-// if you need to set status bar style lightContent
-navigationController?.navigationBar.barStyle = .black
+// set status bar style
+navigation.bar.statusBarStyle = .lightContent
 
 // if you want change navigation bar position
 navigation.bar.isUnrestoredWhenViewWillLayoutSubviews = true
@@ -152,7 +138,6 @@ self.each_navigationItem.xxx
 
 ##### LargeTitle(iOS 11.0+)
 
-Swift
 ``` swift
 // show
 if #available(iOS 11.0, *) {
@@ -168,50 +153,16 @@ if #available(iOS 11.0, *) {
 }
 ```
 
-Objective-C
-``` ObjC
-// show
-if (@available(iOS 11.0, *)) {
-    self.each_navigationBar.prefersLargeTitles = YES;
-}
-// hide
-if (@available(iOS 11.0, *)) {
-    self.each_navigationBar.prefersLargeTitles = NO;
-}
-// alpha
-if (@available(iOS 11.0, *)) {
-    [self.each_navigationBar setLargeTitleAlpha:0.5];
-}
-```
-#### Adjusts UIScrollView contentInset
-
-Swift
-``` swift
-adjustsScrollViewContentInset(scrollView)
-```
-
-Objective-C
-``` ObjC
-[self adjustsScrollViewContentInset:self.scrollView];
-```
-
 #### For UITableViewController
 
 Must remove observer when deinit
 
-Swift
 ``` swift
 deinit {
     removeObserverForContentOffset()
 }
 ```
 
-Objective-C
-``` ObjC
-- (void)dealloc {
-    [self removeObserverForContentOffset];
-}
-```
 ## Author
 
 Pircate, gao497868860@163.com
