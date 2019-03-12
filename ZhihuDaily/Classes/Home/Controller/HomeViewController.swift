@@ -107,9 +107,10 @@ final class HomeViewController: BaseViewController {
         navigationController?.navigationBar.barStyle = .black
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        view.bringSubviewToFront(menuButton)
     }
     
     // MARK: - private
