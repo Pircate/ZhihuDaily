@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5EB4B002449E8FDFFD10AE2F3822AC6"
+               BlueprintIdentifier = "C77D32D0A925C416AE164221925A0069"
+               BuildableName = "CocoaChainKit.framework"
                BlueprintName = "CocoaChainKit"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "CocoaChainKit.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

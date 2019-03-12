@@ -7,6 +7,7 @@
 //
 
 import Moya
+import RxNetwork
 
 enum NewsAPI {
     
@@ -15,7 +16,7 @@ enum NewsAPI {
     case newsDetail(newsID: String)
 }
 
-extension NewsAPI: TargetType {
+extension NewsAPI: TargetType, Cacheable {
     
     var path: String {
         switch self {

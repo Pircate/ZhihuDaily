@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CB72F0F4B912BBCAC1E1C78CEA3F069"
+               BlueprintIdentifier = "300904838EEDDC3BB8242817D8F97CB6"
+               BuildableName = "CleanJSON.framework"
                BlueprintName = "CleanJSON"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "CleanJSON.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

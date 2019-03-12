@@ -10,16 +10,18 @@ import UIKit
 
 open class EachNavigationBar: UINavigationBar {
     
-    /// Default is false. If set true, navigation bar will not restore
-    /// when the UINavigationController call viewWillLayoutSubviews
-    @objc open var isUnrestoredWhenViewWillLayoutSubviews = false
+    /// automatically adjusts position when view layout
+    @objc open var automaticallyAdjustsPosition: Bool = true
     
-    @objc open var extraHeight: CGFloat = 0 {
+    /// Additional height for the navigation bar.
+    @objc open var additionalHeight: CGFloat = 0 {
         didSet {
-            frame.size.height = barHeight + additionalHeight
+            frame.size.height = barHeight + _additionalHeight
+            viewController?.adjustsSafeAreaInsetsAfterIOS11()
         }
     }
     
+    /// Hides shadow image
     @objc open var isShadowHidden: Bool = false {
         didSet {
             guard let background = subviews.first else { return }
@@ -29,69 +31,52 @@ open class EachNavigationBar: UINavigationBar {
     
     @objc open var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
-            viewController?.navigationController?.navigationBar.barStyle = _barStyle
+            superNavigationBar?.barStyle = _barStyle
         }
     }
     
-    open override var isHidden: Bool {
+    /// Bar button item to use for the back button in the child navigation item.
+    @objc open var backBarButtonItem: BackBarButtonItem = .none {
         didSet {
-            viewController?.adjustsSafeAreaInsetsAfterIOS11()
-        }
-    }
-    
-    open override var alpha: CGFloat {
-        get {
-            return super.alpha
-        }
-        set {
-            _alpha = newValue
-            if let background = subviews.first {
-                background.alpha = newValue
-            }
-        }
-    }
-    
-    /// map to barTintColor
-    open override var backgroundColor: UIColor? {
-        get {
-            return super.backgroundColor
-        }
-        set {
-            barTintColor = newValue
-        }
-    }
-    
-    @available(iOS 11.0, *)
-    open override var prefersLargeTitles: Bool {
-        get {
-            return super.prefersLargeTitles
-        }
-        set {
-            super.prefersLargeTitles = newValue
+            backBarButtonItem.navigationController = viewController?.navigationController
             
-            updateLargeTitleDisplayMode(for: newValue)
+            let item = backBarButtonItem.makeBarButtonItem()
+            viewController?._navigationItem.leftBarButtonItem = item
         }
     }
-    
+
     @available(iOS 11.0, *)
-    open override var largeTitleTextAttributes: [NSAttributedString.Key : Any]? {
-        get {
-            return super.largeTitleTextAttributes
-        }
-        set {
-            super.largeTitleTextAttributes = newValue
-            
-            viewController?.navigationController?.navigationBar.largeTitleTextAttributes = newValue
-        }
-    }
-    
-    private lazy var _contentView: UIView? = {
-        subviews.filter { String(describing: $0.classForCoder) == "_UINavigationBarContentView" }.first
+    /// Padding of navigation bar content view.
+    @objc public lazy var layoutPaddings: UIEdgeInsets = {
+        Const.NavigationBar.layoutPaddings
     }()
     
-    private var _alpha: CGFloat = 1
+    @objc open var additionalView: UIView? {
+        didSet {
+            guard let additionalView = additionalView else {
+                oldValue?.removeFromSuperview()
+                return
+            }
+            
+            setupAdditionalView(additionalView)
+        }
+    }
     
-    private weak var viewController: UIViewController?
+    @objc open var shadow: Shadow = .none {
+        didSet {
+            layer.shadowColor = shadow.color
+            layer.shadowOpacity = shadow.opacity
+            layer.shadowOffset = shadow.offset
+            layer.shadowRadius = shadow.radius
+            layer.shadowPath = shadow.path
+        }
+    }
+    
+    private var _contentView: UIView?
+    
+    var _alpha: CGFloat = 1
+    
+    weak var viewController: UIViewController?
     
     public convenience init(viewController: UIViewController) {
         self.init()
@@ -102,18 +87,7 @@ open class EachNavigationBar: UINavigationBar {
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        guard let background = subviews.first else { return }
-        background.alpha = _alpha
-        background.clipsToBounds = isShadowHidden
-        background.frame = CGRect(
-            x: 0,
-            y: -CGFloat.StatusBar.maxY,
-            width: bounds.width,
-            height: bounds.height + CGFloat.StatusBar.maxY)
-        
-        if #available(iOS 11.0, *) {
-            _contentView?.frame.origin.y = additionalHeight
-        }
+        _layoutSubviews()
     }
 }
 
@@ -123,27 +97,97 @@ extension EachNavigationBar {
         return statusBarStyle == .default ? .default : .black
     }
     
-    var additionalHeight: CGFloat {
+    var _additionalHeight: CGFloat {
         if #available(iOS 11.0, *) {
             if prefersLargeTitles { return 0 }
         }
-        return extraHeight
+        return additionalHeight
     }
     
     private var barHeight: CGFloat {
-        if let bar = viewController?.navigationController?.navigationBar {
+        if let bar = superNavigationBar {
             return bar.frame.height
         } else {
-            return CGFloat.NavigationBar.height
+            return Const.NavigationBar.height
         }
     }
 }
 
 extension EachNavigationBar {
     
+    private var superNavigationBar: UINavigationBar? {
+        return viewController?.navigationController?.navigationBar
+    }
+    
     @available(iOS 11.0, *)
-    private func updateLargeTitleDisplayMode(for prefersLargeTitles: Bool) {
-        viewController?.navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
-        viewController?.navigationItem.largeTitleDisplayMode = prefersLargeTitles ? .always : .never
+    private var contentView: UIView? {
+        if let contentView = _contentView { return contentView }
+        
+        _contentView = subviews
+            .filter {
+                String(describing: $0.classForCoder) == "_UINavigationBarContentView"
+            }.first
+        
+        return _contentView
+    }
+    
+    private func setupAdditionalView(_ additionalView: UIView) {
+        addSubview(additionalView)
+        additionalView.translatesAutoresizingMaskIntoConstraints = false
+        additionalView.topAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        additionalView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        additionalView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        additionalView.heightAnchor.constraint(
+            equalToConstant: additionalView.frame.height).isActive = true
+    }
+}
+
+extension EachNavigationBar {
+    
+    func adjustsLayout() {
+        guard let navigationBar = viewController?.navigationController?.navigationBar else { return }
+        
+        if automaticallyAdjustsPosition {
+            frame = navigationBar.frame
+            if #available(iOS 11.0, *) {
+                if prefersLargeTitles {
+                    frame.origin.y = Const.StatusBar.maxY
+                }
+            }
+        } else {
+            frame.size = navigationBar.frame.size
+        }
+        
+        frame.size.height = navigationBar.frame.height + _additionalHeight
+    }
+    
+    private func _layoutSubviews() {
+        guard let background = subviews.first else { return }
+        background.alpha = _alpha
+        background.clipsToBounds = isShadowHidden
+        background.frame = CGRect(
+            x: 0,
+            y: -Const.StatusBar.maxY,
+            width: bounds.width,
+            height: bounds.height + Const.StatusBar.maxY)
+        
+        adjustsLayoutMarginsAfterIOS11()
+    }
+    
+    private func adjustsLayoutMarginsAfterIOS11() {
+        guard #available(iOS 11.0, *) else { return }
+        
+        layoutMargins = Const.NavigationBar.layoutMargins
+        contentView?.frame.origin.y = prefersLargeTitles ? 0 : additionalHeight
+        contentView?.layoutMargins = layoutPaddings
+    }
+}
+
+extension EachNavigationBar {
+    
+    @available(swift, deprecated: 4.2, message: "Please use additionalHeight.")
+    @objc open var extraHeight: CGFloat {
+        get { return additionalHeight }
+        set { additionalHeight = newValue }
     }
 }

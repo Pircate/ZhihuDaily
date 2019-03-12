@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A36C6C3E70CFE3E71F342497DE5AF83"
+               BlueprintIdentifier = "D4F8239FB329387A8476B964D92D92E7"
+               BuildableName = "FSPagerView.framework"
                BlueprintName = "FSPagerView"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "FSPagerView.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

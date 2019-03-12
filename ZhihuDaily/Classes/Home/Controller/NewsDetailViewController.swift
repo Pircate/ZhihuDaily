@@ -42,16 +42,11 @@ final class NewsDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigation.bar.isUnrestoredWhenViewWillLayoutSubviews = true
+        navigation.bar.automaticallyAdjustsPosition = false
         navigation.bar.frame.origin.y = -24;
         navigation.bar.backgroundColor = UIColor.white
         addSubviews()
         bindViewModel()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - private

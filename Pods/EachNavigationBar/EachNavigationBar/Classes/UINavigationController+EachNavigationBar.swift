@@ -20,18 +20,17 @@ extension UINavigationController {
         isNavigationBarHidden = false
         navigationBar.isHidden = bar.isHidden
         
-        if bar.isUnrestoredWhenViewWillLayoutSubviews {
-            bar.frame.size = navigationBar.frame.size
-        } else {
-            bar.frame = navigationBar.frame
-            if #available(iOS 11.0, *) {
-                if bar.prefersLargeTitles {
-                    bar.frame.origin.y = CGFloat.StatusBar.maxY
-                }
-            }
-        }
+        bar.adjustsLayout()
         
-        bar.frame.size.height = navigationBar.frame.height + bar.additionalHeight
+        topViewController?.adjustsSafeAreaInsetsAfterIOS11()
+    }
+    
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard #available(iOS 11.0, *), _configuration.isEnabled else { return }
+        
+        topViewController?._navigationBar.adjustsLayout()
     }
     
     func sendNavigationBarToBack() {
