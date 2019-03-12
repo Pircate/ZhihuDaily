@@ -45,6 +45,7 @@ final class NewsDetailViewController: BaseViewController {
         navigation.bar.automaticallyAdjustsPosition = false
         navigation.bar.frame.origin.y = -24;
         navigation.bar.backgroundColor = UIColor.white
+        navigation.bar.backBarButtonItem = .none
         addSubviews()
         bindViewModel()
     }
