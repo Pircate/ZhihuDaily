@@ -1,11 +1,11 @@
 PODS:
   - Alamofire (4.8.1)
   - Cache (5.2.0)
-  - CleanJSON (0.6.6)
+  - CleanJSON (1.0.0)
   - CocoaChainKit (0.7.0)
   - Delegated (0.1.0)
   - Differentiator (3.1.0)
-  - EachNavigationBar (1.9.2)
+  - EachNavigationBar (1.14.0)
   - FDFullscreenPopGesture (1.1)
   - FSCycleScrollView (0.2.0):
     - FSPagerView
@@ -56,10 +56,10 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - CleanJSON
+  - CleanJSON (= 1.0.0)
   - CocoaChainKit
   - Delegated
-  - EachNavigationBar
+  - EachNavigationBar (= 1.14.0)
   - FDFullscreenPopGesture
   - FSCycleScrollView
   - Hero
@@ -72,14 +72,12 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Cache
-    - CleanJSON
     - CocoaChainKit
     - Delegated
     - Differentiator
-    - EachNavigationBar
     - FDFullscreenPopGesture
     - FSCycleScrollView
     - FSPagerView
@@ -96,15 +94,18 @@ SPEC REPOS:
     - RxSwift
     - RxSwiftX
     - SnapKit
+  trunk:
+    - CleanJSON
+    - EachNavigationBar
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
-  CleanJSON: 6255db2f1750694b31f43c29dadfe8e91da6a22b
+  CleanJSON: 702dd619e1329c6399a579aa19af311acf47e461
   CocoaChainKit: 66c13211d6cc1d5e46192d1a354f733c69b35671
   Delegated: 38a90d2b845e7fe6b17772ebcb6550c5d70f282b
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  EachNavigationBar: 4978d1327a85d7c50d070b0a387f6e30fa089cfc
+  EachNavigationBar: ff866e24f57cf4630508bee102c2cd497d0e5d8f
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FSCycleScrollView: 7b86b4000aa8a958d338e0ed294a3c02f9fb73de
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
@@ -122,6 +123,6 @@ SPEC CHECKSUMS:
   RxSwiftX: abdb26ccd9925210466672efd7dfc9aa57a19029
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 5dabd92f5e1b831df228e04dbe3837169cc42b8b
+PODFILE CHECKSUM: 944130ecc88c3713b78f49270d0ae9b452385984
 
-COCOAPODS: 1.7.0.beta.2
+COCOAPODS: 1.8.4

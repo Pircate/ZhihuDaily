@@ -8,80 +8,102 @@
 
 import UIKit
 
-public class Configuration: NSObject {
+extension UINavigationController {
     
-    @objc public var isEnabled = false
-    
-    @objc public var isHidden = false
-    
-    @objc public var alpha: CGFloat = 1
-    
-    @objc public var barTintColor: UIColor?
-    
-    @objc public var tintColor: UIColor?
-    
-    @objc public var shadowImage: UIImage?
-    
-    // Hides shadow image.
-    @objc public var isShadowHidden: Bool = false
-    
-    @objc public var titleTextAttributes: [NSAttributedString.Key : Any]?
-    
-    @objc public var isTranslucent: Bool = true
-    
-    @objc public var barStyle: UIBarStyle = .default
-    
-    @objc public var statusBarStyle: UIStatusBarStyle = .default
-    
-    /// Additional height for the navigation bar.
-    @objc public var additionalHeight: CGFloat = 0
-    
-    /// Bar button item to use for the back button in the child navigation item.
-    @objc public var backBarButtonItem: BackBarButtonItem = .none
+    public final class Configuration {
+        
+        public var isEnabled = false
+        
+        public var isHidden = false
+        
+        public var alpha: CGFloat = 1
+        
+        public var barTintColor: UIColor?
+        
+        public var tintColor: UIColor?
+        
+        public var shadowImage: UIImage?
+        
+        // Hides shadow image.
+        public var isShadowHidden: Bool = false
+        
+        public var titleTextAttributes: [NSAttributedString.Key : Any]?
+        
+        public var isTranslucent: Bool = true
+        
+        public var barStyle: UIBarStyle = .default
+        
+        public var statusBarStyle: UIStatusBarStyle = .default
+        
+        /// Additional height for the navigation bar.
+        public var additionalHeight: CGFloat = 0
+        
+        public var shadow: Shadow?
+        
+        public var backItem: BackItem?
+        
+        var background: Background = .init()
+        
+        private var _layoutPaddings: UIEdgeInsets = Const.NavigationBar.layoutPaddings
+        
+        private var _prefersLargeTitles: Bool = false
+        
+        private var _largeTitle: LargeTitle = .init()
+    }
+}
+
+public extension UINavigationController.Configuration {
     
     @available(iOS 11.0, *)
     /// Padding of navigation bar content view.
-    @objc public lazy var layoutPaddings: UIEdgeInsets = {
-        Const.NavigationBar.layoutPaddings
-    }()
-    
-    @objc public var shadow: Shadow?
-    
-    var _largeTitleTextAttributes: [NSAttributedString.Key: Any]?
-    
-    var backgroundImage: UIImage?
-    
-    var barMetrics: UIBarMetrics = .default
-    
-    var barPosition: UIBarPosition = .any
-}
-
-extension Configuration {
+    var layoutPaddings: UIEdgeInsets {
+        get { _layoutPaddings }
+        set { _layoutPaddings = newValue }
+    }
     
     @available(iOS 11.0, *)
-    @objc public var largeTitleTextAttributes: [NSAttributedString.Key: Any]? {
-        get { return _largeTitleTextAttributes }
-        set { _largeTitleTextAttributes = newValue }
+    var prefersLargeTitles: Bool {
+        get { _prefersLargeTitles }
+        set { _prefersLargeTitles = newValue }
     }
-}
-
-extension Configuration {
     
-    @objc public func setBackgroundImage(
+    @available(iOS 11.0, *)
+    var largeTitle: LargeTitle {
+        get { _largeTitle }
+        set { _largeTitle = newValue }
+    }
+    
+    func setBackgroundImage(
         _ backgroundImage: UIImage?,
         for barPosition: UIBarPosition = .any,
-        barMetrics: UIBarMetrics = .default) {
-        self.backgroundImage = backgroundImage
-        self.barPosition = barPosition
-        self.barMetrics = barMetrics
+        barMetrics: UIBarMetrics = .default
+    ) {
+        self.background.image = backgroundImage
+        self.background.barPosition = barPosition
+        self.background.barMetrics = barMetrics
     }
 }
 
-extension Configuration {
+extension UINavigationController.Configuration {
     
-    @available(swift, deprecated: 4.2, message: "Please use additionalHeight.")
-    @objc public var extraHeight: CGFloat {
-        get { return additionalHeight }
-        set { additionalHeight = newValue }
+    public struct BackItem {
+        public let style: BackBarButtonItem.ItemStyle
+        public let tintColor: UIColor?
+        
+        public init(style: BackBarButtonItem.ItemStyle, tintColor: UIColor? = nil) {
+            self.style = style
+            self.tintColor = tintColor
+        }
+    }
+    
+    public struct LargeTitle {
+        public var textAttributes: [NSAttributedString.Key: Any]?
+        public var displayMode: UINavigationItem.LargeTitleDisplayMode = .automatic
+    }
+    
+    struct Background {
+        var image: UIImage?
+        var barMetrics: UIBarMetrics = .default
+        var barPosition: UIBarPosition = .any
     }
 }

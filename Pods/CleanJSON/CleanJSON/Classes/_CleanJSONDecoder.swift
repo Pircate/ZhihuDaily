@@ -2,19 +2,19 @@
 //  _CleanJSONDecoder.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
 import Foundation
 
-class _CleanJSONDecoder: CleanDecoder {
+final class _CleanJSONDecoder: CleanDecoder {
     
     /// The decoder's storage.
-    var storage: _CleanJSONDecodingStorage
+    var storage: CleanJSONDecodingStorage
     
     /// Options set on the top-level decoder.
-    let options: CleanJSONDecoder._Options
+    let options: CleanJSONDecoder.Options
     
     /// The path to the current point in encoding.
     public var codingPath: [CodingKey]
@@ -27,8 +27,8 @@ class _CleanJSONDecoder: CleanDecoder {
     // MARK: - Initialization
     
     /// Initializes `self` with the given top-level container and options.
-    init(referencing container: Any, at codingPath: [CodingKey] = [], options: CleanJSONDecoder._Options) {
-        self.storage = _CleanJSONDecodingStorage()
+    init(referencing container: Any, at codingPath: [CodingKey] = [], options: CleanJSONDecoder.Options) {
+        self.storage = CleanJSONDecodingStorage()
         self.storage.push(container: container)
         self.codingPath = codingPath
         self.options = options
@@ -44,8 +44,8 @@ class _CleanJSONDecoder: CleanDecoder {
                     KeyedDecodingContainer<Key>.self,
                     codingPath: codingPath,
                     debugDescription: "Cannot get keyed decoding container -- found null value instead.")
-            default:
-                let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
+            case .useEmptyContainer:
+                let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
                 return KeyedDecodingContainer(container)
             }
         }
@@ -57,13 +57,13 @@ class _CleanJSONDecoder: CleanDecoder {
                     at: codingPath,
                     expectation: [String : Any].self,
                     reality: storage.topContainer)
-            default:
-                let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
+            case .useEmptyContainer:
+                let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
                 return KeyedDecodingContainer(container)
             }
         }
         
-        let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: topContainer)
+        let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: topContainer)
         return KeyedDecodingContainer(container)
     }
     
@@ -75,8 +75,8 @@ class _CleanJSONDecoder: CleanDecoder {
                     UnkeyedDecodingContainer.self,
                     codingPath: codingPath,
                     debugDescription: "Cannot get unkeyed decoding container -- found null value instead.")
-            default:
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            case .useEmptyContainer:
+                return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
             }
         }
         
@@ -87,12 +87,12 @@ class _CleanJSONDecoder: CleanDecoder {
                     at: codingPath,
                     expectation: [Any].self,
                     reality: storage.topContainer)
-            default:
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            case .useEmptyContainer:
+                return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
             }
         }
         
-        return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)
+        return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)
     }
     
     public func singleValueContainer() throws -> SingleValueDecodingContainer {

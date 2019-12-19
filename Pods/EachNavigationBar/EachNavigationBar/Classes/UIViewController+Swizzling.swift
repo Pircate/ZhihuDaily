@@ -8,20 +8,17 @@
 
 infix operator <=>
 
-private func <=>(left: Selector, right: Selector) {
-    if let originalMethod = class_getInstanceMethod(UIViewController.self, left),
-        let swizzledMethod = class_getInstanceMethod(UIViewController.self, right) {
-        method_exchangeImplementations(originalMethod, swizzledMethod)
-    }
-}
-
 extension UIViewController {
+    
+    @available(swift, obsoleted: 4.2, message: "Only for Objective-C call.")
+    @objc public static func navigation_methodSwizzling() {
+        methodSwizzling
+    }
     
     static let methodSwizzling: Void = {
         #selector(viewDidLoad) <=> #selector(navigation_viewDidLoad)
         #selector(viewWillAppear(_:)) <=> #selector(navigation_viewWillAppear(_:))
-        #selector(setNeedsStatusBarAppearanceUpdate)
-            <=> #selector(navigation_setNeedsStatusBarAppearanceUpdate)
+        #selector(setNeedsStatusBarAppearanceUpdate) <=> #selector(navigation_setNeedsStatusBarAppearanceUpdate)
         #selector(viewDidLayoutSubviews) <=> #selector(navigation_viewDidLayoutSubviews)
     }()
     
@@ -62,5 +59,15 @@ extension UIViewController {
         navigation_viewDidLayoutSubviews()
         
         view.bringSubviewToFront(_navigationBar)
+    }
+}
+
+private extension Selector {
+    
+    static func <=> (left: Selector, right: Selector) {
+        if let originalMethod = class_getInstanceMethod(UIViewController.self, left),
+            let swizzledMethod = class_getInstanceMethod(UIViewController.self, right) {
+            method_exchangeImplementations(originalMethod, swizzledMethod)
+        }
     }
 }

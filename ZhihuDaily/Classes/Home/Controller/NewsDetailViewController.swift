@@ -43,7 +43,7 @@ final class NewsDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         navigation.bar.automaticallyAdjustsPosition = false
-        navigation.bar.frame.origin.y = -24;
+        navigation.bar.frame.origin.y = UIApplication.shared.statusBarFrame.maxY - navigation.bar.frame.height;
         navigation.bar.backgroundColor = UIColor.white
         navigation.bar.backBarButtonItem = .none
         addSubviews()

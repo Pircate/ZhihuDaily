@@ -123,8 +123,8 @@ final class HomeViewController: BaseViewController {
             .alpha(0)
             .backgroundColor(UIColor.global)
             .titleTextAttributes([.foregroundColor: UIColor.white])
-            .shadowImage(UIImage()).addSubview(progressView)
-        navigation.bar.subviews.first?.clipsToBounds = true
+            .addSubview(progressView)
+        navigation.bar.isShadowHidden = true
         view.addSubview(navigation.bar)
         navigation.item.title = "今日要闻"
     }

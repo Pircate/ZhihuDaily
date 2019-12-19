@@ -1,14 +1,14 @@
 // 
-//  _CleanJSONDecodingStorage.swift
+//  CleanJSONDecodingStorage.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
 import Foundation
 
-struct _CleanJSONDecodingStorage {
+struct CleanJSONDecodingStorage {
     
     /// The container stack.
     /// Elements may be any one of the JSON types (NSNull, NSNumber, String, Array, [String : Any]).

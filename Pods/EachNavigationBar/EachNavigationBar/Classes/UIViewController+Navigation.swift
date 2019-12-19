@@ -9,24 +9,21 @@
 public extension Navigation where Base: UIViewController {
     
     var bar: EachNavigationBar {
-        assert(!(base is UINavigationController), "UINavigationController can't use this property.")
+        assert(!(base is UINavigationController),
+               "UINavigationController can't use this property, please use configuration.")
         return base._navigationBar
     }
     
     var item: UINavigationItem {
-        assert(!(base is UINavigationController), "UINavigationController can't use this property.")
+        assert(!(base is UINavigationController),
+               "UINavigationController can't use this property, please use configuration.")
         return base._navigationItem
     }
 }
 
 public extension Navigation where Base: UINavigationController {
     
-    var configuration: Configuration {
+    var configuration: UINavigationController.Configuration {
         return base._configuration
-    }
-    
-    @available(iOS 11.0, *)
-    func prefersLargeTitles() {
-        base.navigationBar.prefersLargeTitles = true
     }
 }

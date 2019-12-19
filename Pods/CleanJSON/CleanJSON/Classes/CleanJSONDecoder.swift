@@ -2,7 +2,7 @@
 //  CleanJSONDecoder.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Foundation
 open class CleanJSONDecoder: JSONDecoder {
     
     /// Options set on the top-level encoder to pass down the decoding hierarchy.
-    struct _Options {
+    struct Options {
         let dateDecodingStrategy: DateDecodingStrategy
         let dataDecodingStrategy: DataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
@@ -19,29 +19,34 @@ open class CleanJSONDecoder: JSONDecoder {
         let keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy
         let valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy
         let nestedContainerDecodingStrategy: NestedContainerDecodingStrategy
+        let jsonStringDecodingStrategy: JSONStringDecodingStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
     /// The options set on the top-level decoder.
-    var options: _Options {
-        return _Options(dateDecodingStrategy: dateDecodingStrategy,
-                        dataDecodingStrategy: dataDecodingStrategy,
-                        nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
-                        keyDecodingStrategy: keyDecodingStrategy,
-                        keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
-                        valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
-                        nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
-                        userInfo: userInfo)
+    var options: Options {
+        return Options(dateDecodingStrategy: dateDecodingStrategy,
+                       dataDecodingStrategy: dataDecodingStrategy,
+                       nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
+                       keyDecodingStrategy: keyDecodingStrategy,
+                       keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
+                       valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
+                       nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
+                       jsonStringDecodingStrategy: jsonStringDecodingStrategy,
+                       userInfo: userInfo)
     }
     
     /// The strategy to use for decoding when key not found. Defaults to `.useDefaultValue`.
     open var keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy = .useDefaultValue
     
     /// The strategy to use for decoding when value not found. Defaults to `.custom`.
-    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(.init())
+    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(Adapter())
     
     /// The strategy to use for decoding nested container.
     open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()
+    
+    /// The strategy to use for decoding JSON string.
+    open var jsonStringDecodingStrategy: JSONStringDecodingStrategy = .containsKeys([])
     
     // MARK: - Decoding Values
     
